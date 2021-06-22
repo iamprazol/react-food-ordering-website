@@ -2,19 +2,22 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const NavBar = (props) => {
-  const { id, icon, links, title } = props;
+  const { category_id, image, restaurant_id, title } = props;
 
   return (
-    <NavLink to={links} exact>
+    <NavLink to={"/restaurants/" + restaurant_id} exact>
       <input
         type="radio"
         name="slideItem"
-        id={id}
+        id={category_id}
         className="slide-toggle"
-        checked
       />
-      <label htmlFor={id}>
-        <p className="icon">{icon}</p>
+      <label htmlFor={category_id}>
+        <img
+          className="icon"
+          alt="food.jpeg"
+          src={"http://foodzone.me/images/food/" + image}
+        />
         <span>{title}</span>
       </label>
     </NavLink>

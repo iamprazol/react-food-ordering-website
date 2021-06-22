@@ -7,6 +7,7 @@ import Header from "./common/Header";
 function App() {
   return (
     <div className="container-fluid">
+      <h3>Browse By Categories</h3>
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />

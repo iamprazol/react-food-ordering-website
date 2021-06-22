@@ -1,26 +1,47 @@
-import React from "react";
+import React, { Component } from "react";
 import NavBar from "./NavBar";
 
-const Header = () => {
-  return (
-    <nav className="slidemenu">
-      <NavBar id="slide-item-1" icon="ℋ" links="/" title="Home" />
-      <NavBar id="slide-item-2" icon="★" links="/cusines" title="Cusines" />
-      <NavBar
-        id="slide-item-3"
-        icon="♬"
-        links="/restaurants"
-        title="Restaurants"
-      />
-      <NavBar id="slide-item-4" icon="ヅ" links="/specials" title="Specials" />
+class Header extends Component {
+  constructor() {
+    super();
+    this.state = {
+      foodsByCategory: [],
+    };
+  }
 
-      <div className="clear" />
+  shuffle = (a) => {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  };
 
-      <div className="slider">
-        <div className="bar" />
-      </div>
-    </nav>
-  );
-};
+  componentDidMount() {
+    fetch("http://foodzone.me/api/foods")
+      .then((results) => {
+        return results.json();
+      })
+      .then((data) => {
+        let foodsArray = this.shuffle(data.data),
+          foodsByCategory = foodsArray.slice(0, 8).map((food) => {
+            return (
+              <NavBar
+                id={"slide-item-" + food.id}
+                category_id={food.category_id}
+                image={food.picture}
+                restaurant_id={food.restaurant_id}
+                title={food.food_name}
+              />
+            );
+          });
+        this.setState({ foodsByCategory: foodsByCategory });
+      });
+  }
+
+  render() {
+    return <nav className="slidemenu">{this.state.foodsByCategory}</nav>;
+  }
+}
 
 export default Header;
