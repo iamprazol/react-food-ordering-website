@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import NavBar from "./NavBar";
+import BrowseByCategoryNav from "./BrowseByCategoryNav";
+import "./BrowseByCategory.css";
 
-class Header extends Component {
+class BrowseByCategory extends Component {
   constructor() {
     super();
     this.state = {
@@ -26,7 +27,7 @@ class Header extends Component {
         let foodsArray = this.shuffle(data.data),
           foodsByCategory = foodsArray.slice(0, 8).map((food) => {
             return (
-              <NavBar
+              <BrowseByCategoryNav
                 id={"slide-item-" + food.id}
                 category_id={food.category_id}
                 image={food.picture}
@@ -40,8 +41,18 @@ class Header extends Component {
   }
 
   render() {
-    return <nav className="slidemenu">{this.state.foodsByCategory}</nav>;
+    return (
+      <section class="rfb-nav-container section-padding rbf-bottom-line">
+        <h3 class="rbf-title">
+          Browse By Categories
+          <span class="text-sm">
+            <a href="/foods"> View all foods </a>
+          </span>
+        </h3>
+        <nav className="slidemenu">{this.state.foodsByCategory}</nav>
+      </section>
+    );
   }
 }
 
-export default Header;
+export default BrowseByCategory;

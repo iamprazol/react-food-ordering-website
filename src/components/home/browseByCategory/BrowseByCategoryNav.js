@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const NavBar = (props) => {
+const BrowseByCategoryNav = (props) => {
   const { category_id, image, restaurant_id, title } = props;
 
   return (
@@ -24,4 +24,4 @@ const NavBar = (props) => {
   );
 };
 
-export default NavBar;
+export default BrowseByCategoryNav;

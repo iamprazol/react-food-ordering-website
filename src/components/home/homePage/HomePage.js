@@ -1,6 +1,6 @@
 import React from "react";
 import SVG from "react-inlinesvg";
-import Foodie from "../../assets/images/foodie.png";
+import Foodie from "../../../assets/images/foodie.png";
 
 const HomePage = () => {
   return (

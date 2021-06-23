@@ -1,0 +1,33 @@
+.section-padding {
+	padding: 80px 0;
+}
+
+.rbf-bottom-line {
+	border-bottom: 1px solid rgba(67,41,163,.2);
+}
+
+.rfb-nav-container {
+	display: flex;
+    flex-direction: column;
+	padding-left: 50px;
+    padding-right: 50px;
+}
+
+.rfb-nav-container h3{
+    max-width: 100%;
+	margin-bottom: 0;
+    font-size: 30px;
+	font-family: "Poppins",sans-serif;
+	font-weight: 500;
+}
+
+.rbf-title {
+	display: flex;
+    align-items: baseline;
+	justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.text-sm {
+	font-size: 14px;
+}
