@@ -1,0 +1,46 @@
+
+.card {
+	box-shadow: 0 4px 8px 0 rgba(0.7,0.7,0.7,0.7);
+	transition: 0.5s;
+	background: whitesmoke;
+	margin-right: 20px;
+	border-radius: 4px;
+	text-align: center;
+    display: block;
+    float: left;
+    color: #333;
+  }
+
+  .card:hover {
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+
+  .card-holder {
+	display: inline-flex;
+	padding: 40px;
+	margin-left: 20px;
+  }
+
+  .description {
+	padding: 2px 16px;
+  }
+
+  .details {
+	height: 300px;
+	display: inline-block;
+  }
+
+  .event-type{
+	margin: 30px auto;
+	width: 150px;
+	font-size: 30px;
+  }
+
+  .image-holder{
+	text-align: center;
+  }
+
+  img {
+    height: 200px;
+	border-radius: 4px;
+  }
