@@ -46,7 +46,10 @@ class BrowseByCategory extends Component {
         <h3 class="rbf-title">
           Browse By Categories
           <span class="text-sm">
-            <a href="/foods"> View all foods </a>
+            <a className="text-red" href="/foods">
+              {" "}
+              View all foods{" "}
+            </a>
           </span>
         </h3>
         <nav className="slidemenu">{this.state.foodsByCategory}</nav>

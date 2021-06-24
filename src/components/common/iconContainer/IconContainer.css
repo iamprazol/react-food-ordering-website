@@ -1,0 +1,26 @@
+.iconContainer {
+	border-radius: 3px;
+    cursor: pointer;
+    align-items: center;
+    background-color: hsla(0,0%,100%,.3);
+}
+
+.iconContainer .MuiSvgIcon-root {
+	font-size: 1.1rem;
+}
+
+.iconContainer .text-yellow {
+	color: yellow;
+}
+
+.iconContainer > h4 {
+	margin-left: 5px;
+}
+
+.iconContainer > p {
+	font-size: 12px;
+    background: hsla(0,0%,100%,.2);
+    border-radius: 12px;
+    margin-left: 8px;
+    padding: 2px 6px;
+}

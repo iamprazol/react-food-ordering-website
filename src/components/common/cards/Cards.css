@@ -2,17 +2,17 @@
 .card {
 	box-shadow: 0 4px 8px 0 rgba(0.7,0.7,0.7,0.7);
 	transition: 0.5s;
-	background: whitesmoke;
-	margin-right: 20px;
+	background: #fff;
 	border-radius: 4px;
-	text-align: center;
     display: block;
     float: left;
     color: #333;
+	flex: 0 0 22.5%;
+	margin: 25px 15px 15px 15px;
   }
 
   .card:hover {
-	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+	box-shadow: 0 8px 16px 0 #bc2634;
   }
 
   .card-holder {
@@ -21,6 +21,45 @@
 	margin-left: 20px;
   }
 
+  .product-box {
+	overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 10px;
+    width: 100%;
+  }
+
+  .product-box .title-box {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 5px;
+	margin-top: -40px;
+	letter-spacing: 1px;
+  }
+
+  .product-box .product-title{
+    margin-bottom: 0;
+    font-size: 16px;
+	font-family: "Poppins",sans-serif;
+  }
+
+  .product-box .product-title a:hover{
+	color: #bc2634;
+  }
+
+  .product-box p {
+	  font-size: 14px;
+	  margin-bottom: 10px;
+  }
+
+  .text-light-black {
+	color: rgba(0,0,0,.8705882352941177);
+	text-decoration: none;
+  }
+
+  .text-light-white {
+	color: #6b6b83;
+  }
   .description {
 	padding: 2px 16px;
   }
@@ -37,10 +76,29 @@
   }
 
   .image-holder{
-	text-align: center;
+	font-size: 20px;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    line-height: 50px;
   }
 
   img {
-    height: 200px;
+	max-width: 100%;
+    height: 150px;
+	width: 300px;
 	border-radius: 4px;
+  }
+
+  .product-details {
+	display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+	font-size: 15px;
+  }
+
+  .product-box .product-details span {
+	display: block;
+    line-height: normal;
   }

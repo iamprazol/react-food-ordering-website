@@ -1,3 +1,7 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: "Poppins",sans-serif;
@@ -33,7 +37,7 @@ body {
   color: #666;
 }
 
-a {
+.text-red {
 	color: #ff0018;
 	text-decoration: none;
 }
@@ -146,4 +150,37 @@ a, a:focus, a:hover {
   text-align: center;
   margin-top: 50px;
   min-height: 140px;
+}
+
+.text-custom-white {
+    color: #fff;
+}
+
+.bg-yellow {
+    background-color: #ffc000;
+}
+
+span.rectangle-tag {
+    height: 30px;
+    width: auto;
+    border-radius: 3px;
+    font-size: 12px;
+    margin-right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    letter-spacing: 2px;
+    padding: 0 8px;
+}
+
+.text-yellow {
+    color: #fcb71b;
+}
+
+.fa, .fas {
+    font-weight: 900;
+}
+.fa, .far, .fas {
+    font-family: "Font Awesome 5 Free";
 }
