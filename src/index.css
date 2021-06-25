@@ -156,8 +156,24 @@ a, a:focus, a:hover {
     color: #fff;
 }
 
+.text-center {
+    text-align: center;
+}
+
+.text-medium {
+	font-size: 15px;
+}
+
 .bg-yellow {
     background-color: #ffc000;
+}
+
+.bg-green {
+    background-color: greenyellow;
+}
+
+.bg-red {
+    background-color: red;
 }
 
 span.rectangle-tag {
@@ -178,9 +194,14 @@ span.rectangle-tag {
     color: #fcb71b;
 }
 
-.fa, .fas {
-    font-weight: 900;
-}
-.fa, .far, .fas {
-    font-family: "Font Awesome 5 Free";
+.overlay {
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+    justify-content: space-between;
+    padding: 10px;
+	position: absolute;
 }

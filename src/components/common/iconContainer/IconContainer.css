@@ -5,8 +5,11 @@
     background-color: hsla(0,0%,100%,.3);
 }
 
-.iconContainer .MuiSvgIcon-root {
+.icon-small .MuiSvgIcon-root{
 	font-size: 1.1rem;
+}
+.icon-medium .MuiSvgIcon-root{
+	font-size: 2rem;
 }
 
 .iconContainer .text-yellow {
