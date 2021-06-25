@@ -212,3 +212,7 @@ span.rectangle-tag {
     padding: 10px;
 	position: absolute;
 }
+
+.fw-600 {
+	font-weight: 600;
+}
