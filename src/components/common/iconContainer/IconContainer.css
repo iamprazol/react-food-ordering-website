@@ -2,14 +2,18 @@
 	border-radius: 3px;
     cursor: pointer;
     align-items: center;
-    background-color: hsla(0,0%,100%,.3);
 }
 
 .icon-small .MuiSvgIcon-root{
 	font-size: 1.1rem;
 }
+
 .icon-medium .MuiSvgIcon-root{
 	font-size: 2rem;
+}
+
+.icon-large .MuiSvgIcon-root{
+	font-size: 3rem;
 }
 
 .iconContainer .text-yellow {

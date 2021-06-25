@@ -1,0 +1,13 @@
+.rfb-footer-top {
+	display: flex;
+    flex-direction: row;
+	padding-left: 50px;
+    padding-right: 50px;
+	justify-content: space-between;
+}
+
+.icon-box {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}

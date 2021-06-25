@@ -176,6 +176,10 @@ a, a:focus, a:hover {
     background-color: red;
 }
 
+.bg-black {
+	background-color: #000;
+}
+
 span.rectangle-tag {
     height: 30px;
     width: auto;
@@ -194,6 +198,9 @@ span.rectangle-tag {
     color: #fcb71b;
 }
 
+.text-white {
+    color: #fff;
+}
 .overlay {
 	top: 0;
 	left: 0;
