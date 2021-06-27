@@ -2,6 +2,7 @@ import React from "react";
 import "./NavBar.css";
 import SearchIcon from '@material-ui/icons/Search';
 import IconContainer from "../iconContainer/IconContainer";
+import Button from "../button/Button";
 
 function NavBar() {
 
@@ -20,8 +21,8 @@ function NavBar() {
 			</div>
 			<div className="rfb-navbar-right">
 				<div className="rfb-navbar-account">
-					<a className="rfb-account" href="google.com">{"Login"}</a>
-					<a className="rfb-account" href="google.com">{"Register"}</a>
+					<Button buttonClass="btn-submit btn-secondary" buttonHref="google.com" text={"Login"} />
+					<Button buttonClass="btn-submit btn-secondary" buttonHref="google.com" text={"Register"} />
 				</div>
 			</div>
 		</div>

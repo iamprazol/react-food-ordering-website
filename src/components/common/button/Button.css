@@ -1,0 +1,29 @@
+.btn-submit {
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+    padding: 9px 15px 8px;
+    font-size: 14px;
+    line-height: 1.51741;
+    border-radius: 4px;
+    vertical-align: middle;
+    white-space: nowrap;
+    font-weight: 500;
+    position: relative;
+}
+
+.btn-primary {
+    background-color: #ff0018;
+    border-color: #ff0018;
+}
+
+.btn-secondary {
+    color: blue;
+    border: 2px double blue;
+}
+
+.btn-submit:hover {
+    color: white;
+    background-color: gray;
+    border-color: gray;
+}

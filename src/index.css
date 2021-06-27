@@ -139,19 +139,6 @@ a, a:focus, a:hover {
   background-color: #2d2d2d;
 }
 
-.content {
-  position: relative;
-  z-index: 4;
-}
-
-.content .motto {
-  font-size: 28px;
-  color: #2d2d2d;
-  text-align: center;
-  margin-top: 50px;
-  min-height: 140px;
-}
-
 .text-custom-white {
     color: #fff;
 }
@@ -174,6 +161,10 @@ a, a:focus, a:hover {
 
 .bg-red {
     background-color: red;
+}
+
+.bg-blue {
+  background: blue;
 }
 
 .bg-black {
@@ -201,6 +192,7 @@ span.rectangle-tag {
 .text-white {
     color: #fff;
 }
+
 .overlay {
 	top: 0;
 	left: 0;
