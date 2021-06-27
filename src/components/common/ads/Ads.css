@@ -1,17 +1,22 @@
-.rfb-banner-container {
-    height: 650px;
+.rfb-ads-container {
+    height: 100px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
-.rfb-banner {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url("http://wptest.me/images/food/1624721452.jpg");
+.rfb-ads {
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+    border-radius: 4px;
 }
 
-.rfb-banner-text {
+.rfb-ads-text {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-around;
     text-align: center;
     position: absolute;
     top: 50%;
@@ -21,13 +26,7 @@
     width: 100%;
   }
 
-  .rfb-banner-text h1 {
-    font-size: 50px;
-    font-weight: 600;
-  }
-
-
-  .rfb-banner-text h3 {
+  .rfb-ads-text h3 {
     font-size: 30px;
     font-weight: 400;
   }

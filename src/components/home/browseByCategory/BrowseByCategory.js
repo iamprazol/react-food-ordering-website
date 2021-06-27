@@ -42,7 +42,7 @@ class BrowseByCategory extends Component {
 
   render() {
     return (
-      <section class="rfb-nav-container section-padding rbf-bottom-line">
+      <section class="rfb-nav-container section-padding">
         <h3 class="rbf-title">
           Browse By Categories
           <span class="text-sm">
