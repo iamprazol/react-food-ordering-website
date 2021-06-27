@@ -16,7 +16,7 @@ const BrowseByCategoryNav = (props) => {
         <img
           className="icon"
           alt="food.jpeg"
-          src={"http://foodzone.me/images/food/" + image}
+          src={"http://wptest.me/images/food/" + image}
         />
         <span>{title}</span>
       </label>

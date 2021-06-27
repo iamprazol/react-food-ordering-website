@@ -19,7 +19,7 @@ class BrowseByCategory extends Component {
   };
 
   componentDidMount() {
-    fetch("http://foodzone.me/api/foods")
+    fetch("http://wptest.me/api/foods")
       .then((results) => {
         return results.json();
       })

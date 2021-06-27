@@ -18,7 +18,7 @@ class FooterBottom extends Component {
   };
 
   componentDidMount() {
-    fetch("http://foodzone.me/api/foods")
+    fetch("http://wptest.me/api/foods")
       .then((results) => {
         return results.json();
       })
@@ -28,7 +28,7 @@ class FooterBottom extends Component {
             return (
               <div className="individual-food-pic">
                 <img
-                  src={"http://foodzone.me/images/food/" + food.picture}
+                  src={"http://wptest.me/images/food/" + food.picture}
                   alt="food"
                 />
               </div>

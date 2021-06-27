@@ -19,7 +19,7 @@ class RestaurantList extends Component {
   };
 
   componentDidMount() {
-    fetch("http://foodzone.me/api/restaurant")
+    fetch("http://wptest.me/api/restaurant")
       .then((results) => {
         return results.json();
       })
@@ -32,7 +32,7 @@ class RestaurantList extends Component {
                 name={restaurant.restaurant_name}
                 description={restaurant.description}
                 image={
-                  "http://foodzone.me/images/restaurant/" + restaurant.picture
+                  "http://wptest.me/images/restaurant/" + restaurant.picture
                 }
                 address={restaurant.address}
                 delivery_hours={restaurant.delivery_hours}
