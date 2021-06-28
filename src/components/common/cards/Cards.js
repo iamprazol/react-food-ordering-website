@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Cards.css";
 import StarBorderIcon from "@material-ui/icons/Star";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
@@ -33,12 +34,9 @@ const Cards = (props) => {
       <div className="product-box">
         <div className="title-box">
           <h6 className="product-title">
-            <a
-              className="text-light-black"
-              href={"http://themegrill.me:3000/restaurant/" + id}
-            >
+            <Link className="text-light-black" to={"restaurant/" + id}>
               {name}
-            </a>
+            </Link>
           </h6>
           <div class="tags">
             <span class="text-custom-white rectangle-tag bg-yellow">3.1</span>

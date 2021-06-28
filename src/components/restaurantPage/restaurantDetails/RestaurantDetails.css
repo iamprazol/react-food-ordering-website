@@ -1,0 +1,49 @@
+.rfb-restaurant-details-container {
+	padding: 0 40px;
+}
+
+.rfb-restaurant-details {
+	display: flex;
+    justify-content: space-between;
+}
+
+.rfb-restaurant-details h1 {
+	font-size: 1.5rem;
+}
+
+.rfb-details {
+	display: flex;
+    flex-direction: column;
+}
+
+.u-line {
+	border-bottom: 1px solid rgba(67,41,163,.2);
+	margin: 5px 0;
+	padding: 10px 0;
+}
+
+.restaurant-tabs {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.restaurant-menu-tab {
+	display: flex;
+	justify-content: flex-start;
+	flex: 0 0 60%;
+}
+
+.restaurant-menu-tab a{
+	margin-right: 50px;
+}
+
+.rfb-restaurant-description {
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.rfb-restaurant-description .restaurant-tag {
+	flex: 0 0 60%;
+}
