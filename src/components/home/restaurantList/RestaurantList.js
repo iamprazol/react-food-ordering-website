@@ -19,7 +19,7 @@ class RestaurantList extends Component {
   };
 
   componentDidMount() {
-    fetch("http://wptest.me/api/restaurant")
+    fetch("http://wptest.me/api/restaurants")
       .then((results) => {
         return results.json();
       })
@@ -47,8 +47,8 @@ class RestaurantList extends Component {
 
   render() {
     return (
-      <section class="rfb-nav-container section-padding">
-        <h3 class="rbf-title">Browse By Restaurants</h3>
+      <section class="rfow-nav-container section-padding">
+        <h3 class="rfow-title">Browse By Restaurants</h3>
         <div className="row">{this.state.restaurants}</div>
       </section>
     );

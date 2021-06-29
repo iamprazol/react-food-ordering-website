@@ -42,8 +42,8 @@ class BrowseByCategory extends Component {
 
   render() {
     return (
-      <section class="rfb-nav-container section-padding">
-        <h3 class="rbf-title">
+      <section class="rfow-nav-container section-padding">
+        <h3 class="rfow-title">
           Browse By Categories
           <span class="text-sm">
             <a className="text-red" href="/foods">

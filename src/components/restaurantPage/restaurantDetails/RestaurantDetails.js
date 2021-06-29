@@ -3,37 +3,64 @@ import "./RestaurantDetails.css";
 import IconContainer from "../../common/iconContainer/IconContainer";
 import StarBorderIcon from "@material-ui/icons/Star";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 
-function RestaurantDetails() {
+function RestaurantDetails(props) {
+  let {
+    restaurantId,
+    name,
+    description,
+    deliveryHours,
+    minimumOrder,
+    coverPic,
+    picture,
+    address,
+    vat,
+    discount,
+    additionalCharges,
+  } = props;
+
   return (
-    <section class="rfb-restaurant-details-container">
-      <h1 class="fw-700">Bajeko Sekuwa</h1>
-      <div class="rfb-restaurant-address u-line">
-        <p class="text-light-dark">{"4508 Fort Hamilton Pkwy "}</p>
+    <section class="rfow-restaurant-details-container">
+      <div className="rfow-restaurant-details-header u-line">
+        <div class="rfow-restaurant-title-address">
+          <h1 class="fw-700">{name}</h1>
+          <p class="text-light-black">
+            <IconContainer
+              icon={<LocationOnOutlinedIcon />}
+              colorClass="text-red"
+              fontSizeClass="icon-medium"
+            />
+            {address}
+          </p>
+        </div>
+        <div class="rfow-restaurant-image">
+          <img src={picture} alt="restaurant" />
+        </div>
       </div>
-      <div class="rfb-restaurant-details u-line">
-        <div class="rfb-details price-time">
+      <div class="rfow-restaurant-details u-line">
+        <div class="rfow-details price-time">
           <span class="text-light-black">{"DELIVERY HOURS"}</span>
-          <span class="text-light-black">{"1pm to 80pm"}</span>
+          <span class="text-light-black">{deliveryHours}</span>
         </div>
-        <div class="rfb-details minimum-order">
+        <div class="rfow-details minimum-order">
           <span class="text-light-black">{"MINIMUM ORDER"}</span>
-          <span class="text-light-black">Rs. {"500"}</span>
+          <span class="text-light-black">Rs. {minimumOrder}</span>
         </div>
-        <div class="rfb-details discount-rate">
+        <div class="rfow-details discount-rate">
           <span class="text-light-black">{"DISCOUNT"}</span>
-          <span class="text-light-black">Rs. {"500"}</span>
+          <span class="text-light-black">{discount} % </span>
         </div>
-        <div class="rfb-details service-charge">
+        <div class="rfow-details service-charge">
           <span class="text-light-black">{"SERVICE CHARGE"}</span>
-          <span class="text-light-black">Rs. {"500"}</span>
+          <span class="text-light-black">{additionalCharges} % </span>
         </div>
-        <div class="rfb-details additional-vat">
+        <div class="rfow-details additional-vat">
           <span class="text-light-black">{"ADDITIONAL VAT"}</span>
-          <span class="text-light-black">Rs. {"500"}</span>
+          <span class="text-light-black">{vat} % </span>
         </div>
       </div>
-      <div class="rfb-restaurant-description u-line">
+      <div class="rfow-restaurant-description u-line">
         <div class="rating">
           <span>
             <IconContainer
@@ -63,9 +90,7 @@ function RestaurantDetails() {
           <span className="text-light-black">58 ratings</span>
         </div>
         <div class="restaurant-tag">
-          <h3 class="text-light-white">
-            {"Famous for momos and chicken items"}
-          </h3>
+          <h3 class="text-light-white">{description}</h3>
         </div>
       </div>
 

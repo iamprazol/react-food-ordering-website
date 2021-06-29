@@ -1,17 +1,37 @@
-.rfb-restaurant-details-container {
+.rfow-restaurant-details-container {
 	padding: 0 40px;
 }
 
-.rfb-restaurant-details {
+.rfow-restaurant-details {
 	display: flex;
     justify-content: space-between;
 }
 
-.rfb-restaurant-details h1 {
+.rfow-restaurant-details-header {
+	display: flex;
+    justify-content: space-between;
+}
+
+.rfow-restaurant-details-header .rfow-restaurant-title-address h1 {
 	font-size: 1.5rem;
 }
 
-.rfb-details {
+.rfow-restaurant-details-header .rfow-restaurant-title-address p {
+	font-size: 0.9rem;
+	display: flex;
+    align-items: center;
+}
+
+.rfow-restaurant-details-header .rfow-restaurant-title-address p i {
+    margin-top: 3px;
+}
+
+.rfow-restaurant-details-header .rfow-restaurant-image img {
+    height: 100px;
+    width: 150px;
+}
+
+.rfow-details {
 	display: flex;
     flex-direction: column;
 }
@@ -38,12 +58,12 @@
 	margin-right: 50px;
 }
 
-.rfb-restaurant-description {
+.rfow-restaurant-description {
 	display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.rfb-restaurant-description .restaurant-tag {
+.rfow-restaurant-description .restaurant-tag {
 	flex: 0 0 60%;
 }

@@ -15,16 +15,16 @@ function Banner(props) {
   } = props;
   return (
     <section
-      className="rfb-banner-container rbf-bottom-line"
+      className="rfow-banner-container rfow-bottom-line"
       style={{ height: `${"large" === bannerHeight ? "650px" : "300px"}` }}
     >
       <div
-        className="rfb-banner"
+        className="rfow-banner"
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${bannerImage})`,
         }}
       >
-        <div className="rfb-banner-text">
+        <div className="rfow-banner-text">
           {bannerLargeText ? ` <h1>${bannerLargeText}</h1>` : ""}
           {bannerSmallText ? ` <h3>${bannerSmallText}</h3>` : ""}
           {button

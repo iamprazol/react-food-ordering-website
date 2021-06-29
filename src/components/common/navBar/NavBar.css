@@ -1,4 +1,4 @@
-.rfb-navbar {
+.rfow-navbar {
 	background: #fff;
     display: flex;
     align-items: center;
@@ -8,55 +8,55 @@
     padding-right: 20px;
 }
 
-.rfb-navbar-left {
+.rfow-navbar-left {
 	display: flex;
 	align-items: center;
 	flex: 0 0 30%;
 }
 
 
-.rfb-navbar-center {
+.rfow-navbar-center {
 	display: flex;
 	align-items: center;
 	flex: 0 0 40%;
 	justify-content: center;
 }
 
-.rfb-navbar-right {
+.rfow-navbar-right {
 	display: flex;
     justify-content: center;
 	align-items: center;
 	flex: 0 0 30%;
 }
 
-.rfb-navbar-right .rfb-navbar-account {
+.rfow-navbar-right .rfow-navbar-account {
 	display: flex;
 }
 
-.rfb-navbar-account a {
+.rfow-navbar-account a {
 	margin-left: 20px;
     font-size: 17
 }
 
-.rfb-navbar-left .rfb-navbar-logo {
+.rfow-navbar-left .rfow-navbar-logo {
 	color: #fff;
 	display: flex;
 	padding: 8px 16px;
 	margin-right: 8px;
 }
 
-.rfb-navbar-left .rfb-navbar-logo img {
+.rfow-navbar-left .rfow-navbar-logo img {
 	height: auto;
 	width: 180px;
 }
 
-.rfb-navbar-search i {
+.rfow-navbar-search i {
 	position: absolute;
 	padding: 6px 0 0 25px;
 	font-weight: 400;
 }
 
-.rfb-navbar-search .rfb-search {
+.rfow-navbar-search .rfow-search {
 	height: 40px;
     font-size: 15px;
     width: 400px;

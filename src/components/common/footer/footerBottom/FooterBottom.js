@@ -40,9 +40,9 @@ class FooterBottom extends Component {
 
   render() {
     return (
-      <footer class="rbf-footer-bottom bg-black">
+      <footer class="rfow-footer-bottom bg-black">
         <div className="food-pics">{this.state.foodPics}</div>
-        <div className="rbf-links">
+        <div className="rfow-links">
           <div class="footer-contact">
             <h2 class="text-custom-white">{"Need Help"}</h2>
             <ul>

@@ -1,41 +1,41 @@
-.rbf-footer-bottom {
+.rfow-footer-bottom {
 	display: flex;
     justify-content: space-between;
 	flex-direction: column;
 }
 
-.rbf-footer-bottom .food-pics {
+.rfow-footer-bottom .food-pics {
     display: flex;
     flex-wrap: wrap;
 	margin-bottom: 20px;
 }
 
-.rbf-footer-bottom .food-pics .individual-food-pic {
+.rfow-footer-bottom .food-pics .individual-food-pic {
 	height: 150px;
     width: 225px;
 }
 
-.rbf-footer-bottom .food-pics .individual-food-pic:hover {
+.rfow-footer-bottom .food-pics .individual-food-pic:hover {
 	transform: scale(1.2);
 }
 
-.rbf-footer-bottom .rbf-links {
+.rfow-footer-bottom .rfow-links {
 	display: flex;
     justify-content: space-between;
     padding-left: 50px;
     padding-right: 50px;
 }
 
-.rbf-footer-bottom ul {
+.rfow-footer-bottom ul {
 	margin-top: -10px;
     margin-left: -40px;
 }
 
-.rbf-footer-bottom span, a {
+.rfow-footer-bottom span, a {
 	font-size: 14px;
 }
 
-.rbf-footer-bottom li {
+.rfow-footer-bottom li {
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;

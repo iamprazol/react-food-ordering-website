@@ -1,10 +1,10 @@
-.rfb-ads-container {
+.rfow-ads-container {
     height: 100px;
     padding-left: 50px;
     padding-right: 50px;
 }
 
-.rfb-ads {
+.rfow-ads {
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -13,7 +13,7 @@
     border-radius: 4px;
 }
 
-.rfb-ads-text {
+.rfow-ads-text {
     display: flex;
     align-items: baseline;
     justify-content: space-around;
@@ -26,7 +26,7 @@
     width: 100%;
   }
 
-  .rfb-ads-text h3 {
+  .rfow-ads-text h3 {
     font-size: 30px;
     font-weight: 400;
   }
