@@ -193,6 +193,14 @@ span.rectangle-tag {
     color: #fff;
 }
 
+.text-green {
+    color: green;
+}
+
+.text-black-white {
+	color: #4a4a4a;
+}
+
 .overlay {
 	top: 0;
 	left: 0;
@@ -203,6 +211,10 @@ span.rectangle-tag {
     justify-content: space-between;
     padding: 10px;
 	position: absolute;
+}
+
+.fw-500 {
+	font-weight: 550;
 }
 
 .fw-600 {

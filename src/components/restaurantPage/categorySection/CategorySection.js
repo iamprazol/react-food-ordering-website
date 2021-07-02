@@ -2,6 +2,7 @@ import React from "react";
 import "./CategorySection.css";
 import WhatshotIcon from "@material-ui/icons/Whatshot";
 import IconContainer from "../../common/iconContainer/IconContainer";
+import { Link } from "react-scroll";
 
 function CategorySection() {
   return (
@@ -16,20 +17,25 @@ function CategorySection() {
           Categories
         </h3>
       </div>
-      <div class="rfow-restaurant-categories-body">
-        <a class="u-line-short" href="momo">
-          Momo
-        </a>
-        <a class="u-line-short" href="momo">
-          Pizza
-        </a>
-        <a class="u-line-short" href="momo">
-          Veg
-        </a>
-        <a class="u-line-short" href="momo">
-          Buff
-        </a>
-      </div>
+      <ul
+        class="rfow-restaurant-categories-body"
+        style={{
+          listStyle: "none",
+          margin: "0px",
+          padding: "0px",
+        }}
+      >
+        <li class="active text-medium u-line-short">
+          <Link to="momo" smooth={true}>
+            Momo
+          </Link>
+        </li>
+        <li class="text-medium u-line-short">
+          <Link to="chicken" smooth={true}>
+            Chicken
+          </Link>
+        </li>
+      </ul>
     </div>
   );
 }

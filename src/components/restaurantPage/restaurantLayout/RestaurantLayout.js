@@ -7,6 +7,7 @@ import FooterBottom from "../../common/footer/footerBottom/FooterBottom";
 import RestaurantDetails from "../restaurantDetails/RestaurantDetails";
 import CategorySection from "../categorySection/CategorySection";
 import "./RestaurantLayout.css";
+import MenuLayout from "../menuLayout/MenuLayout";
 
 class RestaurantLayout extends Component {
   constructor() {
@@ -56,12 +57,7 @@ class RestaurantLayout extends Component {
           bannerHeight="medium"
         />
         {this.state.restaurantDetails}
-        <section class="rfow-restaurant-menu-container">
-          <CategorySection />
-          <div class="rfow-restaurant-menu">
-            <h1>This is menu</h1>
-          </div>
-        </section>
+        <MenuLayout />
         <FooterTop />
         <FooterBottom />
       </div>
