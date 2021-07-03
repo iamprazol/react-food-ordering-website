@@ -19,7 +19,9 @@ class RestaurantList extends Component {
   };
 
   componentDidMount() {
-    fetch("http://wptest.me/api/restaurants")
+    const { REACT_APP_API_URL } = process.env;
+
+    fetch(REACT_APP_API_URL + "/restaurants")
       .then((results) => {
         return results.json();
       })

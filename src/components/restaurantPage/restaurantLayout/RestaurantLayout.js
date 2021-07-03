@@ -18,8 +18,10 @@ class RestaurantLayout extends Component {
   }
 
   componentDidMount() {
+    const { REACT_APP_API_URL } = process.env;
+
     fetch(
-      `http://wptest.me/api/restaurant/${this.props.match.params.restaurantId}`
+      `${REACT_APP_API_URL}/restaurant/${this.props.match.params.restaurantId}`
     )
       .then((results) => {
         return results.json();

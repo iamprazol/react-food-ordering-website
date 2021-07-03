@@ -18,7 +18,8 @@ class FooterBottom extends Component {
   };
 
   componentDidMount() {
-    fetch("http://wptest.me/api/foods")
+    const { REACT_APP_API_URL } = process.env;
+    fetch(REACT_APP_API_URL + "/foods")
       .then((results) => {
         return results.json();
       })
