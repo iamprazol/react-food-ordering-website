@@ -59,7 +59,7 @@ class RestaurantLayout extends Component {
           bannerHeight="medium"
         />
         {this.state.restaurantDetails}
-        <MenuLayout />
+        <MenuLayout restaurantId={this.props.match.params.restaurantId} />
         <FooterTop />
         <FooterBottom />
       </div>

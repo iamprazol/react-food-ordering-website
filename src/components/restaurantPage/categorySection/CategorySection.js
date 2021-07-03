@@ -4,7 +4,9 @@ import WhatshotIcon from "@material-ui/icons/Whatshot";
 import IconContainer from "../../common/iconContainer/IconContainer";
 import { Link } from "react-scroll";
 
-function CategorySection() {
+function CategorySection(props) {
+  const { categories } = props;
+
   return (
     <div class="rfow-restaurant-categories">
       <div class="rfow-restaurant-categories-header u-line">
@@ -25,16 +27,15 @@ function CategorySection() {
           padding: "0px",
         }}
       >
-        <li class="active text-medium u-line-short">
-          <Link to="momo" smooth={true}>
-            Momo
-          </Link>
-        </li>
-        <li class="text-medium u-line-short">
-          <Link to="chicken" smooth={true}>
-            Chicken
-          </Link>
-        </li>
+        {categories
+          ? categories.map((category) => (
+              <li class="active text-medium u-line-short">
+                <Link to={category.toLowerCase()} smooth={true}>
+                  {category}
+                </Link>
+              </li>
+            ))
+          : ""}
       </ul>
     </div>
   );
