@@ -1,0 +1,21 @@
+.rfow-field {
+	font-size: 16px;
+	margin-bottom: 16px;
+}
+
+.rfow-field-label {
+	display: inline-block;
+	margin-bottom: 8px;
+}
+
+.rfow-field-control {
+	position: relative;
+	flex: 1 1 auto;
+	min-width: 0;
+	margin-bottom: 0;
+}
+
+.rfow-field-control:not(:first-child) {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}

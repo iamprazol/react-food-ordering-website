@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import IconContainer from "../../common/iconContainer/IconContainer";
+import InputHandler from "../../common/inputHandler/InputHandler";
+import Buttons from "../../common/buttons/Buttons";
 import SearchIcon from "@material-ui/icons/Search";
 import "./MenuSection.css";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
@@ -44,9 +46,36 @@ function MenuSection(props) {
                     />
                   </div>
                 </div>
-                <div className="rfow-restaurant-menu-item-bottom-bar">
-                  {openOrderBar ? <input type="text" /> : ""}
-                </div>
+                {openOrderBar ? (
+                  <div className="rfow-restaurant-menu-item-bottom-bar">
+                    <div className={`rfow-field`}>
+                      <InputHandler
+                        fieldSetting={{
+                          type: "textarea",
+                          value: "",
+                          required: false,
+                          placeholder: "Special Instructions",
+                        }}
+                      />
+                    </div>
+                    <div className={`rfow-field`}>
+                      <InputHandler
+                        fieldSetting={{
+                          type: "number",
+                          value: "",
+                          placeholder: "quantity",
+                        }}
+                      />
+                    </div>
+                    <Buttons
+                      variant="primary"
+                      size="medium"
+                      title="Add To Cart | Rs 200"
+                    />
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           ))}

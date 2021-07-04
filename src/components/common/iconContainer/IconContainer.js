@@ -1,7 +1,14 @@
 import React from "react";
 import "./IconContainer.css";
 
-function IconContainer({ icon, colorClass, fontSizeClass, text, tag }) {
+function IconContainer({
+  icon,
+  colorClass,
+  fontSizeClass,
+  text,
+  tag,
+  iconStyle,
+}) {
   return (
     <i className={"iconContainer " + colorClass + " " + fontSizeClass}>
       {icon && icon}

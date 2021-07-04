@@ -1,0 +1,19 @@
+.rfow-button {
+	color: #fff;
+	background-color: #ced4da;
+	padding: 8px 16px;
+	font-size: 14px;
+	border: 1px solid #ced4da;
+	border-radius: 8px;
+}
+
+.rfow-button-primary {
+	background-color: #008d45;
+	border-color: #277BF1;
+}
+
+.rfow-button-secondary {
+	background-color: #fff;
+	color: #495057;
+	border: 1px solid #e9ecef;
+}
