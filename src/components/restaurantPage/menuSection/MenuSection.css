@@ -29,10 +29,32 @@
 	background-color: #FBF9F9;
 }
 
-.rfow-restaurant-menu-item-bottom-bar {
+.rfow-restaurant-order-food-extras {
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	background-color: whitesmoke;
-	padding: 20px;
+    justify-content: space-between;
+    align-items: center;
+	flex-direction: row;
+}
+
+.rfow-restaurant-order-food-instruction .rfow-field {
+	display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.rfow-restaurant-order-food-quantities {
+	display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.rfow-field i {
+	font-weight: 400;
+    z-index: 10;
+    position: absolute;
+	padding: 5px;
+}
+
+.rfow-field i.right {
+    margin-left: -30px;
 }

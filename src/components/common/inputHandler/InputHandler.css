@@ -1,6 +1,6 @@
 .rfow-field {
 	font-size: 16px;
-	margin-bottom: 16px;
+	margin: 16px 0;
 }
 
 .rfow-field-label {
@@ -19,3 +19,19 @@
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
 }
+
+.rfow-input {
+	height: 30px;
+    width: 200px;
+    text-align: center;
+}
+
+input[type="number"] {
+	-webkit-appearance: textfield;
+	   -moz-appearance: textfield;
+			appearance: textfield;
+  }
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+  }

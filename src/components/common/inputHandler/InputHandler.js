@@ -18,7 +18,7 @@ function InputHandler({ fieldSetting }) {
       case "textarea":
         return (
           <textarea
-            rows="4"
+            rows="6"
             cols="20"
             type={fieldSetting.type}
             disabled={fieldSetting.required}
@@ -52,7 +52,7 @@ function InputHandler({ fieldSetting }) {
             defaultValue={fieldSetting.value || ""}
             disabled={fieldSetting.required}
             placeholder={fieldSetting.placeholder}
-            className="rfow-field-control"
+            className="rfow-field-control rfow-input"
             min="1"
             step="1"
           />
