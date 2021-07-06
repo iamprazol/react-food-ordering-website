@@ -1,7 +1,7 @@
 import React from "react";
 import "./InputHandler.css";
 
-function InputHandler({ fieldSetting }) {
+function InputHandler({ fieldSetting, onChange }) {
   const renderInput = (fieldSetting) => {
     switch (fieldSetting.type) {
       case "text":
@@ -24,6 +24,7 @@ function InputHandler({ fieldSetting }) {
             disabled={fieldSetting.required}
             className="rfow-field-control"
             placeholder={fieldSetting.placeholder}
+            id={fieldSetting.id}
           >
             {fieldSetting.value || ""}
           </textarea>
@@ -55,6 +56,7 @@ function InputHandler({ fieldSetting }) {
             className="rfow-field-control rfow-input"
             min="1"
             step="1"
+            onChange={(e) => onChange(e.target.value)}
           />
         );
       default:

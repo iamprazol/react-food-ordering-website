@@ -3,7 +3,7 @@ import "./Popup.css";
 
 const Popup = (props) => {
   const [closePopup, setClosePopup] = useState(true);
-  const { content } = props;
+  const { content, onClick } = props;
 
   return (
     <div>
@@ -13,6 +13,7 @@ const Popup = (props) => {
             <span
               className="popup-close"
               onClick={() => {
+                onClick(closePopup);
                 setClosePopup(!closePopup);
               }}
             >

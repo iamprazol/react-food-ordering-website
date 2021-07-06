@@ -6,7 +6,6 @@ import Popup from "../../common/popup/Popup";
 import "./MenuSection.css";
 import SearchIcon from "@material-ui/icons/Search";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 
@@ -14,6 +13,38 @@ function MenuSection(props) {
   const { menuItems } = props;
   const [openOrderBar, setOpenOrderBar] = useState(false);
   const [orderedFood, setOrderedFood] = useState([]);
+  const [orderedQuantity, setOrderedQuantity] = useState(1);
+  const [orderHandled, setOrderHandled] = useState(true);
+  const [orderList, setOrderList] = useState([]);
+
+  const handleOrderedFood = (food) => {
+    if (!orderHandled) {
+      setOrderHandled(!orderHandled);
+
+      var order = {
+        restaurant_id: food.restaurant_id,
+        food_id: food.id,
+        quantity: orderedQuantity,
+        price: food.price * orderedQuantity,
+        special_instructions: document.getElementById(
+          `food_${food.id}_special_instructions`
+        ).value,
+      };
+
+      setOrderList([...orderList, order]);
+      setOrderedQuantity(1);
+    }
+  };
+
+  const handleInputValue = (value) => {
+    setOrderedQuantity(value);
+  };
+
+  const handlePopupDisplay = (closePopup) => {
+    if (closePopup) {
+      setOrderHandled(false);
+    }
+  };
 
   return (
     <div class="rfow-restaurant-menu section-padding">
@@ -60,6 +91,7 @@ function MenuSection(props) {
       ))}
       {openOrderBar ? (
         <Popup
+          onClick={handlePopupDisplay}
           content={
             <div className="rfow-restaurant-order-food">
               <div className="rfow-restaurant-order-food-body">
@@ -70,7 +102,7 @@ function MenuSection(props) {
                   <div className={`rfow-field`}>
                     <label
                       className="rfow-field-label"
-                      htmlFor="special_instructions"
+                      htmlFor={`food_${orderedFood.id}_special_instructions`}
                     >
                       Special Instructions
                     </label>
@@ -80,6 +112,7 @@ function MenuSection(props) {
                         value: "",
                         required: false,
                         placeholder: "Extra toppings on pizza",
+                        id: `food_${orderedFood.id}_special_instructions`,
                       }}
                     />
                   </div>
@@ -97,6 +130,7 @@ function MenuSection(props) {
                         value: "",
                         placeholder: "quantity",
                       }}
+                      onChange={handleInputValue}
                     />
                     <IconContainer
                       icon={<RemoveIcon />}
@@ -107,7 +141,10 @@ function MenuSection(props) {
                   <Buttons
                     variant="primary"
                     size="medium"
-                    title={`Add To Cart | Rs ${orderedFood.price}`}
+                    title={`Add To Cart | Rs ${
+                      orderedFood.price * orderedQuantity
+                    }`}
+                    onClick={handleOrderedFood(orderedFood)}
                   />
                 </div>
               </div>
