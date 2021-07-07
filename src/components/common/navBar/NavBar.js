@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./NavBar.css";
 import SearchIcon from "@material-ui/icons/Search";
 import IconContainer from "../iconContainer/IconContainer";
 import Button from "../button/Button";
 
-function NavBar() {
+function NavBar({ onClick }) {
+  const [openLoginPopup, setOpenLoginPopup] = useState(true);
+
   return (
     <div className="rfow-navbar">
       <div className="rfow-navbar-left">
@@ -26,8 +28,11 @@ function NavBar() {
         <div className="rfow-navbar-account">
           <Button
             buttonClass="btn-submit btn-secondary"
-            buttonHref="google.com"
             text={"Login"}
+            onClick={() => {
+              setOpenLoginPopup(!openLoginPopup);
+              onClick(openLoginPopup);
+            }}
           />
           <Button
             buttonClass="btn-submit btn-secondary"

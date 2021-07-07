@@ -6,13 +6,14 @@ function InputHandler({ fieldSetting, onChange }) {
     switch (fieldSetting.type) {
       case "text":
       case "email":
+      case "password":
         return (
           <input
             type={fieldSetting.type}
             defaultValue={fieldSetting.value || ""}
             disabled={fieldSetting.required}
             placeholder={fieldSetting.placeholder}
-            className="rfow-field-control"
+            className="rfow-field-control rfow-input"
           />
         );
       case "textarea":

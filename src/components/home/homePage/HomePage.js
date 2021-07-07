@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BrowseByCategory from "../browseByCategory/BrowseByCategory";
 import RestaurantList from "../restaurantList/RestaurantList";
 import FooterTop from "../../common/footer/footerTop/FooterTop";
@@ -6,10 +6,24 @@ import FooterBottom from "../../common/footer/footerBottom/FooterBottom";
 import NavBar from "../../common/navBar/NavBar";
 import Banner from "../../common/banner/Banner";
 import Ads from "../../common/ads/Ads";
+import LoginPage from "../../authentication/loginPage/LoginPage";
+import Popup from "../../common/popup/Popup";
+
 const HomePage = () => {
+  const [openLoginPopup, setOpenLoginPopup] = useState(false);
+
+  const handleOpenLoginPopup = (loginPopup) => {
+    setOpenLoginPopup(loginPopup);
+  };
+
   return (
     <div className="container-fluid">
-      <NavBar />
+      <NavBar onClick={handleOpenLoginPopup} />
+      {openLoginPopup ? (
+        <Popup popupClass="wd-50 br-25" content={<LoginPage />} />
+      ) : (
+        ""
+      )}
       <Banner
         bannerImage="http://wptest.me/images/food/1624721452.jpg"
         bannerHeight="large"

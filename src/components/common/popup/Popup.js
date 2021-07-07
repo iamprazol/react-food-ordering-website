@@ -3,13 +3,13 @@ import "./Popup.css";
 
 const Popup = (props) => {
   const [closePopup, setClosePopup] = useState(true);
-  const { content, onClick } = props;
+  const { content, onClick, popupClass } = props;
 
   return (
     <div>
       {closePopup ? (
         <div className="popup-overlay">
-          <div className="popup">
+          <div className={`popup ${popupClass}`}>
             <span
               className="popup-close"
               onClick={() => {
