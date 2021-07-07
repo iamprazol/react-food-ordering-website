@@ -8,19 +8,34 @@ import Banner from "../../common/banner/Banner";
 import Ads from "../../common/ads/Ads";
 import LoginPage from "../../authentication/loginPage/LoginPage";
 import Popup from "../../common/popup/Popup";
+import RegistrationPage from "../../authentication/registrationPage/RegistrationPage";
 
 const HomePage = () => {
   const [openLoginPopup, setOpenLoginPopup] = useState(false);
+  const [openRegistrationPopup, setOpenRegistrationPopup] = useState(false);
 
-  const handleOpenLoginPopup = (loginPopup) => {
-    setOpenLoginPopup(loginPopup);
+  const handleOpenAuthenticationPopup = (popupType) => {
+    if ("login" === popupType) {
+      setOpenLoginPopup(!openLoginPopup);
+    } else {
+      setOpenRegistrationPopup(!openRegistrationPopup);
+    }
   };
 
   return (
     <div className="container-fluid">
-      <NavBar onClick={handleOpenLoginPopup} />
+      <NavBar onClick={handleOpenAuthenticationPopup} />
       {openLoginPopup ? (
         <Popup onClick={""} popupClass="wd-50 br-25" content={<LoginPage />} />
+      ) : (
+        ""
+      )}
+      {openRegistrationPopup ? (
+        <Popup
+          onClick={""}
+          popupClass="wd-50 br-25"
+          content={<RegistrationPage />}
+        />
       ) : (
         ""
       )}

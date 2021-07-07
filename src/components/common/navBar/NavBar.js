@@ -5,8 +5,6 @@ import IconContainer from "../iconContainer/IconContainer";
 import Button from "../button/Button";
 
 function NavBar({ onClick }) {
-  const [openLoginPopup, setOpenLoginPopup] = useState(true);
-
   return (
     <div className="rfow-navbar">
       <div className="rfow-navbar-left">
@@ -29,15 +27,12 @@ function NavBar({ onClick }) {
           <Button
             buttonClass="btn-submit btn-secondary"
             text={"Login"}
-            onClick={() => {
-              setOpenLoginPopup(!openLoginPopup);
-              onClick(openLoginPopup);
-            }}
+            onClick={() => onClick("login")}
           />
           <Button
             buttonClass="btn-submit btn-secondary"
-            buttonHref="google.com"
             text={"Register"}
+            onClick={() => onClick("register")}
           />
         </div>
       </div>

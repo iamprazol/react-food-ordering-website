@@ -36,15 +36,17 @@ function InputHandler({ fieldSetting, onChange }) {
             disabled={fieldSetting.required}
             className="rfow-field-control"
           >
-            {fieldSetting.options.map((key, option) => (
-              <option
-                key={key}
-                defaultValue={option}
-                selected={fieldSetting.value === option ? "selected" : ""}
-              >
-                {option}
-              </option>
-            ))}
+            {fieldSetting.options.map((key, option) => {
+              return (
+                <option
+                  key={key}
+                  defaultValue={option}
+                  selected={fieldSetting.value === option ? "selected" : ""}
+                >
+                  {option}
+                </option>
+              );
+            })}
           </select>
         );
       case "number":

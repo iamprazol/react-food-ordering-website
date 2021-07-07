@@ -1,0 +1,42 @@
+.rfow-restaurant-register {
+	display: flex;
+    justify-content: space-between;
+	flex-direction: column;
+	padding: 50px 50px;
+}
+
+.rfow-restaurant-register-header{
+	text-align: center;
+}
+
+.rfow-restaurant-register-body {
+	padding: 10px 40px;
+}
+
+.rfow-restaurant-register input {
+	font-family: Poppins-Medium;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #666666;
+    display: block;
+    width: 100%;
+    background: #e6e6e6;
+    height: 40px;
+    border-radius: 25px !important;
+    padding: 0 15px 0 25px;
+	border: none;
+}
+
+.rfow-restaurant-register .rfow-field i {
+	font-weight: 400;
+    z-index: 10;
+    position: absolute;
+    padding: 10px;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
