@@ -21,11 +21,11 @@ function RestaurantDetails(props) {
   } = props;
 
   return (
-    <section class="rfow-restaurant-details-container">
+    <section className="rfow-restaurant-details-container">
       <div className="rfow-restaurant-details-header u-line">
-        <div class="rfow-restaurant-title-address">
-          <h1 class="fw-700">{name}</h1>
-          <p class="text-light-black">
+        <div className="rfow-restaurant-title-address">
+          <h1 className="fw-700">{name}</h1>
+          <p className="text-light-black">
             <IconContainer
               icon={<LocationOnOutlinedIcon />}
               colorClass="text-red"
@@ -34,34 +34,34 @@ function RestaurantDetails(props) {
             {address}
           </p>
         </div>
-        <div class="rfow-restaurant-image">
+        <div className="rfow-restaurant-image">
           <img src={picture} alt="restaurant" />
         </div>
       </div>
-      <div class="rfow-restaurant-details u-line">
-        <div class="rfow-details price-time">
-          <span class="text-light-black">{"DELIVERY HOURS"}</span>
-          <span class="text-light-black">{deliveryHours}</span>
+      <div className="rfow-restaurant-details u-line">
+        <div className="rfow-details price-time">
+          <span className="text-light-black">{"DELIVERY HOURS"}</span>
+          <span className="text-light-black">{deliveryHours}</span>
         </div>
-        <div class="rfow-details minimum-order">
-          <span class="text-light-black">{"MINIMUM ORDER"}</span>
-          <span class="text-light-black">Rs. {minimumOrder}</span>
+        <div className="rfow-details minimum-order">
+          <span className="text-light-black">{"MINIMUM ORDER"}</span>
+          <span className="text-light-black">Rs. {minimumOrder}</span>
         </div>
-        <div class="rfow-details discount-rate">
-          <span class="text-light-black">{"DISCOUNT"}</span>
-          <span class="text-light-black">{discount} % </span>
+        <div className="rfow-details discount-rate">
+          <span className="text-light-black">{"DISCOUNT"}</span>
+          <span className="text-light-black">{discount} % </span>
         </div>
-        <div class="rfow-details service-charge">
-          <span class="text-light-black">{"SERVICE CHARGE"}</span>
-          <span class="text-light-black">{additionalCharges} % </span>
+        <div className="rfow-details service-charge">
+          <span className="text-light-black">{"SERVICE CHARGE"}</span>
+          <span className="text-light-black">{additionalCharges} % </span>
         </div>
-        <div class="rfow-details additional-vat">
-          <span class="text-light-black">{"ADDITIONAL VAT"}</span>
-          <span class="text-light-black">{vat} % </span>
+        <div className="rfow-details additional-vat">
+          <span className="text-light-black">{"ADDITIONAL VAT"}</span>
+          <span className="text-light-black">{vat} % </span>
         </div>
       </div>
-      <div class="rfow-restaurant-description u-line">
-        <div class="rating">
+      <div className="rfow-restaurant-description u-line">
+        <div className="rating">
           <span>
             <IconContainer
               icon={<StarBorderIcon />}
@@ -89,27 +89,27 @@ function RestaurantDetails(props) {
           </span>
           <span className="text-light-black">58 ratings</span>
         </div>
-        <div class="restaurant-tag">
-          <h3 class="text-light-white">{description}</h3>
+        <div className="restaurant-tag">
+          <h3 className="text-light-white">{description}</h3>
         </div>
       </div>
 
-      <div class="restaurant-tabs u-line">
-        <div class="restaurant-menu-tab">
-          <a class="nav-link text-light-white fw-700" href="#about">
+      <div className="restaurant-tabs u-line">
+        <div className="restaurant-menu-tab">
+          <a className="nav-link text-light-white fw-700" href="#about">
             Menu
           </a>
-          <a class="nav-link text-light-white fw-700" href="#about">
+          <a className="nav-link text-light-white fw-700" href="#about">
             About
           </a>
-          <a class="nav-link text-light-white fw-700" href="#review">
+          <a className="nav-link text-light-white fw-700" href="#review">
             Reviews
           </a>
-          <a class="nav-link text-light-white fw-700" href="#mapgallery">
+          <a className="nav-link text-light-white fw-700" href="#mapgallery">
             Map &amp; Gallery
           </a>
         </div>
-        <div class="add-wishlist">
+        <div className="add-wishlist">
           <IconContainer
             icon={<FavoriteBorderIcon />}
             fontSizeClass="icon-medium"

@@ -24,7 +24,9 @@ const Popup = (props) => {
             </div>
           </div>
         </div>
-      ) : null}
+      ) : (
+        ""
+      )}
     </div>
   );
 };

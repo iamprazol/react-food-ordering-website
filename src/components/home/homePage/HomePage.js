@@ -20,7 +20,7 @@ const HomePage = () => {
     <div className="container-fluid">
       <NavBar onClick={handleOpenLoginPopup} />
       {openLoginPopup ? (
-        <Popup popupClass="wd-50 br-25" content={<LoginPage />} />
+        <Popup onClick={""} popupClass="wd-50 br-25" content={<LoginPage />} />
       ) : (
         ""
       )}
@@ -29,6 +29,7 @@ const HomePage = () => {
         bannerHeight="large"
         bannerLargeText="Order your favourite food from anywhere"
         bannerSmallText="with the largest food ordering platform all over Nepal"
+        button={true}
         buttonClass="btn-submit btn-primary"
         buttonHref="http://themegrill.me:41239/restaurants"
         buttonText="Order Now"

@@ -41,36 +41,36 @@ class FooterBottom extends Component {
 
   render() {
     return (
-      <footer class="rfow-footer-bottom bg-black">
+      <footer className="rfow-footer-bottom bg-black">
         <div className="food-pics">{this.state.foodPics}</div>
         <div className="rfow-links">
-          <div class="footer-contact">
-            <h2 class="text-custom-white">{"Need Help"}</h2>
+          <div className="footer-contact">
+            <h2 className="text-custom-white">{"Need Help"}</h2>
             <ul>
-              <li class="fw-600">
-                <span class="text-light-white">{"Call Us"}</span>
-                <span class="text-white">{"+(977) 9845690436"}</span>
+              <li className="fw-600">
+                <span className="text-light-white">{"Call Us"}</span>
+                <span className="text-white">{"+(977) 9845690436"}</span>
               </li>
-              <li class="fw-600">
-                <span class="text-light-white">{"Email Us"}</span>
-                <span class="text-white">{"demo@domain.com"}</span>
+              <li className="fw-600">
+                <span className="text-light-white">{"Email Us"}</span>
+                <span className="text-white">{"demo@domain.com"}</span>
               </li>
-              <li class="fw-600">
-                <span class="text-light-white">{"Join our twitter"}</span>
-                <span class="text-white">{"@foodie"}</span>
+              <li className="fw-600">
+                <span className="text-light-white">{"Join our twitter"}</span>
+                <span className="text-white">{"@foodie"}</span>
               </li>
-              <li class="fw-600">
-                <span class="text-light-white">{"Join our instagram"}</span>
-                <span class="text-white">{"@foodie"}</span>
+              <li className="fw-600">
+                <span className="text-light-white">{"Join our instagram"}</span>
+                <span className="text-white">{"@foodie"}</span>
               </li>
             </ul>
           </div>
-          <div class="footer-about">
-            <h2 class="text-custom-white">{"Get To Know Us"}</h2>
+          <div className="footer-about">
+            <h2 className="text-custom-white">{"Get To Know Us"}</h2>
             <ul>
               <li>
                 <a
-                  class="text-light-white fw-600"
+                  className="text-light-white fw-600"
                   href="http://themegrill.me:3000/"
                 >
                   {"About Us"}
@@ -78,7 +78,7 @@ class FooterBottom extends Component {
               </li>
               <li>
                 <a
-                  class="text-light-white fw-600"
+                  className="text-light-white fw-600"
                   href="http://themegrill.me:3000/"
                 >
                   {"Blog"}
@@ -86,7 +86,7 @@ class FooterBottom extends Component {
               </li>
               <li>
                 <a
-                  class="text-light-white fw-600"
+                  className="text-light-white fw-600"
                   href="http://themegrill.me:3000/"
                 >
                   {"Socialize"}
@@ -94,7 +94,7 @@ class FooterBottom extends Component {
               </li>
               <li>
                 <a
-                  class="text-light-white fw-600"
+                  className="text-light-white fw-600"
                   href="http://themegrill.me:3000/"
                 >
                   {"FooDie"}
@@ -102,7 +102,7 @@ class FooterBottom extends Component {
               </li>
               <li>
                 <a
-                  class="text-light-white fw-600"
+                  className="text-light-white fw-600"
                   href="http://themegrill.me:3000/"
                 >
                   {"Perks"}
@@ -110,12 +110,12 @@ class FooterBottom extends Component {
               </li>
             </ul>
           </div>
-          <div class="footer-support">
-            <h2 class="text-custom-white">{"Let Us Know You"}</h2>
+          <div className="footer-support">
+            <h2 className="text-custom-white">{"Let Us Know You"}</h2>
             <ul>
               <li>
                 <a
-                  class="text-light-white fw-600"
+                  className="text-light-white fw-600"
                   href="http://themegrill.me:3000/"
                 >
                   {"Account Details"}
@@ -123,7 +123,7 @@ class FooterBottom extends Component {
               </li>
               <li>
                 <a
-                  class="text-light-white fw-600"
+                  className="text-light-white fw-600"
                   href="http://themegrill.me:3000/"
                 >
                   {"Order History"}
@@ -131,7 +131,7 @@ class FooterBottom extends Component {
               </li>
               <li>
                 <a
-                  class="text-light-white fw-600"
+                  className="text-light-white fw-600"
                   href="http://themegrill.me:3000/"
                 >
                   {"Find restaurant"}
@@ -139,7 +139,7 @@ class FooterBottom extends Component {
               </li>
               <li>
                 <a
-                  class="text-light-white fw-600"
+                  className="text-light-white fw-600"
                   href="http://themegrill.me:3000/"
                 >
                   {"Login"}
@@ -147,7 +147,7 @@ class FooterBottom extends Component {
               </li>
               <li>
                 <a
-                  class="text-light-white fw-600"
+                  className="text-light-white fw-600"
                   href="http://themegrill.me:3000/"
                 >
                   {"Track order"}
@@ -155,12 +155,12 @@ class FooterBottom extends Component {
               </li>
             </ul>
           </div>
-          <div class="footer-business">
-            <h2 class="text-custom-white">{"Doing Business ?"}</h2>
+          <div className="footer-business">
+            <h2 className="text-custom-white">{"Doing Business ?"}</h2>
             <ul>
               <li>
                 <a
-                  class="text-light-white fw-600"
+                  className="text-light-white fw-600"
                   href="http://themegrill.me:3000/"
                 >
                   {"Suggest an Idea"}
@@ -168,7 +168,7 @@ class FooterBottom extends Component {
               </li>
               <li>
                 <a
-                  class="text-light-white fw-600"
+                  className="text-light-white fw-600"
                   href="http://themegrill.me:3000/"
                 >
                   {"Be a Partner restaurant"}
@@ -176,7 +176,7 @@ class FooterBottom extends Component {
               </li>
               <li>
                 <a
-                  class="text-light-white fw-600"
+                  className="text-light-white fw-600"
                   href="http://themegrill.me:3000/"
                 >
                   {"Create an Account"}
@@ -184,7 +184,7 @@ class FooterBottom extends Component {
               </li>
               <li>
                 <a
-                  class="text-light-white fw-600"
+                  className="text-light-white fw-600"
                   href="http://themegrill.me:3000/"
                 >
                   {"Help"}
@@ -192,8 +192,8 @@ class FooterBottom extends Component {
               </li>
             </ul>
           </div>
-          <div class="footer-download">
-            <h2 class="text-custom-white">{"Download Apps"}</h2>
+          <div className="footer-download">
+            <h2 className="text-custom-white">{"Download Apps"}</h2>
             <div className="appimage">
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"

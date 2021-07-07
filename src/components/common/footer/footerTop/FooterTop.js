@@ -10,7 +10,7 @@ import ContactSupportTwoToneIcon from "@material-ui/icons/ContactSupportTwoTone"
 
 const FooterTop = () => {
   return (
-    <section class="rfow-footer-top section-padding bg-black">
+    <section className="rfow-footer-top section-padding bg-black">
       <div className="icon-box">
         <IconContainer
           icon={<PaymentIcon />}

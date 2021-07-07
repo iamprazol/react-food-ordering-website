@@ -12,7 +12,7 @@ function LoginPage() {
   return (
     <div className="rfow-restaurant-login">
       <div className="rfow-restaurant-login-left">
-        <img class="wd-70" src={FoodieImage} alt="foodie" />
+        <img className="wd-70" src={FoodieImage} alt="foodie" />
       </div>
       <div className="rfow-restaurant-login-right">
         <div className="rfow-restaurant-login-header">

@@ -47,10 +47,10 @@ function MenuSection(props) {
   };
 
   return (
-    <div class="rfow-restaurant-menu section-padding">
+    <div className="rfow-restaurant-menu section-padding">
       <div className="rfow-restaurant-menu-search">
         <IconContainer icon={<SearchIcon />} fontSizeClass="icon-medium" />
-        <input class="rfow-search" type="text" placeholder="Chicken Momo" />
+        <input className="rfow-search" type="text" placeholder="Chicken Momo" />
       </div>
       {menuItems.map((menuItem) => (
         <div className="rfow-restaurant-menu-list">

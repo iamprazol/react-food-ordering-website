@@ -22,7 +22,7 @@ function MenuLayout(props) {
   }, [REACT_APP_API_URL, restaurantId]);
 
   return (
-    <section class="rfow-restaurant-menu-container">
+    <section className="rfow-restaurant-menu-container">
       <CategorySection categories={categories} />
       <MenuSection menuItems={menuItems} />
     </section>

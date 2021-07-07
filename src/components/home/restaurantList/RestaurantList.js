@@ -49,8 +49,8 @@ class RestaurantList extends Component {
 
   render() {
     return (
-      <section class="rfow-nav-container section-padding">
-        <h3 class="rfow-title">Browse By Restaurants</h3>
+      <section className="rfow-nav-container section-padding">
+        <h3 className="rfow-title">Browse By Restaurants</h3>
         <div className="row">{this.state.restaurants}</div>
       </section>
     );

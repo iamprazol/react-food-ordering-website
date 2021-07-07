@@ -8,8 +8,8 @@ function CategorySection(props) {
   const { categories } = props;
 
   return (
-    <div class="rfow-restaurant-categories">
-      <div class="rfow-restaurant-categories-header u-line">
+    <div className="rfow-restaurant-categories">
+      <div className="rfow-restaurant-categories-header u-line">
         <h3>
           <IconContainer
             icon={<WhatshotIcon />}
@@ -20,7 +20,7 @@ function CategorySection(props) {
         </h3>
       </div>
       <ul
-        class="rfow-restaurant-categories-body"
+        className="rfow-restaurant-categories-body"
         style={{
           listStyle: "none",
           margin: "0px",
@@ -29,7 +29,7 @@ function CategorySection(props) {
       >
         {categories
           ? categories.map((category) => (
-              <li class="active text-medium u-line-short">
+              <li className="active text-medium u-line-short">
                 <Link to={category.toLowerCase()} smooth={true}>
                   {category}
                 </Link>

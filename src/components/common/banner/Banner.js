@@ -13,6 +13,7 @@ function Banner(props) {
     buttonHref,
     buttonText,
   } = props;
+
   return (
     <section
       className="rfow-banner-container rfow-bottom-line"
@@ -25,17 +26,17 @@ function Banner(props) {
         }}
       >
         <div className="rfow-banner-text">
-          {bannerLargeText ? ` <h1>${bannerLargeText}</h1>` : ""}
-          {bannerSmallText ? ` <h3>${bannerSmallText}</h3>` : ""}
-          {button
-            ? `${(
-                <Button
-                  buttonClass={buttonClass}
-                  buttonHref={buttonHref}
-                  text={buttonText}
-                />
-              )}`
-            : ""}
+          {bannerLargeText ? <h1>{bannerLargeText}</h1> : ""}
+          {bannerSmallText ? <h3>{bannerSmallText}</h3> : ""}
+          {button ? (
+            <Button
+              buttonClass={buttonClass}
+              buttonHref={buttonHref}
+              text={buttonText}
+            />
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </section>

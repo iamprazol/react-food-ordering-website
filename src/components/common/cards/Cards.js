@@ -38,17 +38,21 @@ const Cards = (props) => {
               {name}
             </Link>
           </h6>
-          <div class="tags">
-            <span class="text-custom-white rectangle-tag bg-yellow">3.1</span>
+          <div className="tags">
+            <span className="text-custom-white rectangle-tag bg-yellow">
+              3.1
+            </span>
           </div>
         </div>
-        <p class="text-light-white">{description}</p>
-        <div class="product-details">
-          <div class="price-time">
-            <span class="text-light-black time">{delivery_hours}</span>
-            <span class="text-light-white price">Rs. {minimum_order} min</span>
+        <p className="text-light-white">{description}</p>
+        <div className="product-details">
+          <div className="price-time">
+            <span className="text-light-black time">{delivery_hours}</span>
+            <span className="text-light-white price">
+              Rs. {minimum_order} min
+            </span>
           </div>
-          <div class="rating">
+          <div className="rating">
             <span>
               <IconContainer
                 icon={<StarBorderIcon />}
