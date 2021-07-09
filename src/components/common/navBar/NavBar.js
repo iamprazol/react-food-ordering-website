@@ -4,7 +4,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import IconContainer from "../iconContainer/IconContainer";
 import Button from "../button/Button";
 
-function NavBar({ onClick }) {
+function NavBar({ onClick, onKeyPress }) {
   return (
     <div className="rfow-navbar">
       <div className="rfow-navbar-left">
@@ -19,6 +19,7 @@ function NavBar({ onClick }) {
             className="rfow-search"
             type="text"
             placeholder={"Bajeko Sekuwa"}
+            onKeyPress={(e) => onKeyPress(e)}
           />
         </div>
       </div>
