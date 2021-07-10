@@ -5,6 +5,8 @@ import IconContainer from "../iconContainer/IconContainer";
 import Button from "../button/Button";
 
 function NavBar({ onClick, onKeyPress }) {
+  const [searchText, setSearchText] = useState("");
+
   return (
     <div className="rfow-navbar">
       <div className="rfow-navbar-left">
@@ -20,8 +22,14 @@ function NavBar({ onClick, onKeyPress }) {
             type="text"
             placeholder={"Bajeko Sekuwa"}
             onKeyPress={(e) => onKeyPress(e)}
+            onChange={(e) => setSearchText(e.target.value)}
           />
         </div>
+        <Button
+          buttonClass="btn-submit btn-primary"
+          text={"Find Restaurant"}
+          onClick={() => onClick("find_restaurant", searchText)}
+        />
       </div>
       <div className="rfow-navbar-right">
         <div className="rfow-navbar-account">

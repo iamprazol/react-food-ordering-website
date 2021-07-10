@@ -16,11 +16,13 @@ const HomePage = () => {
   const [openRegistrationPopup, setOpenRegistrationPopup] = useState(false);
   const [searchRestaurants, setSearchRestaurants] = useState("");
 
-  const handleOpenAuthenticationPopup = (popupType) => {
-    if ("login" === popupType) {
+  const handleOpenAuthenticationPopup = (clickAction, value) => {
+    if ("login" === clickAction) {
       setOpenLoginPopup(!openLoginPopup);
-    } else {
+    } else if ("register" === clickAction) {
       setOpenRegistrationPopup(!openRegistrationPopup);
+    } else {
+      setSearchRestaurants(value);
     }
   };
 

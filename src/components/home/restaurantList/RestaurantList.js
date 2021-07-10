@@ -1,17 +1,12 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Cards from "../../common/cards/Cards";
 import "./RestaurantList.css";
 
-class RestaurantList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      restaurants: [],
-      message: "",
-    };
-  }
-
-  shuffle = (a) => {
+const RestaurantList = (props) => {
+  const [restaurants, setRestaurants] = useState([]);
+  const [message, setMessage] = useState("");
+  const { searchText } = props;
+  const shuffle = (a) => {
     for (let i = a.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [a[i], a[j]] = [a[j], a[i]];
@@ -19,16 +14,16 @@ class RestaurantList extends Component {
     return a;
   };
 
-  componentDidMount() {
+  useEffect(() => {
     const { REACT_APP_API_URL } = process.env;
-    const searchText = this.props.searchText ? this.props.searchText : "";
+    const searchParams = searchText ? `name=${searchText}` : "";
 
-    fetch(REACT_APP_API_URL + `/restaurants?name=${searchText}`)
+    fetch(REACT_APP_API_URL + `/restaurants?${searchParams}`)
       .then((results) => {
         return results.json();
       })
       .then((data) => {
-        let restaurantsArray = this.shuffle(data.data),
+        let restaurantsArray = shuffle(data.data),
           restaurants = restaurantsArray.map((restaurant) => {
             return (
               <Cards
@@ -45,21 +40,19 @@ class RestaurantList extends Component {
               />
             );
           });
-        this.setState({ message: data.message });
-        this.setState({ restaurants: restaurants });
+        setMessage(data.message);
+        setRestaurants(restaurants);
       });
-  }
+  }, [searchText]);
 
-  render() {
-    return (
-      <section className="rfow-nav-container section-padding">
-        <h3 className="rfow-title">
-          {this.props.searchText ? this.state.message : "Browse By Restaurants"}
-        </h3>
-        <div className="row">{this.state.restaurants}</div>
-      </section>
-    );
-  }
-}
+  return (
+    <section className="rfow-nav-container section-padding">
+      <h3 className="rfow-title">
+        {searchText ? message : "Browse By Restaurants"}
+      </h3>
+      <div className="row">{restaurants}</div>
+    </section>
+  );
+};
 
 export default RestaurantList;

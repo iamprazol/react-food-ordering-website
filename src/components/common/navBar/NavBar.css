@@ -14,12 +14,11 @@
 	flex: 0 0 30%;
 }
 
-
 .rfow-navbar-center {
 	display: flex;
 	align-items: center;
 	flex: 0 0 40%;
-	justify-content: center;
+	justify-content: space-between;
 }
 
 .rfow-navbar-right {
@@ -59,7 +58,7 @@
 .rfow-search {
 	height: 40px;
     font-size: 15px;
-    width: 400px;
+    width: 350px;
     margin-left: 20px;
 	padding-left: 40px;
 }
