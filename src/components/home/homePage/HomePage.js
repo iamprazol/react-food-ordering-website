@@ -10,6 +10,7 @@ import LoginPage from "../../authentication/loginPage/LoginPage";
 import Popup from "../../common/popup/Popup";
 import RegistrationPage from "../../authentication/registrationPage/RegistrationPage";
 import SearchRestaurantPage from "../searchRestaurantPage/SearchRestaurantPage";
+import Button from "../../common/button/Button";
 
 const HomePage = () => {
   const [openLoginPopup, setOpenLoginPopup] = useState(false);
@@ -60,12 +61,17 @@ const HomePage = () => {
           <Banner
             bannerImage="http://wptest.me/images/food/1624721452.jpg"
             bannerHeight="large"
-            bannerLargeText="Order your favourite food from anywhere"
-            bannerSmallText="with the largest food ordering platform all over Nepal"
-            button={true}
-            buttonClass="btn-submit btn-primary"
-            buttonHref="http://themegrill.me:41239/restaurants"
-            buttonText="Order Now"
+            bannerContent={
+              <div className="rfow-banner-text">
+                <h1>Order your favourite food from anywhere</h1>
+                <h3>with the largest food ordering platform all over Nepal</h3>
+                <Button
+                  buttonClass="btn-submit btn-primary"
+                  buttonHref="http://themegrill.me:41239/restaurants"
+                  text="Order Now"
+                />
+              </div>
+            }
           />
           <BrowseByCategory />
           <Ads
