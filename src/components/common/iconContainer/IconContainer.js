@@ -9,6 +9,7 @@ function IconContainer({
   tag,
   iconStyle,
   iconPlacement,
+  onClick,
 }) {
   return (
     <i
@@ -20,6 +21,10 @@ function IconContainer({
         " " +
         iconPlacement
       }
+      onClick={(e) => {
+        e.preventDefault();
+        return onClick ? onClick(true) : "";
+      }}
     >
       {icon && icon}
       {text && <h4> {text}</h4>}
