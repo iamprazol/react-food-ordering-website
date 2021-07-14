@@ -14,7 +14,8 @@ function InputHandler({ fieldSetting, onChange }) {
             disabled={fieldSetting.required}
             placeholder={fieldSetting.placeholder}
             className="rfow-field-control rfow-input"
-            onChange={(e) => onChange(e.target.value)}
+            onChange={(e) => onChange(e)}
+            name={fieldSetting.name}
           />
         );
       case "textarea":
@@ -36,7 +37,7 @@ function InputHandler({ fieldSetting, onChange }) {
           <select
             disabled={fieldSetting.required}
             className="rfow-field-control rfow-input"
-            onChange={(e) => onChange(e.target.value)}
+            onChange={(e) => onChange(e)}
           >
             {fieldSetting.placeholder ? (
               <option value="" disabled selected>
@@ -69,7 +70,7 @@ function InputHandler({ fieldSetting, onChange }) {
             className="rfow-field-control rfow-input"
             min="1"
             step="1"
-            onChange={(e) => onChange(e.target.value)}
+            onChange={(e) => onChange(e)}
           />
         );
       default:

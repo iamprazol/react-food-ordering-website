@@ -11,7 +11,7 @@ function register(user) {
     body: JSON.stringify(user),
   };
 
-  return fetch(`${REACT_APP_API_URL}/users/regsiter`, requestOptions)
+  return fetch(`${REACT_APP_API_URL}/register`, requestOptions)
     .then(handleResponse)
     .then((user) => {
       return user;

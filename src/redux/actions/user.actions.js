@@ -26,7 +26,7 @@ function register(user) {
   function success(user) {
     return { type: userConstants.REGISTER_SUCCESS, user };
   }
-  function failure(user) {
+  function failure(error) {
     return { type: userConstants.REGISTER_FAILURE, error };
   }
 }
