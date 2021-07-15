@@ -1,5 +1,6 @@
 import { userConstants } from "../constants";
 import { userService } from "../services";
+import { alertActions } from "./alert.actions";
 
 export const userActions = {
   register,
@@ -12,10 +13,11 @@ function register(user) {
     userService.register(user).then(
       (user) => {
         dispatch(success());
+        // dispatch(alertActions.success("Registration successful"));
       },
       (error) => {
         dispatch(failure(error.toString()));
-        console.log(error);
+        dispatch(alertActions.error(error.toString()));
       }
     );
   };

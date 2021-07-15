@@ -11,7 +11,7 @@ import Buttons from "../../common/buttons/Buttons";
 import PersonIcon from "@material-ui/icons/Person";
 import ContactPhoneIcon from "@material-ui/icons/ContactPhone";
 
-const RegistrationPage = (props) => {
+const ConnectedRegistrationPage = (props) => {
   const [userData, setUserData] = useState({
     user: {
       first_name: "",
@@ -28,7 +28,7 @@ const RegistrationPage = (props) => {
     const { name, value } = event.target;
     setUserData({
       user: {
-        ...userData,
+        ...userData.user,
         [name]: value,
       },
     });
@@ -36,6 +36,9 @@ const RegistrationPage = (props) => {
 
   const handleSubmit = (event) => {
     const { register } = props;
+
+    console.log(userData);
+    console.log("userData");
 
     setUserData({ submitted: true });
     register(userData);
@@ -171,5 +174,19 @@ const RegistrationPage = (props) => {
     </div>
   );
 };
+
+function mapState(state) {
+  const { registering } = state.registration;
+  return { registering };
+}
+
+const actionCreators = {
+  register: userActions.register,
+};
+
+const RegistrationPage = connect(
+  mapState,
+  actionCreators
+)(ConnectedRegistrationPage);
 
 export default RegistrationPage;
