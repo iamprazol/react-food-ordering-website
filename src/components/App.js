@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./home/homePage/HomePage";
-import PageNotFound from "./PageNotFound";
+import PageNotFound from "./pageNotFound/PageNotFound";
 import RestaurantLayout from "./restaurantPage/restaurantLayout/RestaurantLayout";
 
 function App() {

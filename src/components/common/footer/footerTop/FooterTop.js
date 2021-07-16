@@ -14,48 +14,48 @@ const FooterTop = () => {
       <div className="icon-box">
         <IconContainer
           icon={<PaymentIcon />}
-          colorClass="text-red"
-          fontSizeClass="icon-large"
+          colorclassName="text-red"
+          fontSizeclassName="icon-large"
         />
         <h4 className="text-white">{"100% Payment Secured"}</h4>
       </div>
       <div className="icon-box">
         <IconContainer
           icon={<AccountBalanceIcon />}
-          colorClass="text-red"
-          fontSizeClass="icon-large"
+          colorclassName="text-red"
+          fontSizeclassName="icon-large"
         />
         <h4 className="text-white">{"Support lots of Payments"}</h4>
       </div>
       <div className="icon-box">
         <IconContainer
           icon={<ContactSupportTwoToneIcon />}
-          colorClass="text-red"
-          fontSizeClass="icon-large"
+          colorclassName="text-red"
+          fontSizeclassName="icon-large"
         />
         <h4 className="text-white">{"24 hours / 7 days Support"}</h4>
       </div>
       <div className="icon-box">
         <IconContainer
           icon={<CardGiftcardIcon />}
-          colorClass="text-red"
-          fontSizeClass="icon-large"
+          colorclassName="text-red"
+          fontSizeclassName="icon-large"
         />
         <h4 className="text-white">{"Free Delivery with Rs.5000"}</h4>
       </div>
       <div className="icon-box">
         <IconContainer
           icon={<AssignmentTurnedInOutlinedIcon />}
-          colorClass="text-red"
-          fontSizeClass="icon-large"
+          colorclassName="text-red"
+          fontSizeclassName="icon-large"
         />
         <h4 className="text-white">{"Best Price Guaranteed"}</h4>
       </div>
       <div className="icon-box">
         <IconContainer
           icon={<AppsIcon />}
-          colorClass="text-red"
-          fontSizeClass="icon-large"
+          colorclassName="text-red"
+          fontSizeclassName="icon-large"
         />
         <h4 className="text-white">{"Mobile Apps Ready"}</h4>
       </div>

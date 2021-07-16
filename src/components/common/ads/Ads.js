@@ -16,7 +16,7 @@ const Ads = (props) => {
         <div className="rfow-ads-text">
           <h3>{adsText}</h3>
           <Button
-            buttonClass="btn-submit btn-primary"
+            buttonclassName="btn-submit btn-primary"
             buttonHref={link}
             text={buttonText}
           />

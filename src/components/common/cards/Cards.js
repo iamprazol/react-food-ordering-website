@@ -26,7 +26,7 @@ const Cards = (props) => {
           <span className="circle-tag">
             <IconContainer
               icon={<FavoriteBorderIcon />}
-              fontSizeClass="icon-medium"
+              fontSizeclassName="icon-medium"
             />
           </span>
         </div>
@@ -56,26 +56,26 @@ const Cards = (props) => {
             <span>
               <IconContainer
                 icon={<StarBorderIcon />}
-                colorClass="text-yellow"
-                fontSizeClass="icon-small"
+                colorclassName="text-yellow"
+                fontSizeclassName="icon-small"
               />
               <IconContainer
                 icon={<StarBorderIcon />}
-                colorClass="text-yellow"
-                fontSizeClass="icon-small"
+                colorclassName="text-yellow"
+                fontSizeclassName="icon-small"
               />
               <IconContainer
                 icon={<StarBorderIcon />}
-                colorClass="text-yellow"
-                fontSizeClass="icon-small"
+                colorclassName="text-yellow"
+                fontSizeclassName="icon-small"
               />
               <IconContainer
                 icon={<StarBorderIcon />}
-                fontSizeClass="icon-small"
+                fontSizeclassName="icon-small"
               />
               <IconContainer
                 icon={<StarBorderIcon />}
-                fontSizeClass="icon-small"
+                fontSizeclassName="icon-small"
               />
             </span>
             <span className="text-light-white">4225 ratings</span>

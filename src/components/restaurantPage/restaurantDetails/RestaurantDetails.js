@@ -28,8 +28,8 @@ function RestaurantDetails(props) {
           <p className="text-light-black">
             <IconContainer
               icon={<LocationOnOutlinedIcon />}
-              colorClass="text-red"
-              fontSizeClass="icon-medium"
+              colorclassName="text-red"
+              fontSizeclassName="icon-medium"
             />
             {address}
           </p>
@@ -65,26 +65,26 @@ function RestaurantDetails(props) {
           <span>
             <IconContainer
               icon={<StarBorderIcon />}
-              colorClass="text-yellow"
-              fontSizeClass="icon-medium"
+              colorclassName="text-yellow"
+              fontSizeclassName="icon-medium"
             />
             <IconContainer
               icon={<StarBorderIcon />}
-              colorClass="text-yellow"
-              fontSizeClass="icon-medium"
+              colorclassName="text-yellow"
+              fontSizeclassName="icon-medium"
             />
             <IconContainer
               icon={<StarBorderIcon />}
-              colorClass="text-yellow"
-              fontSizeClass="icon-medium"
+              colorclassName="text-yellow"
+              fontSizeclassName="icon-medium"
             />
             <IconContainer
               icon={<StarBorderIcon />}
-              fontSizeClass="icon-medium"
+              fontSizeclassName="icon-medium"
             />
             <IconContainer
               icon={<StarBorderIcon />}
-              fontSizeClass="icon-medium"
+              fontSizeclassName="icon-medium"
             />
           </span>
           <span className="text-light-black">58 ratings</span>
@@ -112,7 +112,7 @@ function RestaurantDetails(props) {
         <div className="add-wishlist">
           <IconContainer
             icon={<FavoriteBorderIcon />}
-            fontSizeClass="icon-medium"
+            fontSizeclassName="icon-medium"
           />{" "}
         </div>
       </div>

@@ -22,8 +22,8 @@ function LoginPage() {
           <div className={`rfow-field`}>
             <IconContainer
               icon={<MailIcon />}
-              fontSizeClass="icon-small"
-              colorClass="text-green"
+              fontSizeclassName="icon-small"
+              colorclassName="text-green"
             />
             <InputHandler
               fieldSetting={{
@@ -38,8 +38,8 @@ function LoginPage() {
           <div className={`rfow-field`}>
             <IconContainer
               icon={<LockIcon />}
-              fontSizeClass="icon-small"
-              colorClass="text-green"
+              fontSizeclassName="icon-small"
+              colorclassName="text-green"
             />
             <InputHandler
               fieldSetting={{

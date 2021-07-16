@@ -16,7 +16,10 @@ function NavBar({ onClick, onKeyPress }) {
       </div>
       <div className="rfow-navbar-center">
         <div className="rfow-navbar-search">
-          <IconContainer icon={<SearchIcon />} fontSizeClass="icon-medium" />
+          <IconContainer
+            icon={<SearchIcon />}
+            fontSizeclassName="icon-medium"
+          />
           <input
             className="rfow-search"
             type="text"
@@ -26,7 +29,7 @@ function NavBar({ onClick, onKeyPress }) {
           />
         </div>
         <Button
-          buttonClass="btn-submit btn-primary"
+          buttonclassName="btn-submit btn-primary"
           text={"Find Restaurant"}
           onClick={() => onClick("find_restaurant", searchText)}
         />
@@ -34,12 +37,12 @@ function NavBar({ onClick, onKeyPress }) {
       <div className="rfow-navbar-right">
         <div className="rfow-navbar-account">
           <Button
-            buttonClass="btn-submit btn-secondary"
+            buttonclassName="btn-submit btn-secondary"
             text={"Login"}
             onClick={() => onClick("login")}
           />
           <Button
-            buttonClass="btn-submit btn-secondary"
+            buttonclassName="btn-submit btn-secondary"
             text={"Register"}
             onClick={() => onClick("register")}
           />

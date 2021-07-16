@@ -13,8 +13,8 @@ function CategorySection(props) {
         <h3>
           <IconContainer
             icon={<WhatshotIcon />}
-            colorClass="text-yellow"
-            fontSizeClass="icon-small"
+            colorclassName="text-yellow"
+            fontSizeclassName="icon-small"
           />
           Categories
         </h3>

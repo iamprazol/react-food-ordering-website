@@ -13,7 +13,7 @@ function Buttons({ variant, size, title, onClick, close, onCloseClick }) {
       {close ? (
         <IconContainer
           icon={<CloseIcon />}
-          fontSizeClass="icon-xs"
+          fontSizeclassName="icon-xs"
           onClick={onCloseClick}
         />
       ) : (
