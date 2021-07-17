@@ -1,4 +1,7 @@
+// Import Libraries.
 import React, { useState } from "react";
+
+// Import CSS.
 import "./Popup.css";
 
 const Popup = (props) => {

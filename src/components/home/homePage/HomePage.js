@@ -1,4 +1,7 @@
+// Import Libraries.
 import React, { useState } from "react";
+
+// Import Components.
 import BrowseByCategory from "../browseByCategory/BrowseByCategory";
 import RestaurantList from "../restaurantList/RestaurantList";
 import FooterTop from "../../common/footer/footerTop/FooterTop";
@@ -42,8 +45,8 @@ const HomePage = () => {
       />
       {openLoginPopup ? (
         <Popup
-          onClick={""}
-          popupclassName="wd-50 br-25"
+          onClick={(value) => setOpenLoginPopup(!value)}
+          popupClass="wd-50 br-25"
           content={<LoginPage />}
         />
       ) : (
@@ -51,8 +54,8 @@ const HomePage = () => {
       )}
       {openRegistrationPopup ? (
         <Popup
-          onClick={""}
-          popupclassName="wd-50 br-25"
+          onClick={(value) => setOpenLoginPopup(!value)}
+          popupClass="wd-50 br-25"
           content={<RegistrationPage />}
         />
       ) : (
@@ -70,7 +73,7 @@ const HomePage = () => {
                 <h1>Order your favourite food from anywhere</h1>
                 <h3>with the largest food ordering platform all over Nepal</h3>
                 <Button
-                  buttonclassName="btn-submit btn-primary"
+                  buttonClass="btn-submit btn-primary"
                   buttonHref="http://themegrill.me:41239/restaurants"
                   text="Order Now"
                 />

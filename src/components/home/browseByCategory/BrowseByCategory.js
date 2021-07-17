@@ -1,6 +1,11 @@
+// Import Libraries.
 import React, { Component } from "react";
-import BrowseByCategoryNav from "./BrowseByCategoryNav";
+
+// Import CSS.
 import "./BrowseByCategory.css";
+
+// Import Components.
+import BrowseByCategoryNav from "./BrowseByCategoryNav";
 
 class BrowseByCategory extends Component {
   constructor() {

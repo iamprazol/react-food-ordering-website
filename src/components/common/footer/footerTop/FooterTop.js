@@ -1,6 +1,13 @@
+// Import Libraries.
 import React from "react";
-import IconContainer from "../../iconContainer/IconContainer";
+
+// Import CSS.
 import "./FooterTop.css";
+
+// Import Components.
+import IconContainer from "../../iconContainer/IconContainer";
+
+// Import Icons.
 import PaymentIcon from "@material-ui/icons/Payment";
 import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
 import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
@@ -14,48 +21,48 @@ const FooterTop = () => {
       <div className="icon-box">
         <IconContainer
           icon={<PaymentIcon />}
-          colorclassName="text-red"
-          fontSizeclassName="icon-large"
+          colorClass="text-red"
+          fontSizeClass="icon-large"
         />
         <h4 className="text-white">{"100% Payment Secured"}</h4>
       </div>
       <div className="icon-box">
         <IconContainer
           icon={<AccountBalanceIcon />}
-          colorclassName="text-red"
-          fontSizeclassName="icon-large"
+          colorClass="text-red"
+          fontSizeClass="icon-large"
         />
         <h4 className="text-white">{"Support lots of Payments"}</h4>
       </div>
       <div className="icon-box">
         <IconContainer
           icon={<ContactSupportTwoToneIcon />}
-          colorclassName="text-red"
-          fontSizeclassName="icon-large"
+          colorClass="text-red"
+          fontSizeClass="icon-large"
         />
         <h4 className="text-white">{"24 hours / 7 days Support"}</h4>
       </div>
       <div className="icon-box">
         <IconContainer
           icon={<CardGiftcardIcon />}
-          colorclassName="text-red"
-          fontSizeclassName="icon-large"
+          colorClass="text-red"
+          fontSizeClass="icon-large"
         />
         <h4 className="text-white">{"Free Delivery with Rs.5000"}</h4>
       </div>
       <div className="icon-box">
         <IconContainer
           icon={<AssignmentTurnedInOutlinedIcon />}
-          colorclassName="text-red"
-          fontSizeclassName="icon-large"
+          colorClass="text-red"
+          fontSizeClass="icon-large"
         />
         <h4 className="text-white">{"Best Price Guaranteed"}</h4>
       </div>
       <div className="icon-box">
         <IconContainer
           icon={<AppsIcon />}
-          colorclassName="text-red"
-          fontSizeclassName="icon-large"
+          colorClass="text-red"
+          fontSizeClass="icon-large"
         />
         <h4 className="text-white">{"Mobile Apps Ready"}</h4>
       </div>

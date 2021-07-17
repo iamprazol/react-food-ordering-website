@@ -1,9 +1,16 @@
+// Import Libraries.
 import React from "react";
 import { Link } from "react-router-dom";
+
+// Import CSS.
 import "./Cards.css";
+
+// Import Components.
+import IconContainer from "../iconContainer/IconContainer";
+
+// Import Icons.
 import StarBorderIcon from "@material-ui/icons/Star";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import IconContainer from "../iconContainer/IconContainer";
 
 const Cards = (props) => {
   const {
@@ -26,7 +33,7 @@ const Cards = (props) => {
           <span className="circle-tag">
             <IconContainer
               icon={<FavoriteBorderIcon />}
-              fontSizeclassName="icon-medium"
+              fontSizeClass="icon-medium"
             />
           </span>
         </div>
@@ -56,26 +63,26 @@ const Cards = (props) => {
             <span>
               <IconContainer
                 icon={<StarBorderIcon />}
-                colorclassName="text-yellow"
-                fontSizeclassName="icon-small"
+                colorClass="text-yellow"
+                fontSizeClass="icon-small"
               />
               <IconContainer
                 icon={<StarBorderIcon />}
-                colorclassName="text-yellow"
-                fontSizeclassName="icon-small"
+                colorClass="text-yellow"
+                fontSizeClass="icon-small"
               />
               <IconContainer
                 icon={<StarBorderIcon />}
-                colorclassName="text-yellow"
-                fontSizeclassName="icon-small"
+                colorClass="text-yellow"
+                fontSizeClass="icon-small"
               />
               <IconContainer
                 icon={<StarBorderIcon />}
-                fontSizeclassName="icon-small"
+                fontSizeClass="icon-small"
               />
               <IconContainer
                 icon={<StarBorderIcon />}
-                fontSizeclassName="icon-small"
+                fontSizeClass="icon-small"
               />
             </span>
             <span className="text-light-white">4225 ratings</span>

@@ -1,4 +1,7 @@
+// Import Libraries.
 import React, { Component } from "react";
+
+// Import CSS.
 import "./FooterBottom.css";
 
 class FooterBottom extends Component {

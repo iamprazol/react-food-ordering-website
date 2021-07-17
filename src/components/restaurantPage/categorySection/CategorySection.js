@@ -13,8 +13,8 @@ function CategorySection(props) {
         <h3>
           <IconContainer
             icon={<WhatshotIcon />}
-            colorclassName="text-yellow"
-            fontSizeclassName="icon-small"
+            colorClass="text-yellow"
+            fontSizeClass="icon-small"
           />
           Categories
         </h3>
@@ -30,7 +30,7 @@ function CategorySection(props) {
         {categories
           ? categories.map((category) => (
               <li className="active text-medium u-line-short">
-                <Link to={category.toLowerCase()} smooth={true}>
+                <Link to={category.toLowerCase()} smooth>
                   {category}
                 </Link>
               </li>

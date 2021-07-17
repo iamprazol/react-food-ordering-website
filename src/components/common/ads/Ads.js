@@ -1,6 +1,11 @@
+// Import Libraries.
 import React from "react";
-import Button from "../button/Button";
+
+// Import CSS.
 import "./Ads.css";
+
+// Import Components.
+import Button from "../button/Button";
 
 const Ads = (props) => {
   let { adsText, image, link, buttonText } = props;
@@ -16,7 +21,7 @@ const Ads = (props) => {
         <div className="rfow-ads-text">
           <h3>{adsText}</h3>
           <Button
-            buttonclassName="btn-submit btn-primary"
+            buttonClass="btn-submit btn-primary"
             buttonHref={link}
             text={buttonText}
           />

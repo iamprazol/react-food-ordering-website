@@ -1,10 +1,16 @@
+// Import Libraries.
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { userActions } from "../../../redux/actions";
 
+// Import CSS.
 import "./RegistrationPage.css";
+
+// Import Components.
 import InputHandler from "../../common/inputHandler/InputHandler";
 import IconContainer from "../../common/iconContainer/IconContainer";
+
+// Import Icons.
 import MailIcon from "@material-ui/icons/Mail";
 import LockIcon from "@material-ui/icons/Lock";
 import Buttons from "../../common/buttons/Buttons";
@@ -37,9 +43,6 @@ const ConnectedRegistrationPage = (props) => {
   const handleSubmit = (event) => {
     const { register } = props;
 
-    console.log(userData);
-    console.log("userData");
-
     setUserData({ submitted: true });
     register(userData);
   };
@@ -54,8 +57,8 @@ const ConnectedRegistrationPage = (props) => {
           <div className={`rfow-field`}>
             <IconContainer
               icon={<PersonIcon />}
-              fontSizeclassName="icon-small"
-              colorclassName="text-green"
+              fontSizeClass="icon-small"
+              colorClass="text-green"
             />
             <InputHandler
               fieldSetting={{
@@ -72,8 +75,8 @@ const ConnectedRegistrationPage = (props) => {
           <div className={`rfow-field`}>
             <IconContainer
               icon={<PersonIcon />}
-              fontSizeclassName="icon-small"
-              colorclassName="text-green"
+              fontSizeClass="icon-small"
+              colorClass="text-green"
             />
             <InputHandler
               fieldSetting={{
@@ -92,8 +95,8 @@ const ConnectedRegistrationPage = (props) => {
           <div className={`rfow-field`}>
             <IconContainer
               icon={<MailIcon />}
-              fontSizeclassName="icon-small"
-              colorclassName="text-green"
+              fontSizeClass="icon-small"
+              colorClass="text-green"
             />
             <InputHandler
               fieldSetting={{
@@ -110,8 +113,8 @@ const ConnectedRegistrationPage = (props) => {
           <div className={`rfow-field`}>
             <IconContainer
               icon={<ContactPhoneIcon />}
-              fontSizeclassName="icon-small"
-              colorclassName="text-green"
+              fontSizeClass="icon-small"
+              colorClass="text-green"
             />
             <InputHandler
               fieldSetting={{
@@ -130,8 +133,8 @@ const ConnectedRegistrationPage = (props) => {
           <div className={`rfow-field`}>
             <IconContainer
               icon={<LockIcon />}
-              fontSizeclassName="icon-small"
-              colorclassName="text-green"
+              fontSizeClass="icon-small"
+              colorClass="text-green"
             />
             <InputHandler
               fieldSetting={{
@@ -148,8 +151,8 @@ const ConnectedRegistrationPage = (props) => {
           <div className={`rfow-field`}>
             <IconContainer
               icon={<LockIcon />}
-              fontSizeclassName="icon-small"
-              colorclassName="text-green"
+              fontSizeClass="icon-small"
+              colorClass="text-green"
             />
             <InputHandler
               fieldSetting={{

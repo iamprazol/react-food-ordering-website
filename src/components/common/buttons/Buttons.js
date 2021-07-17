@@ -1,6 +1,13 @@
+// Import Libraries.
 import React from "react";
-import IconContainer from "../iconContainer/IconContainer";
+
+// Import CSS.
 import "./Buttons.css";
+
+// Import Components.
+import IconContainer from "../iconContainer/IconContainer";
+
+// Import Icons.
 import CloseIcon from "@material-ui/icons/Close";
 
 function Buttons({ variant, size, title, onClick, close, onCloseClick }) {
@@ -13,7 +20,7 @@ function Buttons({ variant, size, title, onClick, close, onCloseClick }) {
       {close ? (
         <IconContainer
           icon={<CloseIcon />}
-          fontSizeclassName="icon-xs"
+          fontSizeClass="icon-xs"
           onClick={onCloseClick}
         />
       ) : (

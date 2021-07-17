@@ -38,18 +38,14 @@ const PageNotFound = () => {
         onKeyPress={handleSearchRestaurants}
       />
       {openLoginPopup ? (
-        <Popup
-          onClick={""}
-          popupclassName="wd-50 br-25"
-          content={<LoginPage />}
-        />
+        <Popup onClick={""} popupClass="wd-50 br-25" content={<LoginPage />} />
       ) : (
         ""
       )}
       {openRegistrationPopup ? (
         <Popup
           onClick={""}
-          popupclassName="wd-50 br-25"
+          popupClass="wd-50 br-25"
           content={<RegistrationPage />}
         />
       ) : (

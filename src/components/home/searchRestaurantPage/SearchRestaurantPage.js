@@ -1,10 +1,17 @@
+// Import Libraries.
 import React, { useState } from "react";
+
+// Import CSS.
+import "./searchRestaurantPage.css";
+
+// Import Components.
 import RestaurantList from "../restaurantList/RestaurantList";
 import Banner from "../../common/banner/Banner";
 import IconContainer from "../../common/iconContainer/IconContainer";
 import InputHandler from "../../common/inputHandler/InputHandler";
 import Buttons from "../../common/buttons/Buttons.js";
-import "./searchRestaurantPage.css";
+
+// Import Icons.
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 
 function SearchRestaurantPage(props) {
@@ -45,12 +52,12 @@ function SearchRestaurantPage(props) {
           {"Home "}
           <IconContainer
             icon={<ArrowForwardIosIcon />}
-            fontSizeclassName="icon-small"
+            fontSizeClass="icon-small"
           />
           {" Search"}
           <IconContainer
             icon={<ArrowForwardIosIcon />}
-            fontSizeclassName="icon-small"
+            fontSizeClass="icon-small"
           />
           {" Restaurants Found"}
         </span>
@@ -108,7 +115,7 @@ function SearchRestaurantPage(props) {
                     size="small"
                     variant="normal"
                     title={`${value}`}
-                    close={true}
+                    close
                     onCloseClick={handleCloseFilterParam}
                   />
                 );

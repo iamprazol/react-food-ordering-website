@@ -1,4 +1,7 @@
+// Import Libraries.
 import React from "react";
+
+// Import CSS.
 import "./InputHandler.css";
 
 function InputHandler({ fieldSetting, onChange }) {

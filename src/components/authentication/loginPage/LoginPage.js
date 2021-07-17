@@ -1,12 +1,18 @@
+// Import Libraries.
 import React from "react";
+
+// Import CSS.
 import "./LoginPage.css";
+
+// Import Components.
 import InputHandler from "../../common/inputHandler/InputHandler";
 import FoodieImage from "../../../assets/images/foodie.png";
 import IconContainer from "../../common/iconContainer/IconContainer";
+
+// Import Icons.
 import MailIcon from "@material-ui/icons/Mail";
 import LockIcon from "@material-ui/icons/Lock";
 import Buttons from "../../common/buttons/Buttons";
-import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 
 function LoginPage() {
   return (
@@ -22,8 +28,8 @@ function LoginPage() {
           <div className={`rfow-field`}>
             <IconContainer
               icon={<MailIcon />}
-              fontSizeclassName="icon-small"
-              colorclassName="text-green"
+              fontSizeClass="icon-small"
+              colorClass="text-green"
             />
             <InputHandler
               fieldSetting={{
@@ -38,8 +44,8 @@ function LoginPage() {
           <div className={`rfow-field`}>
             <IconContainer
               icon={<LockIcon />}
-              fontSizeclassName="icon-small"
-              colorclassName="text-green"
+              fontSizeClass="icon-small"
+              colorClass="text-green"
             />
             <InputHandler
               fieldSetting={{

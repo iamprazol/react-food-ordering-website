@@ -1,6 +1,11 @@
+// Import Libraries.
 import React, { useState, useEffect } from "react";
-import Cards from "../../common/cards/Cards";
+
+// Import CSS.
 import "./RestaurantList.css";
+
+// Import Components.
+import Cards from "../../common/cards/Cards";
 
 const RestaurantList = (props) => {
   const [restaurants, setRestaurants] = useState([]);
