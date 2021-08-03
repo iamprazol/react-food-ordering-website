@@ -32,7 +32,7 @@ const PageNotFound = () => {
   };
 
   return (
-    <div className="container-fluid">
+    <div className="rfow-container">
       <NavBar
         onClick={handleOpenAuthenticationPopup}
         onKeyPress={handleSearchRestaurants}

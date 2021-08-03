@@ -1,15 +1,15 @@
 // Import Libraries.
 import React from "react";
 
-// Import CSS.
-import "./Banner.css";
+// Import SCSS.
+import "./Banner.scss";
 
 function Banner(props) {
   let { bannerImage, bannerHeight, bannerContent } = props;
 
   return (
     <section
-      className="rfow-banner-container rfow-bottom-line"
+      className="rfow-banner rfow-bottom-line"
       style={{
         height: `${
           "large" === bannerHeight
@@ -21,7 +21,7 @@ function Banner(props) {
       }}
     >
       <div
-        className="rfow-banner"
+        className="rfow-banner__body"
         style={
           bannerImage
             ? {

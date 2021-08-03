@@ -7,13 +7,13 @@ export const alertActions = {
 };
 
 function success(message) {
-  return { type: alertActions.SUCCESS, message };
+  return { type: alertConstants.SUCCESS, message };
 }
 
 function error(message) {
-  return { type: alertActions.ERROR, message };
+  return { type: alertConstants.ERROR, message };
 }
 
 function clear() {
-  return { type: alertActions.CLEAR };
+  return { type: alertConstants.CLEAR };
 }

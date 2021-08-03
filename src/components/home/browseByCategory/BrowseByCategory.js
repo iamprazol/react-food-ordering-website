@@ -1,8 +1,8 @@
 // Import Libraries.
 import React, { Component } from "react";
 
-// Import CSS.
-import "./BrowseByCategory.css";
+// Import SCSS.
+import "./BrowseByCategory.scss";
 
 // Import Components.
 import BrowseByCategoryNav from "./BrowseByCategoryNav";
@@ -49,17 +49,19 @@ class BrowseByCategory extends Component {
 
   render() {
     return (
-      <section className="rfow-nav-container section-padding">
-        <h3 className="rfow-title">
-          Browse By Categories
-          <span className="text-sm">
-            <a className="text-red" href="/foods">
-              {" "}
-              View all foods{" "}
-            </a>
-          </span>
-        </h3>
-        <nav className="slidemenu">{this.state.foodsByCategory}</nav>
+      <section className="rfow-browse section-padding">
+        <div className="rfow-browse__body rfow-container">
+          <h3 className="rfow-browse--title">
+            Browse By Categories
+            <span className="text-sm">
+              <a className="text-red" href="/foods">
+                {" "}
+                View all foods{" "}
+              </a>
+            </span>
+          </h3>
+          <nav className="slidemenu">{this.state.foodsByCategory}</nav>
+        </div>
       </section>
     );
   }

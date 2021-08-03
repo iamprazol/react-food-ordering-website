@@ -167,12 +167,7 @@ const ConnectedRegistrationPage = (props) => {
             />
           </div>
         </div>
-        <Buttons
-          variant="primary"
-          size="large"
-          title="Register"
-          onClick={handleSubmit}
-        />
+        <Buttons variant="primary" title="Register" onClick={handleSubmit} />
       </div>
     </div>
   );

@@ -7,8 +7,10 @@ export const userService = {
 function register(user) {
   const requestOptions = {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(user),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user.user),
   };
 
   return fetch(`${REACT_APP_API_URL}/register`, requestOptions)

@@ -1,19 +1,18 @@
-.rfow-ads-container {
-    height: 100px;
-    padding-left: 50px;
-    padding-right: 50px;
-}
-
 .rfow-ads {
+  height: 100px;
+  padding-left: 50px;
+  padding-right: 50px;
+
+  &__body {
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
     border-radius: 4px;
-}
+  }
 
-.rfow-ads-text {
+  &--text {
     display: flex;
     align-items: baseline;
     justify-content: space-around;
@@ -24,9 +23,10 @@
     transform: translate(-50%, -50%);
     color: white;
     width: 100%;
-  }
 
-  .rfow-ads-text h3 {
-    font-size: 30px;
-    font-weight: 400;
+    h3 {
+      font-size: 30px;
+      font-weight: 400;
+    }
   }
+}

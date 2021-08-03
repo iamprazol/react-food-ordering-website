@@ -1,8 +1,8 @@
 // Import Libraries.
 import React, { useState, useEffect } from "react";
 
-// Import CSS.
-import "./RestaurantList.css";
+// Import SCSS.
+import "./RestaurantList.scss";
 
 // Import Components.
 import Cards from "../../common/cards/Cards";
@@ -51,11 +51,13 @@ const RestaurantList = (props) => {
   }, [searchText]);
 
   return (
-    <section className="rfow-nav-container section-padding">
-      <h3 className="rfow-title">
-        {searchText ? message : "Browse By Restaurants"}
-      </h3>
-      <div className="row">{restaurants}</div>
+    <section className="rfow-browse section-padding">
+      <div className="rfow-browse__body rfow-container">
+        <h3 className="rfow-browse--title">
+          {searchText ? message : "Browse By Restaurants"}
+        </h3>
+        <div className="row">{restaurants}</div>
+      </div>
     </section>
   );
 };

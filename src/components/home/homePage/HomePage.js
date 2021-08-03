@@ -1,6 +1,9 @@
 // Import Libraries.
 import React, { useState } from "react";
 
+// Import SCSS
+import "./HomePage.scss";
+
 // Import Components.
 import BrowseByCategory from "../browseByCategory/BrowseByCategory";
 import RestaurantList from "../restaurantList/RestaurantList";
@@ -38,7 +41,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="container-fluid">
+    <div className="rfow-wrapper">
       <NavBar
         onClick={handleOpenAuthenticationPopup}
         onKeyPress={handleSearchRestaurants}
@@ -69,7 +72,7 @@ const HomePage = () => {
             bannerImage="http://wptest.me/images/food/1624721452.jpg"
             bannerHeight="large"
             bannerContent={
-              <div className="rfow-banner-text">
+              <div className="rfow-banner--text">
                 <h1>Order your favourite food from anywhere</h1>
                 <h3>with the largest food ordering platform all over Nepal</h3>
                 <Button

@@ -52,7 +52,7 @@ class RestaurantLayout extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
+      <div className="rfow-container">
         <NavBar />
         <Banner
           bannerImage="http://wptest.me/images/food/1624721580.jpeg"
