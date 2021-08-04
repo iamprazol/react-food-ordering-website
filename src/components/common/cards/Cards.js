@@ -2,8 +2,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-// Import CSS.
-import "./Cards.css";
+// Import SCSS.
+import "./Cards.scss";
 
 // Import Components.
 import IconContainer from "../iconContainer/IconContainer";
@@ -23,10 +23,10 @@ const Cards = (props) => {
     discount,
   } = props;
   return (
-    <div className="card">
-      <div className="image-holder">
+    <div className="rfow-card">
+      <div className="rfow-card__image-holder">
         <img src={image} alt="food" />
-        <div className="overlay">
+        <div className="rfow-card__overlay">
           <span className="text-custom-white rectangle-tag bg-red">
             {discount + "%"}
           </span>
@@ -38,28 +38,28 @@ const Cards = (props) => {
           </span>
         </div>
       </div>
-      <div className="product-box">
-        <div className="title-box">
-          <h6 className="product-title">
+      <div className="rfow-card__product-box">
+        <div className="rfow-card__title-box">
+          <h6 className="rfow-card__product-title">
             <Link className="text-light-black" to={"restaurant/" + id}>
               {name}
             </Link>
           </h6>
-          <div className="tags">
+          <div className="rfow-card__product-tags">
             <span className="text-custom-white rectangle-tag bg-yellow">
               3.1
             </span>
           </div>
         </div>
         <p className="text-light-white">{description}</p>
-        <div className="product-details">
-          <div className="price-time">
+        <div className="rfow-card__product-details">
+          <div className="rfow-card__price-time">
             <span className="text-light-black time">{delivery_hours}</span>
             <span className="text-light-white price">
               Rs. {minimum_order} min
             </span>
           </div>
-          <div className="rating">
+          <div className="rfow-card__product-rating">
             <span>
               <IconContainer
                 icon={<StarBorderIcon />}

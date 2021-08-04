@@ -1,9 +1,16 @@
+// Import Libraries.
 import React, { useState } from "react";
+
+// Import SCSS.
+import "./MenuSection.scss";
+
+// Import Components.
 import IconContainer from "../../common/iconContainer/IconContainer";
 import InputHandler from "../../common/inputHandler/InputHandler";
 import Buttons from "../../common/buttons/Buttons";
 import Popup from "../../common/popup/Popup";
-import "./MenuSection.css";
+
+// Import icons.
 import SearchIcon from "@material-ui/icons/Search";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import AddIcon from "@material-ui/icons/Add";
@@ -47,24 +54,24 @@ function MenuSection(props) {
   };
 
   return (
-    <div className="rfow-restaurant-menu section-padding">
-      <div className="rfow-restaurant-menu-search">
+    <div className="rfow-menu">
+      <div className="rfow-menu__search">
         <IconContainer icon={<SearchIcon />} fontSizeClass="icon-medium" />
         <input className="rfow-search" type="text" placeholder="Chicken Momo" />
       </div>
       {menuItems.map((menuItem) => (
-        <div className="rfow-restaurant-menu-list">
+        <div className="rfow-menu__list">
           <div
             id={menuItem.category.toLowerCase()}
-            className="rfow-restaurant-menu-title"
+            className="rfow-menu__title"
           >
             <h3 className="fw-500 text-red">{menuItem.category}</h3>
           </div>
           {menuItem.foods.map((food) => (
-            <div className="rfow-restaurant-menu-items">
-              <div className="rfow-restaurant-menu-item u-line">
+            <div className="rfow-menu__items">
+              <div className="rfow-menu__item u-line">
                 <div
-                  className="rfow-restaurant-menu-item-top-bar"
+                  className="rfow-menu__item--top"
                   onClick={() => {
                     setOpenOrderBar(!openOrderBar);
                     setOrderedFood(food);
@@ -73,7 +80,7 @@ function MenuSection(props) {
                   <span className="text-medium text-black-white">
                     {food.food_name}
                   </span>
-                  <div className="rfow-food-order">
+                  <div className="rfow-menu__food-list">
                     <span className="text-medium text-black-white">
                       Rs {food.price}.
                     </span>
@@ -93,12 +100,12 @@ function MenuSection(props) {
         <Popup
           onClick={handlePopupDisplay}
           content={
-            <div className="rfow-restaurant-order-food">
-              <div className="rfow-restaurant-order-food-body">
-                <div className="rfow-restaurant-order-food-extras u-line">
+            <div className="rfow-order">
+              <div className="rfow-order__body">
+                <div className="rfow-order__body-extras u-line">
                   <h1>{orderedFood.food_name}</h1>
                 </div>
-                <div className="rfow-restaurant-order-food-instruction u-line">
+                <div className="rfow-order__body-instruction u-line">
                   <div className={`rfow-field`}>
                     <label
                       className="rfow-field-label"
@@ -117,7 +124,7 @@ function MenuSection(props) {
                     />
                   </div>
                 </div>
-                <div className="rfow-restaurant-order-food-quantities">
+                <div className="rfow-order__body-quantities">
                   <div className={`rfow-field`}>
                     <IconContainer
                       icon={<AddIcon />}

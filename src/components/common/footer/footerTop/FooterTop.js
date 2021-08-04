@@ -1,8 +1,8 @@
 // Import Libraries.
 import React from "react";
 
-// Import CSS.
-import "./FooterTop.css";
+// Import SCSS.
+import "./FooterTop.scss";
 
 // Import Components.
 import IconContainer from "../../iconContainer/IconContainer";
@@ -17,7 +17,7 @@ import ContactSupportTwoToneIcon from "@material-ui/icons/ContactSupportTwoTone"
 
 const FooterTop = () => {
   return (
-    <section className="rfow-footer-top section-padding bg-black">
+    <section className="rfow-footer--top section-padding bg-black">
       <div className="icon-box">
         <IconContainer
           icon={<PaymentIcon />}

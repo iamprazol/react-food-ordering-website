@@ -1,8 +1,8 @@
 // Import Libraries.
 import React, { Component } from "react";
 
-// Import CSS.
-import "./FooterBottom.css";
+// Import SCSS.
+import "./FooterBottom.scss";
 
 class FooterBottom extends Component {
   constructor() {
@@ -28,9 +28,9 @@ class FooterBottom extends Component {
       })
       .then((data) => {
         let foodsArray = this.shuffle(data.data),
-          foodPics = foodsArray.slice(0, 6).map((food) => {
+          foodPics = foodsArray.slice(0, 8).map((food) => {
             return (
-              <div className="individual-food-pic">
+              <div className="rfow-footer--bottom__food-pic">
                 <img
                   src={"http://wptest.me/images/food/" + food.picture}
                   alt="food"
@@ -44,10 +44,10 @@ class FooterBottom extends Component {
 
   render() {
     return (
-      <footer className="rfow-footer-bottom bg-black">
-        <div className="food-pics">{this.state.foodPics}</div>
-        <div className="rfow-links">
-          <div className="footer-contact">
+      <footer className="rfow-footer--bottom bg-black">
+        <div className="rfow-footer--bottom__food">{this.state.foodPics}</div>
+        <div className="rfow-footer--bottom__link">
+          <div className="rfow-footer--bottom__link-contact">
             <h2 className="text-custom-white">{"Need Help"}</h2>
             <ul>
               <li className="fw-600">
@@ -68,7 +68,7 @@ class FooterBottom extends Component {
               </li>
             </ul>
           </div>
-          <div className="footer-about">
+          <div className="rfow-footer--bottom__link-about">
             <h2 className="text-custom-white">{"Get To Know Us"}</h2>
             <ul>
               <li>
@@ -113,7 +113,7 @@ class FooterBottom extends Component {
               </li>
             </ul>
           </div>
-          <div className="footer-support">
+          <div className="rfow-footer--bottom__link-support">
             <h2 className="text-custom-white">{"Let Us Know You"}</h2>
             <ul>
               <li>
@@ -158,7 +158,7 @@ class FooterBottom extends Component {
               </li>
             </ul>
           </div>
-          <div className="footer-business">
+          <div className="rfow-footer--bottom__link-business">
             <h2 className="text-custom-white">{"Doing Business ?"}</h2>
             <ul>
               <li>
@@ -195,7 +195,7 @@ class FooterBottom extends Component {
               </li>
             </ul>
           </div>
-          <div className="footer-download">
+          <div className="rfow-footer--bottom__link-download">
             <h2 className="text-custom-white">{"Download Apps"}</h2>
             <div className="appimage">
               <img

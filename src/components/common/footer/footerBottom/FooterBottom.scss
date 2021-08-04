@@ -1,0 +1,62 @@
+.rfow-footer--bottom {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  &__food {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-bottom: 150px;
+
+    &-pic {
+      height: 150px;
+      width: 200px;
+      flex: 0 0 12.5%;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+
+      img {
+        height: 180px;
+      }
+    }
+  }
+
+  &__link {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 50px;
+    padding-right: 50px;
+
+    &-download {
+      position: relative;
+
+      .appimage {
+        display: flex;
+        flex-direction: column;
+        padding-left: 15px;
+        width: 60%;
+        height: 0%;
+
+        img {
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    ul {
+      margin-top: -10px;
+      margin-left: -40px;
+    }
+
+    span,
+    a {
+      font-size: 14px;
+    }
+  }
+}

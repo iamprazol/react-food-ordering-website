@@ -1,15 +1,22 @@
+// Import Libraries.
 import React from "react";
-import "./CategorySection.css";
-import WhatshotIcon from "@material-ui/icons/Whatshot";
-import IconContainer from "../../common/iconContainer/IconContainer";
 import { Link } from "react-scroll";
+
+// Import SCSS.
+import "./CategorySection.scss";
+
+// Import Components.
+import IconContainer from "../../common/iconContainer/IconContainer";
+
+// Import Icons.
+import WhatshotIcon from "@material-ui/icons/Whatshot";
 
 function CategorySection(props) {
   const { categories } = props;
 
   return (
-    <div className="rfow-restaurant-categories">
-      <div className="rfow-restaurant-categories-header u-line">
+    <div className="rfow-categories">
+      <div className="rfow-categories__header u-line">
         <h3>
           <IconContainer
             icon={<WhatshotIcon />}
@@ -20,7 +27,7 @@ function CategorySection(props) {
         </h3>
       </div>
       <ul
-        className="rfow-restaurant-categories-body"
+        className="rfow-categories__body"
         style={{
           listStyle: "none",
           margin: "0px",

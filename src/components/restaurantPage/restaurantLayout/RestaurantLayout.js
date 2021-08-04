@@ -1,12 +1,15 @@
+// Import Libraries.
 import React, { Component } from "react";
-import { useParams } from "react-router-dom";
+
+// Import SCSS.
+import "./RestaurantLayout.scss";
+
+// Import Components.
 import NavBar from "../../common/navBar/NavBar";
 import Banner from "../../common/banner/Banner";
 import FooterTop from "../../common/footer/footerTop/FooterTop";
 import FooterBottom from "../../common/footer/footerBottom/FooterBottom";
 import RestaurantDetails from "../restaurantDetails/RestaurantDetails";
-import CategorySection from "../categorySection/CategorySection";
-import "./RestaurantLayout.css";
 import MenuLayout from "../menuLayout/MenuLayout";
 
 class RestaurantLayout extends Component {
@@ -52,7 +55,7 @@ class RestaurantLayout extends Component {
 
   render() {
     return (
-      <div className="rfow-container">
+      <div className="rfow-wrapper">
         <NavBar />
         <Banner
           bannerImage="http://wptest.me/images/food/1624721580.jpeg"

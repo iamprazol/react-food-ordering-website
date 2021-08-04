@@ -1,4 +1,10 @@
+// Import Libraries.
 import React, { useState } from "react";
+
+// Import SCSS.
+import "./PageNotFound.css";
+
+// Import Components.
 import NavBar from "../common/navBar/NavBar";
 import LoginPage from "../authentication/loginPage/LoginPage";
 import Popup from "../common/popup/Popup";
@@ -6,8 +12,9 @@ import RegistrationPage from "../authentication/registrationPage/RegistrationPag
 import SearchRestaurantPage from "../home/searchRestaurantPage/SearchRestaurantPage";
 import FooterTop from "../common/footer/footerTop/FooterTop";
 import FooterBottom from "../common/footer/footerBottom/FooterBottom";
+
+// Import Images.
 import HungryImage from "../../assets/images/hungry.png";
-import "./PageNotFound.css";
 
 const PageNotFound = () => {
   const [openLoginPopup, setOpenLoginPopup] = useState(false);
@@ -32,7 +39,7 @@ const PageNotFound = () => {
   };
 
   return (
-    <div className="rfow-container">
+    <div className="rfow-wrapper">
       <NavBar
         onClick={handleOpenAuthenticationPopup}
         onKeyPress={handleSearchRestaurants}

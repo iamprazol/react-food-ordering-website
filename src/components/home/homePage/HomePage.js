@@ -99,8 +99,10 @@ const HomePage = () => {
           />
         </>
       )}
-      <FooterTop />
-      <FooterBottom />
+      <div className="rfow-footer">
+        <FooterTop />
+        <FooterBottom />
+      </div>
     </div>
   );
 };

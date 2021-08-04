@@ -1,6 +1,13 @@
+// Import Libraries.
 import React from "react";
+
+// Import SCSS.
 import "./RestaurantDetails.css";
+
+// Import Components.
 import IconContainer from "../../common/iconContainer/IconContainer";
+
+// Import Icons.
 import StarBorderIcon from "@material-ui/icons/Star";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
@@ -21,7 +28,7 @@ function RestaurantDetails(props) {
   } = props;
 
   return (
-    <section className="rfow-restaurant-details-container">
+    <section className="rfow-restaurant-details-container rfow-container">
       <div className="rfow-restaurant-details-header u-line">
         <div className="rfow-restaurant-title-address">
           <h1 className="fw-700">{name}</h1>

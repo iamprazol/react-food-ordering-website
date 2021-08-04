@@ -1,0 +1,19 @@
+.rfow-footer--top {
+  display: flex;
+  flex-direction: row;
+  padding-left: 80px;
+  padding-right: 80px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  justify-content: space-between;
+
+  .icon-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h4 {
+      font-weight: 500;
+    }
+  }
+}

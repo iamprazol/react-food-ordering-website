@@ -1,4 +1,7 @@
+// Import Libraries.
 import React, { useState, useEffect } from "react";
+
+// Import Components.
 import CategorySection from "../categorySection/CategorySection";
 import MenuSection from "../menuSection/MenuSection";
 
@@ -22,7 +25,7 @@ function MenuLayout(props) {
   }, [REACT_APP_API_URL, restaurantId]);
 
   return (
-    <section className="rfow-restaurant-menu-container">
+    <section className="rfow-restaurant-menu-container rfow-container section-padding">
       <CategorySection categories={categories} />
       <MenuSection menuItems={menuItems} />
     </section>
