@@ -23,7 +23,7 @@ function NavBar({ onClick, onKeyPress }) {
       </div>
       <div className="rfow-navbar--center">
         <div className="rfow-navbar--center__search">
-          <IconContainer icon={<SearchIcon />} fontSizeClass="icon-medium" />
+          <IconContainer icon={<SearchIcon />} fontSizeClass="icon--medium" />
           <input
             className="rfow-search"
             type="text"

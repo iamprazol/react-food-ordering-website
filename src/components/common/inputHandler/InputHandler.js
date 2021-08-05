@@ -1,8 +1,8 @@
 // Import Libraries.
 import React from "react";
 
-// Import CSS.
-import "./InputHandler.css";
+// Import SCSS.
+import "./InputHandler.scss";
 
 function InputHandler({ fieldSetting, onChange }) {
   const renderInput = (fieldSetting) => {

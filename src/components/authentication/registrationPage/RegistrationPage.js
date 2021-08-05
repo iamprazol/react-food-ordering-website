@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { userActions } from "../../../redux/actions";
 
-// Import CSS.
-import "./RegistrationPage.css";
+// Import SCSS.
+import "./RegistrationPage.scss";
 
 // Import Components.
 import InputHandler from "../../common/inputHandler/InputHandler";
@@ -48,16 +48,16 @@ const ConnectedRegistrationPage = (props) => {
   };
 
   return (
-    <div className="rfow-restaurant-register">
-      <div className="rfow-restaurant-register-header">
+    <div className="rfow-popup__register">
+      <div className="rfow-popup__register-header">
         <h1>Member Register</h1>
       </div>
-      <div className="rfow-restaurant-register-body">
+      <div className="rfow-popup__register-body">
         <div className="row">
           <div className={`rfow-field`}>
             <IconContainer
               icon={<PersonIcon />}
-              fontSizeClass="icon-small"
+              fontSizeClass="icon--small"
               colorClass="text-green"
             />
             <InputHandler
@@ -75,7 +75,7 @@ const ConnectedRegistrationPage = (props) => {
           <div className={`rfow-field`}>
             <IconContainer
               icon={<PersonIcon />}
-              fontSizeClass="icon-small"
+              fontSizeClass="icon--small"
               colorClass="text-green"
             />
             <InputHandler
@@ -95,7 +95,7 @@ const ConnectedRegistrationPage = (props) => {
           <div className={`rfow-field`}>
             <IconContainer
               icon={<MailIcon />}
-              fontSizeClass="icon-small"
+              fontSizeClass="icon--small"
               colorClass="text-green"
             />
             <InputHandler
@@ -113,7 +113,7 @@ const ConnectedRegistrationPage = (props) => {
           <div className={`rfow-field`}>
             <IconContainer
               icon={<ContactPhoneIcon />}
-              fontSizeClass="icon-small"
+              fontSizeClass="icon--small"
               colorClass="text-green"
             />
             <InputHandler
@@ -133,7 +133,7 @@ const ConnectedRegistrationPage = (props) => {
           <div className={`rfow-field`}>
             <IconContainer
               icon={<LockIcon />}
-              fontSizeClass="icon-small"
+              fontSizeClass="icon--small"
               colorClass="text-green"
             />
             <InputHandler
@@ -151,7 +151,7 @@ const ConnectedRegistrationPage = (props) => {
           <div className={`rfow-field`}>
             <IconContainer
               icon={<LockIcon />}
-              fontSizeClass="icon-small"
+              fontSizeClass="icon--small"
               colorClass="text-green"
             />
             <InputHandler

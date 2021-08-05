@@ -1,8 +1,8 @@
 // Import Libraries.
 import React from "react";
 
-// Import CSS.
-import "./LoginPage.css";
+// Import SCSS.
+import "./LoginPage.scss";
 
 // Import Components.
 import InputHandler from "../../common/inputHandler/InputHandler";
@@ -16,19 +16,19 @@ import Buttons from "../../common/buttons/Buttons";
 
 function LoginPage() {
   return (
-    <div className="rfow-restaurant-login">
-      <div className="rfow-restaurant-login-left">
+    <div className="rfow-popup__login">
+      <div className="rfow-popup__login-left">
         <img className="wd-70" src={FoodieImage} alt="foodie" />
       </div>
-      <div className="rfow-restaurant-login-right">
-        <div className="rfow-restaurant-login-header">
+      <div className="rfow-popup__login-right">
+        <div className="rfow-popup__login-header">
           <h1>Member Login</h1>
         </div>
-        <div className="rfow-restaurant-login-body">
+        <div className="rfow-popup__login-body">
           <div className={`rfow-field`}>
             <IconContainer
               icon={<MailIcon />}
-              fontSizeClass="icon-small"
+              fontSizeClass="icon--small"
               colorClass="text-green"
             />
             <InputHandler
@@ -44,7 +44,7 @@ function LoginPage() {
           <div className={`rfow-field`}>
             <IconContainer
               icon={<LockIcon />}
-              fontSizeClass="icon-small"
+              fontSizeClass="icon--small"
               colorClass="text-green"
             />
             <InputHandler
@@ -59,7 +59,7 @@ function LoginPage() {
           </div>
           <Buttons variant="primary" size="large" title="LOGIN" />
         </div>
-        <div className="rfow-restaurant-login-footer">
+        <div className="rfow-popup__login-footer">
           <p>Forgot</p>
           <a href="">Username / Password?</a>
         </div>

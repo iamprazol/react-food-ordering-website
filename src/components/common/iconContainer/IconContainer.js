@@ -1,8 +1,8 @@
 // Import Libraries.
 import React from "react";
 
-// Import CSS.
-import "./IconContainer.css";
+// Import SCSS.
+import "./IconContainer.scss";
 
 function IconContainer({
   icon,

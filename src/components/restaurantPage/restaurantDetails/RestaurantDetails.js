@@ -2,7 +2,7 @@
 import React from "react";
 
 // Import SCSS.
-import "./RestaurantDetails.css";
+import "./RestaurantDetails.scss";
 
 // Import Components.
 import IconContainer from "../../common/iconContainer/IconContainer";
@@ -14,12 +14,10 @@ import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 
 function RestaurantDetails(props) {
   let {
-    restaurantId,
     name,
     description,
     deliveryHours,
     minimumOrder,
-    coverPic,
     picture,
     address,
     vat,
@@ -28,70 +26,70 @@ function RestaurantDetails(props) {
   } = props;
 
   return (
-    <section className="rfow-restaurant-details-container rfow-container">
-      <div className="rfow-restaurant-details-header u-line">
-        <div className="rfow-restaurant-title-address">
+    <section className="rfow-details rfow-container">
+      <div className="rfow-details__header u-line">
+        <div className="rfow-details__header-title">
           <h1 className="fw-700">{name}</h1>
           <p className="text-light-black">
             <IconContainer
               icon={<LocationOnOutlinedIcon />}
               colorClass="text-red"
-              fontSizeClass="icon-medium"
+              fontSizeClass="icon--medium"
             />
             {address}
           </p>
         </div>
-        <div className="rfow-restaurant-image">
+        <div className="rfow-details__header-image">
           <img src={picture} alt="restaurant" />
         </div>
       </div>
-      <div className="rfow-restaurant-details u-line">
-        <div className="rfow-details price-time">
+      <div className="rfow-details__body u-line">
+        <div className="rfow-details__body-detail price-time">
           <span className="text-light-black">{"DELIVERY HOURS"}</span>
           <span className="text-light-black">{deliveryHours}</span>
         </div>
-        <div className="rfow-details minimum-order">
+        <div className="rfow-details__body-detail minimum-order">
           <span className="text-light-black">{"MINIMUM ORDER"}</span>
           <span className="text-light-black">Rs. {minimumOrder}</span>
         </div>
-        <div className="rfow-details discount-rate">
+        <div className="rfow-details__body-detail discount-rate">
           <span className="text-light-black">{"DISCOUNT"}</span>
           <span className="text-light-black">{discount} % </span>
         </div>
-        <div className="rfow-details service-charge">
+        <div className="rfow-details__body-detail service-charge">
           <span className="text-light-black">{"SERVICE CHARGE"}</span>
           <span className="text-light-black">{additionalCharges} % </span>
         </div>
-        <div className="rfow-details additional-vat">
+        <div className="rfow-details__body-detail additional-vat">
           <span className="text-light-black">{"ADDITIONAL VAT"}</span>
           <span className="text-light-black">{vat} % </span>
         </div>
       </div>
-      <div className="rfow-restaurant-description u-line">
+      <div className="rfow-details__description u-line">
         <div className="rating">
           <span>
             <IconContainer
               icon={<StarBorderIcon />}
               colorClass="text-yellow"
-              fontSizeClass="icon-medium"
+              fontSizeClass="icon--medium"
             />
             <IconContainer
               icon={<StarBorderIcon />}
               colorClass="text-yellow"
-              fontSizeClass="icon-medium"
+              fontSizeClass="icon--medium"
             />
             <IconContainer
               icon={<StarBorderIcon />}
               colorClass="text-yellow"
-              fontSizeClass="icon-medium"
+              fontSizeClass="icon--medium"
             />
             <IconContainer
               icon={<StarBorderIcon />}
-              fontSizeClass="icon-medium"
+              fontSizeClass="icon--medium"
             />
             <IconContainer
               icon={<StarBorderIcon />}
-              fontSizeClass="icon-medium"
+              fontSizeClass="icon--medium"
             />
           </span>
           <span className="text-light-black">58 ratings</span>
@@ -100,9 +98,8 @@ function RestaurantDetails(props) {
           <h3 className="text-light-white">{description}</h3>
         </div>
       </div>
-
-      <div className="restaurant-tabs u-line">
-        <div className="restaurant-menu-tab">
+      <div className="rfow-details__tabs u-line">
+        <div className="rfow-details__tabs-menu">
           <a className="nav-link text-light-white fw-700" href="#about">
             Menu
           </a>
@@ -119,7 +116,7 @@ function RestaurantDetails(props) {
         <div className="add-wishlist">
           <IconContainer
             icon={<FavoriteBorderIcon />}
-            fontSizeClass="icon-medium"
+            fontSizeClass="icon--medium"
           />{" "}
         </div>
       </div>

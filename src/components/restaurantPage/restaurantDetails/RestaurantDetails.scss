@@ -1,0 +1,73 @@
+.rfow-details {
+  padding: 0 40px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+
+    &-image {
+      img {
+        height: 100px;
+        width: 150px;
+      }
+    }
+
+    &-title {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+
+        i {
+          margin-top: 3px;
+        }
+      }
+    }
+  }
+
+  &__body {
+    display: flex;
+    justify-content: space-between;
+
+    &-detail {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__description {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .restaurant-tag {
+      flex: 0 0 60%;
+    }
+  }
+
+  &__tabs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-menu {
+      display: flex;
+      justify-content: flex-start;
+      flex: 0 0 60%;
+
+      a {
+        margin-right: 50px;
+      }
+    }
+  }
+}
+
+.u-line {
+  border-bottom: 1px solid rgba(67, 41, 163, 0.2);
+  margin: 5px 0;
+  padding: 10px 0;
+}

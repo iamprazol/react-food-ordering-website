@@ -1,15 +1,15 @@
 // Import Libraries.
 import React, { useState } from "react";
 
-// Import CSS.
-import "./searchRestaurantPage.css";
+// Import SCSS.
+import "./searchRestaurantPage.scss";
 
 // Import Components.
 import RestaurantList from "../restaurantList/RestaurantList";
 import Banner from "../../common/banner/Banner";
 import IconContainer from "../../common/iconContainer/IconContainer";
 import InputHandler from "../../common/inputHandler/InputHandler";
-import Buttons from "../../common/buttons/Buttons.js";
+import Buttons from "../../common/buttons/Buttons";
 
 // Import Icons.
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
@@ -38,33 +38,33 @@ function SearchRestaurantPage(props) {
     }
   };
   return (
-    <div className="rfow-search-result-page">
+    <div className="rfow-search-result">
       <Banner
         bannerHeight="small"
         bannerContent={
-          <div className="rfow-banner-text">
+          <div className="rfow-banner--text">
             <h3 className="text-black-white">Restaurants and Stores </h3>
           </div>
         }
       />
-      <div className="rfow-search-result-nav">
+      <div className="rfow-search-result__nav">
         <span className="text-black-white">
           {"Home "}
           <IconContainer
             icon={<ArrowForwardIosIcon />}
-            fontSizeClass="icon-small"
+            fontSizeClass="icon--small"
           />
           {" Search"}
           <IconContainer
             icon={<ArrowForwardIosIcon />}
-            fontSizeClass="icon-small"
+            fontSizeClass="icon--small"
           />
           {" Restaurants Found"}
         </span>
       </div>
-      <div className="rfow-search-result-wrapper">
-        <div className="rfow-search-result-filter-nav">
-          <div className="rfow-search-result-filter-tab">
+      <div className="rfow-search-result__wrapper">
+        <div className="rfow-search-result__filter-nav">
+          <div className="rfow-search-result__filter-tab">
             <div className={`rfow-field`}>
               <InputHandler
                 fieldSetting={{
@@ -108,7 +108,7 @@ function SearchRestaurantPage(props) {
             )}
           </div>
           {filterParams ? (
-            <div className="rfow-search-result-filter-params">
+            <div className="rfow-search-result__filter-params">
               {filterParams.map((value) => {
                 return (
                   <Buttons
@@ -125,7 +125,7 @@ function SearchRestaurantPage(props) {
             ""
           )}
         </div>
-        <div className="rfow-search-result">
+        <div className="rfow-search-result__body">
           <RestaurantList searchText={searchText} />
         </div>
       </div>

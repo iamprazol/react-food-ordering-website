@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 // Import SCSS.
-import "./PageNotFound.css";
+import "./PageNotFound.scss";
 
 // Import Components.
 import NavBar from "../common/navBar/NavBar";
@@ -61,7 +61,7 @@ const PageNotFound = () => {
       {searchRestaurants ? (
         <SearchRestaurantPage searchText={searchRestaurants} />
       ) : (
-        <div className="rfow-page-not-found-container">
+        <div className="rfow-pnf">
           <img src={HungryImage} alt="foodie" />
           <h1 className="text-red">OOPS! Page not found.</h1>
         </div>

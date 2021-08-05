@@ -1,8 +1,8 @@
 // Import Libraries.
 import React, { useState } from "react";
 
-// Import CSS.
-import "./Popup.css";
+// Import SCSS.
+import "./Popup.scss";
 
 const Popup = (props) => {
   const [closePopup, setClosePopup] = useState(true);
@@ -11,10 +11,10 @@ const Popup = (props) => {
   return (
     <div>
       {closePopup ? (
-        <div className="popup-overlay">
-          <div className={`popup ${popupClass}`}>
+        <div className="popup">
+          <div className={`popup__body ${popupClass}`}>
             <span
-              className="popup-close"
+              className="popup__close"
               onClick={() => {
                 onClick(closePopup);
                 setClosePopup(!closePopup);
@@ -22,8 +22,8 @@ const Popup = (props) => {
             >
               &times;
             </span>
-            <div className="popup-events">
-              <div className="popup-card-holder">{content}</div>
+            <div className="popup__card">
+              <div className="popup__card-holder">{content}</div>
             </div>
           </div>
         </div>

@@ -78,7 +78,7 @@ const HomePage = () => {
                 <Button
                   buttonClass="btn-submit btn-primary"
                   buttonHref="http://themegrill.me:41239/restaurants"
-                  text="Order Now"
+                  text={"Order Now"}
                 />
               </div>
             }

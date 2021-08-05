@@ -1,8 +1,8 @@
 // Import Libraries.
 import React from "react";
 
-// Import CSS.
-import "./Button.css";
+// Import SCSS.
+import "./Button.scss";
 
 const Button = (props) => {
   const { buttonClass, buttonHref, text, onClick } = props;

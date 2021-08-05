@@ -1,10 +1,17 @@
+// Import Libraries.
 import React from "react";
+import { Provider } from "react-redux";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import "./index.css";
+
+// Import SCSS.
+import "./index.scss";
+
+//Import Components.
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
-import { Provider } from "react-redux";
+
+// Import Redux Components.
 import { store } from "./redux/helpers";
 
 ReactDOM.render(

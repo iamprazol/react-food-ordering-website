@@ -56,7 +56,7 @@ function MenuSection(props) {
   return (
     <div className="rfow-menu">
       <div className="rfow-menu__search">
-        <IconContainer icon={<SearchIcon />} fontSizeClass="icon-medium" />
+        <IconContainer icon={<SearchIcon />} fontSizeClass="icon--medium" />
         <input className="rfow-search" type="text" placeholder="Chicken Momo" />
       </div>
       {menuItems.map((menuItem) => (
@@ -87,7 +87,7 @@ function MenuSection(props) {
                     <IconContainer
                       icon={<AddCircleOutlineIcon />}
                       colorClass="text-green"
-                      fontSizeClass="icon-small"
+                      fontSizeClass="icon--small"
                     />
                   </div>
                 </div>
@@ -128,7 +128,7 @@ function MenuSection(props) {
                   <div className={`rfow-field`}>
                     <IconContainer
                       icon={<AddIcon />}
-                      fontSizeClass="icon-small"
+                      fontSizeClass="icon--small"
                       iconPlacement="left"
                     />
                     <InputHandler
@@ -141,7 +141,7 @@ function MenuSection(props) {
                     />
                     <IconContainer
                       icon={<RemoveIcon />}
-                      fontSizeClass="icon-small"
+                      fontSizeClass="icon--small"
                       iconPlacement="right"
                     />
                   </div>
