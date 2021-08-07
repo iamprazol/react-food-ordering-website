@@ -25,12 +25,7 @@ const handleResponse = (response) => {
     const data = text && JSON.parse(text);
 
     if (!response.ok) {
-      if (response.status === 401) {
-        //Auto logout if 401 response returned from api.
-        return `logout here`;
-      }
-
-      const error = (data && data.message) || response.statusText;
+      const error = (data && data.error) || response.statusText;
       return Promise.reject(error);
     }
 

@@ -1,7 +1,8 @@
 // Import Libraries.
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { userActions } from "../../../redux/actions";
+import { userActions, alertActions } from "../../../redux/actions";
+import { store } from "../../../redux/helpers";
 
 // Import SCSS.
 import "./RegistrationPage.scss";
@@ -47,6 +48,15 @@ const ConnectedRegistrationPage = (props) => {
     register(userData);
   };
 
+  const [errors, setErrors] = useState({});
+  const { error } = props;
+
+  if (error) {
+    if (0 === Object.keys(errors).length) {
+      setErrors(error);
+    }
+  }
+
   return (
     <div className="rfow-popup__register">
       <div className="rfow-popup__register-header">
@@ -55,11 +65,6 @@ const ConnectedRegistrationPage = (props) => {
       <div className="rfow-popup__register-body">
         <div className="row">
           <div className={`rfow-field`}>
-            <IconContainer
-              icon={<PersonIcon />}
-              fontSizeClass="icon--small"
-              colorClass="text-green"
-            />
             <InputHandler
               fieldSetting={{
                 type: "text",
@@ -68,6 +73,7 @@ const ConnectedRegistrationPage = (props) => {
                 placeholder: "First Name",
                 id: "user_first_name",
                 name: "first_name",
+                error: errors.first_name ? errors.first_name : "",
               }}
               onChange={handleInputChange}
             />
@@ -86,6 +92,7 @@ const ConnectedRegistrationPage = (props) => {
                 placeholder: "Last Name",
                 id: `user_last_name`,
                 name: "last_name",
+                error: errors.last_name ? errors.last_name : "",
               }}
               onChange={handleInputChange}
             />
@@ -106,6 +113,7 @@ const ConnectedRegistrationPage = (props) => {
                 placeholder: "Email",
                 id: `user_email`,
                 name: "email",
+                error: errors.email ? errors.email : "",
               }}
               onChange={handleInputChange}
             />
@@ -124,6 +132,7 @@ const ConnectedRegistrationPage = (props) => {
                 placeholder: "Phone Number",
                 id: `user_phone_number`,
                 name: "phone",
+                error: errors.phone ? errors.phone : "",
               }}
               onChange={handleInputChange}
             />
@@ -144,6 +153,7 @@ const ConnectedRegistrationPage = (props) => {
                 placeholder: "Password",
                 id: `user_password`,
                 name: "password",
+                error: errors.password ? errors.password : "",
               }}
               onChange={handleInputChange}
             />
@@ -162,6 +172,7 @@ const ConnectedRegistrationPage = (props) => {
                 placeholder: "Confirm Password",
                 id: `user_confirm_password`,
                 name: "c_password",
+                error: errors.c_password ? errors.c_password : "",
               }}
               onChange={handleInputChange}
             />
@@ -174,8 +185,8 @@ const ConnectedRegistrationPage = (props) => {
 };
 
 function mapState(state) {
-  const { registering } = state.registration;
-  return { registering };
+  const { registering, error } = state.registration;
+  return { registering, error };
 }
 
 const actionCreators = {

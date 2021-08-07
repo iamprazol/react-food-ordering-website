@@ -11,15 +11,22 @@ function InputHandler({ fieldSetting, onChange }) {
       case "email":
       case "password":
         return (
-          <input
-            type={fieldSetting.type}
-            defaultValue={fieldSetting.value || ""}
-            disabled={fieldSetting.required}
-            placeholder={fieldSetting.placeholder}
-            className="rfow-field-control rfow-input"
-            onChange={(e) => onChange(e)}
-            name={fieldSetting.name}
-          />
+          <>
+            <input
+              type={fieldSetting.type}
+              defaultValue={fieldSetting.value || ""}
+              disabled={fieldSetting.required}
+              placeholder={fieldSetting.placeholder}
+              className={`rfow-field-control rfow-input ${
+                fieldSetting.error ? "rfow-error" : ""
+              }`}
+              onChange={(e) => onChange(e)}
+              name={fieldSetting.name}
+            />
+            <span className="text-red text-xs">
+              {fieldSetting.error ? fieldSetting.error : ""}
+            </span>
+          </>
         );
       case "textarea":
         return (
