@@ -1,5 +1,7 @@
 // Import Libraries.
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { alertActions } from "../../../redux/actions";
 
 // Import SCSS
 import "./HomePage.scss";
@@ -17,11 +19,24 @@ import Popup from "../../common/popup/Popup";
 import RegistrationPage from "../../authentication/registrationPage/RegistrationPage";
 import SearchRestaurantPage from "../searchRestaurantPage/SearchRestaurantPage";
 import Button from "../../common/button/Button";
+import Toast from "../../common/toast/Toast";
 
-const HomePage = () => {
+const ConnectedHome = (props) => {
   const [openLoginPopup, setOpenLoginPopup] = useState(false);
   const [openRegistrationPopup, setOpenRegistrationPopup] = useState(false);
   const [searchRestaurants, setSearchRestaurants] = useState("");
+  const [alerts, setAlerts] = useState({});
+  const { alert } = props;
+
+  if (alert) {
+    if (alert.message) {
+      const alertMessage = Object.keys(alert.message).map((key, value) => {
+        return value + 1 + ". " + alert.message[key].toString();
+      });
+
+      setAlerts({ type: alert.type, message: alertMessage });
+    }
+  }
 
   const handleOpenAuthenticationPopup = (clickAction, value) => {
     if ("login" === clickAction) {
@@ -46,6 +61,18 @@ const HomePage = () => {
         onClick={handleOpenAuthenticationPopup}
         onKeyPress={handleSearchRestaurants}
       />
+	{alerts ? (
+        <Toast
+          title="Registration Failed"
+          type="error"
+          message={
+            "Your Registration has failed due to following errors : " +
+            alert.message
+          }
+        />
+      ) : (
+        ""
+      )}
       {openLoginPopup ? (
         <Popup
           onClick={(value) => setOpenLoginPopup(!value)}
@@ -107,4 +134,13 @@ const HomePage = () => {
   );
 };
 
+function mapState(state) {
+  const { alert } = state;
+  return { alert };
+}
+
+const actionCreators = {
+  clearAlerts: alertActions.clear,
+};
+const HomePage = connect(mapState, actionCreators)(ConnectedHome);
 export default HomePage;

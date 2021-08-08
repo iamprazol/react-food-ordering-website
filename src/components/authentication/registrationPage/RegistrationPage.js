@@ -1,8 +1,7 @@
 // Import Libraries.
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { userActions, alertActions } from "../../../redux/actions";
-import { store } from "../../../redux/helpers";
+import { userActions } from "../../../redux/actions";
 
 // Import SCSS.
 import "./RegistrationPage.scss";
@@ -17,6 +16,7 @@ import LockIcon from "@material-ui/icons/Lock";
 import Buttons from "../../common/buttons/Buttons";
 import PersonIcon from "@material-ui/icons/Person";
 import ContactPhoneIcon from "@material-ui/icons/ContactPhone";
+import Toast from "../../common/toast/Toast";
 
 const ConnectedRegistrationPage = (props) => {
   const [userData, setUserData] = useState({
@@ -198,6 +198,7 @@ const ConnectedRegistrationPage = (props) => {
 
 function mapState(state) {
   const { registering, error } = state.registration;
+
   return { registering, error };
 }
 
