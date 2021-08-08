@@ -10,11 +10,12 @@ import IconContainer from "../iconContainer/IconContainer";
 // Import Icons.
 import CloseIcon from "@material-ui/icons/Close";
 
-function Buttons({ variant, size, title, onClick, close, onCloseClick }) {
+function Buttons({ variant, size, title, onClick, close, onCloseClick, type }) {
   return (
     <button
       className={`rfow-button rfow-button__${variant} rfow-button--${size}`}
       onClick={onClick}
+      type={type ? type : ""}
     >
       <span>{title}</span>
       {close ? (

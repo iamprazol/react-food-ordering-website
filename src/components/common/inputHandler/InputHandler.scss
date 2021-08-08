@@ -1,37 +1,46 @@
 .rfow-field {
-	font-size: 16px;
-	margin: 16px 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 16px;
+  margin: 16px 0;
+  flex: 0 0 45%;
 }
 
 .rfow-field-label {
-	display: inline-block;
-	margin-bottom: 8px;
+  display: inline-block;
+  margin-bottom: 8px;
 }
 
 .rfow-field-control {
-	position: relative;
-	flex: 1 1 auto;
-	min-width: 0;
-	margin-bottom: 0;
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin-bottom: 0;
 }
 
 .rfow-field-control:not(:first-child) {
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
+.rfow-error {
+  color: red;
+  border: 1px solid red;
+}
 .rfow-input {
-	height: 30px;
-    width: 200px;
-    text-align: center;
+  height: 30px;
+  width: 200px;
+  text-align: center;
 }
 
 input[type="number"] {
-	-webkit-appearance: textfield;
-	   -moz-appearance: textfield;
-			appearance: textfield;
-  }
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button {
-	-webkit-appearance: none;
-  }
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}

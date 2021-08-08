@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  padding: 50px 50px;
+  padding: 80px 50px;
 
   &-header {
     text-align: center;
@@ -10,6 +10,12 @@
 
   &-body {
     padding: 10px 40px;
+
+    button {
+      margin-left: 38%;
+      width: 25%;
+      justify-content: center;
+    }
   }
 
   input {
@@ -26,11 +32,22 @@
     border: none;
   }
 
-  .rfow-field i {
-    font-weight: 400;
-    z-index: 10;
-    position: absolute;
-    padding: 10px;
+  .rfow-field {
+    i {
+      font-weight: 400;
+      z-index: 10;
+      position: absolute;
+      padding: 10px;
+      align-self: stretch;
+    }
+
+    span {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      width: 90%;
+      text-align: center;
+      border: 1px solid red;
+    }
   }
 }
 
@@ -39,4 +56,5 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 10px;
 }

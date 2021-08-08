@@ -41,10 +41,11 @@ const ConnectedRegistrationPage = (props) => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event, userDatas) => {
     const { register } = props;
 
-    setUserData({ submitted: true });
+    setUserData({ ...userData, submitted: true });
+    setErrors({});
     register(userData);
   };
 
@@ -65,10 +66,15 @@ const ConnectedRegistrationPage = (props) => {
       <div className="rfow-popup__register-body">
         <div className="row">
           <div className={`rfow-field`}>
+            <IconContainer
+              icon={<PersonIcon />}
+              fontSizeClass="icon--small"
+              colorClass={errors.first_name ? "text-red" : "text-green"}
+            />
             <InputHandler
               fieldSetting={{
                 type: "text",
-                value: "",
+                value: userData.first_name ? userData.first_name : "",
                 required: false,
                 placeholder: "First Name",
                 id: "user_first_name",
@@ -82,12 +88,12 @@ const ConnectedRegistrationPage = (props) => {
             <IconContainer
               icon={<PersonIcon />}
               fontSizeClass="icon--small"
-              colorClass="text-green"
+              colorClass={errors.last_name ? "text-red" : "text-green"}
             />
             <InputHandler
               fieldSetting={{
                 type: "text",
-                value: "",
+                value: userData.last_name ? userData.last_name : "",
                 required: false,
                 placeholder: "Last Name",
                 id: `user_last_name`,
@@ -103,12 +109,12 @@ const ConnectedRegistrationPage = (props) => {
             <IconContainer
               icon={<MailIcon />}
               fontSizeClass="icon--small"
-              colorClass="text-green"
+              colorClass={errors.email ? "text-red" : "text-green"}
             />
             <InputHandler
               fieldSetting={{
                 type: "email",
-                value: "",
+                value: userData.email ? userData.email : "",
                 required: false,
                 placeholder: "Email",
                 id: `user_email`,
@@ -122,12 +128,12 @@ const ConnectedRegistrationPage = (props) => {
             <IconContainer
               icon={<ContactPhoneIcon />}
               fontSizeClass="icon--small"
-              colorClass="text-green"
+              colorClass={errors.phone ? "text-red" : "text-green"}
             />
             <InputHandler
               fieldSetting={{
                 type: "text",
-                value: "",
+                value: userData.phone ? userData.phone : "",
                 required: false,
                 placeholder: "Phone Number",
                 id: `user_phone_number`,
@@ -143,12 +149,12 @@ const ConnectedRegistrationPage = (props) => {
             <IconContainer
               icon={<LockIcon />}
               fontSizeClass="icon--small"
-              colorClass="text-green"
+              colorClass={errors.password ? "text-red" : "text-green"}
             />
             <InputHandler
               fieldSetting={{
                 type: "password",
-                value: "",
+                value: userData.password ? userData.password : "",
                 required: false,
                 placeholder: "Password",
                 id: `user_password`,
@@ -162,12 +168,12 @@ const ConnectedRegistrationPage = (props) => {
             <IconContainer
               icon={<LockIcon />}
               fontSizeClass="icon--small"
-              colorClass="text-green"
+              colorClass={errors.c_password ? "text-red" : "text-green"}
             />
             <InputHandler
               fieldSetting={{
                 type: "password",
-                value: "",
+                value: userData.c_password ? userData.c_password : "",
                 required: false,
                 placeholder: "Confirm Password",
                 id: `user_confirm_password`,
@@ -178,7 +184,13 @@ const ConnectedRegistrationPage = (props) => {
             />
           </div>
         </div>
-        <Buttons variant="primary" title="Register" onClick={handleSubmit} />
+        <Buttons
+          type="submit"
+          variant="primary"
+          title="Register"
+          size="large"
+          onClick={(e) => handleSubmit(e, userData)}
+        />
       </div>
     </div>
   );

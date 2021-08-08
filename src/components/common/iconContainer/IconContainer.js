@@ -18,11 +18,11 @@ function IconContainer({
     <i
       className={
         "iconContainer " +
-        colorClass +
+        (colorClass ? colorClass : "") +
         " " +
-        fontSizeClass +
+        (fontSizeClass ? fontSizeClass : "") +
         " " +
-        iconPlacement
+        (iconPlacement ? iconPlacement : "")
       }
       onClick={(e) => {
         e.preventDefault();
@@ -30,7 +30,7 @@ function IconContainer({
       }}
     >
       {icon && icon}
-      {text && <h4> {text}</h4>}
+      {text && <p> {text}</p>}
       {tag && <p>{tag}</p>}
     </i>
   );

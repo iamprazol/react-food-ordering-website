@@ -4,6 +4,10 @@ import React from "react";
 // Import SCSS.
 import "./InputHandler.scss";
 
+// Import Icons.
+import ErrorIcon from "@material-ui/icons/Error";
+import IconContainer from "../iconContainer/IconContainer";
+
 function InputHandler({ fieldSetting, onChange }) {
   const renderInput = (fieldSetting) => {
     switch (fieldSetting.type) {
@@ -23,9 +27,18 @@ function InputHandler({ fieldSetting, onChange }) {
               onChange={(e) => onChange(e)}
               name={fieldSetting.name}
             />
-            <span className="text-red text-xs">
-              {fieldSetting.error ? fieldSetting.error : ""}
-            </span>
+            {fieldSetting.error ? (
+              <span className="text-xs">
+                <IconContainer
+                  icon={<ErrorIcon />}
+                  fontSizeClass="icon--small"
+                  colorClass="text-red"
+                  text={fieldSetting.error}
+                />
+              </span>
+            ) : (
+              ""
+            )}
           </>
         );
       case "textarea":
