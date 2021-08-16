@@ -1,10 +1,12 @@
 // Import Libraries.
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { alertActions } from "../../../redux/actions";
 
 // Import SCSS
 import "./HomePage.scss";
+
+// Import redux fields.
+import { alertActions } from "../../../redux/actions";
 
 // Import Components.
 import BrowseByCategory from "../browseByCategory/BrowseByCategory";
@@ -25,18 +27,7 @@ const ConnectedHome = (props) => {
   const [openLoginPopup, setOpenLoginPopup] = useState(false);
   const [openRegistrationPopup, setOpenRegistrationPopup] = useState(false);
   const [searchRestaurants, setSearchRestaurants] = useState("");
-  const [alerts, setAlerts] = useState({});
   const { alert } = props;
-
-  if (alert) {
-    if (alert.message) {
-      const alertMessage = Object.keys(alert.message).map((key, value) => {
-        return value + 1 + ". " + alert.message[key].toString();
-      });
-
-      setAlerts({ type: alert.type, message: alertMessage });
-    }
-  }
 
   const handleOpenAuthenticationPopup = (clickAction, value) => {
     if ("login" === clickAction) {
@@ -61,14 +52,11 @@ const ConnectedHome = (props) => {
         onClick={handleOpenAuthenticationPopup}
         onKeyPress={handleSearchRestaurants}
       />
-	{alerts ? (
+      {Object.keys(alert).length > 0 ? (
         <Toast
-          title="Registration Failed"
-          type="error"
-          message={
-            "Your Registration has failed due to following errors : " +
-            alert.message
-          }
+          title={alert.message.title}
+          type={alert.message.type}
+          message={alert.message.description}
         />
       ) : (
         ""

@@ -13,11 +13,23 @@ function register(user) {
     userService.register(user).then(
       (user) => {
         dispatch(success(user));
-        dispatch(alertActions.success("Registration successful"));
+        dispatch(
+          alertActions.success({
+            type: "success",
+            title: "Registration Successful",
+            description: "You have been successfully registered into the site.",
+          })
+        );
       },
       (error) => {
         dispatch(failure(error));
-        dispatch(alertActions.error(error));
+        dispatch(
+          alertActions.error({
+            type: "error",
+            title: "Registration Failed",
+            description: "Please try again or contact the site administrator.",
+          })
+        );
       }
     );
   };
