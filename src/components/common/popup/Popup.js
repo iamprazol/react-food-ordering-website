@@ -1,36 +1,29 @@
-// Import Libraries.
-import React, { useState } from "react";
+import React from "react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  ModalBody,
+  useDisclosure,
+} from "@chakra-ui/react";
 
-// Import SCSS.
-import "./Popup.scss";
+const Popup = ({ content, onClick, popupClass }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: true });
 
-const Popup = (props) => {
-  const [closePopup, setClosePopup] = useState(true);
-  const { content, onClick, popupClass } = props;
+  const handleClose = () => {
+    onClose();
+    if (onClick) onClick(false);
+  };
 
   return (
-    <div>
-      {closePopup ? (
-        <div className="popup">
-          <div className={`popup__body ${popupClass}`}>
-            <span
-              className="popup__close"
-              onClick={() => {
-                onClick(closePopup);
-                setClosePopup(!closePopup);
-              }}
-            >
-              &times;
-            </span>
-            <div className="popup__card">
-              <div className="popup__card-holder">{content}</div>
-            </div>
-          </div>
-        </div>
-      ) : (
-        ""
-      )}
-    </div>
+    <Modal isOpen={isOpen} onClose={handleClose} isCentered size="3xl">
+      <ModalOverlay />
+      <ModalContent className={popupClass}>
+        <ModalCloseButton />
+        <ModalBody>{content}</ModalBody>
+      </ModalContent>
+    </Modal>
   );
 };
 

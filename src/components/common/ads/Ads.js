@@ -1,33 +1,48 @@
-// Import Libraries.
 import React from "react";
+import { Box, Flex, Text, Button as ChakraButton } from "@chakra-ui/react";
 
-// Import SCSS.
-import "./Ads.scss";
-
-// Import Components.
-import Button from "../button/Button";
-
-const Ads = (props) => {
-  let { adsText, image, link, buttonText } = props;
-
+const Ads = ({ adsText, image, link, buttonText }) => {
   return (
-    <div className="rfow-ads section-margin">
-      <div
-        className="rfow-ads__body rfow-container "
-        style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${image})`,
-        }}
+    <Box my={10}>
+      <Flex
+        align="center"
+        justify="center"
+        minH="50px"
+        bgImage={`linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${image})`}
+        bgSize="cover"
+        bgPosition="center"
+        borderRadius="md"
+        color="white"
+        maxW="7xl"
+        mx="auto"
       >
-        <div className="rfow-ads--text">
-          <h3>{adsText}</h3>
-          <Button
-            buttonClass="btn-submit btn-primary"
-            buttonHref={link}
-            text={buttonText}
-          />
-        </div>
-      </div>
-    </div>
+        <Box
+          textAlign="center"
+          display="flex"
+          justifyContent="space-around"
+          p={6}
+          gap={20}
+          alignItems="baseline"
+        >
+          <Text fontSize="2xl" mb={4} fontWeight="600">
+            {adsText}
+          </Text>
+          <ChakraButton
+            as="a"
+            href={link}
+            bg="red.500"
+            _hover={{ bg: "red.600" }}
+            color="white"
+            px={6}
+            py={4}
+            fontWeight="bold"
+            borderRadius="full"
+          >
+            {buttonText}
+          </ChakraButton>
+        </Box>
+      </Flex>
+    </Box>
   );
 };
 

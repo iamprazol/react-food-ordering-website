@@ -1,45 +1,40 @@
-// Import Libraries.
 import React, { useState } from "react";
+import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  CloseButton,
+  Box,
+} from "@chakra-ui/react";
 
-// Import Components.
-import IconContainer from "../iconContainer/IconContainer";
-
-// Import Icons.
-import ErrorIcon from "@material-ui/icons/Error";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-
-import "./Toast.scss";
-function Toast(props) {
-  const { title, message, type } = props;
+function Toast({ title, message, type }) {
   const [showToast, setShowToast] = useState(true);
 
-  const closeToastHandler = () => {
-    setShowToast(!showToast);
-  };
+  if (!showToast) return null;
 
-  return showToast ? (
-    <div
-      className={"rfow-toast " + ("success" === type ? "bg-green" : "bg-red")}
+  return (
+    <Alert
+      status={type === "success" ? "success" : "error"}
+      variant="solid"
+      borderRadius="md"
+      alignItems="center"
+      mb={4}
+      position="relative"
+      boxShadow="md"
     >
-      <div className="rfow-toast__left">
-        <IconContainer
-          icon={"success" === type ? <CheckCircleIcon /> : <ErrorIcon />}
-          colorClass="text-white"
-          fontSizeClass="icon--large"
-        />
-      </div>
-      <div className="rfow-toast__center">
-        <h3 className="rfow-toast__center-title text-white">{title}</h3>
-        <p className="rfow-toast__center-message text-white">{message}</p>
-      </div>
-      <div className="rfow-toast__right">
-        <span className="rfow-toast__close" onClick={closeToastHandler}>
-          &times;
-        </span>
-      </div>
-    </div>
-  ) : (
-    ""
+      <AlertIcon boxSize="1.8em" />
+      <Box flex="1">
+        <AlertTitle>{title}</AlertTitle>
+        <AlertDescription display="block">{message}</AlertDescription>
+      </Box>
+      <CloseButton
+        position="absolute"
+        right="8px"
+        top="8px"
+        onClick={() => setShowToast(false)}
+      />
+    </Alert>
   );
 }
 

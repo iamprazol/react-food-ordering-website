@@ -1,106 +1,98 @@
-// Import Libraries.
 import React from "react";
-
-// Import SCSS.
-import "./InputHandler.scss";
-
-// Import Icons.
-import ErrorIcon from "@material-ui/icons/Error";
+import {
+  Input,
+  Textarea,
+  Select,
+  FormControl,
+  FormErrorMessage,
+  InputGroup,
+  InputLeftElement,
+} from "@chakra-ui/react";
 import IconContainer from "../iconContainer/IconContainer";
+import { MdError } from "react-icons/md";
 
 function InputHandler({ fieldSetting, onChange }) {
-  const renderInput = (fieldSetting) => {
-    switch (fieldSetting.type) {
-      case "text":
-      case "email":
-      case "password":
-        return (
-          <>
-            <input
-              type={fieldSetting.type}
-              defaultValue={fieldSetting.value || ""}
-              disabled={fieldSetting.required}
-              placeholder={fieldSetting.placeholder}
-              className={`rfow-field-control rfow-input ${
-                fieldSetting.error ? "rfow-error" : ""
-              }`}
-              onChange={(e) => onChange(e)}
-              name={fieldSetting.name}
-            />
-            {fieldSetting.error ? (
-              <span className="text-xs">
-                <IconContainer
-                  icon={<ErrorIcon />}
-                  fontSizeClass="icon--small"
-                  colorClass="text-red"
-                  text={fieldSetting.error}
-                />
-              </span>
-            ) : (
-              ""
-            )}
-          </>
-        );
-      case "textarea":
-        return (
-          <textarea
-            rows="6"
-            cols="20"
-            type={fieldSetting.type}
-            disabled={fieldSetting.required}
-            className="rfow-field-control"
-            placeholder={fieldSetting.placeholder}
-            id={fieldSetting.id}
-          >
-            {fieldSetting.value || ""}
-          </textarea>
-        );
-      case "select":
-        return (
-          <select
-            disabled={fieldSetting.required}
-            className="rfow-field-control rfow-input"
-            onChange={(e) => onChange(e)}
-          >
-            {fieldSetting.placeholder ? (
-              <option value="" disabled selected>
-                {fieldSetting.placeholder}
-              </option>
-            ) : (
-              ""
-            )}
+  const { type, value, required, placeholder, id, name, error, options, icon } =
+    fieldSetting;
 
-            {Object.entries(fieldSetting.options).map(([key, option]) => {
-              return (
-                <option
-                  key={key}
-                  defaultValue={option}
-                  selected={fieldSetting.value === option ? "selected" : ""}
-                >
-                  {option}
-                </option>
-              );
-            })}
-          </select>
-        );
-      case "number":
-        return (
-          <input
-            type={fieldSetting.type}
-            defaultValue={fieldSetting.value || ""}
-            disabled={fieldSetting.required}
-            placeholder={fieldSetting.placeholder}
-            className="rfow-field-control rfow-input"
-            min="1"
-            step="1"
-            onChange={(e) => onChange(e)}
-          />
-        );
-      default:
-        return "";
+  const handleChange = (e) => {
+    if (onChange) {
+      if (type === "select") {
+        onChange(e.target.value);
+      } else {
+        onChange(e.target.value);
+      }
     }
   };
-  return renderInput(fieldSetting);
+
+  return (
+    <FormControl isInvalid={!!error} isRequired={required} id={id} name={name}>
+      {(type === "text" ||
+        type === "email" ||
+        type === "password" ||
+        type === "number") && (
+        <InputGroup>
+          {icon && (
+            <InputLeftElement pointerEvents="none">
+              <IconContainer
+                icon={icon}
+                colorClass={error ? "text-red" : "text-green"}
+              />
+            </InputLeftElement>
+          )}
+          <Input
+            type={type}
+            defaultValue={value || ""}
+            isDisabled={required}
+            placeholder={placeholder}
+            onChange={handleChange}
+            name={name}
+            min={type === "number" ? 1 : undefined}
+            step={type === "number" ? 1 : undefined}
+          />
+          {error && (
+            <FormErrorMessage display="flex" alignItems="center" gap={1}>
+              <IconContainer
+                icon={<MdError />}
+                fontSizeClass="icon--small"
+                colorClass="text-red"
+              />
+              {error}
+            </FormErrorMessage>
+          )}
+        </InputGroup>
+      )}
+
+      {type === "textarea" && (
+        <Textarea
+          defaultValue={value || ""}
+          isDisabled={required}
+          placeholder={placeholder}
+          rows={6}
+          onChange={handleChange}
+          id={id}
+          name={name}
+        />
+      )}
+
+      {type === "select" && (
+        <Select
+          placeholder={placeholder}
+          defaultValue={value || ""}
+          isDisabled={required}
+          onChange={handleChange}
+          name={name}
+        >
+          {options &&
+            Object.entries(options).map(([key, option]) => (
+              <option key={key} value={key}>
+                {option}
+              </option>
+            ))}
+        </Select>
+      )}
+    </FormControl>
+  );
 }
 
 export default InputHandler;

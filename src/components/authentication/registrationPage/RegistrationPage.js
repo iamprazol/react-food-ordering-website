@@ -1,198 +1,223 @@
-// Import Libraries.
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { userActions } from "../../../redux/actions";
 
-// Import SCSS.
-import "./RegistrationPage.scss";
+import {
+  Box,
+  SimpleGrid,
+  Heading,
+  Flex,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 
-// Import Components.
 import InputHandler from "../../common/inputHandler/InputHandler";
-import IconContainer from "../../common/iconContainer/IconContainer";
 
-// Import Icons.
-import MailIcon from "@material-ui/icons/Mail";
-import LockIcon from "@material-ui/icons/Lock";
+import {
+  MdEmail,
+  MdLock,
+  MdOutlinePerson,
+  MdContactPhone,
+} from "react-icons/md";
+
 import Buttons from "../../common/buttons/Buttons";
-import PersonIcon from "@material-ui/icons/Person";
-import ContactPhoneIcon from "@material-ui/icons/ContactPhone";
-import Toast from "../../common/toast/Toast";
 
 const ConnectedRegistrationPage = (props) => {
   const [userData, setUserData] = useState({
-    user: {
-      first_name: "",
-      last_name: "",
-      email: "",
-      password: "",
-      c_password: "",
-      phone: "",
-    },
-    submitted: false,
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    c_password: "",
+    phone: "",
   });
+
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const { register, error } = props;
+
+  const toast = useToast();
+
+  // Show errors from props if any
+  useEffect(() => {
+    if (error && Object.keys(error).length > 0) {
+      setErrors(error);
+      toast({
+        title: "Registration Error",
+        description: "Please fix the errors and try again.",
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+      });
+    }
+  }, [error, toast]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setUserData({
-      user: {
-        ...userData.user,
-        [name]: value,
-      },
-    });
+    setUserData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  const handleSubmit = (event, userDatas) => {
-    const { register } = props;
-
-    setUserData({ ...userData, submitted: true });
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setSubmitted(true);
     setErrors({});
     register(userData);
   };
 
-  const [errors, setErrors] = useState({});
-  const { error } = props;
-
-  if (error) {
-    if (0 === Object.keys(errors).length) {
-      setErrors(error);
-    }
-  }
-
   return (
-    <div className="rfow-popup__register">
-      <div className="rfow-popup__register-header">
-        <h1>Member Register</h1>
-      </div>
-      <div className="rfow-popup__register-body">
-        <div className="row">
-          <div className={`rfow-field`}>
-            <IconContainer
-              icon={<PersonIcon />}
-              fontSizeClass="icon--small"
-              colorClass={errors.first_name ? "text-red" : "text-green"}
-            />
+    <Box p={20} bg="white" className="rfow-popup__register">
+      <Heading as="h1" size="xl" mb={8} textAlign="center">
+        Member Register
+      </Heading>
+
+      <form onSubmit={handleSubmit}>
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6} mb={6}>
+          <Flex
+            align="start"
+            spacing={2}
+            className={`rfow-field`}
+            alignItems={"center"}
+          >
             <InputHandler
               fieldSetting={{
                 type: "text",
-                value: userData.first_name ? userData.first_name : "",
+                value: userData.first_name,
                 required: false,
                 placeholder: "First Name",
                 id: "user_first_name",
                 name: "first_name",
-                error: errors.first_name ? errors.first_name : "",
+                error: errors.first_name || "",
+                icon: <MdOutlinePerson />,
               }}
               onChange={handleInputChange}
             />
-          </div>
-          <div className={`rfow-field`}>
-            <IconContainer
-              icon={<PersonIcon />}
-              fontSizeClass="icon--small"
-              colorClass={errors.last_name ? "text-red" : "text-green"}
-            />
+          </Flex>
+
+          <Flex
+            align="start"
+            spacing={2}
+            className={`rfow-field`}
+            alignItems={"center"}
+          >
             <InputHandler
               fieldSetting={{
                 type: "text",
-                value: userData.last_name ? userData.last_name : "",
+                value: userData.last_name,
                 required: false,
                 placeholder: "Last Name",
                 id: `user_last_name`,
                 name: "last_name",
-                error: errors.last_name ? errors.last_name : "",
+                error: errors.last_name || "",
+                icon: <MdOutlinePerson />,
               }}
               onChange={handleInputChange}
             />
-          </div>
-        </div>
-        <div className="row">
-          <div className={`rfow-field`}>
-            <IconContainer
-              icon={<MailIcon />}
-              fontSizeClass="icon--small"
-              colorClass={errors.email ? "text-red" : "text-green"}
-            />
+          </Flex>
+        </SimpleGrid>
+
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6} mb={6}>
+          <Flex
+            align="start"
+            spacing={2}
+            className={`rfow-field`}
+            alignItems={"center"}
+          >
             <InputHandler
               fieldSetting={{
                 type: "email",
-                value: userData.email ? userData.email : "",
+                value: userData.email,
                 required: false,
                 placeholder: "Email",
                 id: `user_email`,
                 name: "email",
-                error: errors.email ? errors.email : "",
+                error: errors.email || "",
+                icon: <MdEmail />,
               }}
               onChange={handleInputChange}
             />
-          </div>
-          <div className={`rfow-field`}>
-            <IconContainer
-              icon={<ContactPhoneIcon />}
-              fontSizeClass="icon--small"
-              colorClass={errors.phone ? "text-red" : "text-green"}
-            />
+          </Flex>
+
+          <Flex
+            align="start"
+            spacing={2}
+            className={`rfow-field`}
+            alignItems={"center"}
+          >
             <InputHandler
               fieldSetting={{
                 type: "text",
-                value: userData.phone ? userData.phone : "",
+                value: userData.phone,
                 required: false,
                 placeholder: "Phone Number",
                 id: `user_phone_number`,
                 name: "phone",
-                error: errors.phone ? errors.phone : "",
+                error: errors.phone || "",
+                icon: <MdContactPhone />,
               }}
               onChange={handleInputChange}
             />
-          </div>
-        </div>
-        <div className="row">
-          <div className={`rfow-field`}>
-            <IconContainer
-              icon={<LockIcon />}
-              fontSizeClass="icon--small"
-              colorClass={errors.password ? "text-red" : "text-green"}
-            />
+          </Flex>
+        </SimpleGrid>
+
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6} mb={8}>
+          <Flex
+            align="start"
+            spacing={2}
+            className={`rfow-field`}
+            alignItems={"center"}
+          >
             <InputHandler
               fieldSetting={{
                 type: "password",
-                value: userData.password ? userData.password : "",
+                value: userData.password,
                 required: false,
                 placeholder: "Password",
                 id: `user_password`,
                 name: "password",
-                error: errors.password ? errors.password : "",
+                error: errors.password || "",
+                icon: <MdLock />,
               }}
               onChange={handleInputChange}
             />
-          </div>
-          <div className={`rfow-field`}>
-            <IconContainer
-              icon={<LockIcon />}
-              fontSizeClass="icon--small"
-              colorClass={errors.c_password ? "text-red" : "text-green"}
-            />
+          </Flex>
+
+          <Flex
+            align="start"
+            spacing={2}
+            className={`rfow-field`}
+            alignItems={"center"}
+          >
             <InputHandler
               fieldSetting={{
                 type: "password",
-                value: userData.c_password ? userData.c_password : "",
+                value: userData.c_password,
                 required: false,
                 placeholder: "Confirm Password",
                 id: `user_confirm_password`,
                 name: "c_password",
-                error: errors.c_password ? errors.c_password : "",
+                error: errors.c_password || "",
+                icon: <MdLock />,
               }}
               onChange={handleInputChange}
             />
-          </div>
-        </div>
+          </Flex>
+        </SimpleGrid>
+
         <Buttons
           type="submit"
           variant="primary"
           title="Register"
           size="large"
-          onClick={(e) => handleSubmit(e, userData)}
+          isDisabled={submitted && Object.keys(errors).length > 0}
+          onClick={handleSubmit}
+          width="full"
         />
-      </div>
-    </div>
+      </form>
+    </Box>
   );
 };
 

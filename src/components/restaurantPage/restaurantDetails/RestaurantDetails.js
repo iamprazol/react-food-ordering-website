@@ -1,19 +1,24 @@
-// Import Libraries.
 import React from "react";
-
-// Import SCSS.
-import "./RestaurantDetails.scss";
-
-// Import Components.
-import IconContainer from "../../common/iconContainer/IconContainer";
-
-// Import Icons.
-import StarBorderIcon from "@material-ui/icons/Star";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
+import {
+  Box,
+  Flex,
+  Heading,
+  Image,
+  Text,
+  Icon,
+  Link,
+  VStack,
+  HStack,
+  Divider,
+} from "@chakra-ui/react";
+import {
+  MdOutlineStarPurple500,
+  MdOutlineAddLocationAlt,
+} from "react-icons/md";
+import { IoMdHeartEmpty } from "react-icons/io";
 
 function RestaurantDetails(props) {
-  let {
+  const {
     name,
     description,
     deliveryHours,
@@ -26,101 +31,95 @@ function RestaurantDetails(props) {
   } = props;
 
   return (
-    <section className="rfow-details rfow-container">
-      <div className="rfow-details__header u-line">
-        <div className="rfow-details__header-title">
-          <h1 className="fw-700">{name}</h1>
-          <p className="text-light-black">
-            <IconContainer
-              icon={<LocationOnOutlinedIcon />}
-              colorClass="text-red"
-              fontSizeClass="icon--medium"
-            />
+    <Box maxW="7xl" mx="auto" p={4}>
+      {/* Header Section */}
+      <Flex
+        justify="space-between"
+        borderBottom="1px"
+        borderColor="gray.200"
+        pb={4}
+      >
+        <Box>
+          <Heading size="lg" fontWeight="700">
+            {name}
+          </Heading>
+          <Text color="gray.600" mt={2}>
+            <Icon as={MdOutlineAddLocationAlt} color="red.400" mr={1} />
             {address}
-          </p>
-        </div>
-        <div className="rfow-details__header-image">
-          <img src={picture} alt="restaurant" />
-        </div>
-      </div>
-      <div className="rfow-details__body u-line">
-        <div className="rfow-details__body-detail price-time">
-          <span className="text-light-black">{"DELIVERY HOURS"}</span>
-          <span className="text-light-black">{deliveryHours}</span>
-        </div>
-        <div className="rfow-details__body-detail minimum-order">
-          <span className="text-light-black">{"MINIMUM ORDER"}</span>
-          <span className="text-light-black">Rs. {minimumOrder}</span>
-        </div>
-        <div className="rfow-details__body-detail discount-rate">
-          <span className="text-light-black">{"DISCOUNT"}</span>
-          <span className="text-light-black">{discount} % </span>
-        </div>
-        <div className="rfow-details__body-detail service-charge">
-          <span className="text-light-black">{"SERVICE CHARGE"}</span>
-          <span className="text-light-black">{additionalCharges} % </span>
-        </div>
-        <div className="rfow-details__body-detail additional-vat">
-          <span className="text-light-black">{"ADDITIONAL VAT"}</span>
-          <span className="text-light-black">{vat} % </span>
-        </div>
-      </div>
-      <div className="rfow-details__description u-line">
-        <div className="rating">
-          <span>
-            <IconContainer
-              icon={<StarBorderIcon />}
-              colorClass="text-yellow"
-              fontSizeClass="icon--medium"
+          </Text>
+        </Box>
+        <Image
+          src={picture}
+          alt="restaurant"
+          boxSize="100px"
+          objectFit="cover"
+          borderRadius="md"
+        />
+      </Flex>
+
+      {/* Info Section */}
+      <Flex wrap="wrap" py={4} borderBottom="1px" borderColor="gray.200">
+        <InfoBlock label="DELIVERY HOURS" value={deliveryHours} />
+        <InfoBlock label="MINIMUM ORDER" value={`Rs. ${minimumOrder}`} />
+        <InfoBlock label="DISCOUNT" value={`${discount} %`} />
+        <InfoBlock label="SERVICE CHARGE" value={`${additionalCharges} %`} />
+        <InfoBlock label="ADDITIONAL VAT" value={`${vat} %`} />
+      </Flex>
+
+      {/* Rating and Description */}
+      <Box py={4} borderBottom="1px" borderColor="gray.200">
+        <HStack spacing={1} mb={2}>
+          {[1, 2, 3, 4, 5].map((i) => (
+            <Icon
+              key={i}
+              as={MdOutlineStarPurple500}
+              color={i <= 3 ? "yellow.400" : "gray.300"}
+              boxSize={5}
             />
-            <IconContainer
-              icon={<StarBorderIcon />}
-              colorClass="text-yellow"
-              fontSizeClass="icon--medium"
-            />
-            <IconContainer
-              icon={<StarBorderIcon />}
-              colorClass="text-yellow"
-              fontSizeClass="icon--medium"
-            />
-            <IconContainer
-              icon={<StarBorderIcon />}
-              fontSizeClass="icon--medium"
-            />
-            <IconContainer
-              icon={<StarBorderIcon />}
-              fontSizeClass="icon--medium"
-            />
-          </span>
-          <span className="text-light-black">58 ratings</span>
-        </div>
-        <div className="restaurant-tag">
-          <h3 className="text-light-white">{description}</h3>
-        </div>
-      </div>
-      <div className="rfow-details__tabs u-line">
-        <div className="rfow-details__tabs-menu">
-          <a className="nav-link text-light-white fw-700" href="#about">
-            Menu
-          </a>
-          <a className="nav-link text-light-white fw-700" href="#about">
-            About
-          </a>
-          <a className="nav-link text-light-white fw-700" href="#review">
-            Reviews
-          </a>
-          <a className="nav-link text-light-white fw-700" href="#mapgallery">
-            Map &amp; Gallery
-          </a>
-        </div>
-        <div className="add-wishlist">
-          <IconContainer
-            icon={<FavoriteBorderIcon />}
-            fontSizeClass="icon--medium"
-          />{" "}
-        </div>
-      </div>
-    </section>
+          ))}
+          <Text color="gray.600">58 ratings</Text>
+        </HStack>
+        <Text fontSize="lg" fontWeight="semibold" color="gray.700">
+          {description}
+        </Text>
+      </Box>
+
+      {/* Tabs and Wishlist */}
+      <Flex
+        justify="space-between"
+        align="center"
+        py={4}
+        borderBottom="1px"
+        borderColor="gray.200"
+      >
+        <HStack spacing={6}>
+          {["Menu", "About", "Reviews", "Map & Gallery"].map((tab) => (
+            <Link
+              key={tab}
+              href={`#${tab.toLowerCase().replace(/\s+/g, "")}`}
+              fontWeight="700"
+              color="gray.700"
+            >
+              {tab}
+            </Link>
+          ))}
+        </HStack>
+        <Icon as={IoMdHeartEmpty} boxSize={6} color="gray.600" />
+      </Flex>
+    </Box>
+  );
+}
+
+function InfoBlock({ label, value }) {
+  return (
+    <Box flex="1 1 200px" mb={3} pr={4}>
+      <Text fontSize="sm" color="gray.500">
+        {label}
+      </Text>
+      <Text fontWeight="medium" color="gray.700">
+        {value}
+      </Text>
+    </Box>
   );
 }
 

@@ -1,72 +1,62 @@
-// Import Libraries.
 import React from "react";
+import { Box, Flex, Text, useColorModeValue, Image } from "@chakra-ui/react";
+import {
+  MdPayment,
+  MdOutlineCardGiftcard,
+  MdOutlineAssignment,
+  MdApps,
+  MdOutlineSupportAgent,
+  MdAccountCircle,
+} from "react-icons/md";
 
-// Import SCSS.
-import "./FooterTop.scss";
+// Utility icon box
+const IconBox = ({ icon, text }) => {
+  const iconColor = useColorModeValue("brand.500", "brand.300");
 
-// Import Components.
-import IconContainer from "../../iconContainer/IconContainer";
-
-// Import Icons.
-import PaymentIcon from "@material-ui/icons/Payment";
-import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
-import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
-import AssignmentTurnedInOutlinedIcon from "@material-ui/icons/AssignmentTurnedInOutlined";
-import AppsIcon from "@material-ui/icons/Apps";
-import ContactSupportTwoToneIcon from "@material-ui/icons/ContactSupportTwoTone";
+  return (
+    <Flex
+      direction="column"
+      align="center"
+      textAlign="center"
+      gap={2}
+      flex="1"
+      minW={{ base: "40%", sm: "30%", md: "15%" }}
+    >
+      <Box fontSize="6xl" color={iconColor}>
+        {icon}
+      </Box>
+      <Text color="white" fontSize="sm">
+        {text}
+      </Text>
+    </Flex>
+  );
+};
 
 const FooterTop = () => {
   return (
-    <section className="rfow-footer--top section-padding bg-black">
-      <div className="icon-box">
-        <IconContainer
-          icon={<PaymentIcon />}
-          colorClass="text-red"
-          fontSizeClass="icon--large"
+    <Box bg="black" py={10}>
+      <Flex
+        wrap="wrap"
+        justify="center"
+        gap={6}
+        maxW="7xl"
+        mx="auto"
+        textAlign="center"
+      >
+        <IconBox icon={<MdPayment />} text="100% Payment Secured" />
+        <IconBox icon={<MdAccountCircle />} text="Support lots of Payments" />
+        <IconBox
+          icon={<MdOutlineSupportAgent />}
+          text="24/7 Customer Support"
         />
-        <h4 className="text-white">{"100% Payment Secured"}</h4>
-      </div>
-      <div className="icon-box">
-        <IconContainer
-          icon={<AccountBalanceIcon />}
-          colorClass="text-red"
-          fontSizeClass="icon--large"
+        <IconBox
+          icon={<MdOutlineCardGiftcard />}
+          text="Free Delivery with Rs.5000"
         />
-        <h4 className="text-white">{"Support lots of Payments"}</h4>
-      </div>
-      <div className="icon-box">
-        <IconContainer
-          icon={<ContactSupportTwoToneIcon />}
-          colorClass="text-red"
-          fontSizeClass="icon--large"
-        />
-        <h4 className="text-white">{"24 hours / 7 days Support"}</h4>
-      </div>
-      <div className="icon-box">
-        <IconContainer
-          icon={<CardGiftcardIcon />}
-          colorClass="text-red"
-          fontSizeClass="icon--large"
-        />
-        <h4 className="text-white">{"Free Delivery with Rs.5000"}</h4>
-      </div>
-      <div className="icon-box">
-        <IconContainer
-          icon={<AssignmentTurnedInOutlinedIcon />}
-          colorClass="text-red"
-          fontSizeClass="icon--large"
-        />
-        <h4 className="text-white">{"Best Price Guaranteed"}</h4>
-      </div>
-      <div className="icon-box">
-        <IconContainer
-          icon={<AppsIcon />}
-          colorClass="text-red"
-          fontSizeClass="icon--large"
-        />
-        <h4 className="text-white">{"Mobile Apps Ready"}</h4>
-      </div>
-    </section>
+        <IconBox icon={<MdOutlineAssignment />} text="Best Price Guaranteed" />
+        <IconBox icon={<MdApps />} text="Mobile Apps Ready" />
+      </Flex>
+    </Box>
   );
 };
 

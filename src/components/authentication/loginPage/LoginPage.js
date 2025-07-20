@@ -1,36 +1,46 @@
-// Import Libraries.
 import React from "react";
+import { Box, Flex, Heading, Image, Link, Text } from "@chakra-ui/react";
 
-// Import SCSS.
-import "./LoginPage.scss";
-
-// Import Components.
 import InputHandler from "../../common/inputHandler/InputHandler";
 import FoodieImage from "../../../assets/images/foodie.png";
 import IconContainer from "../../common/iconContainer/IconContainer";
 
-// Import Icons.
-import MailIcon from "@material-ui/icons/Mail";
-import LockIcon from "@material-ui/icons/Lock";
+import { MdEmail, MdLock } from "react-icons/md";
 import Buttons from "../../common/buttons/Buttons";
 
 function LoginPage() {
   return (
-    <div className="rfow-popup__login">
-      <div className="rfow-popup__login-left">
-        <img className="wd-70" src={FoodieImage} alt="foodie" />
-      </div>
-      <div className="rfow-popup__login-right">
-        <div className="rfow-popup__login-header">
-          <h1>Member Login</h1>
-        </div>
-        <div className="rfow-popup__login-body">
-          <div className={`rfow-field`}>
-            <IconContainer
-              icon={<MailIcon />}
-              fontSizeClass="icon--small"
-              colorClass="text-green"
-            />
+    <Flex
+      direction={{ base: "column", md: "row" }}
+      maxW="900px"
+      mx="auto"
+      borderRadius="md"
+      overflow="hidden"
+      p={6}
+    >
+      <Box
+        flex="1"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        bg="white"
+      >
+        <Image src={FoodieImage} alt="foodie" maxW="70%" />
+      </Box>
+      <Box
+        flex="1"
+        bg="white"
+        p={{ base: 6, md: 10 }}
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+      >
+        <Heading as="h1" size="xl" mb={6}>
+          Member Login
+        </Heading>
+
+        <Box mb={4}>
+          <Flex align="center" mb={2} gap={3}>
             <InputHandler
               fieldSetting={{
                 type: "email",
@@ -38,15 +48,14 @@ function LoginPage() {
                 required: false,
                 placeholder: "iamprazol@gmail.com",
                 id: `user_login_email`,
+                icon: <MdEmail />,
               }}
             />
-          </div>
-          <div className={`rfow-field`}>
-            <IconContainer
-              icon={<LockIcon />}
-              fontSizeClass="icon--small"
-              colorClass="text-green"
-            />
+          </Flex>
+        </Box>
+
+        <Box mb={6}>
+          <Flex align="center" gap={3}>
             <InputHandler
               fieldSetting={{
                 type: "password",
@@ -54,20 +63,32 @@ function LoginPage() {
                 required: false,
                 placeholder: "",
                 id: `user_login_password`,
+                icon: <MdLock />,
               }}
             />
-          </div>
-          <Buttons variant="primary" size="large" title="LOGIN" />
-        </div>
-        <div className="rfow-popup__login-footer">
-          <p>Forgot</p>
-          <a href="">Username / Password?</a>
-        </div>
-        <a href="" className="text-right mt-50">
+          </Flex>
+        </Box>
+
+        <Buttons variant="primary" size="large" title="LOGIN" />
+
+        <Flex justifyContent="space-between" mt={6} mb={4} fontSize="sm">
+          <Text>Forgot</Text>
+          <Link href="/forgot-password" color="blue.500" fontWeight="semibold">
+            Username / Password?
+          </Link>
+        </Flex>
+
+        <Link
+          href="/register"
+          alignSelf="flex-end"
+          color="blue.500"
+          fontWeight="semibold"
+          mt={8}
+        >
           Create your account
-        </a>
-      </div>
-    </div>
+        </Link>
+      </Box>
+    </Flex>
   );
 }
 

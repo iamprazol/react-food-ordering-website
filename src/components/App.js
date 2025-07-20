@@ -1,6 +1,6 @@
 // Import Libraries.
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 // Import Components.
 import HomePage from "./home/homePage/HomePage";
@@ -9,11 +9,11 @@ import RestaurantLayout from "./restaurantPage/restaurantLayout/RestaurantLayout
 
 function App() {
   return (
-    <Switch>
-      <Route exact path="/" component={HomePage} />
-      <Route path="/restaurant/:restaurantId" component={RestaurantLayout} />
-      <Route component={PageNotFound} />
-    </Switch>
+    <Routes>
+      <Route exact path="/" element={<HomePage />} />
+      <Route path="/restaurant/:restaurantId" element={<RestaurantLayout />} />
+      <Route element={<PageNotFound />} />
+    </Routes>
   );
 }
 

@@ -1,17 +1,27 @@
-// Import Libraries.
 import React from "react";
+import { Button, Link } from "@chakra-ui/react";
 
-// Import SCSS.
-import "./Button.scss";
-
-const Button = (props) => {
-  const { buttonClass, buttonHref, text, onClick } = props;
+const ButtonComponent = ({ buttonClass, buttonHref, text, onClick }) => {
+  if (buttonHref) {
+    return (
+      <Link
+        href={buttonHref}
+        className={buttonClass}
+        onClick={onClick}
+        _hover={{ textDecoration: "none" }}
+      >
+        <Button as="span" variant="solid">
+          {text}
+        </Button>
+      </Link>
+    );
+  }
 
   return (
-    <a class={buttonClass} href={buttonHref} onClick={onClick}>
+    <Button className={buttonClass} onClick={onClick} variant="solid">
       {text}
-    </a>
+    </Button>
   );
 };
 
-export default Button;
+export default ButtonComponent;

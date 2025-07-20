@@ -1,10 +1,6 @@
-// Import Libraries.
 import React, { useState } from "react";
+import { Box, Image, Heading, Center, useDisclosure } from "@chakra-ui/react";
 
-// Import SCSS.
-import "./PageNotFound.scss";
-
-// Import Components.
 import NavBar from "../common/navBar/NavBar";
 import LoginPage from "../authentication/loginPage/LoginPage";
 import Popup from "../common/popup/Popup";
@@ -13,7 +9,6 @@ import SearchRestaurantPage from "../home/searchRestaurantPage/SearchRestaurantP
 import FooterTop from "../common/footer/footerTop/FooterTop";
 import FooterBottom from "../common/footer/footerBottom/FooterBottom";
 
-// Import Images.
 import HungryImage from "../../assets/images/hungry.png";
 
 const PageNotFound = () => {
@@ -22,9 +17,9 @@ const PageNotFound = () => {
   const [searchRestaurants, setSearchRestaurants] = useState("");
 
   const handleOpenAuthenticationPopup = (clickAction, value) => {
-    if ("login" === clickAction) {
+    if (clickAction === "login") {
       setOpenLoginPopup(!openLoginPopup);
-    } else if ("register" === clickAction) {
+    } else if (clickAction === "register") {
       setOpenRegistrationPopup(!openRegistrationPopup);
     } else {
       setSearchRestaurants(value);
@@ -33,43 +28,53 @@ const PageNotFound = () => {
 
   const handleSearchRestaurants = (e) => {
     if (e.key === "Enter") {
-      var searchText = e.target.value;
-      setSearchRestaurants(searchText);
+      setSearchRestaurants(e.target.value);
     }
   };
 
   return (
-    <div className="rfow-wrapper">
+    <Box minH="100vh" display="flex" flexDirection="column">
       <NavBar
         onClick={handleOpenAuthenticationPopup}
         onKeyPress={handleSearchRestaurants}
       />
-      {openLoginPopup ? (
-        <Popup onClick={""} popupClass="wd-50 br-25" content={<LoginPage />} />
-      ) : (
-        ""
-      )}
-      {openRegistrationPopup ? (
+
+      {openLoginPopup && (
         <Popup
-          onClick={""}
+          onClick={() => setOpenLoginPopup(false)}
+          popupClass="wd-50 br-25" // You may want to convert these to Chakra styles too
+          content={<LoginPage />}
+        />
+      )}
+
+      {openRegistrationPopup && (
+        <Popup
+          onClick={() => setOpenRegistrationPopup(false)}
           popupClass="wd-50 br-25"
           content={<RegistrationPage />}
         />
-      ) : (
-        ""
       )}
+
       {searchRestaurants ? (
         <SearchRestaurantPage searchText={searchRestaurants} />
       ) : (
-        <div className="rfow-pnf">
-          <img src={HungryImage} alt="foodie" />
-          <h1 className="text-red">OOPS! Page not found.</h1>
-        </div>
+        <Center flex="1" flexDirection="column" p={8}>
+          <Image
+            src={HungryImage}
+            alt="foodie"
+            maxW="300px"
+            mb={6}
+            objectFit="contain"
+          />
+          <Heading color="red.500" size="2xl">
+            OOPS! Page not found.
+          </Heading>
+        </Center>
       )}
-      ;
+
       <FooterTop />
       <FooterBottom />
-    </div>
+    </Box>
   );
 };
 

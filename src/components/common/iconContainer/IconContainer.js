@@ -1,8 +1,5 @@
-// Import Libraries.
 import React from "react";
-
-// Import SCSS.
-import "./IconContainer.scss";
+import { Box, Text, Icon } from "@chakra-ui/react";
 
 function IconContainer({
   icon,
@@ -11,28 +8,49 @@ function IconContainer({
   text,
   tag,
   iconStyle,
-  iconPlacement,
+  iconPlacement = "center",
   onClick,
 }) {
+  // Map old class names to Chakra styles (can be expanded)
+  const colorMap = {
+    "text-yellow": "yellow.400",
+    "text-red": "red.500",
+    "text-light-black": "gray.800",
+    "text-light-white": "gray.500",
+  };
+
+  const fontSizeMap = {
+    "icon--small": "16px",
+    "icon--medium": "20px",
+    "icon--large": "24px",
+  };
+
+  const placementMap = {
+    center: "center",
+    left: "flex-start",
+    right: "flex-end",
+  };
+
   return (
-    <i
-      className={
-        "iconContainer " +
-        (colorClass ? colorClass : "") +
-        " " +
-        (fontSizeClass ? fontSizeClass : "") +
-        " " +
-        (iconPlacement ? iconPlacement : "")
-      }
+    <Box
+      as="span"
+      display="flex"
+      alignItems="center"
+      justifyContent={placementMap[iconPlacement] || "center"}
+      gap={1}
+      color={colorMap[colorClass] || "inherit"}
+      fontSize={fontSizeMap[fontSizeClass] || "inherit"}
+      cursor={onClick ? "pointer" : "default"}
       onClick={(e) => {
         e.preventDefault();
-        return onClick ? onClick(true) : "";
+        if (onClick) onClick(true);
       }}
+      style={iconStyle}
     >
-      {icon && icon}
-      {text && <p> {text}</p>}
-      {tag && <p>{tag}</p>}
-    </i>
+      {icon && <Icon as={icon.type} />}
+      {text && <Text as="span">{text}</Text>}
+      {tag && <Text as="span">{tag}</Text>}
+    </Box>
   );
 }
 

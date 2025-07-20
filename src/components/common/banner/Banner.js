@@ -1,38 +1,43 @@
-// Import Libraries.
 import React from "react";
+import { Box, Flex } from "@chakra-ui/react";
 
-// Import SCSS.
-import "./Banner.scss";
-
-function Banner(props) {
-  let { bannerImage, bannerHeight, bannerContent } = props;
+function Banner({ bannerImage, bannerHeight, bannerContent }) {
+  const height =
+    bannerHeight === "large"
+      ? "650px"
+      : bannerHeight === "medium"
+      ? "300px"
+      : "150px";
 
   return (
-    <section
-      className="rfow-banner rfow-bottom-line"
-      style={{
-        height: `${
-          "large" === bannerHeight
-            ? "650px"
-            : "medium" === bannerHeight
-            ? "300px"
-            : "150px"
-        }`,
-      }}
+    <Box
+      as="section"
+      w="100%"
+      h={height}
+      overflow="hidden"
+      borderBottom="1px solid"
+      borderColor="gray.200"
     >
-      <div
-        className="rfow-banner__body"
-        style={
+      <Flex
+        align="center"
+        justify="center"
+        h="100%"
+        w="100%"
+        bg={bannerImage ? undefined : "floralwhite"}
+        backgroundImage={
           bannerImage
-            ? {
-                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${bannerImage})`,
-              }
-            : { backgroundColor: `floralwhite` }
+            ? `linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.3)), url(${bannerImage})`
+            : undefined
         }
+        backgroundSize="cover"
+        backgroundPosition="center"
+        backgroundRepeat="no-repeat"
+        backgroundBlendMode={bannerImage ? "overlay" : undefined}
+        color="white"
       >
-        {bannerContent ? bannerContent : ""}
-      </div>
-    </section>
+        {bannerContent}
+      </Flex>
+    </Box>
   );
 }
 

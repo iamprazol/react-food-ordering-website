@@ -1,14 +1,19 @@
-// Import Libraries.
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import {
+  Box,
+  Flex,
+  Heading,
+  Text,
+  Image,
+  Stack,
+  Button as ChakraButton,
+} from "@chakra-ui/react";
 
-// Import SCSS
-import "./HomePage.scss";
-
-// Import redux fields.
+// Redux
 import { alertActions } from "../../../redux/actions";
 
-// Import Components.
+// Components
 import BrowseByCategory from "../browseByCategory/BrowseByCategory";
 import RestaurantList from "../restaurantList/RestaurantList";
 import FooterTop from "../../common/footer/footerTop/FooterTop";
@@ -20,19 +25,18 @@ import LoginPage from "../../authentication/loginPage/LoginPage";
 import Popup from "../../common/popup/Popup";
 import RegistrationPage from "../../authentication/registrationPage/RegistrationPage";
 import SearchRestaurantPage from "../searchRestaurantPage/SearchRestaurantPage";
-import Button from "../../common/button/Button";
 import Toast from "../../common/toast/Toast";
 
-const ConnectedHome = (props) => {
+const ConnectedHome = ({ alert }) => {
   const [openLoginPopup, setOpenLoginPopup] = useState(false);
   const [openRegistrationPopup, setOpenRegistrationPopup] = useState(false);
   const [searchRestaurants, setSearchRestaurants] = useState("");
-  const { alert } = props;
+  const { REACT_APP_URL } = process.env;
 
   const handleOpenAuthenticationPopup = (clickAction, value) => {
-    if ("login" === clickAction) {
+    if (clickAction === "login") {
       setOpenLoginPopup(!openLoginPopup);
-    } else if ("register" === clickAction) {
+    } else if (clickAction === "register") {
       setOpenRegistrationPopup(!openRegistrationPopup);
     } else {
       setSearchRestaurants(value);
@@ -41,84 +45,111 @@ const ConnectedHome = (props) => {
 
   const handleSearchRestaurants = (e) => {
     if (e.key === "Enter") {
-      var searchText = e.target.value;
-      setSearchRestaurants(searchText);
+      setSearchRestaurants(e.target.value);
     }
   };
 
   return (
-    <div className="rfow-wrapper">
+    <Flex direction="column" minH="100vh" bg="gray.50">
       <NavBar
         onClick={handleOpenAuthenticationPopup}
         onKeyPress={handleSearchRestaurants}
       />
-      {Object.keys(alert).length > 0 ? (
+
+      {Object.keys(alert).length > 0 && (
         <Toast
           title={alert.message.title}
           type={alert.message.type}
           message={alert.message.description}
         />
-      ) : (
-        ""
       )}
-      {openLoginPopup ? (
+
+      {openLoginPopup && (
         <Popup
           onClick={(value) => setOpenLoginPopup(!value)}
-          popupClass="wd-50 br-25"
           content={<LoginPage />}
         />
-      ) : (
-        ""
       )}
-      {openRegistrationPopup ? (
+
+      {openRegistrationPopup && (
         <Popup
-          onClick={(value) => setOpenLoginPopup(!value)}
+          onClick={(value) => setOpenRegistrationPopup(!value)}
           popupClass="wd-50 br-25"
           content={<RegistrationPage />}
         />
-      ) : (
-        ""
       )}
+
       {searchRestaurants ? (
         <SearchRestaurantPage searchText={searchRestaurants} />
       ) : (
         <>
+          {/* Banner Section */}
           <Banner
-            bannerImage="http://wptest.me/images/food/1624721452.jpg"
+            bannerImage={REACT_APP_URL + "images/food/1624721452.jpg"}
             bannerHeight="large"
             bannerContent={
-              <div className="rfow-banner--text">
-                <h1>Order your favourite food from anywhere</h1>
-                <h3>with the largest food ordering platform all over Nepal</h3>
-                <Button
-                  buttonClass="btn-submit btn-primary"
+              <Box
+                textAlign={{ base: "center", md: "left" }}
+                px={{ base: 4, md: 16 }}
+                py={{ base: 8, md: 24 }}
+                transform="translateY(0)"
+              >
+                <Heading
+                  fontSize={{ base: "40px", md: "50px", lg: "60px" }}
+                  mb={4}
+                  fontWeight="600"
+                  lineHeight="1.2"
+                  width="70%"
+                >
+                  Order your favourite food from anywhere
+                </Heading>
+                <Text
+                  fontSize={{ base: "24px", md: "28px" }}
+                  mb={6}
+                  fontWeight="400"
+                >
+                  with the largest food ordering platform all over Nepal
+                </Text>
+                <ChakraButton
+                  colorScheme="blue"
+                  ml={4}
+                  px={8}
+                  bgColor="brand.500"
+                  borderColor="brand.500"
+                  _hover={{ bgColor: "brand.600" }}
                   buttonHref="http://themegrill.me:41239/restaurants"
-                  text={"Order Now"}
-                />
-              </div>
+                >
+                  {"Order Now"}
+                </ChakraButton>
+              </Box>
             }
           />
+
           <BrowseByCategory />
+
           <Ads
             adsText={"Get free delivery with Rs.5000"}
-            image="http://wptest.me/images/food/1624721452.jpg"
+            image={REACT_APP_URL + "images/food/1624721452.jpg"}
             link="google.com"
             buttonText="Learn More"
           />
+
           <RestaurantList />
+
           <Ads
             adsText={"Get free delivery with Rs.5000"}
-            image="http://wptest.me/images/food/1624721452.jpg"
+            image={REACT_APP_URL + "images/food/1624721452.jpg"}
             link="google.com"
             buttonText="Learn More"
           />
         </>
       )}
-      <div className="rfow-footer">
+
+      <Box mt="auto" bg="gray.100" pt={10}>
         <FooterTop />
         <FooterBottom />
-      </div>
-    </div>
+      </Box>
+    </Flex>
   );
 };
 
@@ -130,5 +161,6 @@ function mapState(state) {
 const actionCreators = {
   clearAlerts: alertActions.clear,
 };
+
 const HomePage = connect(mapState, actionCreators)(ConnectedHome);
 export default HomePage;

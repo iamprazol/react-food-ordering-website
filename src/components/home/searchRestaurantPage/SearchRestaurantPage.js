@@ -1,135 +1,142 @@
-// Import Libraries.
 import React, { useState } from "react";
+import {
+  Box,
+  Flex,
+  Heading,
+  Text,
+  HStack,
+  VStack,
+  Tag,
+  TagLabel,
+  TagCloseButton,
+  Select,
+  Input,
+  Button,
+} from "@chakra-ui/react";
 
-// Import SCSS.
-import "./searchRestaurantPage.scss";
-
-// Import Components.
-import RestaurantList from "../restaurantList/RestaurantList";
 import Banner from "../../common/banner/Banner";
 import IconContainer from "../../common/iconContainer/IconContainer";
-import InputHandler from "../../common/inputHandler/InputHandler";
+import RestaurantList from "../restaurantList/RestaurantList";
 import Buttons from "../../common/buttons/Buttons";
 
-// Import Icons.
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import { MdArrowForward } from "react-icons/md";
 
-function SearchRestaurantPage(props) {
-  const { searchText } = props;
+function SearchRestaurantPage({ searchText }) {
   const [selected, setSelected] = useState("");
   const [filterText, setFilterText] = useState("");
   const [filterParams, setFilterParams] = useState([]);
 
-  const handleSelectedItem = (itemSelected) => {
-    if (itemSelected) {
-      setSelected(itemSelected);
-    }
+  const handleSelectedItem = (e) => {
+    setSelected(e.target.value);
   };
 
   const handleFilterFinalization = () => {
-    if (filterText) {
+    if (filterText && selected) {
       setFilterParams([...filterParams, `${selected} : ${filterText}`]);
+      setFilterText("");
+      setSelected("");
     }
   };
 
-  const handleCloseFilterParam = (isClicked) => {
-    if (isClicked) {
-      console.log("hello");
-    }
+  const handleCloseFilterParam = (indexToRemove) => {
+    setFilterParams(filterParams.filter((_, idx) => idx !== indexToRemove));
   };
+
   return (
-    <div className="rfow-search-result">
+    <Box>
       <Banner
         bannerHeight="small"
         bannerContent={
-          <div className="rfow-banner--text">
-            <h3 className="text-black-white">Restaurants and Stores </h3>
-          </div>
+          <Box px={4}>
+            <Heading size="lg" color="white">
+              Restaurants and Stores
+            </Heading>
+          </Box>
         }
       />
-      <div className="rfow-search-result__nav">
-        <span className="text-black-white">
-          {"Home "}
+
+      <Box bg="gray.800" py={3} px={4}>
+        <Text color="white" fontSize="sm" userSelect="none">
+          Home{" "}
           <IconContainer
-            icon={<ArrowForwardIosIcon />}
+            icon={<MdArrowForward />}
             fontSizeClass="icon--small"
-          />
-          {" Search"}
+          />{" "}
+          Search{" "}
           <IconContainer
-            icon={<ArrowForwardIosIcon />}
+            icon={<MdArrowForward />}
             fontSizeClass="icon--small"
-          />
-          {" Restaurants Found"}
-        </span>
-      </div>
-      <div className="rfow-search-result__wrapper">
-        <div className="rfow-search-result__filter-nav">
-          <div className="rfow-search-result__filter-tab">
-            <div className={`rfow-field`}>
-              <InputHandler
-                fieldSetting={{
-                  type: "select",
-                  value: "",
-                  required: false,
-                  placeholder: "Select a Filter",
-                  id: `rfow_search_filter`,
-                  options: {
-                    name: "Restaurant",
-                    food_name: "Food",
-                    category: "Category",
-                  },
-                }}
-                onChange={handleSelectedItem}
-              />
-            </div>
-            {selected ? (
-              <div className={`rfow-field`}>
-                <InputHandler
-                  fieldSetting={{
-                    type: "text",
-                    value: "",
-                    required: false,
-                    placeholder: "Filter Item",
-                    id: `rfow_search_filter_text`,
-                  }}
-                  onChange={(filterValue) => {
-                    setFilterText(filterValue);
-                  }}
+          />{" "}
+          Restaurants Found
+        </Text>
+      </Box>
+
+      <Flex
+        maxW="7xl"
+        mx="auto"
+        px={4}
+        py={6}
+        direction={{ base: "column", md: "row" }}
+        gap={6}
+      >
+        {/* Filters Sidebar */}
+        <Box flex="0 0 300px">
+          <VStack align="start" spacing={4}>
+            <Select
+              placeholder="Select a Filter"
+              value={selected}
+              onChange={handleSelectedItem}
+              bg="white"
+            >
+              <option value="name">Restaurant</option>
+              <option value="food_name">Food</option>
+              <option value="category">Category</option>
+            </Select>
+
+            {selected && (
+              <HStack width="100%" spacing={2}>
+                <Input
+                  placeholder="Filter Item"
+                  value={filterText}
+                  onChange={(e) => setFilterText(e.target.value)}
                 />
-                <Buttons
-                  variant="primary"
-                  size="small"
-                  title="Done"
+                <Button
+                  size="sm"
+                  colorScheme="blue"
                   onClick={handleFilterFinalization}
-                />
-              </div>
-            ) : (
-              ""
+                >
+                  Done
+                </Button>
+              </HStack>
             )}
-          </div>
-          {filterParams ? (
-            <div className="rfow-search-result__filter-params">
-              {filterParams.map((value) => {
-                return (
-                  <Buttons
-                    size="small"
-                    variant="normal"
-                    title={`${value}`}
-                    close
-                    onCloseClick={handleCloseFilterParam}
-                  />
-                );
-              })}
-            </div>
-          ) : (
-            ""
-          )}
-        </div>
-        <div className="rfow-search-result__body">
+
+            {filterParams.length > 0 && (
+              <HStack wrap="wrap" spacing={2} pt={2}>
+                {filterParams.map((value, idx) => (
+                  <Tag
+                    size="md"
+                    key={idx}
+                    borderRadius="full"
+                    variant="solid"
+                    colorScheme="blue"
+                  >
+                    <TagLabel>{value}</TagLabel>
+                    <TagCloseButton
+                      onClick={() => handleCloseFilterParam(idx)}
+                    />
+                  </Tag>
+                ))}
+              </HStack>
+            )}
+          </VStack>
+        </Box>
+
+        {/* Main Body */}
+        <Box flex="1">
           <RestaurantList searchText={searchText} />
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Flex>
+    </Box>
   );
 }
 

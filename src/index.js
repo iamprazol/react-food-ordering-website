@@ -1,8 +1,9 @@
 // Import Libraries.
 import React from "react";
 import { Provider } from "react-redux";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
+import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 
 // Import SCSS.
 import "./index.scss";
@@ -10,19 +11,24 @@ import "./index.scss";
 //Import Components.
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
+import theme from "./theme";
 
 // Import Redux Components.
 import { store } from "./redux/helpers";
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
   <Provider store={store}>
     <React.StrictMode>
-      <Router>
-        <App />
-      </Router>
+      <ChakraProvider theme={theme}>
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+        <Router>
+          <App />
+        </Router>
+      </ChakraProvider>
     </React.StrictMode>
-  </Provider>,
-  document.getElementById("root")
+  </Provider>
 );
 
 // If you want your app to work offline and load faster, you can change

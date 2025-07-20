@@ -1,167 +1,174 @@
-// Import Libraries.
+// Import Libraries
 import React, { useState } from "react";
+import {
+  Box,
+  Flex,
+  Text,
+  Input,
+  IconButton,
+  VStack,
+  HStack,
+  Textarea,
+  Button,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalBody,
+  ModalCloseButton,
+  ModalHeader,
+} from "@chakra-ui/react";
+import {
+  MdOutlineSearch,
+  MdAddCircleOutline,
+  MdAdd,
+  MdOutlineRemoveCircle,
+} from "react-icons/md";
 
-// Import SCSS.
-import "./MenuSection.scss";
-
-// Import Components.
-import IconContainer from "../../common/iconContainer/IconContainer";
-import InputHandler from "../../common/inputHandler/InputHandler";
-import Buttons from "../../common/buttons/Buttons";
-import Popup from "../../common/popup/Popup";
-
-// Import icons.
-import SearchIcon from "@material-ui/icons/Search";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import AddIcon from "@material-ui/icons/Add";
-import RemoveIcon from "@material-ui/icons/Remove";
-
-function MenuSection(props) {
-  const { menuItems } = props;
+function MenuSection({ menuItems }) {
   const [openOrderBar, setOpenOrderBar] = useState(false);
-  const [orderedFood, setOrderedFood] = useState([]);
+  const [orderedFood, setOrderedFood] = useState({});
   const [orderedQuantity, setOrderedQuantity] = useState(1);
   const [orderHandled, setOrderHandled] = useState(true);
   const [orderList, setOrderList] = useState([]);
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const handleOrderedFood = (food) => {
     if (!orderHandled) {
-      setOrderHandled(!orderHandled);
+      setOrderHandled(true);
 
-      var order = {
+      const specialInstructions =
+        document.getElementById(`food_${food.id}_special_instructions`)
+          ?.value || "";
+
+      const order = {
         restaurant_id: food.restaurant_id,
         food_id: food.id,
         quantity: orderedQuantity,
         price: food.price * orderedQuantity,
-        special_instructions: document.getElementById(
-          `food_${food.id}_special_instructions`
-        ).value,
+        special_instructions: specialInstructions,
       };
 
       setOrderList([...orderList, order]);
       setOrderedQuantity(1);
+      onClose();
     }
   };
 
   const handleInputValue = (value) => {
-    setOrderedQuantity(value);
-  };
-
-  const handlePopupDisplay = (closePopup) => {
-    if (closePopup) {
-      setOrderHandled(false);
-    }
+    setOrderedQuantity(Number(value));
   };
 
   return (
-    <div className="rfow-menu">
-      <div className="rfow-menu__search">
-        <IconContainer icon={<SearchIcon />} fontSizeClass="icon--medium" />
-        <input className="rfow-search" type="text" placeholder="Chicken Momo" />
-      </div>
-      {menuItems.map((menuItem) => (
-        <div className="rfow-menu__list">
-          <div
-            id={menuItem.category.toLowerCase()}
-            className="rfow-menu__title"
-          >
-            <h3 className="fw-500 text-red">{menuItem.category}</h3>
-          </div>
-          {menuItem.foods.map((food) => (
-            <div className="rfow-menu__items">
-              <div className="rfow-menu__item u-line">
-                <div
-                  className="rfow-menu__item--top"
-                  onClick={() => {
-                    setOpenOrderBar(!openOrderBar);
-                    setOrderedFood(food);
-                  }}
-                >
-                  <span className="text-medium text-black-white">
-                    {food.food_name}
-                  </span>
-                  <div className="rfow-menu__food-list">
-                    <span className="text-medium text-black-white">
-                      Rs {food.price}.
-                    </span>
-                    <IconContainer
-                      icon={<AddCircleOutlineIcon />}
-                      colorClass="text-green"
-                      fontSizeClass="icon--small"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      ))}
-      {openOrderBar ? (
-        <Popup
-          onClick={handlePopupDisplay}
-          content={
-            <div className="rfow-order">
-              <div className="rfow-order__body">
-                <div className="rfow-order__body-extras u-line">
-                  <h1>{orderedFood.food_name}</h1>
-                </div>
-                <div className="rfow-order__body-instruction u-line">
-                  <div className={`rfow-field`}>
-                    <label
-                      className="rfow-field-label"
-                      htmlFor={`food_${orderedFood.id}_special_instructions`}
-                    >
-                      Special Instructions
-                    </label>
-                    <InputHandler
-                      fieldSetting={{
-                        type: "textarea",
-                        value: "",
-                        required: false,
-                        placeholder: "Extra toppings on pizza",
-                        id: `food_${orderedFood.id}_special_instructions`,
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="rfow-order__body-quantities">
-                  <div className={`rfow-field`}>
-                    <IconContainer
-                      icon={<AddIcon />}
-                      fontSizeClass="icon--small"
-                      iconPlacement="left"
-                    />
-                    <InputHandler
-                      fieldSetting={{
-                        type: "number",
-                        value: "",
-                        placeholder: "quantity",
-                      }}
-                      onChange={handleInputValue}
-                    />
-                    <IconContainer
-                      icon={<RemoveIcon />}
-                      fontSizeClass="icon--small"
-                      iconPlacement="right"
-                    />
-                  </div>
-                  <Buttons
-                    variant="primary"
-                    size="medium"
-                    title={`Add To Cart | Rs ${
-                      orderedFood.price * orderedQuantity
-                    }`}
-                    onClick={handleOrderedFood(orderedFood)}
-                  />
-                </div>
-              </div>
-            </div>
-          }
+    <Box p={4}>
+      {/* Search Bar */}
+      <Flex mb={4} align="center" gap={2}>
+        <IconButton
+          aria-label="Search"
+          icon={<MdOutlineSearch />}
+          variant="outline"
         />
+        <Input placeholder="Chicken Momo" />
+      </Flex>
+
+      {menuItems && menuItems.length > 0 ? (
+        menuItems.map((menuItem, index) => (
+          <Box key={index} mb={6}>
+            <Text
+              fontWeight="bold"
+              fontSize="xl"
+              color="red.500"
+              id={menuItem.category?.toLowerCase()}
+              mb={2}
+            >
+              {menuItem.category}
+            </Text>
+            <VStack align="stretch" spacing={3}>
+              {menuItem.foods && menuItem.foods.length > 0 ? (
+                menuItem.foods.map((food, idx) => (
+                  <Flex
+                    key={idx}
+                    justify="space-between"
+                    p={3}
+                    borderWidth="1px"
+                    borderRadius="md"
+                    onClick={() => {
+                      setOrderedFood(food);
+                      setOpenOrderBar(true);
+                      setOrderHandled(false);
+                      onOpen();
+                    }}
+                    cursor="pointer"
+                  >
+                    <Text>{food.food_name}</Text>
+                    <HStack>
+                      <Text>Rs {food.price}</Text>
+                      <MdAddCircleOutline color="green" />
+                    </HStack>
+                  </Flex>
+                ))
+              ) : (
+                <Text>No foods found.</Text>
+              )}
+            </VStack>
+          </Box>
+        ))
       ) : (
-        ""
+        <Text>No menu items found.</Text>
       )}
-    </div>
+
+      {/* Popup Modal */}
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>{orderedFood?.food_name}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            {/* Special Instructions */}
+            <Box mb={4}>
+              <Text mb={1}>Special Instructions</Text>
+              <Textarea
+                placeholder="Extra toppings on pizza"
+                id={`food_${orderedFood?.id}_special_instructions`}
+              />
+            </Box>
+
+            {/* Quantity Input */}
+            <Flex align="center" mb={4}>
+              <IconButton
+                icon={<MdAdd />}
+                aria-label="Increase quantity"
+                onClick={() => setOrderedQuantity((q) => q + 1)}
+                size="sm"
+              />
+              <Input
+                type="number"
+                value={orderedQuantity}
+                onChange={(e) => handleInputValue(e.target.value)}
+                mx={2}
+                width="70px"
+              />
+              <IconButton
+                icon={<MdOutlineRemoveCircle />}
+                aria-label="Decrease quantity"
+                onClick={() => setOrderedQuantity((q) => (q > 1 ? q - 1 : 1))}
+                size="sm"
+              />
+            </Flex>
+
+            {/* Add To Cart Button */}
+            <Button
+              colorScheme="red"
+              width="100%"
+              onClick={() => handleOrderedFood(orderedFood)}
+            >
+              Add To Cart | Rs {orderedFood?.price * orderedQuantity || 0}
+            </Button>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </Box>
   );
 }
 

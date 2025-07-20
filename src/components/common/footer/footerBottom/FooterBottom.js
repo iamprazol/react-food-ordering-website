@@ -1,18 +1,19 @@
-// Import Libraries.
-import React, { Component } from "react";
+import {
+  Box,
+  Flex,
+  Heading,
+  Link,
+  Stack,
+  Text,
+  Image,
+  useColorModeValue,
+} from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 
-// Import SCSS.
-import "./FooterBottom.scss";
+const FooterBottom = () => {
+  const [foodPics, setFoodPics] = useState([]);
 
-class FooterBottom extends Component {
-  constructor() {
-    super();
-    this.state = {
-      foodPics: [],
-    };
-  }
-
-  shuffle = (a) => {
+  const shuffle = (a) => {
     for (let i = a.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [a[i], a[j]] = [a[j], a[i]];
@@ -20,198 +21,135 @@ class FooterBottom extends Component {
     return a;
   };
 
-  componentDidMount() {
+  useEffect(() => {
     const { REACT_APP_API_URL } = process.env;
     fetch(REACT_APP_API_URL + "/foods")
-      .then((results) => {
-        return results.json();
-      })
+      .then((res) => res.json())
       .then((data) => {
-        let foodsArray = this.shuffle(data.data),
-          foodPics = foodsArray.slice(0, 8).map((food) => {
-            return (
-              <div className="rfow-footer--bottom__food-pic">
-                <img
-                  src={"http://wptest.me/images/food/" + food.picture}
-                  alt="food"
-                />
-              </div>
-            );
-          });
-        this.setState({ foodPics: foodPics });
+        const foodsArray = shuffle(data.data);
+        const foodElements = foodsArray
+          .slice(0, 7)
+          .map((food, idx) => (
+            <Image
+              src={`http://localhost:8000/images/food/${food.picture}`}
+              objectFit={"cover"}
+              transition="transform 0.3s ease-in-out"
+              _hover={{ transform: "scale(1.1)" }}
+              width="60%"
+              flex="1"
+            />
+          ));
+        setFoodPics(foodElements);
       });
-  }
+  }, []);
 
-  render() {
-    return (
-      <footer className="rfow-footer--bottom bg-black">
-        <div className="rfow-footer--bottom__food">{this.state.foodPics}</div>
-        <div className="rfow-footer--bottom__link">
-          <div className="rfow-footer--bottom__link-contact">
-            <h2 className="text-custom-white">{"Need Help"}</h2>
-            <ul>
-              <li className="fw-600">
-                <span className="text-light-white">{"Call Us"}</span>
-                <span className="text-white">{"+(977) 9845690436"}</span>
-              </li>
-              <li className="fw-600">
-                <span className="text-light-white">{"Email Us"}</span>
-                <span className="text-white">{"demo@domain.com"}</span>
-              </li>
-              <li className="fw-600">
-                <span className="text-light-white">{"Join our twitter"}</span>
-                <span className="text-white">{"@foodie"}</span>
-              </li>
-              <li className="fw-600">
-                <span className="text-light-white">{"Join our instagram"}</span>
-                <span className="text-white">{"@foodie"}</span>
-              </li>
-            </ul>
-          </div>
-          <div className="rfow-footer--bottom__link-about">
-            <h2 className="text-custom-white">{"Get To Know Us"}</h2>
-            <ul>
-              <li>
-                <a
-                  className="text-light-white fw-600"
-                  href="http://themegrill.me:3000/"
-                >
-                  {"About Us"}
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-light-white fw-600"
-                  href="http://themegrill.me:3000/"
-                >
-                  {"Blog"}
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-light-white fw-600"
-                  href="http://themegrill.me:3000/"
-                >
-                  {"Socialize"}
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-light-white fw-600"
-                  href="http://themegrill.me:3000/"
-                >
-                  {"FooDie"}
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-light-white fw-600"
-                  href="http://themegrill.me:3000/"
-                >
-                  {"Perks"}
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="rfow-footer--bottom__link-support">
-            <h2 className="text-custom-white">{"Let Us Know You"}</h2>
-            <ul>
-              <li>
-                <a
-                  className="text-light-white fw-600"
-                  href="http://themegrill.me:3000/"
-                >
-                  {"Account Details"}
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-light-white fw-600"
-                  href="http://themegrill.me:3000/"
-                >
-                  {"Order History"}
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-light-white fw-600"
-                  href="http://themegrill.me:3000/"
-                >
-                  {"Find restaurant"}
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-light-white fw-600"
-                  href="http://themegrill.me:3000/"
-                >
-                  {"Login"}
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-light-white fw-600"
-                  href="http://themegrill.me:3000/"
-                >
-                  {"Track order"}
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="rfow-footer--bottom__link-business">
-            <h2 className="text-custom-white">{"Doing Business ?"}</h2>
-            <ul>
-              <li>
-                <a
-                  className="text-light-white fw-600"
-                  href="http://themegrill.me:3000/"
-                >
-                  {"Suggest an Idea"}
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-light-white fw-600"
-                  href="http://themegrill.me:3000/"
-                >
-                  {"Be a Partner restaurant"}
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-light-white fw-600"
-                  href="http://themegrill.me:3000/"
-                >
-                  {"Create an Account"}
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-light-white fw-600"
-                  href="http://themegrill.me:3000/"
-                >
-                  {"Help"}
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="rfow-footer--bottom__link-download">
-            <h2 className="text-custom-white">{"Download Apps"}</h2>
-            <div className="appimage">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
-                alt="Get Ti On Google Play"
-              />
-              <img
-                src="https://markseducation.com/wp-content/uploads/2016/11/link-badge-appstore_2x.png"
-                alt="Get Ti On Google Play"
-              />
-            </div>
-          </div>
-        </div>
-      </footer>
-    );
-  }
-}
+  const sectionHeading = (text) => (
+    <Heading
+      fontSize="xl"
+      color="white"
+      mb={4}
+      fontWeight="600"
+      fontFamily="heading"
+    >
+      {text}
+    </Heading>
+  );
+
+  const linkItem = (text, href = "#") => (
+    <Link
+      href={href}
+      fontWeight="600"
+      color="gray.300"
+      _hover={{ color: "white" }}
+      fontSize="sm"
+    >
+      {text}
+    </Link>
+  );
+
+  const infoRow = (label, value) => (
+    <Stack spacing={0} fontSize="sm">
+      <Text fontWeight="600" color="gray.300">
+        {label}
+      </Text>
+      <Text color="white">{value}</Text>
+    </Stack>
+  );
+
+  return (
+    <Box bg="black" px={{ base: 4, md: 8 }} py={10}>
+      <Box bg="black" py={10}>
+        <Flex justify="center" maxW="25%" mx="auto" height="200px">
+          {foodPics}
+        </Flex>
+      </Box>
+
+      <Flex justify="space-between" gap={10} maxW="1200px" mx="auto" py={10}>
+        {/* Need Help */}
+        <Box w={{ base: "100%", md: "45%", lg: "18%" }}>
+          {sectionHeading("Need Help")}
+          <Stack spacing={3}>
+            {infoRow("Call Us", "+(977) 9845690436")}
+            {infoRow("Email Us", "demo@domain.com")}
+            {infoRow("Join our twitter", "@foodie")}
+            {infoRow("Join our instagram", "@foodie")}
+          </Stack>
+        </Box>
+
+        {/* Get To Know Us */}
+        <Box w={{ base: "100%", md: "45%", lg: "18%" }}>
+          {sectionHeading("Get To Know Us")}
+          <Stack spacing={2}>
+            {linkItem("About Us")}
+            {linkItem("Blog")}
+            {linkItem("Socialize")}
+            {linkItem("FooDie")}
+            {linkItem("Perks")}
+          </Stack>
+        </Box>
+
+        {/* Let Us Know You */}
+        <Box w={{ base: "100%", md: "45%", lg: "18%" }}>
+          {sectionHeading("Let Us Know You")}
+          <Stack spacing={2}>
+            {linkItem("Account Details")}
+            {linkItem("Order History")}
+            {linkItem("Find restaurant")}
+            {linkItem("Login")}
+            {linkItem("Track order")}
+          </Stack>
+        </Box>
+
+        {/* Doing Business */}
+        <Box w={{ base: "100%", md: "45%", lg: "18%" }}>
+          {sectionHeading("Doing Business ?")}
+          <Stack spacing={2}>
+            {linkItem("Suggest an Idea")}
+            {linkItem("Be a Partner restaurant")}
+            {linkItem("Create an Account")}
+            {linkItem("Help")}
+          </Stack>
+        </Box>
+
+        {/* Download Apps */}
+        <Box w={{ base: "100%", md: "45%", lg: "18%" }}>
+          {sectionHeading("Download Apps")}
+          <Stack spacing={3}>
+            <Image
+              src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+              alt="Google Play"
+              maxW="140px"
+            />
+            <Image
+              src="https://markseducation.com/wp-content/uploads/2016/11/link-badge-appstore_2x.png"
+              alt="App Store"
+              maxW="140px"
+            />
+          </Stack>
+        </Box>
+      </Flex>
+    </Box>
+  );
+};
 
 export default FooterBottom;
