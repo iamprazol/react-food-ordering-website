@@ -28,7 +28,7 @@ const RestaurantList = ({ searchText }) => {
             id={restaurant.id}
             name={restaurant.restaurant_name}
             description={restaurant.description}
-            image={`http://localhost:8000/images/restaurant/${restaurant.picture}`}
+            image={`${restaurant.picture}`}
             address={restaurant.address}
             delivery_hours={restaurant.delivery_hours}
             minimum_order={restaurant.minimum_order}

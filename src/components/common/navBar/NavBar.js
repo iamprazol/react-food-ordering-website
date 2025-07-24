@@ -7,13 +7,16 @@ import {
   IconButton,
   Button as ChakraButton,
   useBreakpointValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { MdOutlineSearch } from "react-icons/md";
+import CartDrawer from "../cart/cartDrawer";
 
 function NavBar({ onClick, onKeyPress }) {
   const [searchText, setSearchText] = useState("");
 
   const isMobile = useBreakpointValue({ base: true, md: false });
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Flex
@@ -104,6 +107,7 @@ function NavBar({ onClick, onKeyPress }) {
         >
           Register
         </ChakraButton>
+        <CartDrawer />
       </Flex>
     </Flex>
   );

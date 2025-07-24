@@ -16,7 +16,7 @@ const BrowseByCategoryNav = ({
   title,
   id,
 }) => {
-  const imageUrl = `http://localhost:8000/images/food/${image}`;
+  const imageUrl = `${image}`;
 
   return (
     <NavLink to={`/restaurant/${restaurant_id}`}>

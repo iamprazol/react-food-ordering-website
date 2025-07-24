@@ -1,18 +1,14 @@
 import React from "react";
-import { Button, IconButton, HStack, Text } from "@chakra-ui/react";
+import { Button, IconButton, HStack, Text, Spinner } from "@chakra-ui/react";
 import IconContainer from "../iconContainer/IconContainer";
 import { MdOutlineClose } from "react-icons/md";
 
 function Buttons({ variant, size, title, onClick, close, onCloseClick, type }) {
-  // Map your custom variant to Chakra variant or color scheme
-  // You can customize this mapping as needed
   const colorSchemeMap = {
     primary: "green",
     normal: "gray",
-    // add more mappings if needed
   };
 
-  // Map your size to Chakra size
   const sizeMap = {
     small: "sm",
     medium: "md",

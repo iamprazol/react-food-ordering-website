@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
 import NavBar from "../../common/navBar/NavBar";
@@ -8,6 +8,8 @@ import FooterTop from "../../common/footer/footerTop/FooterTop";
 import FooterBottom from "../../common/footer/footerBottom/FooterBottom";
 import RestaurantDetails from "../restaurantDetails/RestaurantDetails";
 import MenuLayout from "../menuLayout/MenuLayout";
+import ReviewsSection from "../reviewsSection/ReviewsSection";
+import LocationSection from "../locationSection/LocationSection";
 
 function RestaurantLayout() {
   const [restaurantDetails, setRestaurantDetails] = useState(null);
@@ -28,7 +30,7 @@ function RestaurantLayout() {
     <Box>
       <NavBar />
       <Banner
-        bannerImage="http://localhost:8000/images/food/1624721580.jpeg"
+        bannerImage={restaurantDetails?.cover_pic || ""}
         bannerHeight="medium"
       />
       {restaurantDetails && (
@@ -38,7 +40,7 @@ function RestaurantLayout() {
           description={restaurantDetails.description}
           deliveryHours={restaurantDetails.delivery_hours}
           minimumOrder={restaurantDetails.minimum_order}
-          picture={`http://localhost:8000/images/restaurant/${restaurantDetails.picture}`}
+          picture={`${restaurantDetails.picture}`}
           address={restaurantDetails.address}
           vat={restaurantDetails.vat}
           discount={restaurantDetails.discount}
@@ -46,6 +48,12 @@ function RestaurantLayout() {
         />
       )}
       <MenuLayout restaurantId={restaurantId} />
+
+      <LocationSection
+        latitude={restaurantDetails?.latitude || ""}
+        longitude={restaurantDetails?.longitude || ""}
+      />
+      <ReviewsSection restaurantId={restaurantId} />
       <FooterTop />
       <FooterBottom />
     </Box>

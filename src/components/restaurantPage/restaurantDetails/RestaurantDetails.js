@@ -93,7 +93,7 @@ function RestaurantDetails(props) {
         borderColor="gray.200"
       >
         <HStack spacing={6}>
-          {["Menu", "About", "Reviews", "Map & Gallery"].map((tab) => (
+          {["Menu", "Reviews", "Map & Gallery"].map((tab) => (
             <Link
               key={tab}
               href={`#${tab.toLowerCase().replace(/\s+/g, "")}`}

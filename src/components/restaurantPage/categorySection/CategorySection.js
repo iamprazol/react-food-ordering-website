@@ -17,14 +17,10 @@ function CategorySection({ categories }) {
         alignItems="center"
         gap={2}
       >
-        <Heading as="h3" size="md" display="flex" alignItems="center">
-          <IconContainer
-            icon={<MdWhatshot />}
-            colorClass="text-yellow"
-            fontSizeClass="icon--small"
-          />
+        <Text size="md" display="flex" alignItems="center" color={"#00A145"}>
+          <IconContainer icon={<MdWhatshot />} fontSizeClass="icon--small" />
           <Text ml={2}>Categories</Text>
-        </Heading>
+        </Text>
       </Box>
 
       {/* Categories List */}
@@ -36,9 +32,9 @@ function CategorySection({ categories }) {
             py={2}
             borderBottom="1px"
             borderColor="gray.100"
-            color="gray.700"
+            color="#4A4A4A"
             cursor="pointer"
-            _hover={{ color: "red.500" }}
+            _hover={{ color: "#00A145" }}
           >
             <Link to={category.toLowerCase()} smooth>
               {category}

@@ -13,7 +13,7 @@ function IconContainer({
 }) {
   // Map old class names to Chakra styles (can be expanded)
   const colorMap = {
-    "text-yellow": "yellow.400",
+    "text-yellow": "#fcb71b",
     "text-red": "red.500",
     "text-light-black": "gray.800",
     "text-light-white": "gray.500",

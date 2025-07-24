@@ -31,7 +31,7 @@ const FooterBottom = () => {
           .slice(0, 7)
           .map((food, idx) => (
             <Image
-              src={`http://localhost:8000/images/food/${food.picture}`}
+              src={`${food.picture}`}
               objectFit={"cover"}
               transition="transform 0.3s ease-in-out"
               _hover={{ transform: "scale(1.1)" }}

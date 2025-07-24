@@ -1,5 +1,13 @@
 import React from "react";
-import { Box, Flex, Heading, Image, Link, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  Image,
+  Link,
+  Text,
+  Button as ChakraButton,
+} from "@chakra-ui/react";
 
 import InputHandler from "../../common/inputHandler/InputHandler";
 import FoodieImage from "../../../assets/images/foodie.png";
@@ -35,7 +43,7 @@ function LoginPage() {
         flexDirection="column"
         justifyContent="center"
       >
-        <Heading as="h1" size="xl" mb={6}>
+        <Heading fontWeight="500" size="xl" mb={8} textAlign="center">
           Member Login
         </Heading>
 
@@ -69,8 +77,16 @@ function LoginPage() {
           </Flex>
         </Box>
 
-        <Buttons variant="primary" size="large" title="LOGIN" />
-
+        <ChakraButton
+          type="submit"
+          colorScheme="blue"
+          bgColor="brand.500"
+          borderColor="brand.500"
+          _hover={{ bgColor: "brand.600" }}
+          loadingText="Submitting"
+        >
+          LOGIN
+        </ChakraButton>
         <Flex justifyContent="space-between" mt={6} mb={4} fontSize="sm">
           <Text>Forgot</Text>
           <Link href="/forgot-password" color="blue.500" fontWeight="semibold">

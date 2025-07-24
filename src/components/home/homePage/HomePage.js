@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 import {
   Box,
   Flex,
@@ -9,9 +8,6 @@ import {
   Stack,
   Button as ChakraButton,
 } from "@chakra-ui/react";
-
-// Redux
-import { alertActions } from "../../../redux/actions";
 
 // Components
 import BrowseByCategory from "../browseByCategory/BrowseByCategory";
@@ -27,7 +23,7 @@ import RegistrationPage from "../../authentication/registrationPage/Registration
 import SearchRestaurantPage from "../searchRestaurantPage/SearchRestaurantPage";
 import Toast from "../../common/toast/Toast";
 
-const ConnectedHome = ({ alert }) => {
+const HomePage = () => {
   const [openLoginPopup, setOpenLoginPopup] = useState(false);
   const [openRegistrationPopup, setOpenRegistrationPopup] = useState(false);
   const [searchRestaurants, setSearchRestaurants] = useState("");
@@ -55,15 +51,6 @@ const ConnectedHome = ({ alert }) => {
         onClick={handleOpenAuthenticationPopup}
         onKeyPress={handleSearchRestaurants}
       />
-
-      {Object.keys(alert).length > 0 && (
-        <Toast
-          title={alert.message.title}
-          type={alert.message.type}
-          message={alert.message.description}
-        />
-      )}
-
       {openLoginPopup && (
         <Popup
           onClick={(value) => setOpenLoginPopup(!value)}
@@ -153,14 +140,4 @@ const ConnectedHome = ({ alert }) => {
   );
 };
 
-function mapState(state) {
-  const { alert } = state;
-  return { alert };
-}
-
-const actionCreators = {
-  clearAlerts: alertActions.clear,
-};
-
-const HomePage = connect(mapState, actionCreators)(ConnectedHome);
 export default HomePage;

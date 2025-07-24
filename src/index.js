@@ -1,37 +1,35 @@
 // Import Libraries.
 import React from "react";
-import { Provider } from "react-redux";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"; // ✅ Added
 
 // Import SCSS.
 import "./index.scss";
 
-//Import Components.
+// Import Components.
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import theme from "./theme";
 
-// Import Redux Components.
-import { store } from "./redux/helpers";
+// ✅ Create the React Query client
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <ChakraProvider theme={theme}>
-        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+  <React.StrictMode>
+    <ChakraProvider theme={theme}>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+      <QueryClientProvider client={queryClient}>
         <Router>
           <App />
         </Router>
-      </ChakraProvider>
-    </React.StrictMode>
-  </Provider>
+      </QueryClientProvider>
+    </ChakraProvider>
+  </React.StrictMode>
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+// If you want your app to work offline and load faster...
 serviceWorker.unregister();
