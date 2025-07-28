@@ -12,7 +12,7 @@ import {
 import Cart from "./cart";
 import { MdShoppingBag } from "react-icons/md";
 
-export default function CartDrawer({ isOpen, onClose }) {
+export default function CartDrawer() {
   return (
     <Popover placement="bottom-end" closeOnBlur>
       <PopoverTrigger>

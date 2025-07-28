@@ -7,16 +7,15 @@ import {
   IconButton,
   Button as ChakraButton,
   useBreakpointValue,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { MdOutlineSearch } from "react-icons/md";
 import CartDrawer from "../cart/cartDrawer";
+import AccountIcon from "../accountIcon/AccountIcon";
 
 function NavBar({ onClick, onKeyPress }) {
   const [searchText, setSearchText] = useState("");
 
   const isMobile = useBreakpointValue({ base: true, md: false });
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Flex
@@ -89,24 +88,8 @@ function NavBar({ onClick, onKeyPress }) {
         </ChakraButton>
       </Flex>
 
-      <Flex align="center" gap={2}>
-        <ChakraButton
-          variant="outline"
-          colorScheme="blue"
-          onClick={() => onClick("login")}
-        >
-          Login
-        </ChakraButton>
-        <ChakraButton
-          variant="solid"
-          colorScheme="blue"
-          bgColor="brand.500"
-          borderColor="brand.500"
-          _hover={{ bgColor: "brand.600" }}
-          onClick={() => onClick("register")}
-        >
-          Register
-        </ChakraButton>
+      <Flex align="center" gap={8}>
+        <AccountIcon onClick={onClick} />
         <CartDrawer />
       </Flex>
     </Flex>

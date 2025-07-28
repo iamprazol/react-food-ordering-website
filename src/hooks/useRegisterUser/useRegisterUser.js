@@ -7,7 +7,7 @@ const registerUser = async (user) => {
       "Content-Type": "application/json",
     },
     credentials: "include",
-    body: JSON.stringify(user.user),
+    body: JSON.stringify(user),
   });
 
   const data = await response.json();
@@ -17,6 +17,7 @@ const registerUser = async (user) => {
     error.data = data.error; // attach full error object here
     throw error;
   }
+  localStorage.setItem("token", data.access_token);
 
   return data;
 };

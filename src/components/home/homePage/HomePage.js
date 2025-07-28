@@ -32,8 +32,10 @@ const HomePage = () => {
   const handleOpenAuthenticationPopup = (clickAction, value) => {
     if (clickAction === "login") {
       setOpenLoginPopup(!openLoginPopup);
+      setOpenRegistrationPopup(false);
     } else if (clickAction === "register") {
       setOpenRegistrationPopup(!openRegistrationPopup);
+      setOpenLoginPopup(false);
     } else {
       setSearchRestaurants(value);
     }
@@ -54,7 +56,7 @@ const HomePage = () => {
       {openLoginPopup && (
         <Popup
           onClick={(value) => setOpenLoginPopup(!value)}
-          content={<LoginPage />}
+          content={<LoginPage onClick={handleOpenAuthenticationPopup} />}
         />
       )}
 
