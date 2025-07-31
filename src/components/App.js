@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./home/homePage/HomePage";
 import PageNotFound from "./pageNotFound/PageNotFound";
 import RestaurantLayout from "./restaurantPage/restaurantLayout/RestaurantLayout";
+import CheckoutPage from "./checkoutPage/CheckoutPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route exact path="/" element={<HomePage />} />
       <Route path="/restaurant/:restaurantId" element={<RestaurantLayout />} />
       <Route element={<PageNotFound />} />
+      <Route path="/checkout" element={<CheckoutPage />} />
     </Routes>
   );
 }

@@ -1,5 +1,5 @@
 // Import Libraries
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Flex,
@@ -34,9 +34,30 @@ function MenuSection({ menuItems }) {
   const [orderedFood, setOrderedFood] = useState({});
   const [orderedQuantity, setOrderedQuantity] = useState(1);
   const [orderHandled, setOrderHandled] = useState(true);
+  const [pendingOrder, setPendingOrder] = useState(null);
+  const [currentRestaurantId, setCurrentRestaurantId] = useState(0);
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { cartItems, addToCart } = useCart();
+  const {
+    isOpen: isCartOpen,
+    onOpen: onCartOpen,
+    onClose: onCartClose,
+  } = useDisclosure();
+  const {
+    isOpen: isConfirmationOpen,
+    onOpen: onConfirmationOpen,
+    onClose: onConfirmationClose,
+  } = useDisclosure();
+  const { cartItems, addToCart, clearCart } = useCart();
+
+  useEffect(() => {
+    if (pendingOrder && cartItems.length === 0) {
+      addToCart(pendingOrder);
+      setPendingOrder(null);
+      setOrderedQuantity(1);
+      onConfirmationClose();
+      onCartClose();
+    }
+  }, [cartItems, pendingOrder]);
 
   const generateRandomKey = (length = 16) => {
     const chars =
@@ -61,7 +82,6 @@ function MenuSection({ menuItems }) {
 
       const order = {
         id: generateRandomKey(),
-        restaurant_id: food.restaurant_id,
         food_id: food.id,
         food_name: food.food_name,
         quantity: orderedQuantity,
@@ -69,9 +89,20 @@ function MenuSection({ menuItems }) {
         special_instructions: specialInstructions,
       };
 
-      addToCart(order);
-      setOrderedQuantity(1);
-      onClose();
+      const restaurant_id = localStorage.getItem("order_restaurant_id");
+
+      if (
+        cartItems.length >= 0 &&
+        Number(restaurant_id) !== food.restaurant_id
+      ) {
+        setPendingOrder(order);
+        setCurrentRestaurantId(food.restaurant_id);
+        onConfirmationOpen();
+      } else {
+        addToCart(order);
+        setOrderedQuantity(1);
+        onCartClose();
+      }
     }
   };
 
@@ -133,7 +164,7 @@ function MenuSection({ menuItems }) {
                           setOrderedFood(food);
                           setOpenOrderBar(true);
                           setOrderHandled(false);
-                          onOpen();
+                          onCartOpen();
                         }}
                         cursor="pointer"
                       >
@@ -169,8 +200,8 @@ function MenuSection({ menuItems }) {
         </Flex>
       </Flex>
 
-      {/* Popup Modal */}
-      <Modal isOpen={isOpen} onClose={onClose} size="lg">
+      {/* Popup Cart Modal */}
+      <Modal isOpen={isCartOpen} onClose={onCartClose} size="lg">
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
@@ -248,6 +279,76 @@ function MenuSection({ menuItems }) {
               </Text>
             </Button>
           </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      {/* Popup Restaurant Change Modal */}
+      <Modal
+        isOpen={isConfirmationOpen}
+        onClose={onConfirmationClose}
+        size="lg"
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <Box mt={6} mb={6} opacity={0.8}>
+              <Heading
+                as="h3"
+                fontSize={"30px"}
+                fontWeight={"400"}
+                color="#4A4A4A"
+                mb={3}
+              >
+                Restaurant Changed
+              </Heading>
+            </Box>
+            <Divider orientation="horizontal" />
+            <Box mt={3} mb={4}>
+              <Text mb={3} fontWeight={400} fontSize={"18px"}>
+                Your cart already has item from another restaurant. You have to
+                clear cart items and add items from this restaurant. Do you want
+                to proceed ?
+              </Text>
+              <Flex gap={4} justifyContent={"end"}>
+                <Button
+                  border={"2px solid"}
+                  borderColor={"brand.400"}
+                  bgColor="white"
+                  color={"brand.400"}
+                  onClick={() => {
+                    setPendingOrder(null);
+                    onConfirmationClose();
+                    onCartClose();
+                  }}
+                  fontSize={"sm"}
+                  fontWeight={"400"}
+                  width="15%"
+                  _hover={{ bgColor: "brand.300", color: "white" }}
+                >
+                  <Text>No</Text>
+                </Button>
+                <Button
+                  background={"brand.400"}
+                  color={"white"}
+                  onClick={() => {
+                    localStorage.setItem(
+                      "order_restaurant_id",
+                      currentRestaurantId
+                    );
+                    clearCart();
+                  }}
+                  fontSize={"sm"}
+                  fontWeight={"400"}
+                  width="15%"
+                  _hover={{ bgColor: "brand.600" }}
+                  textAlign={"center"}
+                >
+                  <Text>Yes</Text>
+                </Button>
+              </Flex>
+            </Box>
+          </ModalBody>
         </ModalContent>
       </Modal>
     </Box>

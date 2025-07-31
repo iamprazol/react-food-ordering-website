@@ -17,8 +17,30 @@ export const useCart = () => {
   };
 
   const addToCart = (item) => {
-    const updatedCart = [...cartItems, item];
-    setCartItems(updatedCart);
+    const existingItemIndex = cartItems.findIndex(
+      (cartItem) => cartItem.food_id === item.food_id
+    );
+
+    if (existingItemIndex !== -1) {
+      const existingItem = cartItems[existingItemIndex];
+      const newQuantity = existingItem.quantity + item.quantity;
+
+      const updatedItem = {
+        ...existingItem,
+        quantity: newQuantity,
+        price: newQuantity * (item.price / item.quantity),
+        special_instructions: `${existingItem.special_instructions || ""}, ${
+          item.special_instructions || ""
+        }`.trim(),
+      };
+
+      const updatedCart = [...cartItems];
+      updatedCart[existingItemIndex] = updatedItem;
+      setCartItems(updatedCart);
+    } else {
+      const updatedCart = [...cartItems, item];
+      setCartItems(updatedCart);
+    }
   };
 
   const removeFromCart = (id) => {

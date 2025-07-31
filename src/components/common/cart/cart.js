@@ -5,17 +5,38 @@ import {
   Heading,
   Text,
   Button as ChakraButton,
+  Link,
+  useToast,
 } from "@chakra-ui/react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Image } from "@chakra-ui/react";
 import EmptyCartImage from "../../../assets/images/cart-empty.png";
 import { MdOutlineDeleteForever } from "react-icons/md";
 import { useCart } from "../../../hooks/useCart/useCart";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/auth-context";
 
-export default function Cart({ cartType }) {
+export default function Cart({ cartType, position }) {
   const { cartItems, removeFromCart, clearCart } = useCart();
+  const navigate = useNavigate();
+  const { REACT_APP_API_URL } = process.env;
+  const restaurantId = localStorage.getItem("order_restaurant_id");
+  const [restaurantDetails, setRestaurantDetails] = useState(null);
+  const [orderSuccess, setOrderSuccess] = useState("");
+  const toast = useToast();
 
+  const { token } = useAuth();
   useEffect(() => {}, [cartItems]);
+
+  useEffect(() => {
+    fetch(`${REACT_APP_API_URL}/restaurant/${restaurantId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.data && data.data.length > 0) {
+          setRestaurantDetails(data.data[0]);
+        }
+      });
+  }, [REACT_APP_API_URL, restaurantId]);
 
   const getTotalPrice = () => {
     var price = 0;
@@ -27,10 +48,87 @@ export default function Cart({ cartType }) {
     return price;
   };
 
+  const percentageToPrice = (percentage) => {
+    return Math.round((percentage * Math.round(getTotalPrice())) / 100);
+  };
+
+  const cartCalculation = [
+    {
+      key: "Items Subtotal",
+      value: Math.round(getTotalPrice()),
+    },
+    {
+      key: "Restaurant Discount",
+      value: percentageToPrice(restaurantDetails?.discount),
+    },
+    {
+      key: "Restaurant Service Charge",
+      value: percentageToPrice(restaurantDetails?.additional_charges),
+    },
+    {
+      key: "Additional VAT",
+      value: percentageToPrice(restaurantDetails?.vat),
+    },
+    {
+      key: "Delivery Charge",
+      value: 50,
+    },
+  ];
+
+  const grandTotal =
+    Math.round(getTotalPrice()) -
+    percentageToPrice(restaurantDetails?.discount) +
+    percentageToPrice(restaurantDetails?.additional_charges) +
+    percentageToPrice(restaurantDetails?.vat) +
+    50;
+
+  const dispatchOrder = async () => {
+    const orderInstruction =
+      document.getElementById(`order_special_instructions`)?.value || "";
+    const order = {
+      user_id: 1,
+      restaurant_id: restaurantId,
+      address_id: 1,
+      instruction: orderInstruction,
+      total_price: grandTotal,
+      details: JSON.stringify(cartItems),
+    };
+
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/order`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(order),
+    });
+
+    if (response.ok) {
+      toast({
+        title: "Order Successful",
+        description: "Your order has been processed successfully",
+        status: "success",
+        duration: 4000,
+        isClosable: true,
+      });
+      clearCart();
+    } else {
+      toast({
+        title: "Order Failed",
+        description: "You order has failed. Please try again later.",
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+      });
+    }
+    setOrderSuccess(response.ok);
+  };
+
   return (
     <Flex
       direction={"column"}
       pt={"drawer" === cartType ? 2 : 8}
+      maxW={"checkout" === cartType ? "50%" : "100%"}
       width={"drawer" === cartType ? "100%" : "80%"}
     >
       <Box mb={4} fontWeight="bold" fontSize="lg">
@@ -41,9 +139,9 @@ export default function Cart({ cartType }) {
         p={4}
         borderRadius="md"
         bgColor={cartItems.length > 0 ? "#ffffff" : "#FAFAFA"}
-        position="sticky"
+        position={"relative" === position ? "relative" : "sticky"}
         top="0"
-        zIndex="1000"
+        zIndex={"relative" !== position && "1000"}
         maxH="70vh"
         border={"drawer" === cartType ? "none" : "1px solid #00000020"}
         borderBottom="none"
@@ -101,17 +199,49 @@ export default function Cart({ cartType }) {
                     <MdOutlineDeleteForever size={20} />
                   </Box>
                   <Text color="#00000059" flex={"0 0 25%"} fontWeight="500">
-                    Rs. {item.price}
+                    {Math.round(item.price)}
                   </Text>
                 </Flex>
               ))}
-              <Flex py={4} pl={2} pr={12} justifyContent={"space-between"}>
-                <Text color="#00000059" fontWeight={"900"} fontSize={"13px"}>
-                  Items subtotal:
-                </Text>
-                <Text color="#00000059" fontWeight={"900"} fontSize={"13px"}>
-                  Rs. {getTotalPrice()}
-                </Text>
+              <Flex direction="column" gap={2} mt={2}>
+                {cartCalculation.map((items, idx) => (
+                  <Flex
+                    direction={"row"}
+                    key={idx}
+                    justifyContent={"space-between"}
+                  >
+                    <Text
+                      color="#00000059"
+                      fontWeight={"500"}
+                      fontSize={"14px"}
+                    >
+                      {items.key.toUpperCase()}:
+                    </Text>
+                    <Text
+                      color="#00000059"
+                      fontWeight={"500"}
+                      fontSize={"13px"}
+                      textAlign={"left"}
+                      flex={"0 0 35%"}
+                    >
+                      {items.value}
+                    </Text>
+                  </Flex>
+                ))}
+                <Flex direction={"row"} justifyContent={"space-between"}>
+                  <Text color="#00000059" fontWeight={"500"} fontSize={"14px"}>
+                    GRAND TOTAL:
+                  </Text>
+                  <Text
+                    color="#00000059"
+                    fontWeight={"500"}
+                    fontSize={"13px"}
+                    textAlign={"left"}
+                    flex={"0 0 35%"}
+                  >
+                    Rs. {grandTotal}
+                  </Text>
+                </Flex>
               </Flex>
             </Flex>
           ) : (
@@ -132,47 +262,74 @@ export default function Cart({ cartType }) {
           )}
         </Flex>
       </Box>
-      <Flex
-        mb={4}
-        fontWeight="bold"
-        fontSize="lg"
-        px={10}
-        py={4}
-        border={"drawer" === cartType ? "none" : "1px solid #cccccc"}
-        bgColor="#ffffff"
-        direction={"column"}
-        gap={2}
-      >
-        <ChakraButton
-          bgColor="#28a745"
-          color={"white"}
-          fontSize={"13px"}
-          width="100%"
-          _hover={{
-            bgColor: "white",
-            borderColor: "brand.500",
-            border: "1px solid",
-            color: "brand.500",
-          }}
+
+      {cartItems.length > 0 && (
+        <Flex
+          mb={4}
+          fontWeight="bold"
+          fontSize="lg"
+          px={10}
+          py={4}
+          border={cartType === "drawer" ? "none" : "1px solid #cccccc"}
+          bgColor="#ffffff"
+          direction="column"
+          gap={2}
         >
-          Proceed to Checkout
-        </ChakraButton>
-        <ChakraButton
-          bgColor="brand.500"
-          color={"white"}
-          fontSize={"13px"}
-          width="100%"
-          _hover={{
-            bgColor: "white",
-            borderColor: "brand.500",
-            border: "1px solid",
-            color: "brand.500",
-          }}
-          onClick={() => clearCart()}
-        >
-          Empty Bag
-        </ChakraButton>
-      </Flex>
+          {cartType === "checkout" ? (
+            <ChakraButton
+              bgColor="brand.500"
+              color="white"
+              fontSize="13px"
+              width="100%"
+              _hover={{
+                bgColor: "white",
+                borderColor: "brand.500",
+                border: "1px solid",
+                color: "brand.500",
+              }}
+              onClick={dispatchOrder}
+            >
+              ORDER NOW
+            </ChakraButton>
+          ) : (
+            <>
+              <Link
+                bgColor="#28a745"
+                color="white"
+                fontSize="13px"
+                width="100%"
+                p={3}
+                borderRadius={6}
+                _hover={{
+                  bgColor: "white",
+                  borderColor: "brand.500",
+                  border: "1px solid",
+                  color: "brand.500",
+                }}
+                textAlign="center"
+                onClick={() => navigate("/checkout")}
+              >
+                Proceed to Checkout
+              </Link>
+              <ChakraButton
+                bgColor="brand.500"
+                color="white"
+                fontSize="13px"
+                width="100%"
+                _hover={{
+                  bgColor: "white",
+                  borderColor: "brand.500",
+                  border: "1px solid",
+                  color: "brand.500",
+                }}
+                onClick={clearCart}
+              >
+                Empty Bag
+              </ChakraButton>
+            </>
+          )}
+        </Flex>
+      )}
     </Flex>
   );
 }
