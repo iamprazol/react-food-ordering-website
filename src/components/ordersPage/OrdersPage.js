@@ -26,7 +26,7 @@ import LoginPage from "../authentication/loginPage/LoginPage";
 import Popup from "../common/popup/Popup";
 import RegistrationPage from "../authentication/registrationPage/RegistrationPage";
 import SearchRestaurantPage from "../home/searchRestaurantPage/SearchRestaurantPage";
-import { useAuth } from "../../context/auth-context";
+import { useApp } from "../../context/AppContext";
 import Cart from "../common/cart/cart";
 import { useCart } from "../../hooks/useCart/useCart";
 import EmptyCartImage from "../../assets/images/cart-empty.png";
@@ -45,8 +45,9 @@ const OrdersPage = () => {
   const [openRegistrationPopup, setOpenRegistrationPopup] = useState(false);
   const [searchRestaurants, setSearchRestaurants] = useState("");
   const { REACT_APP_URL, REACT_APP_API_URL } = process.env;
-  const { token } = useAuth();
-  const { cartItems } = useCart();
+  const {
+    state: { token },
+  } = useApp();
 
   useEffect(() => {
     fetch(`${REACT_APP_API_URL}/myorder`, {
@@ -78,50 +79,6 @@ const OrdersPage = () => {
       setSearchRestaurants(e.target.value);
     }
   };
-
-  const formatDate = (deliveryDate, deliveryTime) => {
-    const dateTimeStr = `${deliveryDate.replace(
-      /(\d{2})\/(\d{2})\/(\d{4})/,
-      "$2/$1/$3"
-    )} ${deliveryTime}`;
-
-    const parsedDate = new Date(dateTimeStr);
-
-    const oneHourAgo = new Date(parsedDate.getTime() - 60 * 60 * 1000);
-
-    const day = oneHourAgo.getDate();
-    const month = oneHourAgo.toLocaleString("default", { month: "long" });
-    const year = oneHourAgo.getFullYear();
-    const hours = oneHourAgo.toLocaleString("en-US", {
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    });
-
-    const getOrdinal = (n) => {
-      const s = ["th", "st", "nd", "rd"],
-        v = n % 100;
-      return n + (s[(v - 20) % 10] || s[v] || s[0]);
-    };
-
-    return `${getOrdinal(day)} ${month}, ${year} at ${hours}`;
-  };
-
-  const parseOrderedItems = (order) => {
-    const orderDetails = JSON.parse(order.details);
-    let detail = "";
-
-    orderDetails.map((item, idx) => {
-      detail += item.quantity + "x " + item.food_name;
-
-      if (idx !== orderDetails.length - 1) {
-        detail += ", ";
-      }
-    });
-    return detail;
-  };
-
-  console.log(myOrders);
 
   return (
     <Flex direction="column" minH="100vh" bg="gray.50">

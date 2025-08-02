@@ -2,19 +2,18 @@ import React, { useState, useEffect } from "react";
 import {
   Box,
   Flex,
-  Heading,
   Text,
   Button as ChakraButton,
   Link,
   useToast,
 } from "@chakra-ui/react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Image } from "@chakra-ui/react";
 import EmptyCartImage from "../../../assets/images/cart-empty.png";
 import { MdOutlineDeleteForever } from "react-icons/md";
 import { useCart } from "../../../hooks/useCart/useCart";
+import { useDispatchOrder } from "../../../hooks/useDispatchOrder/useDispatchOrder";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../context/auth-context";
+import { useApp } from "../../../context/AppContext";
 
 export default function Cart({ cartType, position }) {
   const { cartItems, removeFromCart, clearCart } = useCart();
@@ -22,10 +21,8 @@ export default function Cart({ cartType, position }) {
   const { REACT_APP_API_URL } = process.env;
   const restaurantId = localStorage.getItem("order_restaurant_id");
   const [restaurantDetails, setRestaurantDetails] = useState(null);
-  const [orderSuccess, setOrderSuccess] = useState("");
   const toast = useToast();
 
-  const { token } = useAuth();
   useEffect(() => {}, [cartItems]);
 
   useEffect(() => {
@@ -37,6 +34,32 @@ export default function Cart({ cartType, position }) {
         }
       });
   }, [REACT_APP_API_URL, restaurantId]);
+
+  const { mutate: dispatchOrder, isPending } = useDispatchOrder(
+    () => {
+      toast({
+        title: "Order Successful",
+        description: "Your order has been processed successfully.",
+        status: "success",
+        duration: 4000,
+        isClosable: true,
+      });
+      clearCart();
+
+      setTimeout(() => {
+        navigate("/order");
+      }, 1500);
+    },
+    (error) => {
+      toast({
+        title: "Order Failed",
+        description: "You order has failed. Please try again later.",
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+      });
+    }
+  );
 
   const getTotalPrice = () => {
     var price = 0;
@@ -82,7 +105,7 @@ export default function Cart({ cartType, position }) {
     percentageToPrice(restaurantDetails?.vat) +
     50;
 
-  const dispatchOrder = async () => {
+  const handleOrder = async () => {
     const orderInstruction =
       document.getElementById(`order_special_instructions`)?.value || "";
     const order = {
@@ -93,35 +116,7 @@ export default function Cart({ cartType, position }) {
       total_price: grandTotal,
       details: JSON.stringify(cartItems),
     };
-
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/order`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(order),
-    });
-
-    if (response.ok) {
-      toast({
-        title: "Order Successful",
-        description: "Your order has been processed successfully",
-        status: "success",
-        duration: 4000,
-        isClosable: true,
-      });
-      clearCart();
-    } else {
-      toast({
-        title: "Order Failed",
-        description: "You order has failed. Please try again later.",
-        status: "error",
-        duration: 4000,
-        isClosable: true,
-      });
-    }
-    setOrderSuccess(response.ok);
+    dispatchOrder(order);
   };
 
   return (
@@ -287,7 +282,9 @@ export default function Cart({ cartType, position }) {
                 border: "1px solid",
                 color: "brand.500",
               }}
-              onClick={dispatchOrder}
+              onClick={handleOrder}
+              isLoading={isPending}
+              loadingText="Dispatching Order"
             >
               ORDER NOW
             </ChakraButton>

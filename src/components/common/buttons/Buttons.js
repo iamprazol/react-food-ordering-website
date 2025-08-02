@@ -1,6 +1,4 @@
-import React from "react";
-import { Button, IconButton, HStack, Text, Spinner } from "@chakra-ui/react";
-import IconContainer from "../iconContainer/IconContainer";
+import { Button, IconButton, HStack, Text } from "@chakra-ui/react";
 import { MdOutlineClose } from "react-icons/md";
 
 function Buttons({ variant, size, title, onClick, close, onCloseClick, type }) {

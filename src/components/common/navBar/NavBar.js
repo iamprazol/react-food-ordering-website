@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Box,
   Flex,
@@ -7,6 +7,7 @@ import {
   IconButton,
   Button as ChakraButton,
   useBreakpointValue,
+  Link,
 } from "@chakra-ui/react";
 import { MdOutlineSearch } from "react-icons/md";
 import CartDrawer from "../cart/cartDrawer";
@@ -31,13 +32,15 @@ function NavBar({ onClick, onKeyPress }) {
       zIndex="999"
     >
       <Box>
-        <Image
-          src="http://localhost:8000/images/logo/foodie.png"
-          alt="Foodie Logo"
-          width={{ base: "140px", md: "160px" }}
-          height={{ base: "50px", md: "70px" }}
-          objectFit="contain"
-        />
+        <Link href="/">
+          <Image
+            src="http://localhost:8000/images/logo/foodie.png"
+            alt="Foodie Logo"
+            width={{ base: "140px", md: "160px" }}
+            height={{ base: "50px", md: "70px" }}
+            objectFit="contain"
+          />
+        </Link>
       </Box>
 
       <Flex

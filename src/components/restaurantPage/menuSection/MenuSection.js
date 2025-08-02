@@ -89,7 +89,12 @@ function MenuSection({ menuItems }) {
         special_instructions: specialInstructions,
       };
 
-      const restaurant_id = localStorage.getItem("order_restaurant_id");
+      let restaurant_id = localStorage.getItem("order_restaurant_id");
+
+      if (restaurant_id === null) {
+        localStorage.setItem("order_restaurant_id", food.restaurant_id);
+        restaurant_id = food.restaurant_id;
+      }
 
       if (
         cartItems.length >= 0 &&

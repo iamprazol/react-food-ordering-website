@@ -3,11 +3,7 @@ import {
   PopoverTrigger,
   PopoverContent,
   PopoverArrow,
-  PopoverCloseButton,
-  PopoverHeader,
   PopoverBody,
-  Button,
-  Box,
   Flex,
   Image,
   Text,
@@ -20,10 +16,12 @@ import {
 } from "@chakra-ui/react";
 import { RiArrowDropDownLine, RiUserFollowLine } from "react-icons/ri";
 import { IoFastFoodOutline } from "react-icons/io5";
-import { useAuth } from "../../../../context/auth-context";
+import { useApp } from "../../../../context/AppContext";
 
 export default function AccountDrawer({ userData }) {
-  const { logout } = useAuth();
+  const {
+    state: { logout },
+  } = useApp();
   const { onOpen, onClose, isOpen } = useDisclosure();
 
   const accountDrawerItems = [

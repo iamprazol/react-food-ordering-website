@@ -26,7 +26,6 @@ import LoginPage from "../../authentication/loginPage/LoginPage";
 import Popup from "../../common/popup/Popup";
 import RegistrationPage from "../../authentication/registrationPage/RegistrationPage";
 import SearchRestaurantPage from "../../home/searchRestaurantPage/SearchRestaurantPage";
-import { useAuth } from "../../../context/auth-context";
 import Cart from "../../common/cart/cart";
 import { useCart } from "../../../hooks/useCart/useCart";
 import EmptyCartImage from "../../../assets/images/cart-empty.png";
@@ -37,32 +36,41 @@ import { IoMdHeartEmpty } from "react-icons/io";
 // Import Components.
 
 function OrdersTab({ myOrders }) {
-  const formatDate = (deliveryDate, deliveryTime) => {
-    const dateTimeStr = `${deliveryDate.replace(
-      /(\d{2})\/(\d{2})\/(\d{4})/,
-      "$2/$1/$3"
-    )} ${deliveryTime}`;
+  myOrders = myOrders.sort((a, b) => b.id - a.id);
 
-    const parsedDate = new Date(dateTimeStr);
-
-    const oneHourAgo = new Date(parsedDate.getTime() - 60 * 60 * 1000);
-
-    const day = oneHourAgo.getDate();
-    const month = oneHourAgo.toLocaleString("default", { month: "long" });
-    const year = oneHourAgo.getFullYear();
-    const hours = oneHourAgo.toLocaleString("en-US", {
+  const formatDate = (createdAt) => {
+    const kathmanduOptions = {
+      timeZone: "Asia/Kathmandu",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
       hour: "numeric",
       minute: "2-digit",
       hour12: true,
-    });
+    };
+
+    const date = new Date(createdAt.date); // createdAt.date is like "2025-08-02 09:40:03.000000"
+    const formatter = new Intl.DateTimeFormat("en-US", kathmanduOptions);
+    const parts = formatter.formatToParts(date);
+
+    const getPart = (type) => parts.find((p) => p.type === type)?.value;
+
+    const day = parseInt(getPart("day"));
+    const month = getPart("month");
+    const year = getPart("year");
+    const hour = getPart("hour");
+    const minute = getPart("minute");
+    const dayPeriod = getPart("dayPeriod");
 
     const getOrdinal = (n) => {
-      const s = ["th", "st", "nd", "rd"],
-        v = n % 100;
+      const s = ["th", "st", "nd", "rd"];
+      const v = n % 100;
       return n + (s[(v - 20) % 10] || s[v] || s[0]);
     };
 
-    return `${getOrdinal(day)} ${month}, ${year} at ${hours}`;
+    return `${getOrdinal(
+      day
+    )} ${month}, ${year} at ${hour}:${minute} ${dayPeriod}`;
   };
 
   const parseOrderedItems = (order) => {
@@ -90,7 +98,6 @@ function OrdersTab({ myOrders }) {
     const deliveryDate = parseDDMMYYYY(deliveryDateStr);
     const deliveryTime = new Date(deliveryDate);
     deliveryTime.setHours(parseInt(hourStr, 10), parseInt(minuteStr, 10), 0, 0);
-
     const now = new Date();
 
     if (now >= deliveryTime) {
@@ -136,8 +143,7 @@ function OrdersTab({ myOrders }) {
                     Order #{myOrder.id}
                   </Heading>
                   <Text color="#666" fontSize={"14px"}>
-                    Placed on{" "}
-                    {formatDate(myOrder.delivery_date, myOrder.delivery_time)}{" "}
+                    Placed on {formatDate(myOrder.created_at)}{" "}
                   </Text>
                 </Flex>
                 {myOrder.delivered === 0 ? (

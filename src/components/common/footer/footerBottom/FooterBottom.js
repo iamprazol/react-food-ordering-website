@@ -1,14 +1,5 @@
-import {
-  Box,
-  Flex,
-  Heading,
-  Link,
-  Stack,
-  Text,
-  Image,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { Box, Flex, Heading, Link, Stack, Text, Image } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
 const FooterBottom = () => {
   const [foodPics, setFoodPics] = useState([]);

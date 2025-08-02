@@ -4,9 +4,7 @@ import {
   PopoverContent,
   PopoverArrow,
   PopoverCloseButton,
-  PopoverHeader,
   PopoverBody,
-  Button,
   IconButton,
 } from "@chakra-ui/react";
 import Cart from "./cart";

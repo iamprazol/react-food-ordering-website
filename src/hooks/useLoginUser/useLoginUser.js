@@ -1,8 +1,6 @@
-// loginUser.js
 import { useMutation } from "@tanstack/react-query";
-import { useAuth } from "../../context/auth-context";
+import { useApp } from "../../context/AppContext";
 
-// Core login function
 const loginUser = async ({ email, password }) => {
   const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
     method: "POST",
@@ -20,25 +18,22 @@ const loginUser = async ({ email, password }) => {
     throw error;
   }
 
-  // Save token to localStorage (or cookies/context/etc.)
-  if (data.success.token) {
-    localStorage.setItem("token", data.success.token);
-  }
-
   return data;
 };
 
-// React Query hook
 export const useLoginUser = (onSuccess, onError) => {
-  const { login } = useAuth();
+  const { login } = useApp();
 
   return useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
       const token = data?.success?.token;
-      if (token) {
-        login(token);
+      const user = data?.user;
+
+      if (token && user) {
+        login(token, user);
       }
+
       onSuccess?.(data);
     },
     onError: (error) => {

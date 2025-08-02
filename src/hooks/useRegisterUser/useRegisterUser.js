@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
+import { useApp } from "../../context/AppContext";
 
 const registerUser = async (user) => {
   const response = await fetch(`${process.env.REACT_APP_API_URL}/register`, {
@@ -14,18 +15,28 @@ const registerUser = async (user) => {
 
   if (!response.ok) {
     const error = new Error(data?.message || "Registration failed");
-    error.data = data.error; // attach full error object here
+    error.data = data?.errors || data?.error || data;
     throw error;
   }
-  localStorage.setItem("token", data.access_token);
 
   return data;
 };
 
 export const useRegisterUser = (onSuccess, onError) => {
+  const { login } = useApp();
+
   return useMutation({
     mutationFn: registerUser,
-    onSuccess,
+    onSuccess: (data) => {
+      const token = data?.access_token || data?.success?.token;
+      const user = data?.user || data?.success?.user;
+
+      if (token && user) {
+        login(token, user);
+      }
+
+      onSuccess?.(data);
+    },
     onError: (error) => {
       onError?.(error);
     },

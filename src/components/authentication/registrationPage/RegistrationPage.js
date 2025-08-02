@@ -5,13 +5,10 @@ import {
   Heading,
   Flex,
   useToast,
-  Text,
-  Spinner,
   Button as ChakraButton,
 } from "@chakra-ui/react";
 
 import InputHandler from "../../common/inputHandler/InputHandler";
-import Buttons from "../../common/buttons/Buttons";
 import {
   MdEmail,
   MdLock,
@@ -19,7 +16,7 @@ import {
   MdContactPhone,
 } from "react-icons/md";
 
-import { useRegisterUser } from "../../../hooks/useRegisterUser/useRegisterUser"; // new
+import { useRegisterUser } from "../../../hooks/useRegisterUser/useRegisterUser";
 
 const RegistrationPage = () => {
   const toast = useToast();

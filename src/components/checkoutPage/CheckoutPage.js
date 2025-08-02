@@ -1,15 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Flex,
-  Image,
-  Button as ChakraButton,
-  Heading,
-  Link,
-  Text,
-  SimpleGrid,
-  Textarea,
-} from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, Textarea } from "@chakra-ui/react";
 
 // Components
 import FooterTop from "../common/footer/footerTop/FooterTop";
@@ -19,7 +9,7 @@ import LoginPage from "../authentication/loginPage/LoginPage";
 import Popup from "../common/popup/Popup";
 import RegistrationPage from "../authentication/registrationPage/RegistrationPage";
 import SearchRestaurantPage from "../home/searchRestaurantPage/SearchRestaurantPage";
-import { useAuth } from "../../context/auth-context";
+import { useApp } from "../../context/AppContext";
 import Cart from "../common/cart/cart";
 import { useCart } from "../../hooks/useCart/useCart";
 
@@ -29,9 +19,9 @@ const CheckoutPage = () => {
   const [userAddress, setUserAddress] = useState("");
   const [openRegistrationPopup, setOpenRegistrationPopup] = useState(false);
   const [searchRestaurants, setSearchRestaurants] = useState("");
-  const { REACT_APP_URL } = process.env;
-  const { token } = useAuth();
-  const { cartItems } = useCart();
+  const {
+    state: { token },
+  } = useApp();
 
   const handleOpenAuthenticationPopup = (clickAction, value) => {
     if (clickAction === "login") {
@@ -52,7 +42,6 @@ const CheckoutPage = () => {
   };
 
   useEffect(() => {
-    const { REACT_APP_API_URL } = process.env;
     fetch(`${process.env.REACT_APP_API_URL}/myaddress`, {
       headers: {
         Authorization: `Bearer ${token}`,

@@ -12,7 +12,7 @@ import "./index.scss";
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import theme from "./theme";
-import { AuthProvider } from "./context/auth-context";
+import { AppProvider } from "./context/AppContext";
 
 // ✅ Create the React Query client
 const queryClient = new QueryClient();
@@ -25,9 +25,9 @@ root.render(
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <QueryClientProvider client={queryClient}>
         <Router>
-          <AuthProvider>
+          <AppProvider>
             <App />
-          </AuthProvider>
+          </AppProvider>
         </Router>
       </QueryClientProvider>
     </ChakraProvider>

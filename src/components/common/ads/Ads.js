@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Flex, Text, Button as ChakraButton } from "@chakra-ui/react";
 
 const Ads = ({ adsText, image, link, buttonText }) => {

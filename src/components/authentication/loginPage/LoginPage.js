@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Box,
   Flex,
@@ -12,10 +12,8 @@ import {
 
 import InputHandler from "../../common/inputHandler/InputHandler";
 import FoodieImage from "../../../assets/images/foodie.png";
-import IconContainer from "../../common/iconContainer/IconContainer";
 
 import { MdEmail, MdLock } from "react-icons/md";
-import Buttons from "../../common/buttons/Buttons";
 import { useLoginUser } from "../../../hooks/useLoginUser/useLoginUser";
 
 function LoginPage({ onClick }) {

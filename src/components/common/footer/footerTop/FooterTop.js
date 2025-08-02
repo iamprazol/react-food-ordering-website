@@ -1,5 +1,4 @@
-import React from "react";
-import { Box, Flex, Text, useColorModeValue, Image } from "@chakra-ui/react";
+import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import {
   MdPayment,
   MdOutlineCardGiftcard,
