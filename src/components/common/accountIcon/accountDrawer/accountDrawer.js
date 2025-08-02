@@ -16,6 +16,7 @@ import {
   PopoverFooter,
   Button as ChakraButton,
   useDisclosure,
+  Link,
 } from "@chakra-ui/react";
 import { RiArrowDropDownLine, RiUserFollowLine } from "react-icons/ri";
 import { IoFastFoodOutline } from "react-icons/io5";
@@ -29,7 +30,7 @@ export default function AccountDrawer({ userData }) {
     {
       icon: <IoFastFoodOutline size={40} />,
       text: "Orders",
-      slug: "order",
+      slug: "orders",
     },
     {
       icon: <RiUserFollowLine size={40} />,
@@ -88,17 +89,19 @@ export default function AccountDrawer({ userData }) {
                 role="group"
                 cursor="pointer"
               >
-                <IconButton
-                  aria-label="Open Cart"
-                  icon={items.icon}
-                  variant="ghost"
-                  fontSize="24px"
-                  color="brand.500"
-                  p={0}
-                  m={0}
-                  key={idx}
-                  _groupHover={{ color: "brand.700" }}
-                />
+                <Link href={"/" + items.slug}>
+                  <IconButton
+                    aria-label="Open Cart"
+                    icon={items.icon}
+                    variant="ghost"
+                    fontSize="24px"
+                    color="brand.500"
+                    p={0}
+                    m={0}
+                    key={idx}
+                    _groupHover={{ color: "brand.700" }}
+                  />
+                </Link>
                 <Text
                   _groupHover={{ color: "brand.700" }}
                   color="brand.500"

@@ -7,6 +7,7 @@ import HomePage from "./home/homePage/HomePage";
 import PageNotFound from "./pageNotFound/PageNotFound";
 import RestaurantLayout from "./restaurantPage/restaurantLayout/RestaurantLayout";
 import CheckoutPage from "./checkoutPage/CheckoutPage";
+import OrdersPage from "./ordersPage/OrdersPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/restaurant/:restaurantId" element={<RestaurantLayout />} />
       <Route element={<PageNotFound />} />
       <Route path="/checkout" element={<CheckoutPage />} />
+      <Route path="/orders" element={<OrdersPage />} />
     </Routes>
   );
 }
