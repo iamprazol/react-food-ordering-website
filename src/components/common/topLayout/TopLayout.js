@@ -1,0 +1,99 @@
+import React, { useState, useEffect } from "react";
+import {
+  Box,
+  Flex,
+  Heading,
+  Text,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+} from "@chakra-ui/react";
+
+// Components
+import FooterTop from "../footer/footerTop/FooterTop";
+import FooterBottom from "../footer/footerBottom/FooterBottom";
+import NavBar from "../navBar/NavBar";
+import LoginPage from "../../authentication/loginPage/LoginPage";
+import Popup from "../popup/Popup";
+import RegistrationPage from "../../authentication/registrationPage/RegistrationPage";
+import SearchRestaurantPage from "../../home/searchRestaurantPage/SearchRestaurantPage";
+import { useApp } from "../../../context/AppContext";
+
+const TopLayout = ({ element }) => {
+  const [openLoginPopup, setOpenLoginPopup] = useState(false);
+  const [myOrders, setMyOrders] = useState([]);
+  const [openRegistrationPopup, setOpenRegistrationPopup] = useState(false);
+  const [searchRestaurants, setSearchRestaurants] = useState("");
+  const { REACT_APP_URL, REACT_APP_API_URL } = process.env;
+  const {
+    state: { token },
+  } = useApp();
+
+  useEffect(() => {
+    fetch(`${REACT_APP_API_URL}/myorder`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setMyOrders(data.data);
+      });
+  }, []);
+
+  const handleOpenAuthenticationPopup = (clickAction, value) => {
+    if (clickAction === "login") {
+      setOpenLoginPopup(!openLoginPopup);
+      setOpenRegistrationPopup(false);
+    } else if (clickAction === "register") {
+      setOpenRegistrationPopup(!openRegistrationPopup);
+      setOpenLoginPopup(false);
+    } else {
+      setSearchRestaurants(value);
+    }
+  };
+
+  const handleSearchRestaurants = (e) => {
+    if (e.key === "Enter") {
+      setSearchRestaurants(e.target.value);
+    }
+  };
+
+  return (
+    <Flex direction="column" minH="100vh" bg="gray.50">
+      <NavBar
+        onClick={handleOpenAuthenticationPopup}
+        onKeyPress={handleSearchRestaurants}
+      />
+      {openLoginPopup && (
+        <Popup
+          onClick={(value) => setOpenLoginPopup(!value)}
+          content={<LoginPage onClick={handleOpenAuthenticationPopup} />}
+        />
+      )}
+
+      {openRegistrationPopup && (
+        <Popup
+          onClick={(value) => setOpenRegistrationPopup(!value)}
+          popupClass="wd-50 br-25"
+          content={<RegistrationPage />}
+        />
+      )}
+
+      {searchRestaurants ? (
+        <SearchRestaurantPage searchText={searchRestaurants} />
+      ) : (
+        <Flex direction={"column"} justifyContent={"left"}>
+          {element}
+        </Flex>
+      )}
+      <FooterTop />
+      <FooterBottom />
+    </Flex>
+  );
+};
+
+export default TopLayout;

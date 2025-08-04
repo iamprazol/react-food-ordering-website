@@ -6,6 +6,7 @@ const initialState = {
   user: null,
   cart: [],
   orders: [],
+  address: [],
 };
 
 const reducer = (state, action) => {
@@ -57,6 +58,8 @@ const reducer = (state, action) => {
       return { ...state, cart: [] };
     case "SET_ORDERS":
       return { ...state, orders: action.payload };
+    case "SET_ADDRESS":
+      return { ...state, address: action.payload };
     default:
       return state;
   }
@@ -76,9 +79,11 @@ export const AppProvider = ({ children }) => {
     localStorage.setItem("appState", JSON.stringify(state));
   }, [state]);
 
-  const login = (token, user) => {
+  const login = (token, user, address, orders) => {
     dispatch({ type: "SET_TOKEN", payload: token });
     dispatch({ type: "SET_USER", payload: user });
+    dispatch({ type: "SET_ADDRESS", payload: address });
+    dispatch({ type: "SET_ORDERS", payload: orders });
   };
 
   const logout = () => {

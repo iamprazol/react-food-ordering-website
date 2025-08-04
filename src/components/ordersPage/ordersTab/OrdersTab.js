@@ -1,40 +1,17 @@
-import React, { useState, useEffect } from "react";
 import {
   Box,
   Flex,
   Image,
-  Button as ChakraButton,
   Heading,
-  Link,
   Text,
-  SimpleGrid,
-  Textarea,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
   Badge,
   Progress,
 } from "@chakra-ui/react";
 
 // Components
-import FooterTop from "../../common/footer/footerTop/FooterTop";
-import FooterBottom from "../../common/footer/footerBottom/FooterBottom";
-import NavBar from "../../common/navBar/NavBar";
-import LoginPage from "../../authentication/loginPage/LoginPage";
-import Popup from "../../common/popup/Popup";
-import RegistrationPage from "../../authentication/registrationPage/RegistrationPage";
-import SearchRestaurantPage from "../../home/searchRestaurantPage/SearchRestaurantPage";
-import Cart from "../../common/cart/cart";
-import { useCart } from "../../../hooks/useCart/useCart";
 import EmptyCartImage from "../../../assets/images/cart-empty.png";
-// Import Icons.
-import { MdOutlineStarPurple500 } from "react-icons/md";
-import { IoMdHeartEmpty } from "react-icons/io";
 
 // Import Components.
-
 function OrdersTab({ myOrders }) {
   myOrders = myOrders.sort((a, b) => b.id - a.id);
 
@@ -50,6 +27,7 @@ function OrdersTab({ myOrders }) {
     };
 
     const date = new Date(createdAt.date); // createdAt.date is like "2025-08-02 09:40:03.000000"
+
     const formatter = new Intl.DateTimeFormat("en-US", kathmanduOptions);
     const parts = formatter.formatToParts(date);
 

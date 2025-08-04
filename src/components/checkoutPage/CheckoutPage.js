@@ -41,19 +41,6 @@ const CheckoutPage = () => {
     }
   };
 
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/myaddress`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setUserAddress(data.data);
-      });
-  }, []);
-
   return (
     <Flex direction="column" minH="100vh" bg="gray.50">
       <NavBar

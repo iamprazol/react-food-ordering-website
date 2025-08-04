@@ -13,17 +13,15 @@ import {
   Button as ChakraButton,
   useDisclosure,
   Link,
+  useToast,
 } from "@chakra-ui/react";
 import { RiArrowDropDownLine, RiUserFollowLine } from "react-icons/ri";
 import { IoFastFoodOutline } from "react-icons/io5";
-import { useApp } from "../../../../context/AppContext";
+import { useLoginUser } from "../../../../hooks/useLoginUser/useLoginUser";
 
 export default function AccountDrawer({ userData }) {
-  const {
-    state: { logout },
-  } = useApp();
   const { onOpen, onClose, isOpen } = useDisclosure();
-
+  const { toast } = useToast;
   const accountDrawerItems = [
     {
       icon: <IoFastFoodOutline size={40} />,
@@ -33,9 +31,22 @@ export default function AccountDrawer({ userData }) {
     {
       icon: <RiUserFollowLine size={40} />,
       text: "Account",
-      slug: "account",
+      slug: "my-account",
     },
   ];
+
+  const { mutate: logout, isPending } = useLoginUser(
+    () => {
+      toast({
+        title: "Logout Successful",
+        description: "You have been successfully logged-out from the site.",
+        status: "success",
+        duration: 4000,
+        isClosable: true,
+      });
+    },
+    (error) => {}
+  );
 
   return (
     <Popover

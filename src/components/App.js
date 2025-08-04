@@ -8,6 +8,7 @@ import PageNotFound from "./pageNotFound/PageNotFound";
 import RestaurantLayout from "./restaurantPage/restaurantLayout/RestaurantLayout";
 import CheckoutPage from "./checkoutPage/CheckoutPage";
 import OrdersPage from "./ordersPage/OrdersPage";
+import MyAccount from "./myAccount/MyAccount";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route element={<PageNotFound />} />
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="/orders" element={<OrdersPage />} />
+      <Route path="/my-account" element={<MyAccount />} />
     </Routes>
   );
 }

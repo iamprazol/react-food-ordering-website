@@ -1,10 +1,10 @@
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Heading, Flex } from "@chakra-ui/react";
 
 // Components
 import TopLayout from "../common/topLayout/TopLayout";
-import OrdersLayout from "./ordersLayout/OrdersLayout";
+import SideBar from "./sideBar/SideBar";
 
-const OrderHeader = () => {
+const MyAccountHeader = () => {
   return (
     <>
       <Box
@@ -22,23 +22,27 @@ const OrderHeader = () => {
             lineHeight="1.2"
             color={"#4a4a4a"}
           >
-            My Orders
+            Account Settings
           </Heading>
-          <Text fontSize={"16px"} color="#666">
-            Track your food orders and reorder your favorites
-          </Text>
         </Box>
       </Box>
-      <Box as="section" py={10} px={{ base: 4, md: 8 }} bg="#f7f7f9">
-        <Box maxW="7xl" mx="auto" px={14} py={4}>
-          <OrdersLayout />
-        </Box>
-      </Box>
+      <Flex
+        as="section"
+        py={10}
+        px={{ base: 4, md: 8 }}
+        maxW="7xl"
+        mx="150px"
+        direction={"column"}
+        align={"left"}
+        justifyContent={"flex-start"}
+      >
+        <SideBar />
+      </Flex>
     </>
   );
 };
-const OrdersPage = () => {
-  return <TopLayout element={<OrderHeader />}></TopLayout>;
+const MyAccount = () => {
+  return <TopLayout element={<MyAccountHeader />}></TopLayout>;
 };
 
-export default OrdersPage;
+export default MyAccount;

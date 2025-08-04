@@ -28,10 +28,12 @@ export const useLoginUser = (onSuccess, onError) => {
     mutationFn: loginUser,
     onSuccess: (data) => {
       const token = data?.success?.token;
+      const address = data?.success?.address;
+      const orders = data?.success?.orders;
       const user = data?.user;
 
       if (token && user) {
-        login(token, user);
+        login(token, user, address, orders);
       }
 
       onSuccess?.(data);

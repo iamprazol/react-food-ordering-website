@@ -47,7 +47,7 @@ export default function Cart({ cartType, position }) {
       clearCart();
 
       setTimeout(() => {
-        navigate("/order");
+        navigate("/orders");
       }, 1500);
     },
     (error) => {
