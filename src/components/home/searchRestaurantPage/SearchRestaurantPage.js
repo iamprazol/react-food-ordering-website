@@ -43,50 +43,39 @@ function SearchRestaurantPage({ searchText }) {
   };
 
   return (
-    <Box>
-      <Banner
-        bannerHeight="small"
-        bannerContent={
-          <Box px={4}>
-            <Heading size="lg" color="white">
-              Restaurants and Stores
-            </Heading>
-          </Box>
-        }
-      />
-
-      <Box bg="gray.800" py={3} px={4}>
-        <Text color="white" fontSize="sm" userSelect="none">
-          Home{" "}
-          <IconContainer
-            icon={<MdArrowForward />}
-            fontSizeClass="icon--small"
-          />{" "}
-          Search{" "}
-          <IconContainer
-            icon={<MdArrowForward />}
-            fontSizeClass="icon--small"
-          />{" "}
-          Restaurants Found
-        </Text>
+    <Box minH="100vh" bg="gray.50">
+      <Box bg="gray.700" px={6} py={4} color="white">
+        <Heading size="lg">Restaurants and Stores</Heading>
+        <HStack mt={2} fontSize="sm">
+          <Text>Home</Text>
+          <MdArrowForward />
+          <Text>Search</Text>
+          <MdArrowForward />
+          <Text fontWeight="medium">Restaurants Found</Text>
+        </HStack>
       </Box>
 
       <Flex
-        maxW="7xl"
-        mx="auto"
-        px={4}
-        py={6}
+        maxW="8xl"
+        mx="25px"
+        py={8}
+        px={6}
         direction={{ base: "column", md: "row" }}
-        gap={6}
+        gap={8}
       >
-        {/* Filters Sidebar */}
-        <Box flex="0 0 300px">
-          <VStack align="start" spacing={4}>
+        <Box
+          w={{ base: "100%", md: "300px" }}
+          bg="white"
+          p={5}
+          borderRadius="md"
+          shadow="sm"
+        >
+          <VStack align="stretch" spacing={4}>
+            <Text fontWeight="semibold">Choose Filter Type</Text>
             <Select
-              placeholder="Select a Filter"
+              placeholder="Select filter type"
               value={selected}
               onChange={handleSelectedItem}
-              bg="white"
             >
               <option value="name">Restaurant</option>
               <option value="food_name">Food</option>
@@ -94,46 +83,40 @@ function SearchRestaurantPage({ searchText }) {
             </Select>
 
             {selected && (
-              <HStack width="100%" spacing={2}>
+              <HStack>
                 <Input
-                  placeholder="Filter Item"
+                  placeholder="Enter filter keyword"
                   value={filterText}
                   onChange={(e) => setFilterText(e.target.value)}
                 />
                 <Button
                   size="sm"
-                  colorScheme="blue"
                   onClick={handleFilterFinalization}
+                  colorScheme="blue"
                 >
-                  Done
+                  Apply
                 </Button>
               </HStack>
             )}
 
             {filterParams.length > 0 && (
-              <HStack wrap="wrap" spacing={2} pt={2}>
+              <VStack align="start" spacing={2} pt={2} wrap="wrap">
                 {filterParams.map((value, idx) => (
-                  <Tag
-                    size="md"
-                    key={idx}
-                    borderRadius="full"
-                    variant="solid"
-                    colorScheme="blue"
-                  >
+                  <Tag key={idx} colorScheme="blue" borderRadius="full">
                     <TagLabel>{value}</TagLabel>
                     <TagCloseButton
                       onClick={() => handleCloseFilterParam(idx)}
                     />
                   </Tag>
                 ))}
-              </HStack>
+              </VStack>
             )}
           </VStack>
         </Box>
 
         {/* Main Body */}
         <Box flex="1">
-          <RestaurantList searchText={searchText} />
+          <RestaurantList searchText={searchText} col="3" />
         </Box>
       </Flex>
     </Box>

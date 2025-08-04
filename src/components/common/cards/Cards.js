@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Box,
-  Image,
+  chakra,
   Text,
   Flex,
   Badge,
@@ -25,6 +25,11 @@ const Cards = ({
   minimum_order,
   discount,
 }) => {
+  const LazyImage = chakra("img", {
+    baseStyle: {
+      loading: "lazy",
+    },
+  });
   return (
     <Box
       borderWidth="1px"
@@ -34,7 +39,13 @@ const Cards = ({
       boxShadow="md"
     >
       <Box position="relative">
-        <Image src={image} alt={name} objectFit="cover" w="100%" h="180px" />
+        <LazyImage
+          src={image}
+          alt={name}
+          objectFit="cover"
+          w="100%"
+          h="180px"
+        />
 
         <Box position="absolute" top="2" left="2">
           <Badge

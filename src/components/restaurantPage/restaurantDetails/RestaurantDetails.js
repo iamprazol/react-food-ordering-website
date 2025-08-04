@@ -10,6 +10,7 @@ import {
   VStack,
   HStack,
   Divider,
+  chakra,
 } from "@chakra-ui/react";
 import {
   MdOutlineStarPurple500,
@@ -30,6 +31,12 @@ function RestaurantDetails(props) {
     additionalCharges,
   } = props;
 
+  const LazyImage = chakra("img", {
+    baseStyle: {
+      loading: "lazy",
+    },
+  });
+
   return (
     <Box maxW="7xl" mx="auto" p={4}>
       {/* Header Section */}
@@ -48,7 +55,7 @@ function RestaurantDetails(props) {
             {address}
           </Text>
         </Box>
-        <Image
+        <LazyImage
           src={picture}
           alt="restaurant"
           boxSize="100px"

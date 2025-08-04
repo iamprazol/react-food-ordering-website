@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
   Box,
   Flex,
-  Image,
+  chakra,
   Input,
   IconButton,
   Button as ChakraButton,
@@ -13,10 +13,16 @@ import { MdOutlineSearch } from "react-icons/md";
 import CartDrawer from "../cart/cartDrawer";
 import AccountIcon from "../accountIcon/AccountIcon";
 
-function NavBar({ onClick, onKeyPress }) {
+function NavBar({ onClick, onChange }) {
   const [searchText, setSearchText] = useState("");
 
   const isMobile = useBreakpointValue({ base: true, md: false });
+
+  const LazyImage = chakra("img", {
+    baseStyle: {
+      loading: "lazy",
+    },
+  });
 
   return (
     <Flex
@@ -33,7 +39,7 @@ function NavBar({ onClick, onKeyPress }) {
     >
       <Box>
         <Link href="/">
-          <Image
+          <LazyImage
             src="http://localhost:8000/images/logo/foodie.png"
             alt="Foodie Logo"
             width={{ base: "140px", md: "160px" }}
@@ -69,7 +75,7 @@ function NavBar({ onClick, onKeyPress }) {
             placeholder="Bajeko Sekuwa"
             border="none"
             focusBorderColor="transparent"
-            onKeyPress={(e) => onKeyPress(e)}
+            onChange={(e) => onChange(e)}
             onChange={(e) => setSearchText(e.target.value)}
             bg="white"
             rounded="full"

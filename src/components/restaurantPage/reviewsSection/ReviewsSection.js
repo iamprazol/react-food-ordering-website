@@ -4,19 +4,19 @@ import { useParams } from "react-router-dom";
 import {
   Box,
   Heading,
-  UnorderedList,
-  ListItem,
   Text,
   Flex,
-  Image,
+  chakra,
+  Skeleton,
+  SkeletonText,
 } from "@chakra-ui/react";
-import { Link } from "react-scroll";
 import { MdStar } from "react-icons/md";
 import IconContainer from "../../common/iconContainer/IconContainer";
 import Foodie from "../../../assets/images/foodie.png";
 
 function ReviewsSection() {
   const [reviews, setReviews] = useState(null);
+  const [loading, setLoading] = useState(true);
   const { REACT_APP_API_URL } = process.env;
   const { restaurantId } = useParams();
   useEffect(() => {
@@ -26,8 +26,15 @@ function ReviewsSection() {
         if (data.data && data.data.length > 0) {
           setReviews(data.data);
         }
-      });
+      })
+      .finally(() => setLoading(false)); // Done loading
   }, [REACT_APP_API_URL, restaurantId]);
+
+  const LazyImage = chakra("img", {
+    baseStyle: {
+      loading: "lazy",
+    },
+  });
 
   return (
     <Flex
@@ -55,57 +62,76 @@ function ReviewsSection() {
           </Heading>
         </Box>
 
-        {reviews?.map((review, idx) => (
-          <Flex
-            key={idx}
-            fontWeight="medium"
-            py={2}
-            borderBottom="1px"
-            borderColor="gray.100"
-            color="#4A4A4A"
-            cursor="pointer"
-          >
-            <Flex direction="column" flex={1} mb={5} gap={4}>
-              <Flex justifyContent={"space-between"} width="100%">
-                <Flex alignItems={"center"} gap={3}>
-                  <Image
-                    src={review.reviewer_picture}
-                    alt="user"
-                    boxSize="40px"
-                    objectFit="cover"
-                    borderRadius="full"
-                  />
-                  <Text fontSize="sm" fontWeight="600" color={"#000000de"}>
-                    {review.reviewer_name}
+        {loading
+          ? [...Array(3)].map((_, idx) => (
+              <Flex
+                key={idx}
+                fontWeight="medium"
+                py={4}
+                borderBottom="1px"
+                borderColor="gray.100"
+                direction="column"
+                gap={3}
+              >
+                <Flex gap={3} align="center">
+                  <Skeleton boxSize="40px" borderRadius="full" />
+                  <Skeleton height="16px" width="120px" />
+                </Flex>
+                <Skeleton height="16px" width="80px" />
+                <SkeletonText mt="2" noOfLines={2} spacing="2" />
+              </Flex>
+            ))
+          : reviews?.map((review, idx) => (
+              <Flex
+                key={idx}
+                fontWeight="medium"
+                py={2}
+                borderBottom="1px"
+                borderColor="gray.100"
+                color="#4A4A4A"
+                cursor="pointer"
+              >
+                <Flex direction="column" flex={1} mb={5} gap={4}>
+                  <Flex justifyContent={"space-between"} width="100%">
+                    <Flex alignItems={"center"} gap={3}>
+                      <LazyImage
+                        src={review.reviewer_picture}
+                        alt="user"
+                        boxSize="40px"
+                        objectFit="cover"
+                        borderRadius="full"
+                      />
+                      <Text fontSize="sm" fontWeight="600" color={"#000000de"}>
+                        {review.reviewer_name}
+                      </Text>
+                    </Flex>
+                    <Text fontSize="sm" fontWeight="600" color={"#000000de"}>
+                      {review.created_at}
+                    </Text>
+                  </Flex>
+                  <Flex alignItems="center">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <IconContainer
+                        key={i}
+                        icon={<MdStar />}
+                        colorClass="text-yellow"
+                        fontSizeClass="icon--large"
+                      />
+                    ))}
+                    {[...Array(5 - review.rating)].map((_, i) => (
+                      <IconContainer
+                        key={i}
+                        icon={<MdStar />}
+                        fontSizeClass="icon--large"
+                      />
+                    ))}
+                  </Flex>
+                  <Text fontSize={"md"} color="#000000de" fontWeight={400}>
+                    {review.review}
                   </Text>
                 </Flex>
-                <Text fontSize="sm" fontWeight="600" color={"#000000de"}>
-                  {review.created_at}
-                </Text>
               </Flex>
-              <Flex alignItems="center">
-                {[...Array(review.rating)].map((_, i) => (
-                  <IconContainer
-                    key={i}
-                    icon={<MdStar />}
-                    colorClass="text-yellow"
-                    fontSizeClass="icon--large"
-                  />
-                ))}
-                {[...Array(5 - review.rating)].map((_, i) => (
-                  <IconContainer
-                    key={i}
-                    icon={<MdStar />}
-                    fontSizeClass="icon--large"
-                  />
-                ))}
-              </Flex>
-              <Text fontSize={"md"} color="#000000de" fontWeight={400}>
-                {review.review}
-              </Text>
-            </Flex>
-          </Flex>
-        ))}
+            ))}
       </Box>
       <Box
         py={6}
@@ -116,7 +142,7 @@ function ReviewsSection() {
         flexDirection="column"
         gap={6}
       >
-        <Image src={Foodie} alt={"foodie"} height="auto" width="20%" />
+        <LazyImage src={Foodie} alt={"foodie"} height="auto" width="20%" />
         <Box
           textAlign="center"
           maxWidth="600px"

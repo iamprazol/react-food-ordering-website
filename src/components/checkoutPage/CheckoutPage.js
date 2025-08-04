@@ -1,211 +1,166 @@
-import React, { useState, useEffect } from "react";
-import { Box, Flex, Heading, Text, Textarea } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  Text,
+  Textarea,
+  Skeleton,
+  SkeletonText,
+} from "@chakra-ui/react";
 
 // Components
-import FooterTop from "../common/footer/footerTop/FooterTop";
-import FooterBottom from "../common/footer/footerBottom/FooterBottom";
-import NavBar from "../common/navBar/NavBar";
-import LoginPage from "../authentication/loginPage/LoginPage";
-import Popup from "../common/popup/Popup";
-import RegistrationPage from "../authentication/registrationPage/RegistrationPage";
-import SearchRestaurantPage from "../home/searchRestaurantPage/SearchRestaurantPage";
 import { useApp } from "../../context/AppContext";
 import Cart from "../common/cart/cart";
-import { useCart } from "../../hooks/useCart/useCart";
+import TopLayout from "../common/topLayout/TopLayout";
 
-const CheckoutPage = () => {
-  const [openLoginPopup, setOpenLoginPopup] = useState(false);
-  const [restaurantCharge, setRestaurantCharge] = useState({});
-  const [userAddress, setUserAddress] = useState("");
-  const [openRegistrationPopup, setOpenRegistrationPopup] = useState(false);
-  const [searchRestaurants, setSearchRestaurants] = useState("");
+const CheckoutBody = () => {
   const {
-    state: { token },
+    state: { address, user },
   } = useApp();
 
-  const handleOpenAuthenticationPopup = (clickAction, value) => {
-    if (clickAction === "login") {
-      setOpenLoginPopup(!openLoginPopup);
-      setOpenRegistrationPopup(false);
-    } else if (clickAction === "register") {
-      setOpenRegistrationPopup(!openRegistrationPopup);
-      setOpenLoginPopup(false);
-    } else {
-      setSearchRestaurants(value);
-    }
-  };
-
-  const handleSearchRestaurants = (e) => {
-    if (e.key === "Enter") {
-      setSearchRestaurants(e.target.value);
-    }
-  };
+  const isLoading = !address || !user;
 
   return (
-    <Flex direction="column" minH="100vh" bg="gray.50">
-      <NavBar
-        onClick={handleOpenAuthenticationPopup}
-        onKeyPress={handleSearchRestaurants}
-      />
-      {openLoginPopup && (
-        <Popup
-          onClick={(value) => setOpenLoginPopup(!value)}
-          content={<LoginPage onClick={handleOpenAuthenticationPopup} />}
-        />
-      )}
-
-      {openRegistrationPopup && (
-        <Popup
-          onClick={(value) => setOpenRegistrationPopup(!value)}
-          popupClass="wd-50 br-25"
-          content={<RegistrationPage />}
-        />
-      )}
-
-      {searchRestaurants ? (
-        <SearchRestaurantPage searchText={searchRestaurants} />
-      ) : (
-        <Flex direction={"column"} justifyContent={"left"}>
-          <Box
-            as="section"
-            px={{ base: 20, md: 40 }}
-            bg="gray.50"
-            textAlign="left"
-            borderBottom="1px solid #E7E7E7"
-            borderTop="1px solid #E7E7E7"
-            bgColor={"#FAFAFA"}
+    <Flex direction="column" justifyContent="left">
+      <Box
+        as="section"
+        px={{ base: 20, md: 40 }}
+        bg="gray.50"
+        textAlign="left"
+        borderBottom="1px solid #E7E7E7"
+        borderTop="1px solid #E7E7E7"
+        bgColor="#FAFAFA"
+      >
+        <Box px={{ base: 2, md: 8 }} paddingTop={{ base: 4, md: 12 }}>
+          <Heading
+            fontSize={{ base: "20px", md: "30px", lg: "40px" }}
+            mb={4}
+            fontWeight="400"
+            lineHeight="1.2"
+            color="#4a4a4a"
           >
-            <Box px={{ base: 2, md: 8 }} paddingTop={{ base: 4, md: 12 }}>
-              <Heading
-                fontSize={{ base: "20px", md: "30px", lg: "40px" }}
-                mb={4}
-                fontWeight="400"
-                lineHeight="1.2"
-                color={"#4a4a4a"}
-              >
-                Checkout
-              </Heading>
-            </Box>
-          </Box>
-          <Box as="section" py={10} px={{ base: 4, md: 8 }} bg="#f7f7f9">
-            <Box
-              maxW="6xl"
-              mx="auto"
-              px={14}
-              py={4}
-              border={"1px solid #E7E7E7"}
-            >
-              <Heading
-                fontSize="20px"
-                color={"#2d2c2c"}
-                fontWeight={600}
-                display="flex"
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                ORDER DETAILS
-              </Heading>
-            </Box>
-            <Box
-              maxW="6xl"
-              mx="auto"
-              px={14}
-              py={4}
-              border={"1px solid #E7E7E7"}
-              borderTop={"none"}
-              fontWeight={"500"}
-              bgColor="white"
-            >
-              <Flex>
-                <Flex
-                  justifyContent={"center"}
-                  gap={5}
-                  direction={"column"}
-                  flex={"0 0 60%"}
-                >
-                  <Flex justifyContent={"center"} gap={5} direction={"column"}>
-                    <Text fontSize="16px">DELIVERY ADDRESS</Text>
-                    <Flex spacing={6} mb={8}>
-                      {userAddress.length > 0
-                        ? userAddress.map((address, idx) => (
-                            <Box
-                              bgColor={"#FAFAFA"}
-                              border="1px solid #E7E7E7"
-                              p={8}
-                              color={"#4A4A4A"}
-                              fontWeight={"400"}
-                              fontSize={"0.875rem"}
-                              width="90%"
-                            >
-                              <Text>{address.address_title.toUpperCase()}</Text>
-                              <Text>{address.full_name}</Text>
-                              <Text>{address.address_details}</Text>
-                              <Text>Phone: {address.address_contact}</Text>
-                              <Text>
-                                Alternate Phone:{" "}
-                                {address.address_alternate_contact}
-                              </Text>
-                            </Box>
-                          ))
-                        : "hello"}
-                    </Flex>
-                  </Flex>
-                  <Flex justifyContent={"center"} gap={5} direction={"column"}>
-                    <Text fontSize="16px"> YOUR ORDER SETTINGS</Text>
-                    <Flex spacing={6} mb={8}>
-                      <Box
-                        bgColor={"#FAFAFA"}
-                        border="1px solid #E7E7E7"
-                        p={8}
-                        color={"#4A4A4A"}
-                        fontWeight={"400"}
-                        fontSize={"0.875rem"}
-                        width="90%"
-                      >
-                        <Text>Delivery Time: ASAP</Text>
-                        <Text>Payment Option: Cash on Delivery</Text>
-                      </Box>
-                    </Flex>
-                  </Flex>
-                  <Flex justifyContent={"center"} gap={5} direction={"column"}>
-                    <Text fontSize="16px"> SPECIAL INSTRUCTIONS</Text>
-                    <Flex>
-                      <Box
-                        bgColor={"#FAFAFA"}
-                        border="1px solid #E7E7E7"
-                        p={8}
-                        color={"#4A4A4A"}
-                        fontWeight={"400"}
-                        fontSize={"0.875rem"}
-                        width="90%"
-                      >
-                        <Textarea
-                          placeholder="Please mention if there are special instruction for the delivery person. (eg. Beware of Dogs)"
-                          id={`order_special_instructions`}
-                          fontSize="sm"
-                          bgColor={"white"}
-                        />
-                      </Box>
-                    </Flex>
-                  </Flex>
-                </Flex>
-                <Cart
-                  position="relative"
-                  restaurantCharge={restaurantCharge}
-                  cartType="checkout"
-                />
-              </Flex>
-            </Box>
-          </Box>
-        </Flex>
-      )}
+            Checkout
+          </Heading>
+        </Box>
+      </Box>
 
-      <Box mt="auto" bg="gray.100" pt={10}>
-        <FooterTop />
-        <FooterBottom />
+      <Box as="section" py={10} px={{ base: 4, md: 8 }} bg="#f7f7f9">
+        <Box maxW="6xl" mx="auto" px={14} py={4} border="1px solid #E7E7E7">
+          <Heading
+            fontSize="20px"
+            color="#2d2c2c"
+            fontWeight={600}
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            ORDER DETAILS
+          </Heading>
+        </Box>
+
+        <Box
+          maxW="6xl"
+          mx="auto"
+          px={14}
+          py={4}
+          border="1px solid #E7E7E7"
+          borderTop="none"
+          fontWeight="500"
+          bgColor="white"
+        >
+          {isLoading ? (
+            <Flex gap={8}>
+              <Box flex="0 0 60%">
+                <Skeleton height="120px" mb={4} />
+                <Skeleton height="120px" mb={4} />
+                <Skeleton height="120px" mb={4} />
+              </Box>
+              <Box flex="1">
+                <Skeleton height="300px" />
+              </Box>
+            </Flex>
+          ) : (
+            <Flex>
+              <Flex direction="column" gap={8} flex="0 0 60%">
+                <Box>
+                  <Text fontSize="16px" mb={2}>
+                    DELIVERY ADDRESS
+                  </Text>
+                  <Box
+                    bgColor="#FAFAFA"
+                    border="1px solid #E7E7E7"
+                    p={8}
+                    color="#4A4A4A"
+                    fontWeight="400"
+                    fontSize="0.875rem"
+                    width="90%"
+                  >
+                    <Text>{address.address_title.toUpperCase()}</Text>
+                    <Text>{user.first_name + " " + user.last_name}</Text>
+                    <Text>{address.address_details}</Text>
+                    <Text>Phone: {address.address_contact}</Text>
+                    <Text>
+                      Alternate Phone: {address.address_alternate_contact}
+                    </Text>
+                  </Box>
+                </Box>
+
+                <Box>
+                  <Text fontSize="16px" mb={2}>
+                    YOUR ORDER SETTINGS
+                  </Text>
+                  <Box
+                    bgColor="#FAFAFA"
+                    border="1px solid #E7E7E7"
+                    p={8}
+                    color="#4A4A4A"
+                    fontWeight="400"
+                    fontSize="0.875rem"
+                    width="90%"
+                  >
+                    <Text>Delivery Time: ASAP</Text>
+                    <Text>Payment Option: Cash on Delivery</Text>
+                  </Box>
+                </Box>
+
+                <Box>
+                  <Text fontSize="16px" mb={2}>
+                    SPECIAL INSTRUCTIONS
+                  </Text>
+                  <Box
+                    bgColor="#FAFAFA"
+                    border="1px solid #E7E7E7"
+                    p={8}
+                    color="#4A4A4A"
+                    fontWeight="400"
+                    fontSize="0.875rem"
+                    width="90%"
+                  >
+                    <Textarea
+                      placeholder="Please mention if there are special instruction for the delivery person. (eg. Beware of Dogs)"
+                      id="order_special_instructions"
+                      fontSize="sm"
+                      bgColor="white"
+                    />
+                  </Box>
+                </Box>
+              </Flex>
+
+              <Cart
+                position="relative"
+                restaurantCharge={50}
+                cartType="checkout"
+              />
+            </Flex>
+          )}
+        </Box>
       </Box>
     </Flex>
   );
+};
+
+const CheckoutPage = () => {
+  return <TopLayout element={<CheckoutBody />} />;
 };
 
 export default CheckoutPage;

@@ -1,7 +1,7 @@
 import {
   Box,
   Flex,
-  Image,
+  chakra,
   Heading,
   Text,
   Badge,
@@ -92,6 +92,11 @@ function OrdersTab({ myOrders }) {
     return percent.toFixed(2);
   }
 
+  const LazyImage = chakra("img", {
+    baseStyle: {
+      loading: "lazy",
+    },
+  });
   return (
     <Flex direction={"column"} gap={5}>
       {myOrders.length > 0 ? (
@@ -173,7 +178,7 @@ function OrdersTab({ myOrders }) {
               >
                 <Flex className="restaurant-info" gap="15px" align={"center"}>
                   <Box position="relative">
-                    <Image
+                    <LazyImage
                       src={myOrder.restaurant_image}
                       alt={myOrder.restaurant_name}
                       objectFit="cover"
@@ -225,7 +230,7 @@ function OrdersTab({ myOrders }) {
           justifyContent="center"
           p={6}
         >
-          <Image src={EmptyCartImage} alt="Empty Cart" width="25%" />
+          <LazyImage src={EmptyCartImage} alt="Empty Cart" width="25%" />
           <Text fontSize="lg" color="gray.500" mt={4}>
             Your orders page is empty.
           </Text>

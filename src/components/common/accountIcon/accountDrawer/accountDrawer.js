@@ -5,7 +5,7 @@ import {
   PopoverArrow,
   PopoverBody,
   Flex,
-  Image,
+  chakra,
   Text,
   IconButton,
   SimpleGrid,
@@ -48,6 +48,12 @@ export default function AccountDrawer({ userData }) {
     (error) => {}
   );
 
+  const LazyImage = chakra("img", {
+    baseStyle: {
+      loading: "lazy",
+    },
+  });
+
   return (
     <Popover
       placement="bottom-end"
@@ -58,7 +64,7 @@ export default function AccountDrawer({ userData }) {
     >
       <PopoverTrigger>
         <Flex align={"center"} gap={2}>
-          <Image
+          <LazyImage
             src={userData.picture}
             borderRadius={"full"}
             boxSize={"35px"}

@@ -1,22 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import {
-  Box,
-  Image,
-  Text,
-  VisuallyHidden,
-  useRadio,
-  useRadioGroup,
-} from "@chakra-ui/react";
+import { Box, chakra, Text, VisuallyHidden } from "@chakra-ui/react";
 
-const BrowseByCategoryNav = ({
-  category_id,
-  image,
-  restaurant_id,
-  title,
-  id,
-}) => {
+const BrowseByCategoryNav = ({ category_id, image, restaurant_id, title }) => {
   const imageUrl = `${image}`;
+
+  const LazyImage = chakra("img", {
+    baseStyle: {
+      loading: "lazy",
+    },
+  });
 
   return (
     <NavLink to={`/restaurant/${restaurant_id}`}>
@@ -40,7 +33,7 @@ const BrowseByCategoryNav = ({
           id={category_id}
         />
 
-        <Image
+        <LazyImage
           boxSize="130px"
           objectFit="cover"
           borderRadius="full"

@@ -3,7 +3,7 @@ import {
   Box,
   Flex,
   Heading,
-  Image,
+  chakra,
   Link,
   Text,
   useToast,
@@ -62,6 +62,11 @@ function LoginPage({ onClick }) {
     login(userData);
   };
 
+  const LazyImage = chakra("img", {
+    baseStyle: {
+      loading: "lazy",
+    },
+  });
   return (
     <Flex
       direction={{ base: "column", md: "row" }}
@@ -78,7 +83,7 @@ function LoginPage({ onClick }) {
         alignItems="center"
         bg="white"
       >
-        <Image src={FoodieImage} alt="foodie" maxW="70%" />
+        <LazyImage src={FoodieImage} alt="foodie" maxW="70%" />
       </Box>
       <Box
         flex="1"

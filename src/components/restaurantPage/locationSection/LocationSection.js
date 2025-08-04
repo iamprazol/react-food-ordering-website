@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 import {
   Box,
   Flex,
-  Image,
+  chakra,
   SimpleGrid,
   Modal,
   ModalOverlay,
@@ -18,6 +18,7 @@ import {
   ModalBody,
   useDisclosure,
   IconButton,
+  Skeleton,
 } from "@chakra-ui/react";
 import { CloseIcon } from "@chakra-ui/icons";
 
@@ -31,8 +32,11 @@ L.Icon.Default.mergeOptions({
 
 function LocationSection({ latitude, longitude }) {
   const [foodImages, setFoodImages] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const { REACT_APP_API_URL } = process.env;
   const { restaurantId } = useParams();
+
   useEffect(() => {
     fetch(`${REACT_APP_API_URL}/foodofrestaurant/${restaurantId}`)
       .then((res) => res.json())
@@ -40,18 +44,25 @@ function LocationSection({ latitude, longitude }) {
         if (data.data && data.data.length > 0) {
           setFoodImages(data.data);
         }
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [REACT_APP_API_URL, restaurantId]);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedImage, setSelectedImage] = useState(null);
 
-  if (!latitude || !longitude) {
-    return <p>Loading location...</p>;
-  }
   const openImage = (img) => {
     setSelectedImage(img);
     onOpen();
   };
+
+  const LazyImage = chakra("img", {
+    baseStyle: {
+      loading: "lazy",
+    },
+  });
 
   return (
     <Flex
@@ -66,42 +77,59 @@ function LocationSection({ latitude, longitude }) {
       id="map&gallery"
     >
       <Box py={6} width="70%">
-        <MapContainer
-          center={[latitude, longitude]}
-          zoom={13}
-          style={{ height: "470px", width: "100%" }}
-          scrollWheelZoom={false}
-        >
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          <Marker position={[latitude, longitude]}>
-            <Popup>Your location</Popup>
-          </Marker>
-        </MapContainer>
+        {loading ? (
+          <Box height="470px" borderRadius="md" overflow="hidden">
+            <Skeleton height="100%" width="100%" />
+          </Box>
+        ) : (
+          <MapContainer
+            center={[latitude, longitude]}
+            zoom={13}
+            style={{ height: "470px", width: "100%" }}
+            scrollWheelZoom={false}
+          >
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            <Marker position={[latitude, longitude]}>
+              <Popup>Your location</Popup>
+            </Marker>
+          </MapContainer>
+        )}
       </Box>
       <Box py={6} width="70%">
         <SimpleGrid columns={[2, null, 3]} spacing={2}>
-          {foodImages?.slice(0, 9).map((food, idx) => (
-            <Box
-              key={idx}
-              cursor="pointer"
-              overflow="hidden"
-              borderRadius="md"
-              boxShadow="md"
-              onClick={() => openImage(food.picture)}
-              _hover={{ transform: "scale(1.03)", transition: "0.3s" }}
-              height="150px"
-            >
-              <Image
-                src={food.picture}
-                alt={food.food_name}
-                fit={"cover"}
-                height="100%"
-                width="100%"
-                objectPosition="center"
-                transition="0.3s ease"
-              />
-            </Box>
-          ))}
+          {loading
+            ? [...Array(9)].map((_, idx) => (
+                <Box
+                  key={idx}
+                  height="150px"
+                  borderRadius="md"
+                  overflow="hidden"
+                >
+                  <Skeleton height="100%" width="100%" />
+                </Box>
+              ))
+            : foodImages?.slice(0, 9).map((food, idx) => (
+                <Box
+                  key={idx}
+                  cursor="pointer"
+                  overflow="hidden"
+                  borderRadius="md"
+                  boxShadow="md"
+                  onClick={() => openImage(food.picture)}
+                  _hover={{ transform: "scale(1.03)", transition: "0.3s" }}
+                  height="150px"
+                >
+                  <LazyImage
+                    src={food.picture}
+                    alt={food.food_name}
+                    fit={"cover"}
+                    height="100%"
+                    width="100%"
+                    objectPosition="center"
+                    transition="0.3s ease"
+                  />
+                </Box>
+              ))}
         </SimpleGrid>
         <Modal isOpen={isOpen} onClose={onClose} isCentered size="xl">
           <ModalOverlay />
@@ -118,7 +146,7 @@ function LocationSection({ latitude, longitude }) {
                 colorScheme="blackAlpha"
                 aria-label="Close image viewer"
               />
-              <Image
+              <LazyImage
                 src={selectedImage}
                 alt="Selected"
                 width="100%"

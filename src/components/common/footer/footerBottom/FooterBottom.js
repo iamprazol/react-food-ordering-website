@@ -1,4 +1,12 @@
-import { Box, Flex, Heading, Link, Stack, Text, Image } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  Link,
+  Stack,
+  Text,
+  chakra,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 const FooterBottom = () => {
@@ -12,6 +20,12 @@ const FooterBottom = () => {
     return a;
   };
 
+  const LazyImage = chakra("img", {
+    baseStyle: {
+      loading: "lazy",
+    },
+  });
+
   useEffect(() => {
     const { REACT_APP_API_URL } = process.env;
     fetch(REACT_APP_API_URL + "/foods")
@@ -21,7 +35,7 @@ const FooterBottom = () => {
         const foodElements = foodsArray
           .slice(0, 7)
           .map((food, idx) => (
-            <Image
+            <LazyImage
               src={`${food.picture}`}
               objectFit={"cover"}
               transition="transform 0.3s ease-in-out"
@@ -126,12 +140,12 @@ const FooterBottom = () => {
         <Box w={{ base: "100%", md: "45%", lg: "18%" }}>
           {sectionHeading("Download Apps")}
           <Stack spacing={3}>
-            <Image
+            <LazyImage
               src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
               alt="Google Play"
               maxW="140px"
             />
-            <Image
+            <LazyImage
               src="https://markseducation.com/wp-content/uploads/2016/11/link-badge-appstore_2x.png"
               alt="App Store"
               maxW="140px"

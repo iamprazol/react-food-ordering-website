@@ -9,10 +9,6 @@ const OrdersLayout = () => {
   const {
     state: { orders },
   } = useApp();
-  const [openLoginPopup, setOpenLoginPopup] = useState(false);
-  const [myOrders, setMyOrders] = useState(orders);
-  const [openRegistrationPopup, setOpenRegistrationPopup] = useState(false);
-  const { REACT_APP_API_URL } = process.env;
 
   return (
     <Tabs variant="unstyled" justifyContent={"space-between"} w="100%">
@@ -66,21 +62,21 @@ const OrdersLayout = () => {
       </TabList>
       <TabPanels width="100%">
         <TabPanel p="20px 0px" width="100% !important">
-          <OrdersTab myOrders={myOrders} />
+          <OrdersTab myOrders={orders} />
         </TabPanel>
         <TabPanel p="20px 0px" width="100% !important">
           <OrdersTab
-            myOrders={myOrders.filter((order) => order.delivered === 0)}
+            myOrders={orders.filter((order) => order.delivered === 0)}
           />
         </TabPanel>
         <TabPanel p="20px 0px" width="100% !important">
           <OrdersTab
-            myOrders={myOrders.filter((order) => order.delivered === 1)}
+            myOrders={orders.filter((order) => order.delivered === 1)}
           />
         </TabPanel>
         <TabPanel p="20px 0px" width="100% !important">
           <OrdersTab
-            myOrders={myOrders.filter((order) => order.delivered === -1)}
+            myOrders={orders.filter((order) => order.delivered === -1)}
           />
         </TabPanel>
       </TabPanels>

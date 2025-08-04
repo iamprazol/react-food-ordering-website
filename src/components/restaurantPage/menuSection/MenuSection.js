@@ -1,4 +1,3 @@
-// Import Libraries
 import React, { useState, useEffect } from "react";
 import {
   Box,
@@ -19,6 +18,8 @@ import {
   ModalFooter,
   Divider,
   Heading,
+  Skeleton,
+  SkeletonText,
 } from "@chakra-ui/react";
 
 import {
@@ -36,6 +37,7 @@ function MenuSection({ menuItems }) {
   const [orderHandled, setOrderHandled] = useState(true);
   const [pendingOrder, setPendingOrder] = useState(null);
   const [currentRestaurantId, setCurrentRestaurantId] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const {
     isOpen: isCartOpen,
@@ -50,6 +52,12 @@ function MenuSection({ menuItems }) {
   const { cartItems, addToCart, clearCart } = useCart();
 
   useEffect(() => {
+    if (menuItems?.length > 0) {
+      setLoading(false);
+    }
+  }, [menuItems]);
+
+  useEffect(() => {
     if (pendingOrder && cartItems.length === 0) {
       addToCart(pendingOrder);
       setPendingOrder(null);
@@ -62,20 +70,14 @@ function MenuSection({ menuItems }) {
   const generateRandomKey = (length = 16) => {
     const chars =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let key = "";
-
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * chars.length);
-      key += chars[randomIndex];
-    }
-
-    return key;
+    return Array.from({ length })
+      .map(() => chars[Math.floor(Math.random() * chars.length)])
+      .join("");
   };
 
   const handleOrderedFood = (food) => {
     if (!orderHandled) {
       setOrderHandled(true);
-
       const specialInstructions =
         document.getElementById(`food_${food.id}_special_instructions`)
           ?.value || "";
@@ -115,6 +117,19 @@ function MenuSection({ menuItems }) {
     setOrderedQuantity(Number(value));
   };
 
+  const renderSkeletons = () => {
+    return Array.from({ length: 3 }).map((_, sectionIndex) => (
+      <Box key={sectionIndex} mb={6}>
+        <Skeleton height="20px" width="550px" mb={3} />
+        <VStack align="stretch" spacing={4}>
+          {Array.from({ length: 3 }).map((_, itemIndex) => (
+            <Skeleton key={itemIndex} height="30px" />
+          ))}
+        </VStack>
+      </Box>
+    ));
+  };
+
   return (
     <Box p={4}>
       <Flex direction="column" gap="60px">
@@ -143,8 +158,11 @@ function MenuSection({ menuItems }) {
             _placeholder={{ color: "gray.400" }}
           />
         </Flex>
+
         <Flex direction="column" gap="20px">
-          {menuItems && menuItems.length > 0 ? (
+          {loading ? (
+            renderSkeletons()
+          ) : menuItems && menuItems.length > 0 ? (
             menuItems.map((menuItem, index) => (
               <Box key={index} mb={6}>
                 <Box bg="#FBF9F9" p={3}>

@@ -6,14 +6,13 @@ import {
   Button as ChakraButton,
   Link,
   useToast,
+  chakra,
 } from "@chakra-ui/react";
-import { Image } from "@chakra-ui/react";
 import EmptyCartImage from "../../../assets/images/cart-empty.png";
 import { MdOutlineDeleteForever } from "react-icons/md";
 import { useCart } from "../../../hooks/useCart/useCart";
 import { useDispatchOrder } from "../../../hooks/useDispatchOrder/useDispatchOrder";
 import { useNavigate } from "react-router-dom";
-import { useApp } from "../../../context/AppContext";
 
 export default function Cart({ cartType, position }) {
   const { cartItems, removeFromCart, clearCart } = useCart();
@@ -118,6 +117,12 @@ export default function Cart({ cartType, position }) {
     };
     dispatchOrder(order);
   };
+
+  const LazyImage = chakra("img", {
+    baseStyle: {
+      loading: "lazy",
+    },
+  });
 
   return (
     <Flex
@@ -246,7 +251,7 @@ export default function Cart({ cartType, position }) {
               justifyContent="center"
               p={6}
             >
-              <Image src={EmptyCartImage} alt="Empty Cart" width="25%" />
+              <LazyImage src={EmptyCartImage} alt="Empty Cart" width="25%" />
               <Text fontSize="lg" color="gray.500" mt={4}>
                 Your cart is empty.
               </Text>

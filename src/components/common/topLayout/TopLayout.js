@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Box,
   Flex,
@@ -10,6 +10,7 @@ import {
   Tab,
   TabPanel,
 } from "@chakra-ui/react";
+import debounce from "lodash.debounce";
 
 // Components
 import FooterTop from "../footer/footerTop/FooterTop";
@@ -56,17 +57,21 @@ const TopLayout = ({ element }) => {
     }
   };
 
+  const debounceSearch = useCallback(
+    debounce((value) => {
+      setSearchRestaurants(value);
+    }, 500),
+    []
+  );
   const handleSearchRestaurants = (e) => {
-    if (e.key === "Enter") {
-      setSearchRestaurants(e.target.value);
-    }
+    debounceSearch(e.target.value);
   };
 
   return (
     <Flex direction="column" minH="100vh" bg="gray.50">
       <NavBar
         onClick={handleOpenAuthenticationPopup}
-        onKeyPress={handleSearchRestaurants}
+        onChange={handleSearchRestaurants}
       />
       {openLoginPopup && (
         <Popup
@@ -90,8 +95,11 @@ const TopLayout = ({ element }) => {
           {element}
         </Flex>
       )}
-      <FooterTop />
-      <FooterBottom />
+
+      <Box mt="auto" bg="gray.100" pt={10}>
+        <FooterTop />
+        <FooterBottom />
+      </Box>
     </Flex>
   );
 };
