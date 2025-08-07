@@ -30,10 +30,11 @@ export const useLoginUser = (onSuccess, onError) => {
       const token = data?.success?.token;
       const address = data?.success?.address;
       const orders = data?.success?.orders;
+      const favourites = data?.success?.favourites;
       const user = data?.user;
 
       if (token && user) {
-        login(token, user, address, orders);
+        login(token, user, address, orders, favourites);
       }
 
       onSuccess?.(data);

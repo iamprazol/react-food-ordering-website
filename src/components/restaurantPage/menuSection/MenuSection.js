@@ -19,16 +19,12 @@ import {
   Divider,
   Heading,
   Skeleton,
-  SkeletonText,
 } from "@chakra-ui/react";
 
-import {
-  MdOutlineSearch,
-  MdAddCircleOutline,
-  MdAdd,
-  MdOutlineRemoveCircle,
-} from "react-icons/md";
+import { MdOutlineSearch, MdAdd, MdOutlineRemoveCircle } from "react-icons/md";
 import { useCart } from "../../../hooks/useCart/useCart";
+import { useApp } from "../../../context/AppContext";
+import FoodCard from "./foodCard/FoodCard";
 
 function MenuSection({ menuItems }) {
   const [openOrderBar, setOpenOrderBar] = useState(false);
@@ -39,6 +35,9 @@ function MenuSection({ menuItems }) {
   const [currentRestaurantId, setCurrentRestaurantId] = useState(0);
   const [loading, setLoading] = useState(true);
 
+  const {
+    state: { favourites, token },
+  } = useApp();
   const {
     isOpen: isCartOpen,
     onOpen: onCartOpen,
@@ -191,24 +190,7 @@ function MenuSection({ menuItems }) {
                         }}
                         cursor="pointer"
                       >
-                        <Flex direction="column" gap={1}>
-                          <Text fontSize={"md"} color="#4A4A4A">
-                            {food.food_name}
-                          </Text>
-                          <Text
-                            fontSize={"14px"}
-                            color="#4A4A4A"
-                            opacity={"0.5"}
-                          >
-                            {food.description}
-                          </Text>
-                        </Flex>
-                        <HStack>
-                          <Text fontSize={"md"} color="#383838">
-                            Rs {food.price}
-                          </Text>
-                          <MdAddCircleOutline color="green" size={"16px"} />
-                        </HStack>
+                        <FoodCard currentFood={food} />
                       </Flex>
                     ))
                   ) : (

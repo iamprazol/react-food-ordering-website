@@ -9,6 +9,8 @@ function IconContainer({
   iconStyle,
   iconPlacement = "center",
   onClick,
+  padding,
+  bgColor,
 }) {
   // Map old class names to Chakra styles (can be expanded)
   const colorMap = {
@@ -45,6 +47,7 @@ function IconContainer({
         if (onClick) onClick(true);
       }}
       style={iconStyle}
+      p={padding && padding}
     >
       {icon && <Icon as={icon.type} />}
       {text && <Text as="span">{text}</Text>}

@@ -4,7 +4,7 @@ import { Box, Heading, Flex } from "@chakra-ui/react";
 import TopLayout from "../common/topLayout/TopLayout";
 import SideBar from "./sideBar/SideBar";
 
-const MyAccountHeader = () => {
+const MyAccountHeader = ({ index }) => {
   return (
     <>
       <Box
@@ -36,13 +36,13 @@ const MyAccountHeader = () => {
         align={"left"}
         justifyContent={"flex-start"}
       >
-        <SideBar />
+        <SideBar index={index} />
       </Flex>
     </>
   );
 };
-const MyAccount = () => {
-  return <TopLayout element={<MyAccountHeader />}></TopLayout>;
+const MyAccount = ({ index }) => {
+  return <TopLayout element={<MyAccountHeader index={index} />}></TopLayout>;
 };
 
 export default MyAccount;

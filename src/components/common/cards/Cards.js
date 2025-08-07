@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import {
   Box,
   chakra,
@@ -6,15 +6,17 @@ import {
   Flex,
   Badge,
   Link as ChakraLink,
+  IconButton,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 // Import Icons.
 import { MdOutlineStarPurple500 } from "react-icons/md";
-import { IoMdHeartEmpty } from "react-icons/io";
+import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 
 // Import Components.
 import IconContainer from "../iconContainer/IconContainer";
+import { useApp } from "../../../context/AppContext";
 
 const Cards = ({
   id,
@@ -30,6 +32,64 @@ const Cards = ({
       loading: "lazy",
     },
   });
+
+  const [liked, setLiked] = useState(false);
+  const {
+    state: { token, favourites },
+    dispatch,
+  } = useApp();
+
+  useEffect(() => {
+    favourites?.restaurants.map((restaurant) => {
+      if (id == restaurant.restaurant_id) {
+        setLiked(true);
+      }
+    });
+  }, [favourites]);
+
+  const handleFavourites = async (restaurant_id) => {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/${
+        liked
+          ? `deletefavouriterestaurant/${restaurant_id}`
+          : `favouriterestaurant/${restaurant_id}`
+      }`,
+      {
+        method: liked ? "DELETE" : "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    const restaurant = data.data.restaurant;
+
+    let newFavouritesRef = {};
+    if (liked) {
+      newFavouritesRef = favourites.restaurants.filter((restaurant) => {
+        return restaurant.restaurant_id !== restaurant_id;
+      });
+    } else {
+      const currentFoods = favourites.restaurants || [];
+
+      newFavouritesRef = [...currentFoods, restaurant];
+    }
+    const updatedFavourites = {
+      ...favourites,
+      restaurants: newFavouritesRef,
+    };
+
+    dispatch({
+      type: "SET_FAVOURITES",
+      payload: updatedFavourites,
+    });
+
+    setLiked(!liked);
+  };
+
   return (
     <Box
       borderWidth="1px"
@@ -58,10 +118,25 @@ const Cards = ({
             {discount}%
           </Badge>
         </Box>
-        <Box position="absolute" top="2" right="2">
-          <IconContainer
-            icon={<IoMdHeartEmpty />}
-            fontSizeClass="icon--medium"
+        <Box
+          position="absolute"
+          top="2"
+          right="2"
+          bgColor={"white"}
+          borderRadius={"full"}
+        >
+          <IconButton
+            icon={
+              liked ? <IoMdHeart size={26} /> : <IoMdHeartEmpty size={26} />
+            }
+            padding={1}
+            variant="ghost"
+            fontSize="24px"
+            color={liked ? "brand.500" : "grey.600"}
+            _hover={{
+              color: liked ? "grey.600" : "brand.500",
+            }}
+            onClick={() => handleFavourites(id)}
           />
         </Box>
       </Box>

@@ -20,8 +20,10 @@ import { FaRegAddressCard } from "react-icons/fa";
 import OrdersLayout from "../../ordersPage/ordersLayout/OrdersLayout";
 import EditProfile from "../editProfile/EditProfile";
 import SavedAddresses from "../savedAddresses/SavedAddresses";
+import { GiSelfLove } from "react-icons/gi";
+import MyFavourites from "../myFavourites/MyFavourites";
 
-const sideBar = () => {
+const sideBar = ({ index }) => {
   const myAccountItems = [
     {
       icon: <RiUserFollowLine size={40} />,
@@ -41,11 +43,25 @@ const sideBar = () => {
       slug: "addresses",
       element: <SavedAddresses />,
     },
+    {
+      icon: <GiSelfLove size={40} />,
+      text: "My Favourites",
+      slug: "favourites",
+      element: <MyFavourites />,
+    },
   ];
+
+  console.log(index);
+
   return (
     <Box py={6} width="100%">
       <Box mb={4} pb={2} display="flex" alignItems="center" gap={2}>
-        <Tabs display="flex" direction="column" width="100%">
+        <Tabs
+          display="flex"
+          direction="column"
+          width="100%"
+          defaultIndex={index}
+        >
           <TabList
             display="flex"
             flexDir="column"

@@ -18,20 +18,33 @@ import {
 import { RiArrowDropDownLine, RiUserFollowLine } from "react-icons/ri";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { useLoginUser } from "../../../../hooks/useLoginUser/useLoginUser";
+import { GiSelfLove } from "react-icons/gi";
+import { FaRegAddressCard } from "react-icons/fa";
 
 export default function AccountDrawer({ userData }) {
   const { onOpen, onClose, isOpen } = useDisclosure();
   const { toast } = useToast;
   const accountDrawerItems = [
     {
-      icon: <IoFastFoodOutline size={40} />,
+      icon: <RiUserFollowLine size={30} />,
+      text: "Account",
+      slug: "my-account",
+    },
+    {
+      icon: <IoFastFoodOutline size={30} />,
       text: "Orders",
       slug: "orders",
     },
+
     {
-      icon: <RiUserFollowLine size={40} />,
-      text: "Account",
-      slug: "my-account",
+      icon: <FaRegAddressCard size={30} />,
+      text: "Saved Address",
+      slug: "my-account/address",
+    },
+    {
+      icon: <GiSelfLove size={30} />,
+      text: "Favourites",
+      slug: "my-account/favourites",
     },
   ];
 
@@ -103,6 +116,7 @@ export default function AccountDrawer({ userData }) {
                 alignItems={"center"}
                 role="group"
                 cursor="pointer"
+                textAlign={"center"}
               >
                 <Link href={"/" + items.slug}>
                   <IconButton

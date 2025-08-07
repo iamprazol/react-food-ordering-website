@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Flex,
@@ -11,15 +11,18 @@ import {
   HStack,
   Divider,
   chakra,
+  IconButton,
 } from "@chakra-ui/react";
 import {
   MdOutlineStarPurple500,
   MdOutlineAddLocationAlt,
 } from "react-icons/md";
-import { IoMdHeartEmpty } from "react-icons/io";
+import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
+import { useApp } from "../../../context/AppContext";
 
 function RestaurantDetails(props) {
   const {
+    restaurantId,
     name,
     description,
     deliveryHours,
@@ -31,11 +34,69 @@ function RestaurantDetails(props) {
     additionalCharges,
   } = props;
 
+  const [liked, setLiked] = useState(false);
+
   const LazyImage = chakra("img", {
     baseStyle: {
       loading: "lazy",
     },
   });
+
+  const {
+    state: { favourites, token },
+    dispatch,
+  } = useApp();
+
+  useEffect(() => {
+    favourites?.restaurants.map((restaurant) => {
+      if (restaurantId == restaurant.restaurant_id) {
+        setLiked(true);
+      }
+    });
+  }, [favourites]);
+
+  const handleFavourites = async (restaurant_id) => {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/${
+        liked
+          ? `deletefavouriterestaurant/${restaurant_id}`
+          : `favouriterestaurant/${restaurant_id}`
+      }`,
+      {
+        method: liked ? "DELETE" : "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    const restaurant = data.data.restaurant;
+
+    let newFavouritesRef = {};
+    if (liked) {
+      newFavouritesRef = favourites.restaurants.filter((restaurant) => {
+        return restaurant.restaurant_id !== restaurant_id;
+      });
+    } else {
+      const currentFoods = favourites.restaurants || [];
+
+      newFavouritesRef = [...currentFoods, restaurant];
+    }
+    const updatedFavourites = {
+      ...favourites,
+      restaurants: newFavouritesRef,
+    };
+
+    dispatch({
+      type: "SET_FAVOURITES",
+      payload: updatedFavourites,
+    });
+
+    setLiked(!liked);
+  };
 
   return (
     <Box maxW="7xl" mx="auto" p={4}>
@@ -111,7 +172,17 @@ function RestaurantDetails(props) {
             </Link>
           ))}
         </HStack>
-        <Icon as={IoMdHeartEmpty} boxSize={6} color="gray.600" />
+        <IconButton
+          icon={liked ? <IoMdHeart size={26} /> : <IoMdHeartEmpty size={26} />}
+          padding={1}
+          variant="ghost"
+          fontSize="24px"
+          color={liked ? "brand.500" : "grey.600"}
+          _hover={{
+            color: liked ? "grey.600" : "brand.500",
+          }}
+          onClick={() => handleFavourites(restaurantId)}
+        />
       </Flex>
     </Box>
   );

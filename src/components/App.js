@@ -18,7 +18,9 @@ function App() {
       <Route element={<PageNotFound />} />
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="/orders" element={<OrdersPage />} />
-      <Route path="/my-account" element={<MyAccount />} />
+      <Route path="/my-account" element={<MyAccount index={0} />} />
+      <Route path="/my-account/address" element={<MyAccount index={2} />} />
+      <Route path="/my-account/favourites" element={<MyAccount index={3} />} />
     </Routes>
   );
 }
