@@ -109,6 +109,7 @@ function LoginPage({ onClick }) {
                   id: `user_login_email`,
                   icon: <MdEmail />,
                   name: "email",
+                  error: errors["email"] || "",
                 }}
                 onChange={handleInputChange}
               />
@@ -126,6 +127,7 @@ function LoginPage({ onClick }) {
                   id: `user_login_password`,
                   icon: <MdLock />,
                   name: "password",
+                  error: errors["password"] || "",
                 }}
                 onChange={handleInputChange}
               />

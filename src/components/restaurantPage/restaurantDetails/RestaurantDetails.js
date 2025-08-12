@@ -48,11 +48,13 @@ function RestaurantDetails(props) {
   } = useApp();
 
   useEffect(() => {
-    favourites?.restaurants.map((restaurant) => {
-      if (restaurantId == restaurant.restaurant_id) {
-        setLiked(true);
-      }
-    });
+    if (token) {
+      favourites?.restaurants.map((restaurant) => {
+        if (restaurantId == restaurant.restaurant_id) {
+          setLiked(true);
+        }
+      });
+    }
   }, [favourites]);
 
   const handleFavourites = async (restaurant_id) => {

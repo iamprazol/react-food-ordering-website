@@ -40,11 +40,13 @@ const Cards = ({
   } = useApp();
 
   useEffect(() => {
-    favourites?.restaurants.map((restaurant) => {
-      if (id == restaurant.restaurant_id) {
-        setLiked(true);
-      }
-    });
+    if (token) {
+      favourites?.restaurants.map((restaurant) => {
+        if (id == restaurant.restaurant_id) {
+          setLiked(true);
+        }
+      });
+    }
   }, [favourites]);
 
   const handleFavourites = async (restaurant_id) => {

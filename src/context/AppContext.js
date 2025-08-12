@@ -96,6 +96,7 @@ export const AppProvider = ({ children }) => {
 
   const logout = () => {
     dispatch({ type: "LOGOUT" });
+    localStorage.removeItem("appState");
   };
 
   return (

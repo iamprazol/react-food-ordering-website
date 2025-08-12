@@ -17,13 +17,13 @@ import {
 } from "@chakra-ui/react";
 import { RiArrowDropDownLine, RiUserFollowLine } from "react-icons/ri";
 import { IoFastFoodOutline } from "react-icons/io5";
-import { useLoginUser } from "../../../../hooks/useLoginUser/useLoginUser";
 import { GiSelfLove } from "react-icons/gi";
 import { FaRegAddressCard } from "react-icons/fa";
+import { useLogoutUser } from "../../../../hooks/useLogoutUser/useLogoutUser";
 
 export default function AccountDrawer({ userData }) {
   const { onOpen, onClose, isOpen } = useDisclosure();
-  const { toast } = useToast;
+  const toast = useToast();
   const accountDrawerItems = [
     {
       icon: <RiUserFollowLine size={30} />,
@@ -48,18 +48,21 @@ export default function AccountDrawer({ userData }) {
     },
   ];
 
-  const { mutate: logout, isPending } = useLoginUser(
-    () => {
-      toast({
-        title: "Logout Successful",
-        description: "You have been successfully logged-out from the site.",
-        status: "success",
-        duration: 4000,
-        isClosable: true,
-      });
-    },
-    (error) => {}
-  );
+  const { logout } = useLogoutUser(() => {
+    toast({
+      title: "Logout Successful",
+      description: "You have been successfully logged-out from the site.",
+      status: "success",
+      duration: 4000,
+      isClosable: true,
+    });
+  });
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    logout();
+    onClose();
+  };
 
   const LazyImage = chakra("img", {
     baseStyle: {
@@ -155,10 +158,7 @@ export default function AccountDrawer({ userData }) {
             ?
             <ChakraButton
               _hover={{ color: "brand.700" }}
-              onClick={() => {
-                logout();
-                onClose();
-              }}
+              onClick={handleLogout}
               variant={"link"}
               fontSize={"13px"}
               marginLeft={2}

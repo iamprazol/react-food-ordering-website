@@ -30,11 +30,13 @@ const FoodCard = ({ currentFood, context }) => {
   } = useApp();
 
   useEffect(() => {
-    favourites.foods.map((food) => {
-      if (currentFood.food_id == food.food_id) {
-        setLiked(true);
-      }
-    });
+    if (token) {
+      favourites.foods.map((food) => {
+        if (currentFood.food_id == food.food_id) {
+          setLiked(true);
+        }
+      });
+    }
   }, [favourites]);
 
   const handleFavourites = async (food_id) => {
