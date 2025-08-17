@@ -8,6 +8,7 @@ const initialState = {
   orders: [],
   address: [],
   favourites: [],
+  notifications: [],
 };
 
 const reducer = (state, action) => {
@@ -62,11 +63,27 @@ const reducer = (state, action) => {
     case "SET_ADDRESS":
       return { ...state, address: action.payload };
     case "SET_FAVOURITES":
-      console.log("payload");
-
-      console.log(action.payload);
-
       return { ...state, favourites: action.payload };
+    case "SET_NOTIFICATIONS":
+      const keyOf = (notification) =>
+        notification?.id ??
+        notification?.uuid ??
+        notification?._id ??
+        notification?.created_at?.date;
+      const dedupe = (arr) =>
+        Array.from(
+          new Map(
+            arr.map((notification) => [keyOf(notification), notification])
+          ).values()
+        );
+      const byCreatedDesc = (a, b) =>
+        (b?.created_at?.date || "").localeCompare(a?.created_at?.date || "");
+
+      const incoming = Array.isArray(action.payload) ? action.payload : [];
+      const next = dedupe([...(state.notifications || []), ...incoming]).sort(
+        byCreatedDesc
+      );
+      return { ...state, notifications: next };
     default:
       return state;
   }

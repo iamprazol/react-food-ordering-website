@@ -15,6 +15,60 @@ import EmptyCartImage from "../../../assets/images/cart-empty.png";
 function OrdersTab({ myOrders }) {
   myOrders = myOrders.sort((a, b) => b.id - a.id);
 
+  const getOrderStatus = (myOrder) => {
+    const status = myOrder.status;
+
+    if (status === "CREATED" || status === "SENT_TO_RESTAURANT") {
+      return {
+        bgColor: "#cce5ff",
+        color: "#0066cc",
+        text: "Order Placed",
+      };
+    } else if (status === "ACCEPTED") {
+      return {
+        bgColor: "#cce5ff",
+        color: "#0066cc",
+        text: "Order Accepted",
+      };
+    } else if (status === "REJECTED") {
+      return {
+        bgColor: "#f8d7da",
+        color: "#721c24",
+        text: "Order Rejected",
+      };
+    } else if (status === "READY") {
+      return {
+        bgColor: "#cce5ff",
+        color: "#0066cc",
+        text: "Order Ready",
+      };
+    } else if (status === "PICKED_UP") {
+      return {
+        bgColor: "#cce5ff",
+        color: "#0066cc",
+        text: "Order Picked Up",
+      };
+    } else if (status === "ON_THE_WAY") {
+      return {
+        bgColor: "#cce5ff",
+        color: "#0066cc",
+        text: "On The Way",
+      };
+    } else if (status === "CANCELLED") {
+      return {
+        bgColor: "#f8d7da",
+        color: "#721c24",
+        text: "Cancelled",
+      };
+    } else {
+      return {
+        bgColor: "#e8f5e8",
+        color: "#2d7738",
+        text: "Delivered",
+      };
+    }
+  };
+
   const formatDate = (createdAt) => {
     const kathmanduOptions = {
       timeZone: "Asia/Kathmandu",
@@ -65,31 +119,23 @@ function OrdersTab({ myOrders }) {
     return detail;
   };
 
-  function getDeliveryProgress(deliveryTimeStr, deliveryDateStr) {
-    const [hourStr, minuteStr] = deliveryTimeStr.split(":");
-
-    const parseDDMMYYYY = (date) => {
-      const [day, month, year] = date.split("/").map(Number);
-      return new Date(year, month - 1, day);
-    };
-
-    const deliveryDate = parseDDMMYYYY(deliveryDateStr);
-    const deliveryTime = new Date(deliveryDate);
-    deliveryTime.setHours(parseInt(hourStr, 10), parseInt(minuteStr, 10), 0, 0);
-    const now = new Date();
-
-    if (now >= deliveryTime) {
+  function getDeliveryProgress(myOrder) {
+    if (
+      myOrder.status === "CREATED" ||
+      myOrder.status === "SENT_TO_RESTAURANT"
+    ) {
+      return 20;
+    } else if (myOrder.status === "ACCEPTED") {
+      return 40;
+    } else if (myOrder.status === "READY") {
+      return 60;
+    } else if (myOrder.status === "PICKED_UP") {
+      return 70;
+    } else if (myOrder.status === "ON_THE_WAY") {
+      return 80;
+    } else {
       return 100;
     }
-
-    const orderTime = new Date(deliveryTime.getTime() - 60 * 60 * 1000);
-
-    const totalDuration = deliveryTime - orderTime;
-    const elapsed = now - orderTime;
-
-    const percent = Math.min((elapsed / totalDuration) * 100, 100);
-
-    return percent.toFixed(2);
   }
 
   const LazyImage = chakra("img", {
@@ -129,46 +175,18 @@ function OrdersTab({ myOrders }) {
                     Placed on {formatDate(myOrder.created_at)}{" "}
                   </Text>
                 </Flex>
-                {myOrder.delivered === 0 ? (
-                  <Badge
-                    bgColor="#cce5ff"
-                    color="#0066cc"
-                    fontSize="12px"
-                    fontWeight={"500"}
-                    px={3}
-                    py={1}
-                    borderRadius="xl"
-                    height="50%"
-                  >
-                    On The Way
-                  </Badge>
-                ) : myOrder.delivered === 1 ? (
-                  <Badge
-                    bgColor="#e8f5e8"
-                    color="#2d7738"
-                    fontSize="12px"
-                    fontWeight={"500"}
-                    px={3}
-                    py={1}
-                    borderRadius="xl"
-                    height="50%"
-                  >
-                    Delivered
-                  </Badge>
-                ) : (
-                  <Badge
-                    bgColor="#f8d7da"
-                    color="#721c24"
-                    fontSize="12px"
-                    fontWeight={"500"}
-                    px={3}
-                    py={1}
-                    borderRadius="xl"
-                    height="50%"
-                  >
-                    Cancelled
-                  </Badge>
-                )}
+                <Badge
+                  bgColor={getOrderStatus(myOrder).bgColor}
+                  color={getOrderStatus(myOrder).color}
+                  fontSize="12px"
+                  fontWeight={"500"}
+                  px={3}
+                  py={1}
+                  borderRadius="xl"
+                  height="50%"
+                >
+                  {getOrderStatus(myOrder).text}
+                </Badge>
               </Flex>
               <Flex
                 direction={"column"}
@@ -202,10 +220,7 @@ function OrdersTab({ myOrders }) {
                   </Flex>
                 </Flex>
                 <Progress
-                  value={getDeliveryProgress(
-                    myOrder.delivery_time,
-                    myOrder.delivery_date
-                  )}
+                  value={getDeliveryProgress(myOrder)}
                   size="xs"
                   colorScheme="pink"
                 />

@@ -112,7 +112,7 @@ const FoodCard = ({ currentFood, context }) => {
           }
         />
       </Box>
-      <Flex direction="column" gap={1} flex="0 0 60%">
+      <Flex direction="column" gap={1} flex="0 0 50%">
         <Text fontSize={"md"} color="#4A4A4A">
           {currentFood.food_name}
         </Text>

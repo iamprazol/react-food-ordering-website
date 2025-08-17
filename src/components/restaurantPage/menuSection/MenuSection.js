@@ -130,7 +130,7 @@ function MenuSection({ menuItems }) {
   };
 
   return (
-    <Box p={4}>
+    <Box p={4} w="100%">
       <Flex direction="column" gap="60px">
         {/* Search Bar */}
         <Flex

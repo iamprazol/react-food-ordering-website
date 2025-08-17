@@ -11,11 +11,15 @@ import {
 } from "@chakra-ui/react";
 import { MdOutlineSearch } from "react-icons/md";
 import CartDrawer from "../cart/cartDrawer";
+import NotificationDrawer from "../notifications/NotificationDrawer";
 import AccountIcon from "../accountIcon/AccountIcon";
+import { useApp } from "../../../context/AppContext";
 
 function NavBar({ onClick, onChange }) {
   const [searchText, setSearchText] = useState("");
-
+  const {
+    state: { token },
+  } = useApp();
   const isMobile = useBreakpointValue({ base: true, md: false });
 
   const LazyImage = chakra("img", {
@@ -100,6 +104,7 @@ function NavBar({ onClick, onChange }) {
       <Flex align="center" gap={8}>
         <AccountIcon onClick={onClick} />
         <CartDrawer />
+        {token ? <NotificationDrawer /> : ""}
       </Flex>
     </Flex>
   );

@@ -36,6 +36,7 @@ const FooterBottom = () => {
           .slice(0, 7)
           .map((food, idx) => (
             <LazyImage
+              key={idx}
               src={`${food.picture}`}
               objectFit={"cover"}
               transition="transform 0.3s ease-in-out"

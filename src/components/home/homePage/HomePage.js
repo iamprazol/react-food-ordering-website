@@ -45,7 +45,6 @@ const HomeHeader = () => {
               bgColor="brand.500"
               borderColor="brand.500"
               _hover={{ bgColor: "brand.600" }}
-              buttonHref="http://themegrill.me:41239/restaurants"
             >
               {"Order Now"}
             </ChakraButton>
