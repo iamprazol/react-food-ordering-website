@@ -12,8 +12,18 @@ import IconContainer from "../iconContainer/IconContainer";
 import { MdError } from "react-icons/md";
 
 function InputHandler({ fieldSetting, onChange }) {
-  const { type, value, required, placeholder, id, name, error, options, icon } =
-    fieldSetting;
+  const {
+    type,
+    value,
+    required,
+    placeholder,
+    id,
+    name,
+    error,
+    options,
+    icon,
+    bgColor,
+  } = fieldSetting;
 
   const handleChange = (e) => {
     if (onChange) {
@@ -51,6 +61,7 @@ function InputHandler({ fieldSetting, onChange }) {
               min={type === "number" ? 1 : undefined}
               step={type === "number" ? 1 : undefined}
               pl={icon ? "2.5rem" : undefined}
+              bgColor={fieldSetting.bgColor || ""}
             />
             {error && (
               <FormErrorMessage display="flex" alignItems="center" gap={1}>

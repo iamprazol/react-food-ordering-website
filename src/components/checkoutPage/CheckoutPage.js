@@ -12,6 +12,7 @@ import {
 import { useApp } from "../../context/AppContext";
 import Cart from "../common/cart/cart";
 import TopLayout from "../common/topLayout/TopLayout";
+import PaymentOptions from "./paymentOption/PaymentOption";
 
 const CheckoutBody = () => {
   const {
@@ -107,7 +108,7 @@ const CheckoutBody = () => {
 
                 <Box>
                   <Text fontSize="16px" mb={2}>
-                    YOUR ORDER SETTINGS
+                    PAYMENT OPTIONS
                   </Text>
                   <Box
                     bgColor="#FAFAFA"
@@ -118,8 +119,7 @@ const CheckoutBody = () => {
                     fontSize="0.875rem"
                     width="90%"
                   >
-                    <Text>Delivery Time: ASAP</Text>
-                    <Text>Payment Option: Cash on Delivery</Text>
+                    <PaymentOptions />
                   </Box>
                 </Box>
 

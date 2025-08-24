@@ -13,6 +13,8 @@ import { MdOutlineDeleteForever } from "react-icons/md";
 import { useCart } from "../../../hooks/useCart/useCart";
 import { useDispatchOrder } from "../../../hooks/useDispatchOrder/useDispatchOrder";
 import { useNavigate } from "react-router-dom";
+import { useApp } from "../../../context/AppContext";
+import { usePaymentProcessor } from "../../../hooks/usePaymentProcessor/usePaymentProcessor";
 
 export default function Cart({ cartType, position }) {
   const { cartItems, removeFromCart, clearCart } = useCart();
@@ -21,6 +23,23 @@ export default function Cart({ cartType, position }) {
   const restaurantId = localStorage.getItem("order_restaurant_id");
   const [restaurantDetails, setRestaurantDetails] = useState(null);
   const toast = useToast();
+  const {
+    state: { paymentIntent },
+  } = useApp();
+  const [provider, setProvider] = useState(paymentIntent.paymentMode);
+
+  const { mutateAsync: payAsync, isPending: isPaying } = usePaymentProcessor(
+    null,
+    (error) => {
+      toast({
+        title: "Payment Failed",
+        description: (error && error.message) || "Please try again later.",
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+      });
+    }
+  );
 
   useEffect(() => {}, [cartItems]);
 
@@ -34,31 +53,29 @@ export default function Cart({ cartType, position }) {
       });
   }, [REACT_APP_API_URL, restaurantId]);
 
-  const { mutate: dispatchOrder, isPending } = useDispatchOrder(
-    () => {
-      toast({
-        title: "Order Successful",
-        description: "Your order has been processed successfully.",
-        status: "success",
-        duration: 4000,
-        isClosable: true,
-      });
-      clearCart();
-
-      setTimeout(() => {
-        navigate("/orders");
-      }, 1500);
-    },
-    (error) => {
-      toast({
-        title: "Order Failed",
-        description: "You order has failed. Please try again later.",
-        status: "error",
-        duration: 4000,
-        isClosable: true,
-      });
-    }
-  );
+  const { mutateAsync: dispatchOrderAsync, isPending: isDispatching } =
+    useDispatchOrder(
+      () => {
+        toast({
+          title: "Order Successful",
+          description: "Your order has been processed successfully.",
+          status: "success",
+          duration: 4000,
+          isClosable: true,
+        });
+        clearCart();
+        setTimeout(() => navigate("/orders"), 1500);
+      },
+      (error) => {
+        toast({
+          title: "Order Failed",
+          description: (error && error.message) || "Please try again later.",
+          status: "error",
+          duration: 4000,
+          isClosable: true,
+        });
+      }
+    );
 
   const getTotalPrice = () => {
     var price = 0;
@@ -107,6 +124,22 @@ export default function Cart({ cartType, position }) {
   const handleOrder = async () => {
     const orderInstruction =
       document.getElementById(`order_special_instructions`)?.value || "";
+
+    if (
+      paymentIntent.paymentMode === "stripe" &&
+      null === paymentIntent.paymentMethodId
+    ) {
+      toast({
+        title: "Payment Details Not Found",
+        description:
+          "Your payment details seems to be empty. Please try again.",
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+      });
+      return;
+    }
+
     const order = {
       user_id: 1,
       restaurant_id: restaurantId,
@@ -114,8 +147,51 @@ export default function Cart({ cartType, position }) {
       instruction: orderInstruction,
       total_price: grandTotal,
       details: JSON.stringify(cartItems),
+      currency: "inr",
+      paymentIntent: paymentIntent,
     };
-    dispatchOrder(order);
+    try {
+      let payRes = { success: true, status: "cod" };
+
+      if (provider === "stripe") {
+        payRes = await payAsync({ provider, order });
+        console.log("payment result:", payRes);
+
+        if (
+          payRes &&
+          payRes.status === "requires_action" &&
+          payRes.client_secret
+        ) {
+          toast({
+            title: "Additional authentication required",
+            description: "Please complete verification to finish payment.",
+            status: "info",
+            duration: 4000,
+            isClosable: true,
+          });
+          return;
+        }
+
+        if (
+          !payRes ||
+          (payRes.status !== "succeeded" &&
+            payRes.status !== "requires_capture")
+        ) {
+          throw new Error("Payment not completed.");
+        }
+      }
+
+      const orderRes = await dispatchOrderAsync(order);
+      console.log("order result:", orderRes);
+    } catch (e) {
+      toast({
+        title: "Checkout Failed",
+        description: (e && e.message) || "Please try again later.",
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+      });
+    }
   };
 
   const LazyImage = chakra("img", {
@@ -288,7 +364,7 @@ export default function Cart({ cartType, position }) {
                 color: "brand.500",
               }}
               onClick={handleOrder}
-              isLoading={isPending}
+              isLoading={isPaying || isDispatching}
               loadingText="Dispatching Order"
             >
               ORDER NOW

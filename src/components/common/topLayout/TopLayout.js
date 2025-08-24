@@ -30,6 +30,7 @@ const TopLayout = ({ element }) => {
   const { REACT_APP_URL, REACT_APP_API_URL } = process.env;
   const {
     state: { token },
+    dispatch,
   } = useApp();
 
   useEffect(() => {
@@ -41,6 +42,10 @@ const TopLayout = ({ element }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        dispatch({
+          type: "SET_ORDERS",
+          payload: data.data,
+        });
         setMyOrders(data.data);
       });
   }, []);

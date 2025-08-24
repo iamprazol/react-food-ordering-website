@@ -9,6 +9,7 @@ const initialState = {
   address: [],
   favourites: [],
   notifications: [],
+  paymentIntent: [],
 };
 
 const reducer = (state, action) => {
@@ -84,6 +85,9 @@ const reducer = (state, action) => {
         byCreatedDesc
       );
       return { ...state, notifications: next };
+
+    case "SET_PAYMENT_INTENT":
+      return { ...state, paymentIntent: action.payload };
     default:
       return state;
   }
