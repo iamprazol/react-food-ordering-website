@@ -13,7 +13,6 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-scroll";
 import { MdWhatshot } from "react-icons/md";
-import IconContainer from "../../../components/common/iconContainer/IconContainer";
 import { RiUserFollowLine } from "react-icons/ri";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { FaRegAddressCard } from "react-icons/fa";
@@ -22,6 +21,7 @@ import EditProfile from "./EditProfile";
 import SavedAddresses from "./SavedAddresses";
 import { GiSelfLove } from "react-icons/gi";
 import MyFavourites from "./MyFavourites";
+import IconContainer from "../../../widgets/icon-container/IconContainer";
 
 const sideBar = ({ index }) => {
   const myAccountItems = [

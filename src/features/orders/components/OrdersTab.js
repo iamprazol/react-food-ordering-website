@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 
 // Components
-import EmptyCartImage from "../../../assets/images/cart-empty.png";
+import EmptyCartImage from "../../../shared/assets/images/cart-empty.png";
 
 const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
 

@@ -1,7 +1,7 @@
 import { Box, Heading, Flex } from "@chakra-ui/react";
 
 // Components
-import TopLayout from "../../components/common/topLayout/TopLayout";
+import TopLayout from "../../shared/ui/TopLayout";
 import SideBar from "../../features/accounts/components/SideBar";
 
 const MyAccountHeader = ({ index }) => {

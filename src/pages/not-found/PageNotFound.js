@@ -1,6 +1,6 @@
 import { chakra, Heading, Center } from "@chakra-ui/react";
-import TopLayout from "../../components/common/topLayout/TopLayout";
-import HungryImage from "../../assets/images/hungry.png";
+import TopLayout from "../../shared/ui/TopLayout";
+import HungryImage from "../../shared/assets/images/hungry.png";
 
 const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
 

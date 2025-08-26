@@ -1,7 +1,7 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
 
 // Components
-import TopLayout from "../../components/common/topLayout/TopLayout";
+import TopLayout from "../../shared/ui/TopLayout";
 import OrdersLayout from "../../features/orders/components/OrdersLayout";
 
 const OrderHeader = () => {

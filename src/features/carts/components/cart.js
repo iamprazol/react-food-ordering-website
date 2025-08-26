@@ -8,13 +8,13 @@ import {
   useToast,
   chakra,
 } from "@chakra-ui/react";
-import EmptyCartImage from "../../../assets/images/cart-empty.png";
+import EmptyCartImage from "../../../shared/assets/images/cart-empty.png";
 import { MdOutlineDeleteForever } from "react-icons/md";
 import { useCart } from "../hooks/useCart";
-import { useDispatchOrder } from "../../../shared/hooks/useDispatchOrder/useDispatchOrder";
+import { useDispatchOrder } from "../../orders/hooks/useDispatchOrder";
 import { useNavigate } from "react-router-dom";
 import { useApp } from "../../../context/AppContext";
-import { usePaymentProcessor } from "../../../shared/hooks/usePaymentProcessor/usePaymentProcessor";
+import { usePaymentProcessor } from "../../checkout/hooks/usePaymentProcessor";
 
 const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
 

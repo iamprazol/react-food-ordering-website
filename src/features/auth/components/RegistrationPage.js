@@ -8,7 +8,7 @@ import {
   Button as ChakraButton,
 } from "@chakra-ui/react";
 
-import InputHandler from "../../../components/common/inputHandler/InputHandler";
+import InputHandler from "../../../widgets/inputHandler/InputHandler";
 import {
   MdEmail,
   MdLock,
@@ -16,7 +16,7 @@ import {
   MdContactPhone,
 } from "react-icons/md";
 
-import { useRegisterUser } from "../../../shared/hooks/useRegisterUser/useRegisterUser";
+import { useRegisterUser } from "../hooks/useRegisterUser";
 
 const RegistrationPage = () => {
   const toast = useToast();

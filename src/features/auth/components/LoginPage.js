@@ -10,11 +10,10 @@ import {
   Button as ChakraButton,
 } from "@chakra-ui/react";
 
-import InputHandler from "../../../components/common/inputHandler/InputHandler";
-import FoodieImage from "../../../assets/images/foodie.png";
-
+import InputHandler from "../../../widgets/inputHandler/InputHandler";
+import FoodieImage from "../../../shared/assets/images/foodie.png";
 import { MdEmail, MdLock } from "react-icons/md";
-import { useLoginUser } from "../../../shared/hooks/useLoginUser/useLoginUser";
+import { useLoginUser } from "../hooks/useLoginUser";
 
 const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
 

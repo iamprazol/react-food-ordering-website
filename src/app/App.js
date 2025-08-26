@@ -3,7 +3,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 // Import Components.
-import HomePage from "../pages/home/homePage/HomePage";
+import HomePage from "../pages/home/HomePage";
 import PageNotFound from "../pages/not-found/PageNotFound";
 import RestaurantLayout from "../pages/restaurantLayout/RestaurantLayout";
 import CheckoutPage from "../pages/checkout/CheckoutPage";

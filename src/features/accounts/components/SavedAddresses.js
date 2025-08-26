@@ -11,7 +11,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useApp } from "../../../context/AppContext";
-import InputHandler from "../../../components/common/inputHandler/InputHandler";
+import InputHandler from "../../../widgets/inputHandler/InputHandler";
 
 const SavedAddresses = () => {
   const {

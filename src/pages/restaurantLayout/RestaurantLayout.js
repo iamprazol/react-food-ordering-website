@@ -6,10 +6,10 @@ import NavBar from "../../widgets/navBar/NavBar";
 import Banner from "../../widgets/banner/Banner";
 import FooterTop from "../../widgets/footer/footer-top/FooterTop";
 import FooterBottom from "../../widgets/footer/footer-bottom/FooterBottom";
-import RestaurantDetails from "../../features/restaurants/components/RestaurantDetails";
-import MenuLayout from "../../features/restaurants/components/MenuLayout";
-import ReviewsSection from "../../features/restaurants/components/ReviewsSection";
-import LocationSection from "../../features/restaurants/components/LocationSection";
+import RestaurantDetails from "../../features/restaurants/components/restaurant-page/RestaurantDetails";
+import MenuLayout from "../../features/restaurants/components/restaurant-page/menu/MenuLayout";
+import ReviewsSection from "../../features/restaurants/components/restaurant-page/reviews/ReviewsSection";
+import LocationSection from "../../features/restaurants/components/restaurant-page/location/LocationSection";
 
 function RestaurantLayout() {
   const [restaurantDetails, setRestaurantDetails] = useState(null);

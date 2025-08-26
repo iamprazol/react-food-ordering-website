@@ -11,8 +11,8 @@ import {
 // Components
 import { useApp } from "../../context/AppContext";
 import Cart from "../../features/carts/components/cart";
-import TopLayout from "../../components/common/topLayout/TopLayout";
-import PaymentOptions from "../../components/checkoutPage/paymentOption/PaymentOption";
+import TopLayout from "../../shared/ui/TopLayout";
+import PaymentOptions from "../../features/checkout/components/PaymentOption";
 
 const CheckoutBody = () => {
   const {

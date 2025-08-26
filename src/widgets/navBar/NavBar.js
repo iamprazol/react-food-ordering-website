@@ -11,8 +11,8 @@ import {
 } from "@chakra-ui/react";
 import { MdOutlineSearch } from "react-icons/md";
 import CartDrawer from "../../features/carts/components/cartDrawer";
-import NotificationDrawer from "../../components/common/notifications/NotificationDrawer";
-import AccountIcon from "../../components/common/accountIcon/AccountIcon";
+import NotificationDrawer from "../notifications/NotificationDrawer";
+import AccountIcon from "../accountIcon/AccountIcon";
 import { useApp } from "../../context/AppContext";
 
 const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });

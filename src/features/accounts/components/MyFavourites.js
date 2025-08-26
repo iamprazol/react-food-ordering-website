@@ -13,8 +13,8 @@ import {
 
 // Components
 import { useApp } from "../../../context/AppContext";
-import Cards from "../../restaurants/components/Cards";
-import FoodCard from "../../../components/restaurantPage/menuSection/foodCard/FoodCard";
+import Cards from "../../restaurants/components/restaurant-list/cards/Cards";
+import FoodCard from "../../food/FoodCard";
 
 const MyFavourites = () => {
   const {
