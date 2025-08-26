@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useRef, useCallback, useMemo } from "react";
 import {
   Box,
   Heading,
@@ -8,75 +8,42 @@ import {
   SkeletonText,
 } from "@chakra-ui/react";
 import Cards from "./cards/Cards";
+import { useRestaurants } from "../../api/useRestaurants";
+import { useDebouncedValue } from "../../../../shared/hooks/useDebouncedValue";
 
 const RestaurantList = ({ searchText, col }) => {
-  const [restaurants, setRestaurants] = useState([]);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  const [loading, setLoading] = useState(false);
-  const observerRef = useRef();
+  const debounced = useDebouncedValue(searchText, 350);
 
-  const shuffle = (a) => {
-    const cloned = [...a];
-    for (let i = cloned.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [cloned[i], cloned[j]] = [cloned[j], cloned[i]];
-    }
-    return cloned;
-  };
+  const {
+    data,
+    isLoading,
+    isError,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useRestaurants(debounced);
 
-  useEffect(() => {
-    setRestaurants([]);
-    setPage(1);
-    setHasMore(true);
-  }, [searchText]);
+  const restaurants = useMemo(
+    () => (data ? data.pages.flatMap((p) => p.items) : []),
+    [data]
+  );
 
-  useEffect(() => {
-    const fetchRestaurants = async () => {
-      if (!hasMore || loading) return;
-      setLoading(true);
-      try {
-        const { REACT_APP_API_URL } = process.env;
-        const searchParams = new URLSearchParams();
-
-        if (searchText) searchParams.append("name", searchText); // Already supported
-        searchParams.append("page", page); // Laravel handles this automatically
-        searchParams.append("per_page", 8); // Optional pagination size
-
-        const res = await fetch(
-          `${REACT_APP_API_URL}/restaurants/search?${searchParams.toString()}`
-        );
-        const data = await res.json();
-
-        if (data?.data?.length > 0) {
-          setRestaurants((prev) => [...prev, ...shuffle(data.data)]);
-        }
-
-        if (data?.pagination?.current_page >= data?.pagination?.last_page) {
-          setHasMore(false);
-        }
-      } catch (error) {
-        console.error("Error fetching restaurants:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchRestaurants();
-  }, [page, searchText]);
-
+  const observerRef = useRef(null);
   const loadMoreRef = useCallback(
     (node) => {
-      if (loading) return;
+      if (isFetchingNextPage) return;
       if (observerRef.current) observerRef.current.disconnect();
+
       observerRef.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasMore) {
-          setPage((prev) => prev + 1);
+        const first = entries[0];
+        if (first.isIntersecting && hasNextPage) {
+          fetchNextPage();
         }
       });
+
       if (node) observerRef.current.observe(node);
     },
-    [loading, hasMore]
+    [isFetchingNextPage, hasNextPage, fetchNextPage]
   );
 
   const renderSkeletons = () =>
@@ -105,26 +72,34 @@ const RestaurantList = ({ searchText, col }) => {
         )}
 
         <SimpleGrid columns={col} spacing={6}>
-          {restaurants.map((restaurant) => (
+          {restaurants.map((r) => (
             <Cards
-              key={restaurant.id}
-              id={restaurant.id}
-              name={restaurant.restaurant_name}
-              description={restaurant.description}
-              image={restaurant.picture}
-              address={restaurant.address}
-              delivery_hours={restaurant.delivery_hours}
-              minimum_order={restaurant.minimum_order}
-              discount={restaurant.discount}
+              key={r.id}
+              id={r.id}
+              name={r.restaurant_name}
+              description={r.description}
+              image={r.picture}
+              address={r.address}
+              delivery_hours={r.delivery_hours}
+              minimum_order={r.minimum_order}
+              discount={r.discount}
             />
           ))}
 
-          {loading && renderSkeletons()}
+          {isLoading && renderSkeletons()}
+
+          {isFetchingNextPage &&
+            Array.from({ length: 4 }).map((_, i) => (
+              <Box key={`more-${i}`} bg="white" p={4} borderRadius="md">
+                <Skeleton height="150px" mb={4} />
+                <SkeletonText noOfLines={2} spacing="3" />
+              </Box>
+            ))}
         </SimpleGrid>
 
-        {searchText && <div ref={loadMoreRef} style={{ height: "1px" }} />}
+        {hasNextPage && <div ref={loadMoreRef} style={{ height: 1 }} />}
 
-        {!loading && restaurants.length === 0 && (
+        {isError && (
           <Text mt={6} textAlign="center">
             No restaurants found.
           </Text>
