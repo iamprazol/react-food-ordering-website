@@ -30,6 +30,8 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 });
 
+const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
+
 function LocationSection({ latitude, longitude }) {
   const [foodImages, setFoodImages] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -57,12 +59,6 @@ function LocationSection({ latitude, longitude }) {
     setSelectedImage(img);
     onOpen();
   };
-
-  const LazyImage = chakra("img", {
-    baseStyle: {
-      loading: "lazy",
-    },
-  });
 
   return (
     <Flex

@@ -21,6 +21,8 @@ import { GiSelfLove } from "react-icons/gi";
 import { FaRegAddressCard } from "react-icons/fa";
 import { useLogoutUser } from "../../../../hooks/useLogoutUser/useLogoutUser";
 
+const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
+
 export default function AccountDrawer({ userData }) {
   const { onOpen, onClose, isOpen } = useDisclosure();
   const toast = useToast();
@@ -63,12 +65,6 @@ export default function AccountDrawer({ userData }) {
     logout();
     onClose();
   };
-
-  const LazyImage = chakra("img", {
-    baseStyle: {
-      loading: "lazy",
-    },
-  });
 
   return (
     <Popover

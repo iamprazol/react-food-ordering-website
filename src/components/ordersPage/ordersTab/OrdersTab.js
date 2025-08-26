@@ -11,6 +11,8 @@ import {
 // Components
 import EmptyCartImage from "../../../assets/images/cart-empty.png";
 
+const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
+
 // Import Components.
 function OrdersTab({ myOrders }) {
   myOrders = myOrders.sort((a, b) => b.id - a.id);
@@ -138,11 +140,6 @@ function OrdersTab({ myOrders }) {
     }
   }
 
-  const LazyImage = chakra("img", {
-    baseStyle: {
-      loading: "lazy",
-    },
-  });
   return (
     <Flex direction={"column"} gap={5}>
       {myOrders.length > 0 ? (

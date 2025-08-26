@@ -15,18 +15,14 @@ import NotificationDrawer from "../notifications/NotificationDrawer";
 import AccountIcon from "../accountIcon/AccountIcon";
 import { useApp } from "../../../context/AppContext";
 
+const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
+
 function NavBar({ onClick, onChange }) {
   const [searchText, setSearchText] = useState("");
   const {
     state: { token },
   } = useApp();
   const isMobile = useBreakpointValue({ base: true, md: false });
-
-  const LazyImage = chakra("img", {
-    baseStyle: {
-      loading: "lazy",
-    },
-  });
 
   return (
     <Flex

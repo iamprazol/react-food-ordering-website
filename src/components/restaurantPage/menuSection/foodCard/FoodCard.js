@@ -16,13 +16,10 @@ import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 // Import Components.
 import { useApp } from "../../../../context/AppContext";
 import { MdAddCircleOutline } from "react-icons/md";
-const FoodCard = ({ currentFood, context }) => {
-  const LazyImage = chakra("img", {
-    baseStyle: {
-      loading: "lazy",
-    },
-  });
 
+const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
+
+const FoodCard = ({ currentFood, context }) => {
   const [liked, setLiked] = useState(false);
   const {
     state: { token, favourites },

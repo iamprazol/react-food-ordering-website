@@ -16,6 +16,8 @@ import { useNavigate } from "react-router-dom";
 import { useApp } from "../../../context/AppContext";
 import { usePaymentProcessor } from "../../../hooks/usePaymentProcessor/usePaymentProcessor";
 
+const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
+
 export default function Cart({ cartType, position }) {
   const { cartItems, removeFromCart, clearCart } = useCart();
   const navigate = useNavigate();
@@ -193,12 +195,6 @@ export default function Cart({ cartType, position }) {
       });
     }
   };
-
-  const LazyImage = chakra("img", {
-    baseStyle: {
-      loading: "lazy",
-    },
-  });
 
   return (
     <Flex

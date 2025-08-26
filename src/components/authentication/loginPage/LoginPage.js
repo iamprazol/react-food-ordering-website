@@ -16,6 +16,8 @@ import FoodieImage from "../../../assets/images/foodie.png";
 import { MdEmail, MdLock } from "react-icons/md";
 import { useLoginUser } from "../../../hooks/useLoginUser/useLoginUser";
 
+const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
+
 function LoginPage({ onClick }) {
   const toast = useToast();
 
@@ -62,11 +64,6 @@ function LoginPage({ onClick }) {
     login(userData);
   };
 
-  const LazyImage = chakra("img", {
-    baseStyle: {
-      loading: "lazy",
-    },
-  });
   return (
     <Flex
       direction={{ base: "column", md: "row" }}

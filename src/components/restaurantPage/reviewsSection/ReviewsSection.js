@@ -14,6 +14,8 @@ import { MdStar } from "react-icons/md";
 import IconContainer from "../../common/iconContainer/IconContainer";
 import Foodie from "../../../assets/images/foodie.png";
 
+const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
+
 function ReviewsSection() {
   const [reviews, setReviews] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -29,12 +31,6 @@ function ReviewsSection() {
       })
       .finally(() => setLoading(false)); // Done loading
   }, [REACT_APP_API_URL, restaurantId]);
-
-  const LazyImage = chakra("img", {
-    baseStyle: {
-      loading: "lazy",
-    },
-  });
 
   return (
     <Flex

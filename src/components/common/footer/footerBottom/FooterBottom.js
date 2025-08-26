@@ -9,6 +9,8 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
+const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
+
 const FooterBottom = () => {
   const [foodPics, setFoodPics] = useState([]);
 
@@ -19,12 +21,6 @@ const FooterBottom = () => {
     }
     return a;
   };
-
-  const LazyImage = chakra("img", {
-    baseStyle: {
-      loading: "lazy",
-    },
-  });
 
   useEffect(() => {
     const { REACT_APP_API_URL } = process.env;

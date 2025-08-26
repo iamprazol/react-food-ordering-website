@@ -21,12 +21,6 @@ const MyFavourites = () => {
     state: { favourites },
   } = useApp();
 
-  const LazyImage = chakra("img", {
-    baseStyle: {
-      loading: "lazy",
-    },
-  });
-
   return (
     <Tabs variant="unstyled" justifyContent={"space-between"} w="100%">
       <TabList>

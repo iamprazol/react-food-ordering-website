@@ -20,6 +20,8 @@ import {
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { useApp } from "../../../context/AppContext";
 
+const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
+
 function RestaurantDetails(props) {
   const {
     restaurantId,
@@ -35,12 +37,6 @@ function RestaurantDetails(props) {
   } = props;
 
   const [liked, setLiked] = useState(false);
-
-  const LazyImage = chakra("img", {
-    baseStyle: {
-      loading: "lazy",
-    },
-  });
 
   const {
     state: { favourites, token },
