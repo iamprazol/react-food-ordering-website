@@ -13,13 +13,13 @@ import {
 import debounce from "lodash.debounce";
 
 // Components
-import FooterTop from "../footer/footerTop/FooterTop";
-import FooterBottom from "../footer/footerBottom/FooterBottom";
-import NavBar from "../navBar/NavBar";
-import LoginPage from "../../authentication/loginPage/LoginPage";
+import FooterTop from "../../../widgets/footer/footer-top/FooterTop";
+import FooterBottom from "../../../widgets/footer/footer-bottom/FooterBottom";
+import NavBar from "../../../widgets/navBar/NavBar";
+import LoginPage from "../../../features/auth/components/LoginPage";
 import Popup from "../popup/Popup";
-import RegistrationPage from "../../authentication/registrationPage/RegistrationPage";
-import SearchRestaurantPage from "../../home/searchRestaurantPage/SearchRestaurantPage";
+import RegistrationPage from "../../../features/auth/components/RegistrationPage";
+import SearchRestaurantPage from "../../../pages/home/searchRestaurantPage/SearchRestaurantPage";
 import { useApp } from "../../../context/AppContext";
 
 const TopLayout = ({ element }) => {

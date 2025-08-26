@@ -9,9 +9,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"; // ✅
 import "./index.scss";
 
 // Import Components.
-import App from "./components/App";
+import App from "./app/App";
 import * as serviceWorker from "./serviceWorker";
-import theme from "./theme";
+import theme from "./shared/styles/theme";
 import { AppProvider } from "./context/AppContext";
 
 // ✅ Create the React Query client

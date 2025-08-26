@@ -19,7 +19,7 @@ import { RiArrowDropDownLine, RiUserFollowLine } from "react-icons/ri";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { GiSelfLove } from "react-icons/gi";
 import { FaRegAddressCard } from "react-icons/fa";
-import { useLogoutUser } from "../../../../hooks/useLogoutUser/useLogoutUser";
+import { useLogoutUser } from "../../../../shared/hooks/useLogoutUser/useLogoutUser";
 
 const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
 
