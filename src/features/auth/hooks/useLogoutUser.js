@@ -1,7 +1,7 @@
-import { useApp } from "../../../context/AppContext";
+import { useAuth } from "../../../context/AuthContext";
 
 export const useLogoutUser = (onSuccess) => {
-  const { logout } = useApp();
+  const { logout } = useAuth();
 
   const handleLogout = () => {
     logout();

@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { useApp } from "../../../context/AppContext";
+import { useAuth } from "../../../context/AuthContext";
 
 const registerUser = async (user) => {
   const response = await fetch(`${process.env.REACT_APP_API_URL}/register`, {
@@ -23,7 +23,7 @@ const registerUser = async (user) => {
 };
 
 export const useRegisterUser = (onSuccess, onError) => {
-  const { login } = useApp();
+  const { login } = useAuth();
 
   return useMutation({
     mutationFn: registerUser,

@@ -1,7 +1,7 @@
-import { useApp } from "../../../context/AppContext";
+import { useCartContext } from "../../../context/CartContext";
 
 export const useCart = () => {
-  const { state, dispatch } = useApp();
+  const { state, dispatch } = useCartContext();
 
   const addToCart = (item) => {
     dispatch({ type: "ADD_TO_CART", payload: item });

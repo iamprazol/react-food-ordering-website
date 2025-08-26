@@ -7,7 +7,7 @@ import {
   CardCvcElement,
 } from "@stripe/react-stripe-js";
 import { Box, FormControl, FormLabel, Button, Text } from "@chakra-ui/react";
-import { useApp } from "../../../../context/AppContext";
+import { useUserData } from "../../../../context/UserDataContext";
 
 export default function StripeElement() {
   const stripe = useStripe();
@@ -17,7 +17,7 @@ export default function StripeElement() {
   const {
     state: { paymentIntent },
     dispatch,
-  } = useApp();
+  } = useUserData();
 
   const handleBlur = async (event, field) => {
     const cardElement = elements.getElement(CardNumberElement);

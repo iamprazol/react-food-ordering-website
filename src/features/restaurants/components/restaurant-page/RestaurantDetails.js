@@ -18,7 +18,8 @@ import {
   MdOutlineAddLocationAlt,
 } from "react-icons/md";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
-import { useApp } from "../../../../context/AppContext";
+import { useAuth } from "../../../../context/AuthContext";
+import { useUserData } from "../../../../context/UserDataContext";
 
 const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
 
@@ -39,9 +40,12 @@ function RestaurantDetails(props) {
   const [liked, setLiked] = useState(false);
 
   const {
-    state: { favourites, token },
+    state: { token },
+  } = useAuth();
+  const {
+    state: { favourites },
     dispatch,
-  } = useApp();
+  } = useUserData();
 
   useEffect(() => {
     if (token) {

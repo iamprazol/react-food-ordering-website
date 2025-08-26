@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { useApp } from "../../../context/AppContext";
+import { useAuth } from "../../../context/AuthContext";
 
 export async function dispatchOrder({ order, token }) {
   const base = process.env.REACT_APP_API_URL;
@@ -43,7 +43,7 @@ export async function dispatchOrder({ order, token }) {
 export function useDispatchOrder(onSuccess, onError) {
   const {
     state: { token },
-  } = useApp();
+  } = useAuth();
 
   const mutation = useMutation({
     mutationFn: (order) => dispatchOrder({ order, token }),

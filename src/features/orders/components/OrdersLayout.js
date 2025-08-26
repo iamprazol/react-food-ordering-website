@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
 // Components
-import { useApp } from "../../../context/AppContext";
 import OrdersTab from "./OrdersTab";
+import { useUserData } from "../../../context/UserDataContext";
 
 const OrdersLayout = () => {
   const {
     state: { orders },
-  } = useApp();
+  } = useUserData();
 
   return (
     <Tabs variant="unstyled" justifyContent={"space-between"} w="100%">

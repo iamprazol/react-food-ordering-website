@@ -9,15 +9,19 @@ import {
 } from "@chakra-ui/react";
 
 // Components
-import { useApp } from "../../context/AppContext";
 import Cart from "../../features/carts/components/cart";
 import TopLayout from "../../shared/ui/TopLayout";
 import PaymentOptions from "../../features/checkout/components/PaymentOption";
+import { useAuth } from "../../context/AuthContext";
+import { useUserData } from "../../context/UserDataContext";
 
 const CheckoutBody = () => {
   const {
-    state: { address, user },
-  } = useApp();
+    state: { user },
+  } = useAuth();
+  const {
+    state: { address },
+  } = useUserData();
 
   const isLoading = !address || !user;
 
@@ -96,7 +100,7 @@ const CheckoutBody = () => {
                     fontSize="0.875rem"
                     width="90%"
                   >
-                    <Text>{address.address_title.toUpperCase()}</Text>
+                    <Text>{address?.address_title?.toUpperCase()}</Text>
                     <Text>{user.first_name + " " + user.last_name}</Text>
                     <Text>{address.address_details}</Text>
                     <Text>Phone: {address.address_contact}</Text>

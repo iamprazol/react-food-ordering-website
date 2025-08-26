@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { useApp } from "../../../context/AppContext";
+import { useAuth } from "../../../context/AuthContext";
+import { useUserData } from "../../../context/UserDataContext";
 
 const loginUser = async ({ email, password }) => {
   const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
@@ -23,7 +24,8 @@ const loginUser = async ({ email, password }) => {
 };
 
 export const useLoginUser = (onSuccess, onError) => {
-  const { login } = useApp();
+  const { login } = useAuth();
+  const { dispatch } = useUserData();
 
   return useMutation({
     mutationFn: loginUser,
@@ -35,9 +37,12 @@ export const useLoginUser = (onSuccess, onError) => {
       const user = data?.user;
 
       if (token && user) {
-        login(token, user, address, orders, favourites);
+        login(token, user);
       }
 
+      dispatch({ type: "SET_ADDRESS", payload: address });
+      dispatch({ type: "SET_ORDERS", payload: orders });
+      dispatch({ type: "SET_FAVOURITES", payload: favourites });
       onSuccess?.(data);
     },
     onError: (error) => {

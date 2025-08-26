@@ -12,14 +12,14 @@ import {
 } from "@chakra-ui/react";
 
 // Components
-import { useApp } from "../../../context/AppContext";
+import { useUserData } from "../../../context/UserDataContext";
 import Cards from "../../restaurants/components/restaurant-list/cards/Cards";
 import FoodCard from "../../food/FoodCard";
 
 const MyFavourites = () => {
   const {
     state: { favourites },
-  } = useApp();
+  } = useUserData();
 
   return (
     <Tabs variant="unstyled" justifyContent={"space-between"} w="100%">

@@ -10,14 +10,15 @@ import {
   Button as ChakraButton,
   useToast,
 } from "@chakra-ui/react";
-import { useApp } from "../../../context/AppContext";
 import InputHandler from "../../../widgets/inputHandler/InputHandler";
+import { useAuth } from "../../../context/AuthContext";
 
 const EditProfile = () => {
   const {
     state: { user, token },
     dispatch,
-  } = useApp();
+  } = useAuth();
+
   const [userData, setUserData] = useState({
     picture: user.picture,
     first_name: user.first_name,

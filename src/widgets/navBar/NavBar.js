@@ -13,7 +13,7 @@ import { MdOutlineSearch } from "react-icons/md";
 import CartDrawer from "../../features/carts/components/cartDrawer";
 import NotificationDrawer from "../notifications/NotificationDrawer";
 import AccountIcon from "../accountIcon/AccountIcon";
-import { useApp } from "../../context/AppContext";
+import { useAuth } from "../../context/AuthContext";
 
 const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
 
@@ -21,7 +21,7 @@ function NavBar({ onClick, onChange }) {
   const [searchText, setSearchText] = useState("");
   const {
     state: { token },
-  } = useApp();
+  } = useAuth();
   const isMobile = useBreakpointValue({ base: true, md: false });
 
   return (

@@ -11,14 +11,14 @@ import {
 } from "@chakra-ui/react";
 
 // Components
-import { useApp } from "../../../context/AppContext";
 import StripeWrapper from "./stripe-element/StripeWrapper";
+import { useUserData } from "../../../context/UserDataContext";
 
 const PaymentOptions = () => {
   const {
     state: { orders, paymentIntent },
     dispatch,
-  } = useApp();
+  } = useUserData();
   const [paymentDetails, setPaymentDetails] = useState({});
   const [activeIndex, setActiveIndex] = useState(0);
 

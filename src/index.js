@@ -12,10 +12,24 @@ import "./index.scss";
 import App from "./app/App";
 import * as serviceWorker from "./serviceWorker";
 import theme from "./shared/styles/theme";
-import { AppProvider } from "./context/AppContext";
+import { AuthProvider } from "./context/AuthContext";
+import { CartProvider } from "./context/CartContext";
+import { UserDataProvider } from "./context/UserDataContext";
+import { NotificationsProvider } from "./context/NotificationsContext";
 
-// ✅ Create the React Query client
 const queryClient = new QueryClient();
+
+export default function AppProviders({ children }) {
+  return (
+    <AuthProvider>
+      <UserDataProvider>
+        <CartProvider>
+          <NotificationsProvider>{children}</NotificationsProvider>
+        </CartProvider>
+      </UserDataProvider>
+    </AuthProvider>
+  );
+}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -24,11 +38,11 @@ root.render(
     <ChakraProvider theme={theme}>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <QueryClientProvider client={queryClient}>
-        <Router>
-          <AppProvider>
+        <AppProviders>
+          <Router>
             <App />
-          </AppProvider>
-        </Router>
+          </Router>
+        </AppProviders>
       </QueryClientProvider>
     </ChakraProvider>
   </React.StrictMode>

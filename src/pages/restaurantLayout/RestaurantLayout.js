@@ -10,8 +10,9 @@ import RestaurantDetails from "../../features/restaurants/components/restaurant-
 import MenuLayout from "../../features/restaurants/components/restaurant-page/menu/MenuLayout";
 import ReviewsSection from "../../features/restaurants/components/restaurant-page/reviews/ReviewsSection";
 import LocationSection from "../../features/restaurants/components/restaurant-page/location/LocationSection";
+import TopLayout from "../../shared/ui/TopLayout";
 
-function RestaurantLayout() {
+function RestaurantLayoutBody() {
   const [restaurantDetails, setRestaurantDetails] = useState(null);
   const { REACT_APP_API_URL } = process.env;
   const { restaurantId } = useParams();
@@ -28,7 +29,6 @@ function RestaurantLayout() {
 
   return (
     <Box>
-      <NavBar />
       <Banner
         bannerImage={restaurantDetails?.cover_pic || ""}
         bannerHeight="medium"
@@ -60,4 +60,7 @@ function RestaurantLayout() {
   );
 }
 
+const RestaurantLayout = () => {
+  return <TopLayout element={<RestaurantLayoutBody />}></TopLayout>;
+};
 export default RestaurantLayout;

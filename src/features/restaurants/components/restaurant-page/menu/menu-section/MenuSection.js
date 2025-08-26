@@ -23,8 +23,9 @@ import {
 
 import { MdOutlineSearch, MdAdd, MdOutlineRemoveCircle } from "react-icons/md";
 import { useCart } from "../../../../../carts/hooks/useCart";
-import { useApp } from "../../../../../../context/AppContext";
 import FoodCard from "../../../../../food/FoodCard";
+import { useAuth } from "../../../../../../context/AuthContext";
+import { useUserData } from "../../../../../../context/UserDataContext";
 
 function MenuSection({ menuItems }) {
   const [openOrderBar, setOpenOrderBar] = useState(false);
@@ -36,8 +37,12 @@ function MenuSection({ menuItems }) {
   const [loading, setLoading] = useState(true);
 
   const {
-    state: { favourites, token },
-  } = useApp();
+    state: { token },
+  } = useAuth();
+  const {
+    state: { favourites },
+  } = useUserData();
+
   const {
     isOpen: isCartOpen,
     onOpen: onCartOpen,

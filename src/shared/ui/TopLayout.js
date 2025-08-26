@@ -19,8 +19,9 @@ import NavBar from "../../widgets/navBar/NavBar";
 import LoginPage from "../../features/auth/components/LoginPage";
 import RegistrationPage from "../../features/auth/components/RegistrationPage";
 import SearchRestaurantPage from "../../features/restaurants/components/restaurant-filters/search-restaurant/SearchRestaurantPage";
-import { useApp } from "../../context/AppContext";
 import Popup from "../../widgets/popup/Popup";
+import { useAuth } from "../../context/AuthContext";
+import { useUserData } from "../../context/UserDataContext";
 
 const TopLayout = ({ element }) => {
   const [openLoginPopup, setOpenLoginPopup] = useState(false);
@@ -30,8 +31,8 @@ const TopLayout = ({ element }) => {
   const { REACT_APP_URL, REACT_APP_API_URL } = process.env;
   const {
     state: { token },
-    dispatch,
-  } = useApp();
+  } = useAuth();
+  const { dispatch } = useUserData();
 
   useEffect(() => {
     fetch(`${REACT_APP_API_URL}/myorder`, {

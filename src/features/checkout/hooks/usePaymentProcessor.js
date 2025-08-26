@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { useApp } from "../../../context/AppContext";
 import { initiateStripePayment } from "./initaiteStripePayment";
+import { useAuth } from "../../../context/AuthContext";
 
 const providers = {
   stripe: initiateStripePayment,
@@ -15,7 +15,7 @@ async function initiatePayment({ provider, order, token }) {
 export function usePaymentProcessor(onSuccess, onError) {
   const {
     state: { token },
-  } = useApp();
+  } = useAuth();
 
   const mutation = useMutation({
     mutationFn: ({ provider, order }) =>

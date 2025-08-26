@@ -15,8 +15,9 @@ import { MdOutlineStarPurple500 } from "react-icons/md";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 
 // Import Components.
-import { useApp } from "../../../../../context/AppContext";
 import IconContainer from "../../../../../widgets/icon-container/IconContainer";
+import { useAuth } from "../../../../../context/AuthContext";
+import { useUserData } from "../../../../../context/UserDataContext";
 
 const Cards = ({
   id,
@@ -35,9 +36,12 @@ const Cards = ({
 
   const [liked, setLiked] = useState(false);
   const {
-    state: { token, favourites },
+    state: { token },
+  } = useAuth();
+  const {
+    state: { favourites },
     dispatch,
-  } = useApp();
+  } = useUserData();
 
   useEffect(() => {
     if (token) {

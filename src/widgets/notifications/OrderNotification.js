@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from "react";
 import Echo from "laravel-echo";
 import Pusher from "pusher-js";
-import { useApp } from "../../context/AppContext";
 import { Box, VStack, Text, Badge, Flex } from "@chakra-ui/react";
+import { useAuth } from "../../context/AuthContext";
+import { useNotifications } from "../../context/NotificationsContext";
+import { useUserData } from "../../context/UserDataContext";
 
 export default function OrderNotification({ orderId, userId = 1 }) {
   const {
-    state: { token, notifications, orders },
+    state: { token },
+  } = useAuth();
+  const {
+    state: { orders },
+    dispatch: userDispatch,
+  } = useUserData();
+  const {
+    state: { notifications },
     dispatch,
-  } = useApp();
+  } = useNotifications();
 
   useEffect(() => {
     if (!token) {
@@ -50,7 +59,7 @@ export default function OrderNotification({ orderId, userId = 1 }) {
             : item
         );
 
-        dispatch?.({
+        userDispatch?.({
           type: "SET_ORDERS",
           payload: updatedOrders,
         });

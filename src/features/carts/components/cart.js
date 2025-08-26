@@ -13,8 +13,8 @@ import { MdOutlineDeleteForever } from "react-icons/md";
 import { useCart } from "../hooks/useCart";
 import { useDispatchOrder } from "../../orders/hooks/useDispatchOrder";
 import { useNavigate } from "react-router-dom";
-import { useApp } from "../../../context/AppContext";
 import { usePaymentProcessor } from "../../checkout/hooks/usePaymentProcessor";
+import { useUserData } from "../../../context/UserDataContext";
 
 const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
 
@@ -27,7 +27,7 @@ export default function Cart({ cartType, position }) {
   const toast = useToast();
   const {
     state: { paymentIntent },
-  } = useApp();
+  } = useUserData();
   const [provider, setProvider] = useState(paymentIntent.paymentMode);
 
   const { mutateAsync: payAsync, isPending: isPaying } = usePaymentProcessor(
@@ -89,8 +89,8 @@ export default function Cart({ cartType, position }) {
     return price;
   };
 
-  const percentageToPrice = (percentage) => {
-    return Math.round((percentage * Math.round(getTotalPrice())) / 100);
+  const percentageToPrice = (percentage = 0) => {
+    return Math.round((percentage * Math.round(getTotalPrice())) / 100) || 0;
   };
 
   const cartCalculation = [
@@ -287,7 +287,7 @@ export default function Cart({ cartType, position }) {
                       fontWeight={"500"}
                       fontSize={"14px"}
                     >
-                      {items.key.toUpperCase()}:
+                      {items.key?.toUpperCase()}:
                     </Text>
                     <Text
                       color="#00000059"

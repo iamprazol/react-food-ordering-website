@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useApp } from "../../context/AppContext";
 import { FaRegUser } from "react-icons/fa";
 import { IconButton } from "@chakra-ui/react";
 import AccountDrawer from "./accountDrawer/accountDrawer";
+import { useAuth } from "../../context/AuthContext";
 
 function AccountIcon({ onClick }) {
   const {
     state: { token },
-  } = useApp();
+  } = useAuth();
 
   const [userData, setUserData] = useState({});
 

@@ -11,15 +11,16 @@ import {
 } from "@chakra-ui/react";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import OrderNotification from "./OrderNotification";
-import { useApp } from "../../context/AppContext";
 import { useEffect, useState, useMemo } from "react";
+import { useNotifications } from "../../context/NotificationsContext";
 
 export default function NotificationDrawer() {
   const {
-    state: { notifications = [] },
+    state: { notifications },
     dispatch,
-  } = useApp();
+  } = useNotifications();
 
+  useEffect(() => {}, [notifications]);
   const activeCount = useMemo(
     () => notifications.filter((notification) => !notification?.is_read).length,
     [notifications]

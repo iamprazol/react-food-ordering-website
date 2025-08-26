@@ -14,17 +14,21 @@ import {
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 
 // Import Components.
-import { useApp } from "../../context/AppContext";
 import { MdAddCircleOutline } from "react-icons/md";
+import { useAuth } from "../../context/AuthContext";
+import { useUserData } from "../../context/UserDataContext";
 
 const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
 
 const FoodCard = ({ currentFood, context }) => {
   const [liked, setLiked] = useState(false);
   const {
-    state: { token, favourites },
+    state: { token },
+  } = useAuth();
+  const {
+    state: { favourites },
     dispatch,
-  } = useApp();
+  } = useUserData();
 
   useEffect(() => {
     if (token) {
