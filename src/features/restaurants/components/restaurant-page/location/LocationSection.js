@@ -81,7 +81,8 @@ function LocationSection({ latitude, longitude }) {
           <MapContainer
             center={[latitude, longitude]}
             zoom={13}
-            style={{ height: "470px", width: "100%" }}
+            height="470px"
+            width="100%"
             scrollWheelZoom={false}
           >
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />

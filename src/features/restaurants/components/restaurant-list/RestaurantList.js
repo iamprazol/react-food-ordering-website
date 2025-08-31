@@ -97,7 +97,7 @@ const RestaurantList = ({ searchText, col }) => {
             ))}
         </SimpleGrid>
 
-        {hasNextPage && <div ref={loadMoreRef} style={{ height: 1 }} />}
+        {hasNextPage && <div ref={loadMoreRef} height={1} />}
 
         {isError && (
           <Text mt={6} textAlign="center">

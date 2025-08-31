@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useMemo, useCallback } from "react";
 import {
   Box,
   chakra,
@@ -19,6 +19,8 @@ import IconContainer from "../../../../../widgets/icon-container/IconContainer";
 import { useAuth } from "../../../../../context/AuthContext";
 import { useUserData } from "../../../../../context/UserDataContext";
 
+const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
+
 const Cards = ({
   id,
   name,
@@ -28,13 +30,6 @@ const Cards = ({
   minimum_order,
   discount,
 }) => {
-  const LazyImage = chakra("img", {
-    baseStyle: {
-      loading: "lazy",
-    },
-  });
-
-  const [liked, setLiked] = useState(false);
   const {
     state: { token },
   } = useAuth();
@@ -43,58 +38,48 @@ const Cards = ({
     dispatch,
   } = useUserData();
 
-  useEffect(() => {
-    if (token) {
-      favourites?.restaurants.map((restaurant) => {
-        if (id == restaurant.restaurant_id) {
-          setLiked(true);
+  const isLiked = useMemo(() => {
+    if (!token) return false;
+    const list = (favourites && favourites.restaurants) || [];
+    return list.some((r) => r && r.restaurant_id === id);
+  }, [token, favourites, id]);
+
+  const handleFavourites = useCallback(
+    async (restaurant_id) => {
+      if (!token) return;
+      const endpoint = isLiked
+        ? `deletefavouriterestaurant/${restaurant_id}`
+        : `favouriterestaurant/${restaurant_id}`;
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/${endpoint}`,
+        {
+          method: isLiked ? "DELETE" : "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         }
+      );
+
+      const data = await response.json();
+
+      const restaurant = data && data.data && data.data.restaurant;
+
+      const current = (favourites && favourites.restaurants) || [];
+      const nextRestaurants = isLiked
+        ? current.filter((r) => r && r.restaurant_id !== restaurant_id)
+        : [...current, restaurant];
+
+      dispatch({
+        type: "SET_FAVOURITES",
+        payload: { ...favourites, restaurants: nextRestaurants },
       });
-    }
-  }, [favourites]);
+    },
+    [token, favourites, dispatch, isLiked]
+  );
 
-  const handleFavourites = async (restaurant_id) => {
-    const response = await fetch(
-      `${process.env.REACT_APP_API_URL}/${
-        liked
-          ? `deletefavouriterestaurant/${restaurant_id}`
-          : `favouriterestaurant/${restaurant_id}`
-      }`,
-      {
-        method: liked ? "DELETE" : "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    const data = await response.json();
-
-    const restaurant = data.data.restaurant;
-
-    let newFavouritesRef = {};
-    if (liked) {
-      newFavouritesRef = favourites.restaurants.filter((restaurant) => {
-        return restaurant.restaurant_id !== restaurant_id;
-      });
-    } else {
-      const currentFoods = favourites.restaurants || [];
-
-      newFavouritesRef = [...currentFoods, restaurant];
-    }
-    const updatedFavourites = {
-      ...favourites,
-      restaurants: newFavouritesRef,
-    };
-
-    dispatch({
-      type: "SET_FAVOURITES",
-      payload: updatedFavourites,
-    });
-
-    setLiked(!liked);
-  };
+  const filledStars = useMemo(() => Array.from({ length: 3 }), []);
+  const emptyStars = useMemo(() => Array.from({ length: 2 }), []);
 
   return (
     <Box
@@ -124,24 +109,26 @@ const Cards = ({
             {discount}%
           </Badge>
         </Box>
+
         <Box
           position="absolute"
           top="2"
           right="2"
-          bgColor={"white"}
-          borderRadius={"full"}
+          bgColor="white"
+          borderRadius="full"
         >
           <IconButton
+            aria-label={
+              isLiked ? "Remove from favourites" : "Add to favourites"
+            }
             icon={
-              liked ? <IoMdHeart size={26} /> : <IoMdHeartEmpty size={26} />
+              isLiked ? <IoMdHeart size={26} /> : <IoMdHeartEmpty size={26} />
             }
             padding={1}
             variant="ghost"
             fontSize="24px"
-            color={liked ? "brand.500" : "grey.600"}
-            _hover={{
-              color: liked ? "grey.600" : "brand.500",
-            }}
+            color={isLiked ? "brand.500" : "grey.600"}
+            _hover={{ color: isLiked ? "grey.600" : "brand.500" }}
             onClick={() => handleFavourites(id)}
           />
         </Box>
@@ -175,7 +162,7 @@ const Cards = ({
 
         <Flex align="center" gap={2}>
           <Flex color="yellow.400" gap={1}>
-            {[...Array(3)].map((_, i) => (
+            {filledStars.map((_, i) => (
               <IconContainer
                 key={`filled-${i}`}
                 icon={<MdOutlineStarPurple500 />}
@@ -183,7 +170,7 @@ const Cards = ({
                 colorClass="text-yellow"
               />
             ))}
-            {[...Array(2)].map((_, i) => (
+            {emptyStars.map((_, i) => (
               <IconContainer
                 key={`empty-${i}`}
                 icon={<MdOutlineStarPurple500 />}
@@ -200,4 +187,4 @@ const Cards = ({
   );
 };
 
-export default Cards;
+export default React.memo(Cards);
