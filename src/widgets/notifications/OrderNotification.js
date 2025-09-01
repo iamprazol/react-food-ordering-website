@@ -32,7 +32,7 @@ export default function OrderNotification({ orderId, userId = 1 }) {
       cluster: "mt1",
       forceTLS: true,
       disableStats: true,
-      authEndpoint: "http://localhost:8000/broadcasting/auth",
+      authEndpoint: process.env.REACT_APP_URL + "/broadcasting/auth",
       auth: {
         headers: {
           Authorization: `Bearer ${token}`,

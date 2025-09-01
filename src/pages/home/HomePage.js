@@ -13,7 +13,7 @@ const HomeHeader = () => {
     <>
       {/* Banner Section */}
       <Banner
-        bannerImage={REACT_APP_URL + "images/food/1624721452.jpg"}
+        bannerImage={REACT_APP_URL + "/images/food/1624721452.jpg"}
         bannerHeight="large"
         bannerContent={
           <Box
@@ -56,7 +56,7 @@ const HomeHeader = () => {
 
       <Ads
         adsText={"Get free delivery with Rs.5000"}
-        image={REACT_APP_URL + "images/food/1624721452.jpg"}
+        image={REACT_APP_URL + "/images/food/1624721452.jpg"}
         link="google.com"
         buttonText="Learn More"
       />
@@ -65,7 +65,7 @@ const HomeHeader = () => {
 
       <Ads
         adsText={"Get free delivery with Rs.5000"}
-        image={REACT_APP_URL + "images/food/1624721452.jpg"}
+        image={REACT_APP_URL + "/images/food/1624721452.jpg"}
         link="google.com"
         buttonText="Learn More"
       />

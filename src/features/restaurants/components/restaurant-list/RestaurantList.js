@@ -1,4 +1,4 @@
-import { useRef, useCallback, useMemo } from "react";
+import { useRef, useEffect, useMemo } from "react";
 import {
   Box,
   Heading,
@@ -28,23 +28,39 @@ const RestaurantList = ({ searchText, col }) => {
     [data]
   );
 
+  const sentinelRef = useRef(null);
   const observerRef = useRef(null);
-  const loadMoreRef = useCallback(
-    (node) => {
-      if (isFetchingNextPage) return;
-      if (observerRef.current) observerRef.current.disconnect();
 
-      observerRef.current = new IntersectionObserver((entries) => {
+  useEffect(() => {
+    const node = sentinelRef.current;
+    if (!node) return;
+    if (typeof window === "undefined" || !("IntersectionObserver" in window)) {
+      return;
+    }
+
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+      observerRef.current = null;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
         const first = entries[0];
-        if (first.isIntersecting && hasNextPage) {
+        if (first.isIntersecting && hasNextPage && !isFetchingNextPage) {
           fetchNextPage();
         }
-      });
+      },
+      { rootMargin: "800px 0px 800px 0px", threshold: 0 }
+    );
 
-      if (node) observerRef.current.observe(node);
-    },
-    [isFetchingNextPage, hasNextPage, fetchNextPage]
-  );
+    observer.observe(node);
+    observerRef.current = observer;
+
+    return () => {
+      observer.disconnect();
+      observerRef.current = null;
+    };
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   const renderSkeletons = () =>
     Array.from({ length: 12 }).map((_, index) => (
@@ -65,7 +81,7 @@ const RestaurantList = ({ searchText, col }) => {
   return (
     <Box as="section" py={10} px={{ base: 4, md: 8 }} bg="gray.50">
       <Box maxW="7xl" mx="auto">
-        {"" === searchText && (
+        {searchText === "" && (
           <Heading fontSize="30px" mb={4}>
             Browse By Restaurants
           </Heading>
@@ -97,7 +113,8 @@ const RestaurantList = ({ searchText, col }) => {
             ))}
         </SimpleGrid>
 
-        {hasNextPage && <div ref={loadMoreRef} height={1} />}
+        {/* Needs a real height so it can intersect */}
+        {hasNextPage && <Box ref={sentinelRef} h="1px" />}
 
         {isError && (
           <Text mt={6} textAlign="center">

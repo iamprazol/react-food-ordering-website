@@ -40,7 +40,7 @@ function NavBar({ onClick, onChange }) {
       <Box>
         <Link href="/">
           <LazyImage
-            src="http://localhost:8000/images/logo/foodie.png"
+            src={process.env.REACT_APP_URL + "/images/logo/foodie.png"}
             alt="Foodie Logo"
             width={{ base: "140px", md: "160px" }}
             height={{ base: "50px", md: "70px" }}

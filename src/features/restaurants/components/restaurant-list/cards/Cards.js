@@ -96,6 +96,8 @@ const Cards = ({
           objectFit="cover"
           w="100%"
           h="180px"
+          loading="lazy"
+          decoding="async"
         />
 
         <Box position="absolute" top="2" left="2">

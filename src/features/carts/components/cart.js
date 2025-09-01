@@ -43,8 +43,6 @@ export default function Cart({ cartType, position }) {
     }
   );
 
-  useEffect(() => {}, [cartItems]);
-
   useEffect(() => {
     fetch(`${REACT_APP_API_URL}/restaurant/${restaurantId}`)
       .then((res) => res.json())
