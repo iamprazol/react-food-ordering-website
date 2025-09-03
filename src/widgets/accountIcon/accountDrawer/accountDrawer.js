@@ -4,51 +4,44 @@ import {
   PopoverContent,
   PopoverArrow,
   PopoverBody,
+  PopoverFooter,
+  PopoverCloseButton,
   Flex,
-  chakra,
   Text,
   IconButton,
   SimpleGrid,
-  PopoverFooter,
   Button as ChakraButton,
   useDisclosure,
-  Link,
   useToast,
+  LinkBox,
+  LinkOverlay,
+  Avatar,
 } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
 import { RiArrowDropDownLine, RiUserFollowLine } from "react-icons/ri";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { GiSelfLove } from "react-icons/gi";
 import { FaRegAddressCard } from "react-icons/fa";
 import { useLogoutUser } from "../../../features/auth/hooks/useLogoutUser";
 
-const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
+const accountDrawerItems = [
+  { icon: <RiUserFollowLine size={30} />, text: "Account", slug: "my-account" },
+  { icon: <IoFastFoodOutline size={30} />, text: "Orders", slug: "orders" },
+  {
+    icon: <FaRegAddressCard size={30} />,
+    text: "Saved Address",
+    slug: "my-account/address",
+  },
+  {
+    icon: <GiSelfLove size={30} />,
+    text: "Favourites",
+    slug: "my-account/favourites",
+  },
+];
 
 export default function AccountDrawer({ userData }) {
   const { onOpen, onClose, isOpen } = useDisclosure();
   const toast = useToast();
-  const accountDrawerItems = [
-    {
-      icon: <RiUserFollowLine size={30} />,
-      text: "Account",
-      slug: "my-account",
-    },
-    {
-      icon: <IoFastFoodOutline size={30} />,
-      text: "Orders",
-      slug: "orders",
-    },
-
-    {
-      icon: <FaRegAddressCard size={30} />,
-      text: "Saved Address",
-      slug: "my-account/address",
-    },
-    {
-      icon: <GiSelfLove size={30} />,
-      text: "Favourites",
-      slug: "my-account/favourites",
-    },
-  ];
 
   const { logout } = useLogoutUser(() => {
     toast({
@@ -66,6 +59,10 @@ export default function AccountDrawer({ userData }) {
     onClose();
   };
 
+  const displayName =
+    (userData?.first_name?.charAt(0).toUpperCase() || "") +
+    (userData?.first_name?.slice(1) || "");
+
   return (
     <Popover
       placement="bottom-end"
@@ -75,92 +72,92 @@ export default function AccountDrawer({ userData }) {
       onClose={onClose}
       isLazy
       lazyBehavior="unmount"
+      returnFocusOnClose
     >
       <PopoverTrigger>
-        <Flex align={"center"} gap={2}>
-          <LazyImage
-            src={userData.picture}
-            borderRadius={"full"}
-            boxSize={"35px"}
-            alt={userData.first_name}
-            border="2px solid red"
+        <Flex align="center" gap={2} cursor="pointer">
+          <Avatar
+            name={displayName}
+            src={userData?.picture}
+            boxSize="35px"
+            border="2px solid"
+            borderColor="red.300"
           />
-          <Flex align={"center"} gap={0}>
-            <Text color="#6b6b83" fontWeight={"600"} fontSize={"13px"}>
-              Hi, {""}
-              {userData?.first_name?.charAt(0).toUpperCase() +
-                userData?.first_name?.slice(1)}
+          <Flex align="center" gap={0}>
+            <Text color="#6b6b83" fontWeight="600" fontSize="13px">
+              Hi, {displayName}
             </Text>
             <IconButton
-              aria-label="Open Cart"
+              aria-label="Open account menu"
               icon={<RiArrowDropDownLine size={30} />}
               variant="ghost"
               fontSize="24px"
               color="brand.500"
               p={0}
               m={0}
-              _hover={{
-                color: "brand.700",
-              }}
+              _hover={{ color: "brand.700" }}
             />
           </Flex>
         </Flex>
       </PopoverTrigger>
-      <PopoverContent width="200px" paddingTop={10}>
+
+      <PopoverContent width="220px" pt={10}>
         <PopoverArrow />
+        <PopoverCloseButton />
         <PopoverBody>
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6} mb={8}>
-            {accountDrawerItems.map((items, idx) => (
-              <Flex
-                direction={"column"}
-                gap={3}
-                alignItems={"center"}
+          <SimpleGrid columns={{ base: 2 }} spacing={4} mb={6}>
+            {accountDrawerItems.map((item) => (
+              <LinkBox
+                key={item.slug}
+                as={Flex}
+                direction="column"
+                gap={2}
+                align="center"
                 role="group"
                 cursor="pointer"
-                textAlign={"center"}
+                textAlign="center"
+                _hover={{ color: "brand.700" }}
               >
-                <Link href={"/" + items.slug}>
-                  <IconButton
-                    aria-label="Open Cart"
-                    icon={items.icon}
-                    variant="ghost"
-                    fontSize="24px"
-                    color="brand.500"
-                    p={0}
-                    m={0}
-                    key={idx}
-                    _groupHover={{ color: "brand.700" }}
-                  />
-                </Link>
-                <Text
-                  _groupHover={{ color: "brand.700" }}
+                <IconButton
+                  aria-hidden
+                  tabIndex={-1}
+                  icon={item.icon}
+                  variant="ghost"
+                  fontSize="24px"
                   color="brand.500"
-                  fontWeight="500"
-                >
-                  {items.text}
+                  p={0}
+                  m={0}
+                  _groupHover={{ color: "brand.700" }}
+                />
+                <Text color="brand.500" fontWeight="500">
+                  {item.text}
                 </Text>
-              </Flex>
+                <LinkOverlay
+                  as={RouterLink}
+                  to={`/${item.slug}`}
+                  onClick={onClose}
+                  aria-label={item.text}
+                />
+              </LinkBox>
             ))}
           </SimpleGrid>
         </PopoverBody>
+
         <PopoverFooter
-          alignItems={"center"}
-          display={"flex"}
-          flexDir={"column"}
+          display="flex"
+          flexDir="column"
+          alignItems="center"
           p={4}
         >
           <Text fontWeight="500">
-            Not{" "}
-            {userData?.first_name?.charAt(0).toUpperCase() +
-              userData?.first_name?.slice(1)}
-            ?
+            Not {displayName}?{" "}
             <ChakraButton
-              _hover={{ color: "brand.700" }}
               onClick={handleLogout}
-              variant={"link"}
-              fontSize={"13px"}
-              marginLeft={2}
-              color={"brand.500"}
+              variant="link"
+              fontSize="13px"
+              ml={2}
+              color="brand.500"
+              _hover={{ color: "brand.700" }}
             >
               Sign Out
             </ChakraButton>

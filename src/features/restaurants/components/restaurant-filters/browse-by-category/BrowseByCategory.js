@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import {
   Box,
   Heading,
@@ -8,6 +8,8 @@ import {
   SkeletonText,
 } from "@chakra-ui/react";
 import BrowseByCategoryNav from "../../../../../widgets/navBar/BrowseByCategoryNav";
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 const BrowseByCategory = () => {
   const [foods, setFoods] = useState([]);
@@ -23,36 +25,44 @@ const BrowseByCategory = () => {
   };
 
   useEffect(() => {
-    const fetchFoods = async () => {
+    const abortController = new AbortController();
+
+    (async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/foods`);
+        setLoading(true);
+
+        const response = await fetch(`${API_URL}/foods`, {
+          signal: abortController.signal,
+        });
         const result = await response.json();
         const shuffled = shuffleArray(result.data).slice(0, 8);
-        setFoods(shuffled);
+        if (!abortController.signal.aborted) setFoods(shuffled);
       } catch (error) {
         console.error("Error fetching foods:", error);
       } finally {
-        setLoading(false);
+        if (!abortController.signal.aborted) setLoading(false);
       }
-    };
+    })();
 
-    fetchFoods();
+    return () => abortController.abort();
   }, []);
 
-  const renderSkeletons = () => {
-    return Array.from({ length: 8 }).map((_, index) => (
-      <Box
-        key={index}
-        width={{ base: "100%", sm: "48%", md: "23%" }}
-        height="150px"
-        borderRadius="md"
-        px={6}
-      >
-        <SkeletonCircle size="100" />
-        <SkeletonText noOfLines={1} spacing="2" marginTop={4} />
-      </Box>
-    ));
-  };
+  const skeletons = useMemo(
+    () =>
+      Array.from({ length: 8 }, (_, index) => (
+        <Box
+          key={index}
+          width={{ base: "100%", sm: "48%", md: "23%" }}
+          height="150px"
+          borderRadius="md"
+          px={6}
+        >
+          <SkeletonCircle boxSize="100px" />
+          <SkeletonText noOfLines={1} spacing="2" mt={4} />
+        </Box>
+      )),
+    []
+  );
 
   return (
     <Box as="section" py={10} px={{ base: 4, md: 8 }} bg="gray.50">
@@ -74,7 +84,7 @@ const BrowseByCategory = () => {
 
         <Flex gap={4}>
           {loading
-            ? renderSkeletons()
+            ? skeletons
             : foods.map((food) => (
                 <BrowseByCategoryNav
                   key={food.id}

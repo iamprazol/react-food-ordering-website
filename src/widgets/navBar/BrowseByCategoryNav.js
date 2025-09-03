@@ -1,49 +1,55 @@
-import React from "react";
+import React, { memo } from "react";
 import { NavLink } from "react-router-dom";
-import { Box, chakra, Text, VisuallyHidden } from "@chakra-ui/react";
+import { chakra, Text, LinkBox, LinkOverlay } from "@chakra-ui/react";
 
 const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
 
-const BrowseByCategoryNav = ({ category_id, image, restaurant_id, title }) => {
-  const imageUrl = `${image}`;
+const MemoBrowseByCategoryNav = ({ image, restaurant_id, title }) => {
+  const to = `/restaurant/${encodeURIComponent(restaurant_id)}`;
 
   return (
-    <NavLink to={`/restaurant/${restaurant_id}`}>
-      <Box
-        as="label"
-        htmlFor={category_id}
-        cursor="pointer"
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        borderColor="gray.200"
-        textAlign="center"
-        w={36}
-        transition="transform 0.3s ease-in-out"
-        _hover={{ transform: "scale(1.2)" }}
-      >
-        <VisuallyHidden
-          as="input"
-          type="radio"
-          name="slideItem"
-          id={category_id}
-        />
+    <LinkBox
+      as="article"
+      role="group"
+      cursor="pointer"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      textAlign="center"
+      w={36}
+      transition="transform 0.2s ease"
+      _hover={{ transform: "scale(1.05)" }}
+      willChange="transform"
+    >
+      <LazyImage
+        boxSize="130px"
+        objectFit="cover"
+        borderRadius="full"
+        src={image}
+        alt={title || "Restaurant"}
+        mb={2}
+        decoding="async"
+      />
 
-        <LazyImage
-          boxSize="130px"
-          objectFit="cover"
-          borderRadius="full"
-          src={imageUrl}
-          alt={title}
-          mb={2}
-        />
+      <Text fontSize="sm" noOfLines={1} _groupHover={{ color: "brand.500" }}>
+        {title}
+      </Text>
 
-        <Text fontSize="sm" noOfLines={1}>
-          {title}
-        </Text>
-      </Box>
-    </NavLink>
+      <LinkOverlay
+        as={NavLink}
+        to={to}
+        aria-label={title ? `Open ${title}` : "Open restaurant"}
+      />
+    </LinkBox>
   );
 };
+
+const BrowseByCategoryNav = memo(
+  MemoBrowseByCategoryNav,
+  (prev, next) =>
+    prev.restaurant_id === next.restaurant_id &&
+    prev.image === next.image &&
+    prev.title === next.title
+);
 
 export default BrowseByCategoryNav;
