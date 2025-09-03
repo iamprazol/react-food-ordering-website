@@ -5,9 +5,6 @@ import {
   Tab,
   TabPanel,
   Flex,
-  Box,
-  Text,
-  chakra,
   SimpleGrid,
 } from "@chakra-ui/react";
 

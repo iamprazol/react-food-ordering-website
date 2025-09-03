@@ -80,7 +80,7 @@ const RestaurantList = ({ searchText, col }) => {
 
   return (
     <Box as="section" py={10} px={{ base: 4, md: 8 }} bg="gray.50">
-      <Box maxW="7xl" mx="auto">
+      <Box maxW="7xl" mx="auto" id="restaurants">
         {searchText === "" && (
           <Heading fontSize="30px" mb={4}>
             Browse By Restaurants

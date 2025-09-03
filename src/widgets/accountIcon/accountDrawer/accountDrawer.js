@@ -73,6 +73,8 @@ export default function AccountDrawer({ userData }) {
       isOpen={isOpen}
       onOpen={onOpen}
       onClose={onClose}
+      isLazy
+      lazyBehavior="unmount"
     >
       <PopoverTrigger>
         <Flex align={"center"} gap={2}>

@@ -1,14 +1,5 @@
-import { useState, useEffect } from "react";
-import {
-  Box,
-  chakra,
-  Text,
-  Flex,
-  Badge,
-  Link as ChakraLink,
-  IconButton,
-  HStack,
-} from "@chakra-ui/react";
+import { useMemo, useCallback, memo, useState } from "react";
+import { Box, chakra, Text, Flex, IconButton, HStack } from "@chakra-ui/react";
 
 // Import Icons.
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
@@ -19,9 +10,9 @@ import { useAuth } from "../../context/AuthContext";
 import { useUserData } from "../../context/UserDataContext";
 
 const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
+const API_URL = process.env.REACT_APP_API_URL;
 
-const FoodCard = ({ currentFood, context }) => {
-  const [liked, setLiked] = useState(false);
+const MemoFoodCard = ({ currentFood, context, onClick }) => {
   const {
     state: { token },
   } = useAuth();
@@ -30,56 +21,65 @@ const FoodCard = ({ currentFood, context }) => {
     dispatch,
   } = useUserData();
 
-  useEffect(() => {
-    if (token) {
-      favourites.foods.map((food) => {
-        if (currentFood.food_id == food.food_id) {
-          setLiked(true);
+  const [optimisticLike, setOptimisticLike] = useState(null);
+  const [pending, setPending] = useState(false);
+
+  const foodId = currentFood?.food_id ?? currentFood?.id;
+
+  const isLiked = useMemo(() => {
+    if (!token) return false;
+    const list = (favourites && favourites.foods) || [];
+
+    return list.some((food) => food && food.food_id == foodId);
+  }, [token, favourites, foodId]);
+
+  const uiLiked = optimisticLike ?? isLiked;
+  const handleFavourites = useCallback(
+    async (targetId) => {
+      if (!token || !API_URL || targetId == null) return;
+      const endpoint = isLiked
+        ? `deletefavouritefood/${targetId}`
+        : `favouritefood/${targetId}`;
+      const method = isLiked ? "DELETE" : "POST";
+
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/${endpoint}`,
+        {
+          method,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         }
+      );
+
+      const jsonResponse = await response.json();
+
+      const serverFood = jsonResponse?.data?.food;
+
+      const current = (favourites && favourites.foods) || [];
+
+      const nextFoods = isLiked
+        ? current.filter((food) => (food?.food_id ?? food?.id) != targetId)
+        : [...current, serverFood];
+
+      dispatch({
+        type: "SET_FAVOURITES",
+        payload: { ...favourites, foods: nextFoods },
       });
-    }
-  }, [favourites]);
 
-  const handleFavourites = async (food_id) => {
-    const response = await fetch(
-      `${process.env.REACT_APP_API_URL}/${
-        liked ? `deletefavouritefood/${food_id}` : `favouritefood/${food_id}`
-      }`,
-      {
-        method: liked ? "DELETE" : "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+      setPending(false);
+      setOptimisticLike(null);
+    },
+    [token, favourites, dispatch, isLiked, pending]
+  );
 
-    const data = await response.json();
-
-    const food = data.data.food;
-
-    let newFavouritesRef = {};
-    if (liked) {
-      newFavouritesRef = favourites.foods.filter((food) => {
-        return food.food_id !== food_id;
-      });
-    } else {
-      const currentFoods = favourites.foods || [];
-
-      newFavouritesRef = [...currentFoods, food];
-    }
-    const updatedFavourites = {
-      ...favourites,
-      foods: newFavouritesRef,
-    };
-
-    dispatch({
-      type: "SET_FAVOURITES",
-      payload: updatedFavourites,
-    });
-
-    setLiked(!liked);
-  };
+  const onHeartClick = useCallback(() => {
+    if (foodId == null) return;
+    setOptimisticLike(!isLiked);
+    setPending(true);
+    handleFavourites(foodId);
+  }, [foodId, handleFavourites, isLiked]);
 
   return (
     <>
@@ -98,19 +98,18 @@ const FoodCard = ({ currentFood, context }) => {
         alignContent={"center"}
       >
         <IconButton
-          icon={liked ? <IoMdHeart size={26} /> : <IoMdHeartEmpty size={26} />}
+          aria-label={uiLiked ? "Remove from favourites" : "Add to favourites"}
+          icon={
+            uiLiked ? <IoMdHeart size={26} /> : <IoMdHeartEmpty size={26} />
+          }
           padding={1}
           variant="ghost"
           fontSize="24px"
-          color={liked ? "brand.500" : "grey.600"}
+          color={uiLiked ? "brand.500" : "grey.600"}
           _hover={{
-            color: liked ? "grey.600" : "brand.500",
+            color: uiLiked ? "grey.600" : "brand.500",
           }}
-          onClick={() =>
-            handleFavourites(
-              currentFood.id ? currentFood.id : currentFood.food_id
-            )
-          }
+          onClick={pending ? null : onHeartClick}
         />
       </Box>
       <Flex direction="column" gap={1} flex="0 0 50%">
@@ -126,11 +125,19 @@ const FoodCard = ({ currentFood, context }) => {
           Rs {currentFood.price}
         </Text>
         {context !== "myAccount" && (
-          <MdAddCircleOutline color="green" size={"16px"} />
+          <MdAddCircleOutline color="green" size={"16px"} onClick={onClick} />
         )}
       </HStack>
     </>
   );
 };
+
+const FoodCard = memo(
+  MemoFoodCard,
+  (prev, next) =>
+    (prev.currentFood?.food_id ?? prev.currentFood?.id) ===
+      (next.currentFood?.food_id ?? next.currentFood?.id) &&
+    prev.context === next.context
+);
 
 export default FoodCard;

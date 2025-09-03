@@ -12,7 +12,7 @@ import { MdShoppingBag } from "react-icons/md";
 
 export default function CartDrawer() {
   return (
-    <Popover placement="bottom-end" closeOnBlur>
+    <Popover isLazy lazyBehavior="unmount" placement="bottom-end" closeOnBlur>
       <PopoverTrigger>
         <IconButton
           aria-label="Open Cart"

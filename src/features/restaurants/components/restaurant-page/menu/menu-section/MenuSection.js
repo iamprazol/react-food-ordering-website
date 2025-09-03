@@ -121,6 +121,13 @@ function MenuSection({ menuItems }) {
     setOrderedQuantity(Number(value));
   };
 
+  const handleAddToCartClick = (addedFood) => {
+    setOrderedFood(addedFood);
+    setOpenOrderBar(true);
+    setOrderHandled(false);
+    onCartOpen();
+  };
+
   const renderSkeletons = () => {
     return Array.from({ length: 3 }).map((_, sectionIndex) => (
       <Box key={sectionIndex} mb={6}>
@@ -187,15 +194,13 @@ function MenuSection({ menuItems }) {
                         justify="space-between"
                         p={3}
                         borderBottomWidth="1px"
-                        onClick={() => {
-                          setOrderedFood(food);
-                          setOpenOrderBar(true);
-                          setOrderHandled(false);
-                          onCartOpen();
-                        }}
                         cursor="pointer"
                       >
-                        <FoodCard currentFood={food} />
+                        <FoodCard
+                          currentFood={food}
+                          context="menu"
+                          onClick={() => handleAddToCartClick(food)}
+                        />
                       </Flex>
                     ))
                   ) : (

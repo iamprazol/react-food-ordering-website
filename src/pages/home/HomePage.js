@@ -45,6 +45,8 @@ const HomeHeader = () => {
               bgColor="brand.500"
               borderColor="brand.500"
               _hover={{ bgColor: "brand.600" }}
+              as="a"
+              href={"#restaurants"}
             >
               {"Order Now"}
             </ChakraButton>
@@ -57,7 +59,7 @@ const HomeHeader = () => {
       <Ads
         adsText={"Get free delivery with Rs.5000"}
         image={REACT_APP_URL + "/images/food/1624721452.jpg"}
-        link="google.com"
+        link="#restaurants"
         buttonText="Learn More"
       />
 
@@ -66,7 +68,7 @@ const HomeHeader = () => {
       <Ads
         adsText={"Get free delivery with Rs.5000"}
         image={REACT_APP_URL + "/images/food/1624721452.jpg"}
-        link="google.com"
+        link="#restaurants"
         buttonText="Learn More"
       />
     </>

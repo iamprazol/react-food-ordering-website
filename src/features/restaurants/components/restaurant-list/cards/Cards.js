@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, memo, useState } from "react";
 import {
   Box,
   chakra,
@@ -21,7 +21,7 @@ import { useUserData } from "../../../../../context/UserDataContext";
 
 const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
 
-const Cards = ({
+const MemoCards = ({
   id,
   name,
   description,
@@ -38,11 +38,15 @@ const Cards = ({
     dispatch,
   } = useUserData();
 
+  const [optimisticLike, setOptimisticLike] = useState(null);
+  const [pending, setPending] = useState(false);
+
   const isLiked = useMemo(() => {
     if (!token) return false;
     const list = (favourites && favourites.restaurants) || [];
     return list.some((r) => r && r.restaurant_id === id);
   }, [token, favourites, id]);
+  const uiLiked = optimisticLike ?? isLiked;
 
   const handleFavourites = useCallback(
     async (restaurant_id) => {
@@ -50,10 +54,12 @@ const Cards = ({
       const endpoint = isLiked
         ? `deletefavouriterestaurant/${restaurant_id}`
         : `favouriterestaurant/${restaurant_id}`;
+      const method = isLiked ? "DELETE" : "POST";
+
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/${endpoint}`,
         {
-          method: isLiked ? "DELETE" : "POST",
+          method,
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -61,25 +67,35 @@ const Cards = ({
         }
       );
 
-      const data = await response.json();
+      const jsonResponse = await response.json();
 
-      const restaurant = data && data.data && data.data.restaurant;
+      const restaurant = jsonResponse?.data?.restaurant;
 
       const current = (favourites && favourites.restaurants) || [];
       const nextRestaurants = isLiked
-        ? current.filter((r) => r && r.restaurant_id !== restaurant_id)
+        ? current.filter((r) => r && r.restaurant_id != restaurant_id)
         : [...current, restaurant];
 
       dispatch({
         type: "SET_FAVOURITES",
         payload: { ...favourites, restaurants: nextRestaurants },
       });
+
+      setPending(false);
+      setOptimisticLike(null);
     },
     [token, favourites, dispatch, isLiked]
   );
 
   const filledStars = useMemo(() => Array.from({ length: 3 }), []);
   const emptyStars = useMemo(() => Array.from({ length: 2 }), []);
+
+  const onHeartClick = useCallback(() => {
+    if (id == null) return;
+    setOptimisticLike(!isLiked);
+    setPending(true);
+    handleFavourites(id);
+  }, [id, handleFavourites, isLiked]);
 
   return (
     <Box
@@ -121,17 +137,17 @@ const Cards = ({
         >
           <IconButton
             aria-label={
-              isLiked ? "Remove from favourites" : "Add to favourites"
+              uiLiked ? "Remove from favourites" : "Add to favourites"
             }
             icon={
-              isLiked ? <IoMdHeart size={26} /> : <IoMdHeartEmpty size={26} />
+              uiLiked ? <IoMdHeart size={26} /> : <IoMdHeartEmpty size={26} />
             }
             padding={1}
             variant="ghost"
             fontSize="24px"
-            color={isLiked ? "brand.500" : "grey.600"}
-            _hover={{ color: isLiked ? "grey.600" : "brand.500" }}
-            onClick={() => handleFavourites(id)}
+            color={uiLiked ? "brand.500" : "grey.600"}
+            _hover={{ color: uiLiked ? "grey.600" : "brand.500" }}
+            onClick={pending ? null : onHeartClick}
           />
         </Box>
       </Box>
@@ -189,4 +205,5 @@ const Cards = ({
   );
 };
 
-export default React.memo(Cards);
+const Cards = memo(MemoCards, (prev, next) => prev.id === next.id);
+export default Cards;

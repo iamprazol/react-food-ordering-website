@@ -39,7 +39,13 @@ export default function NotificationDrawer() {
   };
 
   return (
-    <Popover placement="bottom-end" closeOnBlur onClose={markAllRead}>
+    <Popover
+      placement="bottom-end"
+      closeOnBlur
+      onClose={markAllRead}
+      isLazy
+      lazyBehavior="unmount"
+    >
       <PopoverTrigger>
         <Flex position="relative">
           <IconButton
