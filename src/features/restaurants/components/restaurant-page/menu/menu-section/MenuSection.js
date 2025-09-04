@@ -21,11 +21,12 @@ import {
   Skeleton,
 } from "@chakra-ui/react";
 
-import { MdOutlineSearch, MdAdd, MdOutlineRemoveCircle } from "react-icons/md";
+import { MdAdd, MdOutlineRemoveCircle } from "react-icons/md";
 import { useCart } from "../../../../../carts/hooks/useCart";
 import FoodCard from "../../../../../food/FoodCard";
 import { useAuth } from "../../../../../../context/AuthContext";
 import { useUserData } from "../../../../../../context/UserDataContext";
+import { Search } from "../../../../../../widgets/icon/Icon";
 
 function MenuSection({ menuItems }) {
   const [openOrderBar, setOpenOrderBar] = useState(false);
@@ -155,7 +156,7 @@ function MenuSection({ menuItems }) {
         >
           <IconButton
             aria-label="Search"
-            icon={<MdOutlineSearch />}
+            icon={<Search />}
             variant="ghost"
             fontSize="xl"
           />

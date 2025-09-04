@@ -9,11 +9,11 @@ import {
   useBreakpointValue,
   Link,
 } from "@chakra-ui/react";
-import { MdOutlineSearch } from "react-icons/md";
 import CartDrawer from "../../features/carts/components/cartDrawer";
 import NotificationDrawer from "../notifications/NotificationDrawer";
 import AccountIcon from "../accountIcon/AccountIcon";
 import { useAuth } from "../../context/AuthContext";
+import { Search } from "../icon/Icon";
 
 const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
 
@@ -67,7 +67,7 @@ function NavBar({ onClick, onChange }) {
         >
           <IconButton
             aria-label="Search"
-            icon={<MdOutlineSearch />}
+            icon={<Search />}
             variant="ghost"
             fontSize="xl"
           />

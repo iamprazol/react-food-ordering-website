@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Box,
   Flex,
@@ -14,9 +14,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-import Banner from "../../../../../widgets/banner/Banner";
 import RestaurantList from "../../restaurant-list/RestaurantList";
-import IconContainer from "../../../../../widgets/icon-container/IconContainer";
 
 import { MdArrowForward } from "react-icons/md";
 

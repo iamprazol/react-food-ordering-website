@@ -9,12 +9,9 @@ import {
 } from "@chakra-ui/react";
 
 import InputHandler from "../../../widgets/inputHandler/InputHandler";
-import {
-  MdEmail,
-  MdLock,
-  MdOutlinePerson,
-  MdContactPhone,
-} from "react-icons/md";
+import { MdEmail, MdLock, MdContactPhone } from "react-icons/md";
+
+import { UserIcon } from "../../../widgets/icon/Icon";
 
 import { useRegisterUser } from "../hooks/useRegisterUser";
 
@@ -71,12 +68,12 @@ const RegistrationPage = () => {
     {
       name: "first_name",
       placeholder: "First Name",
-      icon: <MdOutlinePerson />,
+      icon: <UserIcon />,
     },
     {
       name: "last_name",
       placeholder: "Last Name",
-      icon: <MdOutlinePerson />,
+      icon: <UserIcon />,
     },
     {
       name: "email",

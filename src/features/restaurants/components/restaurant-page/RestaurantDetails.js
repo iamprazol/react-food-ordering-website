@@ -13,10 +13,9 @@ import {
   chakra,
   IconButton,
 } from "@chakra-ui/react";
-import {
-  MdOutlineStarPurple500,
-  MdOutlineAddLocationAlt,
-} from "react-icons/md";
+
+import { Stars } from "../../../../widgets/icon/Icon";
+import { MdOutlineAddLocationAlt } from "react-icons/md";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { useAuth } from "../../../../context/AuthContext";
 import { useUserData } from "../../../../context/UserDataContext";
@@ -142,7 +141,7 @@ function RestaurantDetails(props) {
           {[1, 2, 3, 4, 5].map((i) => (
             <Icon
               key={i}
-              as={MdOutlineStarPurple500}
+              as={Stars}
               color={i <= 3 ? "yellow.400" : "gray.300"}
               boxSize={5}
             />

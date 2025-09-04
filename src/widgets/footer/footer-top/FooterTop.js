@@ -1,15 +1,14 @@
 import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import {
-  MdPayment,
-  MdOutlineCardGiftcard,
-  MdOutlineAssignment,
-  MdApps,
-  MdOutlineSupportAgent,
-  MdAccountCircle,
-} from "react-icons/md";
+  PaymentIcon,
+  CardGiftIcon,
+  AssignmentIcon,
+  AppsIcon,
+  SupportAgentIcon,
+  AccountCircleIcon,
+} from "../../icon/Icon";
 
-// Utility icon box
-const IconBox = ({ icon, text }) => {
+const IconBox = ({ icon: IconComponent, text }) => {
   const iconColor = useColorModeValue("brand.500", "brand.300");
 
   return (
@@ -21,9 +20,7 @@ const IconBox = ({ icon, text }) => {
       flex="1"
       minW={{ base: "40%", sm: "30%", md: "15%" }}
     >
-      <Box fontSize="6xl" color={iconColor}>
-        {icon}
-      </Box>
+      <IconComponent boxSize="12" color={iconColor} />
       <Text color="white" fontSize="sm">
         {text}
       </Text>
@@ -42,18 +39,12 @@ const FooterTop = () => {
         mx="auto"
         textAlign="center"
       >
-        <IconBox icon={<MdPayment />} text="100% Payment Secured" />
-        <IconBox icon={<MdAccountCircle />} text="Support lots of Payments" />
-        <IconBox
-          icon={<MdOutlineSupportAgent />}
-          text="24/7 Customer Support"
-        />
-        <IconBox
-          icon={<MdOutlineCardGiftcard />}
-          text="Free Delivery with Rs.5000"
-        />
-        <IconBox icon={<MdOutlineAssignment />} text="Best Price Guaranteed" />
-        <IconBox icon={<MdApps />} text="Mobile Apps Ready" />
+        <IconBox icon={PaymentIcon} text="100% Payment Secured" />
+        <IconBox icon={AccountCircleIcon} text="Support lots of Payments" />
+        <IconBox icon={SupportAgentIcon} text="24/7 Customer Support" />
+        <IconBox icon={CardGiftIcon} text="Free Delivery with Rs.5000" />
+        <IconBox icon={AssignmentIcon} text="Best Price Guaranteed" />
+        <IconBox icon={AppsIcon} text="Mobile Apps Ready" />
       </Flex>
     </Box>
   );

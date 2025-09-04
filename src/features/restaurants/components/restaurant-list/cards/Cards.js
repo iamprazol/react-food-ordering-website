@@ -11,8 +11,8 @@ import {
 import { Link } from "react-router-dom";
 
 // Import Icons.
-import { MdOutlineStarPurple500 } from "react-icons/md";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
+import { Stars } from "../../../../../widgets/icon/Icon";
 
 // Import Components.
 import IconContainer from "../../../../../widgets/icon-container/IconContainer";
@@ -183,7 +183,7 @@ const MemoCards = ({
             {filledStars.map((_, i) => (
               <IconContainer
                 key={`filled-${i}`}
-                icon={<MdOutlineStarPurple500 />}
+                icon={<Stars />}
                 fontSizeClass="icon--small"
                 colorClass="text-yellow"
               />
@@ -191,7 +191,7 @@ const MemoCards = ({
             {emptyStars.map((_, i) => (
               <IconContainer
                 key={`empty-${i}`}
-                icon={<MdOutlineStarPurple500 />}
+                icon={<Stars />}
                 fontSizeClass="icon--small"
               />
             ))}

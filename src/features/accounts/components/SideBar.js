@@ -11,8 +11,6 @@ import {
   TabPanels,
   TabPanel,
 } from "@chakra-ui/react";
-import { Link } from "react-scroll";
-import { MdWhatshot } from "react-icons/md";
 import { RiUserFollowLine } from "react-icons/ri";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { FaRegAddressCard } from "react-icons/fa";

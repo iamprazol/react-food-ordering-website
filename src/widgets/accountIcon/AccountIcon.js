@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { FaRegUser } from "react-icons/fa";
 import { IconButton } from "@chakra-ui/react";
 import AccountDrawer from "./accountDrawer/accountDrawer";
 import { useAuth } from "../../context/AuthContext";
+import { UserIcon } from "../icon/Icon";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -57,7 +57,7 @@ function AccountIcon({ onClick }) {
   return (
     <IconButton
       aria-label={loading ? "Loading account" : "Open login"}
-      icon={<FaRegUser size={30} />}
+      icon={<UserIcon size={30} />}
       variant="ghost"
       fontSize="24px"
       color="brand.500"
