@@ -82,7 +82,18 @@ const RestaurantList = ({ searchText, col }) => {
     <Box as="section" py={10} px={{ base: 4, md: 8 }} bg="gray.50">
       <Box maxW="7xl" mx="auto" id="restaurants">
         {searchText === "" && (
-          <Heading fontSize="30px" mb={4}>
+          <Heading
+            fontSize={{ base: "20px", md: "30px" }}
+            mb={4}
+            color="blackAlpha.800"
+            fontWeight={600}
+            display="flex"
+            flexDirection={{ base: "column", md: "row" }}
+            alignItems={{ base: "left", md: "center" }}
+            justifyContent="space-between"
+            gap={{ base: 2, md: 0 }}
+          >
+            {" "}
             Browse By Restaurants
           </Heading>
         )}

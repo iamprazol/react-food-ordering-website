@@ -30,8 +30,6 @@ function reducer(state, action) {
       const next = dedupe([...(state.notifications || []), ...incoming]).sort(
         byCreatedDesc
       );
-      console.log("next");
-      console.log(next);
 
       return { ...state, notifications: next };
     case "CLEAR_NOTIFICATIONS":

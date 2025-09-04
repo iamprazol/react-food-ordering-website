@@ -111,9 +111,8 @@ function SearchRestaurantPage({ searchText }) {
           </VStack>
         </Box>
 
-        {/* Main Body */}
         <Box flex="1">
-          <RestaurantList searchText={searchText} col="3" />
+          <RestaurantList searchText={searchText} col={{ base: 2, md: 3 }} />
         </Box>
       </Flex>
     </Box>

@@ -16,18 +16,21 @@ import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { UserDataProvider } from "./context/UserDataContext";
 import { NotificationsProvider } from "./context/NotificationsContext";
+import { AppProvider } from "./context/AppContext";
 
 const queryClient = new QueryClient();
 
 export default function AppProviders({ children }) {
   return (
-    <AuthProvider>
-      <UserDataProvider>
-        <CartProvider>
-          <NotificationsProvider>{children}</NotificationsProvider>
-        </CartProvider>
-      </UserDataProvider>
-    </AuthProvider>
+    <AppProvider>
+      <AuthProvider>
+        <UserDataProvider>
+          <CartProvider>
+            <NotificationsProvider>{children}</NotificationsProvider>
+          </CartProvider>
+        </UserDataProvider>
+      </AuthProvider>
+    </AppProvider>
   );
 }
 

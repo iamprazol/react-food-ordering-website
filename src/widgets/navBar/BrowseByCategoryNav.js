@@ -16,13 +16,14 @@ const MemoBrowseByCategoryNav = ({ image, restaurant_id, title }) => {
       flexDirection="column"
       alignItems="center"
       textAlign="center"
-      w={36}
+      w={{ base: "130px", md: 36 }}
       transition="transform 0.2s ease"
       _hover={{ transform: "scale(1.05)" }}
       willChange="transform"
+      mt={{ base: "10px", md: "none" }}
     >
       <LazyImage
-        boxSize="130px"
+        boxSize={{ base: "100px", md: "130px" }}
         objectFit="cover"
         borderRadius="full"
         src={image}

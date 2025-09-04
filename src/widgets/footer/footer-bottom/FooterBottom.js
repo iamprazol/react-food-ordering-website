@@ -6,13 +6,19 @@ import {
   Stack,
   Text,
   chakra,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { useApp } from "../../../context/AppContext";
 
 const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
 
 const FooterBottom = () => {
   const [foodPics, setFoodPics] = useState([]);
+  const {
+    state: { isMobile },
+  } = useApp();
+  const foodCount = isMobile ? 2 : 7;
 
   const shuffle = (a) => {
     for (let i = a.length - 1; i > 0; i--) {
@@ -29,7 +35,7 @@ const FooterBottom = () => {
       .then((data) => {
         const foodsArray = shuffle(data.data);
         const foodElements = foodsArray
-          .slice(0, 7)
+          .slice(0, foodCount)
           .map((food, idx) => (
             <LazyImage
               key={idx}
@@ -81,12 +87,25 @@ const FooterBottom = () => {
   return (
     <Box bg="black" px={{ base: 4, md: 8 }} py={10}>
       <Box bg="black" py={10}>
-        <Flex justify="center" maxW="25%" mx="auto" height="200px">
+        <Flex
+          justify="center"
+          maxW={{ base: "80%", md: "25%" }}
+          mx="auto"
+          height={{ base: "100px", md: "200px" }}
+        >
           {foodPics}
         </Flex>
       </Box>
 
-      <Flex justify="space-between" gap={10} maxW="1200px" mx="auto" py={10}>
+      <Flex
+        justify="space-between"
+        flexDirection={{ base: "column", md: "row" }}
+        gap={10}
+        maxW="1200px"
+        mx="auto"
+        py={10}
+        textAlign={"center"}
+      >
         {/* Need Help */}
         <Box w={{ base: "100%", md: "45%", lg: "18%" }}>
           {sectionHeading("Need Help")}
@@ -136,7 +155,7 @@ const FooterBottom = () => {
         {/* Download Apps */}
         <Box w={{ base: "100%", md: "45%", lg: "18%" }}>
           {sectionHeading("Download Apps")}
-          <Stack spacing={3}>
+          <Stack spacing={3} alignItems={"center"}>
             <LazyImage
               src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
               alt="Google Play"

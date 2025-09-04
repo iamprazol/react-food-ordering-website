@@ -1,18 +1,17 @@
 import { Box, Flex } from "@chakra-ui/react";
 
-function Banner({ bannerImage, bannerHeight, bannerContent }) {
-  const height =
-    bannerHeight === "large"
-      ? "650px"
-      : bannerHeight === "medium"
-      ? "300px"
-      : "150px";
+function Banner({ bannerImage, bannerHeight = "medium", bannerContent }) {
+  const heightMap = {
+    large: { base: "250px", md: "400px", lg: "650px" },
+    medium: { base: "150px", md: "250px", lg: "300px" },
+    small: { base: "100px", md: "120px", lg: "150px" },
+  };
 
   return (
     <Box
       as="section"
       w="100%"
-      h={height}
+      h={heightMap[bannerHeight]}
       overflow="hidden"
       borderBottom="1px solid"
       borderColor="gray.200"
@@ -32,7 +31,9 @@ function Banner({ bannerImage, bannerHeight, bannerContent }) {
         backgroundPosition="center"
         backgroundRepeat="no-repeat"
         backgroundBlendMode={bannerImage ? "overlay" : undefined}
-        color="white"
+        color={bannerImage ? "white" : "gray.800"}
+        px={{ base: 4, md: 8 }}
+        textAlign="center"
       >
         {bannerContent}
       </Flex>

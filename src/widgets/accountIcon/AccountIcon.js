@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { IconButton } from "@chakra-ui/react";
+import { IconButton, Text } from "@chakra-ui/react";
 import AccountDrawer from "./accountDrawer/accountDrawer";
 import { useAuth } from "../../context/AuthContext";
 import { UserIcon } from "../icon/Icon";
+import { useApp } from "../../context/AppContext";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -10,6 +11,9 @@ function AccountIcon({ onClick }) {
   const {
     state: { token },
   } = useAuth();
+  const {
+    state: { isMobile },
+  } = useApp();
 
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -54,7 +58,11 @@ function AccountIcon({ onClick }) {
     return <AccountDrawer userData={userData} />;
   }
 
-  return (
+  return isMobile ? (
+    <Text fontSize="16px" color="brand.500" fontWeight={"500"}>
+      My Account
+    </Text>
+  ) : (
     <IconButton
       aria-label={loading ? "Loading account" : "Open login"}
       icon={<UserIcon size={30} />}

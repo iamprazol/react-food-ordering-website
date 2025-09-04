@@ -20,8 +20,8 @@ const IconBox = ({ icon: IconComponent, text }) => {
       flex="1"
       minW={{ base: "40%", sm: "30%", md: "15%" }}
     >
-      <IconComponent boxSize="12" color={iconColor} />
-      <Text color="white" fontSize="sm">
+      <IconComponent boxSize={{ base: "8", md: "12" }} color={iconColor} />
+      <Text color="white" fontSize={{ base: "12px", md: "16px" }}>
         {text}
       </Text>
     </Flex>

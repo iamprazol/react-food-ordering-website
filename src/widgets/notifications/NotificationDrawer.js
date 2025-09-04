@@ -8,11 +8,13 @@ import {
   IconButton,
   Badge,
   Flex,
+  Text,
 } from "@chakra-ui/react";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import OrderNotification from "./OrderNotification";
 import { useEffect, useState, useMemo } from "react";
 import { useNotifications } from "../../context/NotificationsContext";
+import { useApp } from "../../context/AppContext";
 
 export default function NotificationDrawer() {
   const {
@@ -37,7 +39,9 @@ export default function NotificationDrawer() {
       payload: updated,
     });
   };
-
+  const {
+    state: { isMobile },
+  } = useApp();
   return (
     <Popover
       placement="bottom-end"
@@ -48,14 +52,20 @@ export default function NotificationDrawer() {
     >
       <PopoverTrigger>
         <Flex position="relative">
-          <IconButton
-            aria-label="Open Notifications"
-            icon={<MdOutlineNotificationsActive size={40} />}
-            variant="ghost"
-            fontSize="24px"
-            color="brand.500"
-            _hover={{ color: "brand.700" }}
-          />
+          {isMobile ? (
+            <Text fontSize="16px" color="brand.500" fontWeight={"500"}>
+              Notifications
+            </Text>
+          ) : (
+            <IconButton
+              aria-label="Open Notifications"
+              icon={<MdOutlineNotificationsActive size={40} />}
+              variant="ghost"
+              fontSize="24px"
+              color="brand.500"
+              _hover={{ color: "brand.700" }}
+            />
+          )}
           {!!activeCount && (
             <Badge
               bgColor="brand.300"
