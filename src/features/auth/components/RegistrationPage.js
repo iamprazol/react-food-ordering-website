@@ -33,7 +33,11 @@ const RegistrationPage = () => {
     () => {
       toast({
         title: "Registration Successful",
-        description: "You have been successfully registered into the site.",
+        description: (
+          <Box fontSize={{ base: "12px", md: "14px" }}>
+            You have been successfully registered into the site.
+          </Box>
+        ),
         status: "success",
         duration: 4000,
         isClosable: true,
@@ -45,7 +49,11 @@ const RegistrationPage = () => {
 
       toast({
         title: "Registration Error",
-        description: "Please fix the errors and try again.",
+        description: (
+          <Box fontSize={{ base: "12px", md: "14px" }}>
+            Please fix the errors and try again.
+          </Box>
+        ),
         status: "error",
         duration: 4000,
         isClosable: true,
@@ -102,47 +110,73 @@ const RegistrationPage = () => {
   ];
 
   return (
-    <Box p={14} bg="white" maxW="800px" mx="auto" borderRadius="md">
-      <Heading fontWeight="500" size="xl" mb={10} textAlign="center">
-        Member Register
-      </Heading>
-
-      <form onSubmit={handleSubmit}>
-        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6} mb={8}>
-          {inputFields.map((field, idx) => (
-            <Flex key={idx} direction="column" className="rfow-field" mb={2}>
-              <InputHandler
-                fieldSetting={{
-                  type: field.type || "text",
-                  value: userData[field.name],
-                  required: false,
-                  placeholder: field.placeholder,
-                  id: `user_${field.name}`,
-                  name: field.name,
-                  error: errors[field.name] || "",
-                  icon: field.icon,
-                }}
-                onChange={handleInputChange}
-              />
-            </Flex>
-          ))}
-        </SimpleGrid>
-        <Flex justifyContent={"center"} mt={10}>
-          <ChakraButton
-            type="submit"
-            colorScheme="blue"
-            px={16}
-            bgColor="brand.500"
-            borderColor="brand.500"
-            _hover={{ bgColor: "brand.600" }}
-            isLoading={isPending}
-            loadingText="Submitting"
+    <Flex
+      direction={{ base: "column", md: "row" }}
+      maxW="900px"
+      mx="auto"
+      borderRadius="md"
+      overflow="hidden"
+      p={{ base: 0, md: 6 }}
+    >
+      <Box
+        flex="1"
+        bg="white"
+        p={{ base: 6, md: 10 }}
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+      >
+        <Heading
+          fontWeight="500"
+          fontSize={{ base: "24px", md: "28px" }}
+          mb={8}
+          textAlign="center"
+        >
+          Member Register
+        </Heading>
+        <form onSubmit={handleSubmit}>
+          <SimpleGrid
+            columns={{ base: 1, md: 2 }}
+            spacing={{ base: 4, md: 6 }}
+            mb={8}
           >
-            Submit
-          </ChakraButton>
-        </Flex>
-      </form>
-    </Box>
+            {inputFields.map((field, idx) => (
+              <Flex key={idx} direction="column" className="rfow-field" mb={2}>
+                <InputHandler
+                  fieldSetting={{
+                    type: field.type || "text",
+                    value: userData[field.name],
+                    required: false,
+                    placeholder: field.placeholder,
+                    id: `user_${field.name}`,
+                    name: field.name,
+                    error: errors[field.name] || "",
+                    icon: field.icon,
+                  }}
+                  onChange={handleInputChange}
+                />
+              </Flex>
+            ))}
+          </SimpleGrid>
+          <Flex justifyContent={"center"} mt={10}>
+            <ChakraButton
+              type="submit"
+              colorScheme="blue"
+              bgColor="brand.500"
+              borderColor="brand.500"
+              _hover={{ bgColor: "brand.600" }}
+              loadingText="Submitting"
+              isLoading={isPending}
+              width="100%"
+              height={8}
+              fontSize={{ base: "14px", md: "16px" }}
+            >
+              Submit
+            </ChakraButton>
+          </Flex>
+        </form>
+      </Box>
+    </Flex>
   );
 };
 

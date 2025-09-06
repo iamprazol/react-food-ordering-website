@@ -60,7 +60,7 @@ const HomeHeader = () => {
                 _hover={{ bgColor: "brand.600" }}
                 as="a"
                 href={"#restaurants"}
-                fontSize={{ base: "14px", md: "18px" }}
+                fontSize={{ base: "12px", md: "18px" }}
               >
                 Order Now
               </ChakraButton>

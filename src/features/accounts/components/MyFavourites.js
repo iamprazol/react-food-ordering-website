@@ -24,7 +24,7 @@ const MyFavourites = () => {
         <Tab
           _selected={{ color: "white", bg: "brand.400" }}
           width="100%"
-          fontSize={"14px"}
+          fontSize={{ base: "14px", md: "16px" }}
           fontWeight={"500"}
           p="15px 20px"
           borderTopLeftRadius={"4px"}
@@ -37,7 +37,7 @@ const MyFavourites = () => {
         <Tab
           _selected={{ color: "white", bg: "brand.400" }}
           width="100%"
-          fontSize={"14px"}
+          fontSize={{ base: "14px", md: "16px" }}
           fontWeight={"500"}
           p="15px 20px"
           bgColor={"white"}
@@ -48,7 +48,7 @@ const MyFavourites = () => {
       </TabList>
       <TabPanels width="100%">
         <TabPanel p="20px 0px" width="100% !important">
-          <SimpleGrid columns={2} spacing={6}>
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
             {favourites.restaurants.map((restaurant, idx) => (
               <Cards
                 key={idx}

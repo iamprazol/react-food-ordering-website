@@ -8,6 +8,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { Box, FormControl, FormLabel, Button, Text } from "@chakra-ui/react";
 import { useUserData } from "../../../../context/UserDataContext";
+import { useApp } from "../../../../context/AppContext";
 
 export default function StripeElement() {
   const stripe = useStripe();
@@ -50,9 +51,13 @@ export default function StripeElement() {
     });
   }
 
+  const {
+    state: { isMobile },
+  } = useApp();
+
   const elementStyle = {
     base: {
-      fontSize: "16px",
+      fontSize: isMobile ? "14px" : "16px",
       color: "#000",
       fontFamily: "system-ui, sans-serif",
       backgroundColor: "white", // background color
@@ -64,9 +69,11 @@ export default function StripeElement() {
   };
 
   return (
-    <Box as="form" p={4}>
-      <FormControl mb={4}>
-        <FormLabel>Card Number</FormLabel>
+    <Box as="form">
+      <FormControl my={4}>
+        <FormLabel fontSize={{ base: "14px", md: "16px" }}>
+          Card Number
+        </FormLabel>
         <Box p={2} borderWidth={1} borderRadius="md" bgColor={"white"}>
           <CardNumberElement
             options={{ style: elementStyle }}
@@ -75,8 +82,8 @@ export default function StripeElement() {
         </Box>
       </FormControl>
 
-      <FormControl mb={4}>
-        <FormLabel>Expiry</FormLabel>
+      <FormControl my={4}>
+        <FormLabel fontSize={{ base: "14px", md: "16px" }}>Expiry</FormLabel>
         <Box p={2} borderWidth={1} borderRadius="md" bgColor={"white"}>
           <CardExpiryElement
             options={{ style: elementStyle }}
@@ -85,8 +92,8 @@ export default function StripeElement() {
         </Box>
       </FormControl>
 
-      <FormControl mb={4}>
-        <FormLabel>CVC</FormLabel>
+      <FormControl my={4}>
+        <FormLabel fontSize={{ base: "14px", md: "16px" }}>CVC</FormLabel>
         <Box p={2} borderWidth={1} borderRadius="md" bgColor={"white"}>
           <CardCvcElement
             options={{ style: elementStyle }}
@@ -99,7 +106,7 @@ export default function StripeElement() {
         <Text
           mt={1}
           color={message.type === "error" ? "red.500" : "green.500"}
-          fontSize="14px"
+          fontSize="12px"
           fontWeight="500"
         >
           {message.message}

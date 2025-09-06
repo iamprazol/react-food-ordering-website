@@ -35,7 +35,11 @@ export default function Cart({ cartType, position }) {
     (error) => {
       toast({
         title: "Payment Failed",
-        description: (error && error.message) || "Please try again later.",
+        description: (
+          <Box fontSize={{ base: "12px", md: "14px" }}>
+            {(error && error.message) || "Please try again later."}
+          </Box>
+        ),
         status: "error",
         duration: 4000,
         isClosable: true,
@@ -155,7 +159,6 @@ export default function Cart({ cartType, position }) {
 
       if (provider === "stripe") {
         payRes = await payAsync({ provider, order });
-        console.log("payment result:", payRes);
 
         if (
           payRes &&
@@ -182,7 +185,6 @@ export default function Cart({ cartType, position }) {
       }
 
       const orderRes = await dispatchOrderAsync(order);
-      console.log("order result:", orderRes);
     } catch (e) {
       toast({
         title: "Checkout Failed",
@@ -198,11 +200,11 @@ export default function Cart({ cartType, position }) {
     <Flex
       direction={"column"}
       pt={"drawer" === cartType ? 2 : 8}
-      maxW={"checkout" === cartType ? "50%" : "100%"}
-      width={"drawer" === cartType ? "100%" : "80%"}
+      maxW={"checkout" === cartType ? { base: "100%", md: "50%" } : "100%"}
+      width={"drawer" === cartType ? "100%" : { base: "100%", md: "80%" }}
     >
       <Box mb={4} fontWeight="bold" fontSize="lg">
-        <Text fontSize="16px">MY BAG</Text>
+        <Text fontSize={{ base: "14px", md: "16px" }}>MY BAG</Text>
       </Box>
       <Box
         direction={"column"}
@@ -237,19 +239,23 @@ export default function Cart({ cartType, position }) {
                       <Text
                         color="#00000059"
                         fontWeight={"900"}
-                        fontSize={"14px"}
+                        fontSize={{ base: "12px", md: "14px" }}
                       >
                         {item.quantity}
                       </Text>
                       <Text
                         color="red.500"
                         fontWeight={"900"}
-                        fontSize={"14px"}
+                        fontSize={{ base: "12px", md: "14px" }}
                       >
                         {item.food_name}
                       </Text>
                     </Flex>
-                    <Text color={"#6b6b83"} fontWeight={"900"} fontSize="10px">
+                    <Text
+                      color={"#6b6b83"}
+                      fontWeight={"900"}
+                      fontSize={{ base: "10px", md: "12px" }}
+                    >
                       {item.special_instructions}
                     </Text>
                   </Flex>
@@ -268,7 +274,12 @@ export default function Cart({ cartType, position }) {
                   >
                     <MdOutlineDeleteForever size={20} />
                   </Box>
-                  <Text color="#00000059" flex={"0 0 25%"} fontWeight="500">
+                  <Text
+                    color="#00000059"
+                    flex={"0 0 25%"}
+                    fontWeight="500"
+                    fontSize={{ base: "12px", md: "14px" }}
+                  >
                     {Math.round(item.price)}
                   </Text>
                 </Flex>
@@ -283,14 +294,14 @@ export default function Cart({ cartType, position }) {
                     <Text
                       color="#00000059"
                       fontWeight={"500"}
-                      fontSize={"14px"}
+                      fontSize={{ base: "12px", md: "14px" }}
                     >
                       {items.key?.toUpperCase()}:
                     </Text>
                     <Text
                       color="#00000059"
                       fontWeight={"500"}
-                      fontSize={"13px"}
+                      fontSize={{ base: "12px", md: "14px" }}
                       textAlign={"left"}
                       flex={"0 0 35%"}
                     >
@@ -299,13 +310,17 @@ export default function Cart({ cartType, position }) {
                   </Flex>
                 ))}
                 <Flex direction={"row"} justifyContent={"space-between"}>
-                  <Text color="#00000059" fontWeight={"500"} fontSize={"14px"}>
+                  <Text
+                    color="#00000059"
+                    fontWeight={"500"}
+                    fontSize={{ base: "12px", md: "14px" }}
+                  >
                     GRAND TOTAL:
                   </Text>
                   <Text
                     color="#00000059"
                     fontWeight={"500"}
-                    fontSize={"13px"}
+                    fontSize={{ base: "12px", md: "14px" }}
                     textAlign={"left"}
                     flex={"0 0 35%"}
                   >
@@ -322,10 +337,18 @@ export default function Cart({ cartType, position }) {
               p={6}
             >
               <LazyImage src={EmptyCartImage} alt="Empty Cart" width="25%" />
-              <Text fontSize="lg" color="gray.500" mt={4}>
+              <Text
+                fontSize={{ base: "12px", md: "14px" }}
+                color="gray.500"
+                mt={4}
+              >
                 Your cart is empty.
               </Text>
-              <Text fontSize="lg" color="gray.500" mt={4}>
+              <Text
+                fontSize={{ base: "12px", md: "14px" }}
+                color="gray.500"
+                mt={4}
+              >
                 Add items to get started.
               </Text>
             </Flex>
@@ -349,7 +372,7 @@ export default function Cart({ cartType, position }) {
             <ChakraButton
               bgColor="brand.500"
               color="white"
-              fontSize="13px"
+              fontSize={{ base: "12px", md: "14px" }}
               width="100%"
               _hover={{
                 bgColor: "white",
@@ -368,7 +391,7 @@ export default function Cart({ cartType, position }) {
               <Link
                 bgColor="#28a745"
                 color="white"
-                fontSize="13px"
+                fontSize={{ base: "12px", md: "14px" }}
                 width="100%"
                 p={3}
                 borderRadius={6}
@@ -386,7 +409,7 @@ export default function Cart({ cartType, position }) {
               <ChakraButton
                 bgColor="brand.500"
                 color="white"
-                fontSize="13px"
+                fontSize={{ base: "12px", md: "14px" }}
                 width="100%"
                 _hover={{
                   bgColor: "white",

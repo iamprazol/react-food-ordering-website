@@ -16,6 +16,7 @@ import {
   LinkBox,
   LinkOverlay,
   Avatar,
+  Box,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import { RiArrowDropDownLine, RiUserFollowLine } from "react-icons/ri";
@@ -46,7 +47,11 @@ export default function AccountDrawer({ userData }) {
   const { logout } = useLogoutUser(() => {
     toast({
       title: "Logout Successful",
-      description: "You have been successfully logged-out from the site.",
+      description: (
+        <Box fontSize={{ base: "12px", md: "14px" }}>
+          You have been successfully logged-out from the site.
+        </Box>
+      ),
       status: "success",
       duration: 4000,
       isClosable: true,

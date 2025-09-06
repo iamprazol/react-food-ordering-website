@@ -9,7 +9,7 @@ const MyAccountHeader = ({ index }) => {
     <>
       <Box
         as="section"
-        px={{ base: 20, md: 40 }}
+        px={{ base: 0, md: 40 }}
         bg="gray.50"
         textAlign="left"
         borderTop="1px solid #E7E7E7"
@@ -31,7 +31,7 @@ const MyAccountHeader = ({ index }) => {
         py={10}
         px={{ base: 4, md: 8 }}
         maxW="7xl"
-        mx="150px"
+        mx={{ base: 0, md: "150px" }}
         direction={"column"}
         align={"left"}
         justifyContent={"flex-start"}

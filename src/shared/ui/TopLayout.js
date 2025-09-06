@@ -89,7 +89,6 @@ const TopLayout = ({ element }) => {
       {openRegistrationPopup && (
         <Popup
           onClick={(value) => setOpenRegistrationPopup(!value)}
-          popupClass="wd-50 br-25"
           content={<RegistrationPage />}
         />
       )}

@@ -8,6 +8,7 @@ import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { MdAddCircleOutline } from "react-icons/md";
 import { useAuth } from "../../context/AuthContext";
 import { useUserData } from "../../context/UserDataContext";
+import { useApp } from "../../context/AppContext";
 
 const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
 const API_URL = process.env.REACT_APP_API_URL;
@@ -20,7 +21,9 @@ const MemoFoodCard = ({ currentFood, context, onClick }) => {
     state: { favourites },
     dispatch,
   } = useUserData();
-
+  const {
+    state: { isMobile },
+  } = useApp();
   const [optimisticLike, setOptimisticLike] = useState(null);
   const [pending, setPending] = useState(false);
 
@@ -83,13 +86,15 @@ const MemoFoodCard = ({ currentFood, context, onClick }) => {
 
   return (
     <>
-      <LazyImage
-        src={currentFood.picture}
-        objectFit="cover"
-        w="75px"
-        height="75px"
-        borderRadius={"8px"}
-      />
+      {!isMobile && (
+        <LazyImage
+          src={currentFood.picture}
+          objectFit="cover"
+          w="75px"
+          height="75px"
+          borderRadius={"8px"}
+        />
+      )}
       <Box
         top="2"
         right="2"
@@ -112,16 +117,22 @@ const MemoFoodCard = ({ currentFood, context, onClick }) => {
           onClick={pending ? null : onHeartClick}
         />
       </Box>
-      <Flex direction="column" gap={1} flex="0 0 50%">
-        <Text fontSize={"md"} color="#4A4A4A">
+      <Flex direction="column" gap={1} flex="0 0 50%" justifyContent={"center"}>
+        <Text fontSize={{ base: "12px", md: "md" }} color="#4A4A4A">
           {currentFood.food_name}
         </Text>
-        <Text fontSize={"14px"} color="#4A4A4A" opacity={"0.5"}>
-          {currentFood.restaurant_name}
-        </Text>
+        {context === "myAccount" && (
+          <Text
+            fontSize={{ base: "12px", md: "md" }}
+            color="#4A4A4A"
+            opacity={"0.5"}
+          >
+            {currentFood.restaurant_name}
+          </Text>
+        )}
       </Flex>
       <HStack>
-        <Text fontSize={"md"} color="#383838">
+        <Text fontSize={{ base: "12px", md: "md" }} color="#383838">
           Rs {currentFood.price}
         </Text>
         {context !== "myAccount" && (

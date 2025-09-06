@@ -157,10 +157,12 @@ function OrdersTab({ myOrders }) {
                 justifyContent={"space-between"}
                 p="20px"
                 borderBottom="1px solid #f0f0f0"
+                direction={{ base: "column", md: "row" }}
+                gap={4}
               >
                 <Flex direction={"column"}>
                   <Heading
-                    fontSize={"18px"}
+                    fontSize={{ base: "14px", md: "18px" }}
                     fontWeight={"600"}
                     mb="5px"
                     color={"#333"}
@@ -168,19 +170,21 @@ function OrdersTab({ myOrders }) {
                     {" "}
                     Order #{myOrder.id}
                   </Heading>
-                  <Text color="#666" fontSize={"14px"}>
+                  <Text color="#666" fontSize={"12px"}>
                     Placed on {formatDate(myOrder.created_at)}{" "}
                   </Text>
                 </Flex>
                 <Badge
                   bgColor={getOrderStatus(myOrder).bgColor}
                   color={getOrderStatus(myOrder).color}
-                  fontSize="12px"
+                  fontSize={{ base: "10px", md: "12px" }}
                   fontWeight={"500"}
                   px={3}
                   py={1}
                   borderRadius="xl"
                   height="50%"
+                  w={{ base: "50%", md: "15%" }}
+                  textAlign={"center"}
                 >
                   {getOrderStatus(myOrder).text}
                 </Badge>
@@ -197,21 +201,21 @@ function OrdersTab({ myOrders }) {
                       src={myOrder.restaurant_image}
                       alt={myOrder.restaurant_name}
                       objectFit="cover"
-                      h="60px"
-                      w="60px"
+                      h={{ base: "50px", md: "60px" }}
+                      w={{ base: "50px", md: "60px" }}
                       borderRadius="8px"
                     />
                   </Box>
                   <Flex direction="column">
                     <Text
-                      fontSize={"16px"}
+                      fontSize={{ base: "14px", md: "18px" }}
                       fontWeight={"600"}
                       color="#333"
                       marginBottom={"5px"}
                     >
                       {myOrder.restaurant_name}
                     </Text>
-                    <Text fontSize={"14px"} color="#666">
+                    <Text fontSize={{ base: "12px", md: "14px" }} color="#666">
                       {myOrder.restaurant_address}
                     </Text>
                   </Flex>
@@ -222,12 +226,16 @@ function OrdersTab({ myOrders }) {
                   colorScheme="pink"
                 />
                 <Flex className="restaurant-info" gap="15px" align={"center"}>
-                  <Text fontSize={"14px"} color="#666">
+                  <Text fontSize={{ base: "12px", md: "14px" }} color="#666">
                     {parseOrderedItems(myOrder)}
                   </Text>
                 </Flex>
                 <Flex className="order-footer" gap="15px" align={"center"}>
-                  <Text fontSize={"18px"} fontWeight={"600"} color="#333">
+                  <Text
+                    fontSize={{ base: "14px", md: "18px" }}
+                    fontWeight={"600"}
+                    color="#333"
+                  >
                     Rs. {myOrder.total_price}
                   </Text>
                 </Flex>

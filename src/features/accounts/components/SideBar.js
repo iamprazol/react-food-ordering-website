@@ -49,8 +49,6 @@ const sideBar = ({ index }) => {
     },
   ];
 
-  console.log(index);
-
   return (
     <Box py={6} width="100%">
       <Box mb={4} pb={2} display="flex" alignItems="center" gap={2}>
@@ -59,6 +57,8 @@ const sideBar = ({ index }) => {
           direction="column"
           width="100%"
           defaultIndex={index}
+          flexDirection={{ base: "column", md: "row" }}
+          gap={10}
         >
           <TabList
             display="flex"
@@ -66,6 +66,7 @@ const sideBar = ({ index }) => {
             gap={2}
             width="400px"
             border="none"
+            flexDirection={{ base: "column", md: "row" }}
           >
             {myAccountItems.map((items, idx) => (
               <Tab
@@ -76,6 +77,7 @@ const sideBar = ({ index }) => {
                 borderBottom={"none"}
                 key={idx}
                 _selected={{ color: "brand.500" }}
+                fontSize={{ base: "14px", md: "16px" }}
               >
                 <IconContainer icon={items.icon} fontSizeClass="icon--small" />
                 {items.text}

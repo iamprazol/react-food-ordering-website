@@ -13,12 +13,16 @@ import {
 // Components
 import StripeWrapper from "./stripe-element/StripeWrapper";
 import { useUserData } from "../../../context/UserDataContext";
+import { useApp } from "../../../context/AppContext";
 
 const PaymentOptions = () => {
   const {
     state: { orders, paymentIntent },
     dispatch,
   } = useUserData();
+  const {
+    state: { isMobile },
+  } = useApp();
   const [paymentDetails, setPaymentDetails] = useState({});
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -60,19 +64,19 @@ const PaymentOptions = () => {
         <Tab
           _selected={{ color: "white", bg: "brand.400" }}
           width="100%"
-          fontSize={"14px"}
+          fontSize={{ base: "12px", md: "14px" }}
           fontWeight={"500"}
           borderTopLeftRadius={"4px"}
           borderBottomLeftRadius={"4px"}
           bgColor={"white"}
           boxShadow={"md"}
         >
-          Cash on Delivery
+          {isMobile ? "COD" : "Cash on Delivery"}
         </Tab>
         <Tab
           _selected={{ color: "white", bg: "brand.400" }}
           width="100%"
-          fontSize={"14px"}
+          fontSize={{ base: "12px", md: "14px" }}
           fontWeight={"500"}
           bgColor={"white"}
           boxShadow={"md"}
@@ -81,10 +85,18 @@ const PaymentOptions = () => {
         </Tab>
       </TabList>
       <TabPanels width="100%">
-        <TabPanel p="20px 0px" width="100% !important" fontSize={"15px"}>
-          <Text>Have the cash ready when you receive your order.</Text>
+        <TabPanel
+          width="100% !important"
+          fontSize={{ base: "12px", md: "14px" }}
+        >
+          <Text p={{ md: "10px" }}>
+            Have the cash ready when you receive your order.
+          </Text>
         </TabPanel>
-        <TabPanel p="20px 0px" width="100% !important" mt={4}>
+        <TabPanel
+          width="100% !important"
+          fontSize={{ base: "12px", md: "14px" }}
+        >
           <StripeWrapper />
         </TabPanel>
       </TabPanels>

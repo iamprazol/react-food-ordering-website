@@ -105,7 +105,7 @@ const BrowseByCategory = () => {
             href="/foods"
             color="brand.300"
             ml={{ base: 0, md: 2 }}
-            fontSize={{ base: "14px", md: "md" }}
+            fontSize={{ base: "12px", md: "md" }}
           >
             View all foods
           </Link>

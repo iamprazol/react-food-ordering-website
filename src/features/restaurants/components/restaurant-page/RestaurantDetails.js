@@ -109,7 +109,7 @@ function RestaurantDetails(props) {
         pb={4}
       >
         <Box>
-          <Heading size="lg" fontWeight="700">
+          <Heading fontSize={{ base: "18px", md: "lg" }} fontWeight="700">
             {name}
           </Heading>
           <Text color="gray.600" mt={2}>
@@ -148,7 +148,11 @@ function RestaurantDetails(props) {
           ))}
           <Text color="gray.600">58 ratings</Text>
         </HStack>
-        <Text fontSize="lg" fontWeight="semibold" color="gray.700">
+        <Text
+          fontSize={{ base: "12px", md: "18px" }}
+          fontWeight="semibold"
+          color="gray.700"
+        >
           {description}
         </Text>
       </Box>
@@ -192,7 +196,7 @@ function RestaurantDetails(props) {
 function InfoBlock({ label, value }) {
   return (
     <Box flex="1 1 200px" mb={3} pr={4}>
-      <Text fontSize="sm" color="gray.500">
+      <Text fontSize={{ base: "12px", md: "16px" }} color="gray.500">
         {label}
       </Text>
       <Text fontWeight="medium" color="gray.700">

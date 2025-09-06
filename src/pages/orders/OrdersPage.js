@@ -9,7 +9,7 @@ const OrderHeader = () => {
     <>
       <Box
         as="section"
-        px={{ base: 20, md: 40 }}
+        px={{ base: 0, md: 40 }}
         bg="gray.50"
         textAlign="left"
         borderTop="1px solid #E7E7E7"
@@ -24,13 +24,13 @@ const OrderHeader = () => {
           >
             My Orders
           </Heading>
-          <Text fontSize={"16px"} color="#666">
+          <Text fontSize={{ base: "14px", md: "16px" }} color="#666">
             Track your food orders and reorder your favorites
           </Text>
         </Box>
       </Box>
-      <Box as="section" py={10} px={{ base: 4, md: 8 }} bg="#f7f7f9">
-        <Box maxW="7xl" mx="auto" px={14} py={4}>
+      <Box as="section" py={10} px={{ base: 0, md: 8 }} bg="#f7f7f9">
+        <Box maxW="7xl" mx="auto" px={{ base: 2, md: 14 }} py={4}>
           <OrdersLayout />
         </Box>
       </Box>

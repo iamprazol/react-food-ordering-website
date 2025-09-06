@@ -61,7 +61,11 @@ const EditProfile = () => {
     if (!response.ok) {
       toast({
         title: "Profile Update failed",
-        description: "Your profile update has failed. Please try again later.",
+        description: (
+          <Box fontSize={{ base: "12px", md: "14px" }}>
+            Your profile update has failed. Please try again later.
+          </Box>
+        ),
         status: "error",
         duration: 4000,
         isClosable: true,
@@ -71,7 +75,11 @@ const EditProfile = () => {
 
       toast({
         title: "Profile Updated",
-        description: "Your profile has been updated successfully.",
+        description: (
+          <Box fontSize={{ base: "12px", md: "14px" }}>
+            Your profile has been updated successfully.
+          </Box>
+        ),
         status: "success",
         duration: 4000,
         isClosable: true,
@@ -83,13 +91,17 @@ const EditProfile = () => {
   };
 
   return (
-    <Box mx="20px">
+    <Box mx={{ base: 0, md: "20px" }}>
       <Flex direction="column" gap={10}>
         <VStack align="left">
           <FormLabel fontSize="0.75rem" color="#9B9B9B">
             PROFILE PICTURE
           </FormLabel>
-          <Avatar size="xl" name="Prajjwal Poudel" src={userData.picture} />
+          <Avatar
+            size={{ base: "lg", md: "xl" }}
+            name="Prajjwal Poudel"
+            src={userData.picture}
+          />
         </VStack>
 
         <form onSubmit={handleSubmit}>
@@ -174,8 +186,10 @@ const EditProfile = () => {
                 borderColor="brand.500"
                 _hover={{ bgColor: "brand.600" }}
                 loadingText="Saving"
-                isLoading={isSubmitting}
                 width="100%"
+                height={8}
+                fontSize={{ base: "14px", md: "16px" }}
+                isLoading={isSubmitting}
               >
                 Save
               </ChakraButton>

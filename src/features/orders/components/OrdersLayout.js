@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
 // Components
@@ -11,51 +10,73 @@ const OrdersLayout = () => {
   } = useUserData();
 
   return (
-    <Tabs variant="unstyled" justifyContent={"space-between"} w="100%">
-      <TabList>
+    <Tabs
+      variant="unstyled"
+      justifyContent={"space-between"}
+      px={{ base: 0, md: 16 }}
+    >
+      <TabList flexDirection={{ base: "column", md: "row" }}>
         <Tab
           _selected={{ color: "white", bg: "brand.400" }}
-          width="100%"
-          fontSize={"14px"}
+          fontSize={{ base: "12px", md: "14px" }}
           fontWeight={"500"}
           p="15px 20px"
           borderTopLeftRadius={"4px"}
           borderBottomLeftRadius={"4px"}
+          borderTopRightRadius={{ base: "4px", md: 0 }}
+          borderBottomRightRadius={{ base: "4px", md: 0 }}
           bgColor={"white"}
           boxShadow={"md"}
+          borderBottom="1px solid #e1e1e1"
+          w="100%"
         >
           All Orders
         </Tab>
         <Tab
           _selected={{ color: "white", bg: "brand.400" }}
-          width="100%"
-          fontSize={"14px"}
+          fontSize={{ base: "12px", md: "14px" }}
           fontWeight={"500"}
           p="15px 20px"
+          borderTopLeftRadius={"4px"}
+          borderBottomLeftRadius={"4px"}
+          borderTopRightRadius={{ base: "4px", md: 0 }}
+          borderBottomRightRadius={{ base: "4px", md: 0 }}
           bgColor={"white"}
           boxShadow={"md"}
+          borderBottom="1px solid #e1e1e1"
+          w="100%"
         >
           Active
         </Tab>
         <Tab
           _selected={{ color: "white", bg: "brand.400" }}
-          width="100%"
-          fontSize={"14px"}
+          fontSize={{ base: "12px", md: "14px" }}
           fontWeight={"500"}
           p="15px 20px"
+          borderTopLeftRadius={"4px"}
+          borderBottomLeftRadius={"4px"}
+          borderTopRightRadius={{ base: "4px", md: 0 }}
+          borderBottomRightRadius={{ base: "4px", md: 0 }}
           bgColor={"white"}
           boxShadow={"md"}
+          borderBottom="1px solid #e1e1e1"
+          w="100%"
         >
           Delivered
         </Tab>
         <Tab
           _selected={{ color: "white", bg: "brand.400" }}
-          width="100%"
-          fontSize={"14px"}
+          fontSize={{ base: "12px", md: "14px" }}
           fontWeight={"500"}
           p="15px 20px"
+          borderTopLeftRadius={"4px"}
+          borderBottomLeftRadius={"4px"}
+          borderTopRightRadius={{ base: "4px", md: 0 }}
+          borderBottomRightRadius={{ base: "4px", md: 0 }}
           bgColor={"white"}
           boxShadow={"md"}
+          borderBottom="1px solid #e1e1e1"
+          w="100%"
         >
           Cancelled
         </Tab>

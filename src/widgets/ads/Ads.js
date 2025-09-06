@@ -24,11 +24,7 @@ const Ads = ({ adsText, image, link, buttonText }) => {
           alignItems={{ base: "center", md: "baseline" }}
           flexDirection={{ base: "column", md: "row" }}
         >
-          <Text
-            fontSize={{ base: "20px", sm: "30px", md: "50px", lg: "60px" }}
-            mb={4}
-            fontWeight="600"
-          >
+          <Text fontSize={{ base: "20px" }} mb={4} fontWeight="600">
             {adsText}
           </Text>
           <ChakraButton
@@ -41,7 +37,7 @@ const Ads = ({ adsText, image, link, buttonText }) => {
             py={4}
             fontWeight="bold"
             borderRadius="full"
-            fontSize={{ base: "14px", sm: "18px", md: "24px", lg: "28px" }}
+            fontSize={{ base: "16px" }}
           >
             {buttonText}
           </ChakraButton>

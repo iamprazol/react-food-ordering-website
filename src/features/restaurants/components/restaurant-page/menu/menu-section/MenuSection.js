@@ -24,8 +24,6 @@ import {
 import { MdAdd, MdOutlineRemoveCircle } from "react-icons/md";
 import { useCart } from "../../../../../carts/hooks/useCart";
 import FoodCard from "../../../../../food/FoodCard";
-import { useAuth } from "../../../../../../context/AuthContext";
-import { useUserData } from "../../../../../../context/UserDataContext";
 import { Search } from "../../../../../../widgets/icon/Icon";
 
 function MenuSection({ menuItems }) {
@@ -36,13 +34,6 @@ function MenuSection({ menuItems }) {
   const [pendingOrder, setPendingOrder] = useState(null);
   const [currentRestaurantId, setCurrentRestaurantId] = useState(0);
   const [loading, setLoading] = useState(true);
-
-  const {
-    state: { token },
-  } = useAuth();
-  const {
-    state: { favourites },
-  } = useUserData();
 
   const {
     isOpen: isCartOpen,
@@ -143,7 +134,7 @@ function MenuSection({ menuItems }) {
   };
 
   return (
-    <Box p={4} w="100%">
+    <Box p={{ base: 0, md: 4 }} w="100%">
       <Flex direction="column" gap="60px">
         {/* Search Bar */}
         <Flex
@@ -156,7 +147,7 @@ function MenuSection({ menuItems }) {
         >
           <IconButton
             aria-label="Search"
-            icon={<Search />}
+            icon={<Search size={5} />}
             variant="ghost"
             fontSize="xl"
           />
@@ -168,6 +159,7 @@ function MenuSection({ menuItems }) {
             rounded="full"
             shadow="sm"
             _placeholder={{ color: "gray.400" }}
+            fontSize={{ base: "14px", md: "16px" }}
           />
         </Flex>
 

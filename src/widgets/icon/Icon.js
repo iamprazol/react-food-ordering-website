@@ -2,11 +2,12 @@
 import { chakra, IconProps } from "@chakra-ui/react";
 import React from "react";
 
-export const Search = React.forwardRef((props, ref) => (
+export const Search = React.forwardRef(({ size, ...props }, ref) => (
   <chakra.svg
     viewBox="0 0 18 18"
     xmlns="https://www.w3.org/2000/svg"
     ref={ref}
+    boxSize={size}
     {...props}
   >
     <path
@@ -31,7 +32,7 @@ export const Search = React.forwardRef((props, ref) => (
   </chakra.svg>
 ));
 
-export const Stars = React.forwardRef((props, ref) => (
+export const Stars = React.forwardRef(({ size, ...props }, ref) => (
   <chakra.svg
     ref={ref}
     viewBox="0 0 24 24"
@@ -39,6 +40,7 @@ export const Stars = React.forwardRef((props, ref) => (
     stroke="currentColor"
     fill="currentColor"
     strokeWidth="0"
+    boxSize={size}
     {...props}
   >
     <path fill="none" d="M0 0h24v24H0V0z" />

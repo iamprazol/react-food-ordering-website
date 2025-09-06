@@ -52,7 +52,7 @@ const CheckoutBody = () => {
       <Box as="section" py={10} px={{ base: 4, md: 8 }} bg="#f7f7f9">
         <Box maxW="6xl" mx="auto" px={14} py={4} border="1px solid #E7E7E7">
           <Heading
-            fontSize="20px"
+            fontSize={{ base: "18px", md: "20px" }}
             color="#2d2c2c"
             fontWeight={600}
             display="flex"
@@ -66,7 +66,7 @@ const CheckoutBody = () => {
         <Box
           maxW="6xl"
           mx="auto"
-          px={14}
+          px={{ base: 4, md: 14 }}
           py={4}
           border="1px solid #E7E7E7"
           borderTop="none"
@@ -85,20 +85,24 @@ const CheckoutBody = () => {
               </Box>
             </Flex>
           ) : (
-            <Flex>
+            <Flex direction={{ base: "column", md: "row" }}>
               <Flex direction="column" gap={8} flex="0 0 60%">
                 <Box>
-                  <Text fontSize="16px" mb={2}>
+                  <Text
+                    fontSize={{ base: "14px", md: "16px" }}
+                    mb={2}
+                    textAlign={{ base: "center", md: "left" }}
+                  >
                     DELIVERY ADDRESS
                   </Text>
                   <Box
                     bgColor="#FAFAFA"
                     border="1px solid #E7E7E7"
-                    p={8}
+                    p={{ base: 4, md: 8 }}
                     color="#4A4A4A"
                     fontWeight="400"
-                    fontSize="0.875rem"
-                    width="90%"
+                    fontSize={{ base: "12px", md: "14px" }}
+                    width={{ base: "100%", md: "90%" }}
                   >
                     <Text>{address?.address_title?.toUpperCase()}</Text>
                     <Text>{user.first_name + " " + user.last_name}</Text>
@@ -111,39 +115,47 @@ const CheckoutBody = () => {
                 </Box>
 
                 <Box>
-                  <Text fontSize="16px" mb={2}>
+                  <Text
+                    fontSize={{ base: "14px", md: "16px" }}
+                    mb={2}
+                    textAlign={{ base: "center", md: "left" }}
+                  >
                     PAYMENT OPTIONS
                   </Text>
                   <Box
                     bgColor="#FAFAFA"
                     border="1px solid #E7E7E7"
-                    p={8}
+                    p={{ base: 4, md: 8 }}
                     color="#4A4A4A"
                     fontWeight="400"
-                    fontSize="0.875rem"
-                    width="90%"
+                    fontSize={{ base: "12px", md: "14px" }}
+                    width={{ base: "100%", md: "90%" }}
                   >
                     <PaymentOptions />
                   </Box>
                 </Box>
 
                 <Box>
-                  <Text fontSize="16px" mb={2}>
+                  <Text
+                    fontSize={{ base: "14px", md: "16px" }}
+                    mb={2}
+                    textAlign={{ base: "center", md: "left" }}
+                  >
                     SPECIAL INSTRUCTIONS
                   </Text>
                   <Box
                     bgColor="#FAFAFA"
                     border="1px solid #E7E7E7"
-                    p={8}
+                    p={{ base: 4, md: 8 }}
                     color="#4A4A4A"
                     fontWeight="400"
-                    fontSize="0.875rem"
-                    width="90%"
+                    fontSize={{ base: "12px", md: "14px" }}
+                    width={{ base: "100%", md: "90%" }}
                   >
                     <Textarea
+                      fontSize={{ base: "12px", md: "14px" }}
                       placeholder="Please mention if there are special instruction for the delivery person. (eg. Beware of Dogs)"
                       id="order_special_instructions"
-                      fontSize="sm"
                       bgColor="white"
                     />
                   </Box>

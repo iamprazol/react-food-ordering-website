@@ -111,7 +111,7 @@ const MemoCards = ({
           alt={name}
           objectFit="cover"
           w="100%"
-          h="180px"
+          h={{ base: "150px", md: "180px" }}
           loading="lazy"
           decoding="async"
         />
@@ -158,7 +158,7 @@ const MemoCards = ({
             as={Link}
             to={`/restaurant/${id}`}
             fontWeight="bold"
-            fontSize="md"
+            fontSize={{ base: "14px", md: "md" }}
             color="black"
             _hover={{ textDecoration: "underline" }}
           >
@@ -169,11 +169,20 @@ const MemoCards = ({
           </Badge>
         </Flex>
 
-        <Text fontSize="sm" color="gray.600" noOfLines={2} mb={3}>
+        <Text
+          fontSize={{ base: "base", md: "md" }}
+          color="gray.600"
+          noOfLines={2}
+          mb={3}
+        >
           {description}
         </Text>
 
-        <Flex justify="space-between" mb={2} fontSize="sm">
+        <Flex
+          justify="space-between"
+          mb={2}
+          fontSize={{ base: "base", md: "md" }}
+        >
           <Text color="gray.800">{delivery_hours}</Text>
           <Text color="gray.500">Rs. {minimum_order} min</Text>
         </Flex>
@@ -196,7 +205,7 @@ const MemoCards = ({
               />
             ))}
           </Flex>
-          <Text fontSize="xs" color="gray.500">
+          <Text fontSize={{ base: "base", md: "xs" }} color="gray.500">
             4225 ratings
           </Text>
         </Flex>

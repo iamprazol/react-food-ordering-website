@@ -10,7 +10,7 @@ import {
   Skeleton,
   SkeletonText,
 } from "@chakra-ui/react";
-import { MdStar } from "react-icons/md";
+import { Stars } from "../../../../../widgets/icon/Icon";
 import IconContainer from "../../../../../widgets/icon-container/IconContainer";
 import Foodie from "../../../../../shared/assets/images/foodie.png";
 
@@ -88,20 +88,32 @@ function ReviewsSection() {
                 cursor="pointer"
               >
                 <Flex direction="column" flex={1} mb={5} gap={4}>
-                  <Flex justifyContent={"space-between"} width="100%">
+                  <Flex
+                    justifyContent={"space-between"}
+                    width="100%"
+                    alignItems={"center"}
+                  >
                     <Flex alignItems={"center"} gap={3}>
                       <LazyImage
                         src={review.reviewer_picture}
                         alt="user"
-                        boxSize="40px"
                         objectFit="cover"
                         borderRadius="full"
+                        boxSize={{ base: "30px", md: "40px" }}
                       />
-                      <Text fontSize="sm" fontWeight="600" color={"#000000de"}>
+                      <Text
+                        fontSize={{ base: "14px", md: "sm" }}
+                        fontWeight="600"
+                        color={"#000000de"}
+                      >
                         {review.reviewer_name}
                       </Text>
                     </Flex>
-                    <Text fontSize="sm" fontWeight="600" color={"#000000de"}>
+                    <Text
+                      fontSize={{ base: "12px", md: "sm" }}
+                      fontWeight="600"
+                      color={"#000000de"}
+                    >
                       {review.created_at}
                     </Text>
                   </Flex>
@@ -109,7 +121,7 @@ function ReviewsSection() {
                     {[...Array(review.rating)].map((_, i) => (
                       <IconContainer
                         key={i}
-                        icon={<MdStar />}
+                        icon={<Stars />}
                         colorClass="text-yellow"
                         fontSizeClass="icon--large"
                       />
@@ -117,12 +129,16 @@ function ReviewsSection() {
                     {[...Array(5 - review.rating)].map((_, i) => (
                       <IconContainer
                         key={i}
-                        icon={<MdStar />}
+                        icon={<Stars />}
                         fontSizeClass="icon--large"
                       />
                     ))}
                   </Flex>
-                  <Text fontSize={"md"} color="#000000de" fontWeight={400}>
+                  <Text
+                    fontSize={{ base: "12px", md: "sm" }}
+                    color="#000000de"
+                    fontWeight={400}
+                  >
                     {review.review}
                   </Text>
                 </Flex>
@@ -138,7 +154,12 @@ function ReviewsSection() {
         flexDirection="column"
         gap={6}
       >
-        <LazyImage src={Foodie} alt={"foodie"} height="auto" width="20%" />
+        <LazyImage
+          src={Foodie}
+          alt={"foodie"}
+          height="auto"
+          width={{ base: "80%", md: "20%" }}
+        />
         <Box
           textAlign="center"
           maxWidth="600px"
@@ -146,10 +167,18 @@ function ReviewsSection() {
           display="flex"
           flexDirection="column"
         >
-          <Heading fontSize={"30px"} color={"#6b6b83"} fontWeight="600">
+          <Heading
+            fontSize={{ base: "18px", md: "30px" }}
+            color={"#6b6b83"}
+            fontWeight="600"
+          >
             Be one of the first to review
           </Heading>
-          <Text fontSize={"15px"} color={"#6b6b83"} fontWeight="400">
+          <Text
+            fontSize={{ base: "12px", md: "15px" }}
+            color={"#6b6b83"}
+            fontWeight="400"
+          >
             Order now and write a review to give others the inside scoop.
           </Text>
         </Box>

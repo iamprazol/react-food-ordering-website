@@ -35,8 +35,6 @@ function NavBar({ onClick, onChange }) {
     state: { isMobile },
   } = useApp();
 
-  console.log(isMobile);
-
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -78,7 +76,7 @@ function NavBar({ onClick, onChange }) {
           >
             <IconButton
               aria-label="Search"
-              icon={<Search />}
+              icon={<Search size={6} />}
               variant="ghost"
               fontSize="xl"
             />

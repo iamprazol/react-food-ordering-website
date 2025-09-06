@@ -65,7 +65,11 @@ const SavedAddresses = () => {
     if (!response.ok) {
       toast({
         title: "Address Update failed",
-        description: "Your Address update has failed. Please try again later.",
+        description: (
+          <Box fontSize={{ base: "12px", md: "14px" }}>
+            Your Address update has failed. Please try again later.
+          </Box>
+        ),
         status: "error",
         duration: 4000,
         isClosable: true,
@@ -78,7 +82,11 @@ const SavedAddresses = () => {
 
       toast({
         title: "Address Updated",
-        description: "Your Address has been updated successfully.",
+        description: (
+          <Box fontSize={{ base: "12px", md: "14px" }}>
+            Your Address has been updated successfully.
+          </Box>
+        ),
         status: "success",
         duration: 4000,
         isClosable: true,
@@ -93,10 +101,13 @@ const SavedAddresses = () => {
     <Box mx="20px">
       <Flex direction="column" gap={10}>
         <form onSubmit={handleSubmit}>
-          <VStack spacing={10} flex="1" align="stretch">
-            <HStack spacing={6}>
+          <VStack spacing={{ base: 4, md: 10 }} flex="1" align="stretch">
+            <Flex direction={{ base: "column", md: "row" }} gap={6}>
               <FormControl>
-                <FormLabel fontSize="0.75rem" color="#9B9B9B">
+                <FormLabel
+                  fontSize={{ base: "12px", md: "16px" }}
+                  color="#9B9B9B"
+                >
                   ADDRESS TITLE
                 </FormLabel>
                 <InputHandler
@@ -114,7 +125,10 @@ const SavedAddresses = () => {
               </FormControl>
 
               <FormControl>
-                <FormLabel fontSize="0.75rem" color="#9B9B9B">
+                <FormLabel
+                  fontSize={{ base: "12px", md: "16px" }}
+                  color="#9B9B9B"
+                >
                   ADDRESS
                 </FormLabel>
                 <InputHandler
@@ -129,11 +143,14 @@ const SavedAddresses = () => {
                   onChange={handleInputChange}
                 />
               </FormControl>
-            </HStack>
+            </Flex>
 
-            <HStack spacing={6}>
+            <Flex direction={{ base: "column", md: "row" }} gap={6}>
               <FormControl>
-                <FormLabel fontSize="0.75rem" color="#9B9B9B">
+                <FormLabel
+                  fontSize={{ base: "12px", md: "16px" }}
+                  color="#9B9B9B"
+                >
                   ADDRESS CONTACT
                 </FormLabel>
                 <InputHandler
@@ -151,7 +168,10 @@ const SavedAddresses = () => {
                 />
               </FormControl>
               <FormControl>
-                <FormLabel fontSize="0.75rem" color="#9B9B9B">
+                <FormLabel
+                  fontSize={{ base: "12px", md: "16px" }}
+                  color="#9B9B9B"
+                >
                   ADDRESS ALTERNATE CONTACT
                 </FormLabel>
                 <InputHandler
@@ -168,10 +188,13 @@ const SavedAddresses = () => {
                   onChange={handleInputChange}
                 />
               </FormControl>
-            </HStack>
-            <HStack spacing={6}>
+            </Flex>
+            <Flex direction={{ base: "column", md: "row" }} gap={6}>
               <FormControl>
-                <FormLabel fontSize="0.75rem" color="#9B9B9B">
+                <FormLabel
+                  fontSize={{ base: "12px", md: "16px" }}
+                  color="#9B9B9B"
+                >
                   ADDRESS DETAILS
                 </FormLabel>
                 <InputHandler
@@ -188,9 +211,9 @@ const SavedAddresses = () => {
                   onChange={handleInputChange}
                 />
               </FormControl>
-            </HStack>
+            </Flex>
 
-            <HStack spacing={4} justify="flex-start">
+            <Flex direction={{ base: "column", md: "row" }} gap={6}>
               <ChakraButton
                 type="submit"
                 colorScheme="blue"
@@ -200,10 +223,12 @@ const SavedAddresses = () => {
                 loadingText="Saving"
                 isLoading={isSubmitting}
                 width="100%"
+                height={8}
+                fontSize={{ base: "14px", md: "16px" }}
               >
                 Save
               </ChakraButton>
-            </HStack>
+            </Flex>
           </VStack>
         </form>
       </Flex>

@@ -14,11 +14,15 @@ import InputHandler from "../../../widgets/inputHandler/InputHandler";
 import FoodieImage from "../../../shared/assets/images/foodie.png";
 import { MdEmail, MdLock } from "react-icons/md";
 import { useLoginUser } from "../hooks/useLoginUser";
+import { useApp } from "../../../context/AppContext";
 
 const LazyImage = chakra("img", { baseStyle: { loading: "lazy" } });
 
 function LoginPage({ onClick }) {
   const toast = useToast();
+  const {
+    state: { isMobile },
+  } = useApp();
 
   const [userData, setUserData] = useState({
     email: "",
@@ -31,7 +35,11 @@ function LoginPage({ onClick }) {
     () => {
       toast({
         title: "Login Successful",
-        description: "You have been successfully logged-in into the site.",
+        description: (
+          <Box fontSize={{ base: "12px", md: "14px" }}>
+            You have been successfully logged-in into the site.
+          </Box>
+        ),
         status: "success",
         duration: 4000,
         isClosable: true,
@@ -44,7 +52,11 @@ function LoginPage({ onClick }) {
 
       toast({
         title: "Login Error",
-        description: "Please fix the errors and try again.",
+        description: (
+          <Box fontSize={{ base: "12px", md: "14px" }}>
+            Please fix the errors and try again.
+          </Box>
+        ),
         status: "error",
         duration: 4000,
         isClosable: true,
@@ -70,17 +82,21 @@ function LoginPage({ onClick }) {
       mx="auto"
       borderRadius="md"
       overflow="hidden"
-      p={6}
+      p={{ base: 0, md: 6 }}
     >
-      <Box
-        flex="1"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        bg="white"
-      >
-        <LazyImage src={FoodieImage} alt="foodie" maxW="70%" />
-      </Box>
+      {isMobile ? (
+        ""
+      ) : (
+        <Box
+          flex="1"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          bg="white"
+        >
+          <LazyImage src={FoodieImage} alt="foodie" maxW="70%" />
+        </Box>
+      )}
       <Box
         flex="1"
         bg="white"
@@ -89,7 +105,12 @@ function LoginPage({ onClick }) {
         flexDirection="column"
         justifyContent="center"
       >
-        <Heading fontWeight="500" size="xl" mb={8} textAlign="center">
+        <Heading
+          fontWeight="500"
+          fontSize={{ base: "24px", md: "28px" }}
+          mb={8}
+          textAlign="center"
+        >
           Member Login
         </Heading>
 
@@ -139,23 +160,22 @@ function LoginPage({ onClick }) {
             loadingText="Logging In"
             isLoading={isPending}
             width="100%"
+            height={8}
+            fontSize={{ base: "14px", md: "16px" }}
           >
             LOGIN
           </ChakraButton>
         </form>
-        <Flex justifyContent="space-between" mt={6} mb={4} fontSize="sm">
-          <Text>Forgot</Text>
-          <Link href="/forgot-password" color="blue.500" fontWeight="semibold">
-            Username / Password?
-          </Link>
-        </Flex>
 
         <Link
-          alignSelf="flex-end"
           color="blue.500"
           fontWeight="semibold"
-          mt={8}
           onClick={() => onClick("register")}
+          fontSize={{ base: "12px", md: "14px" }}
+          textAlign={"center"}
+          mt={6}
+          mb={4}
+          alignSelf="center"
         >
           Create your account
         </Link>

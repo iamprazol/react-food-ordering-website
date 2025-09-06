@@ -71,6 +71,7 @@ function LocationSection({ latitude, longitude }) {
       w="100%"
       gap={2}
       id="map&gallery"
+      direction={{ base: "column", md: "row" }}
     >
       <Box py={6} width="70%">
         {loading ? (
@@ -92,7 +93,7 @@ function LocationSection({ latitude, longitude }) {
           </MapContainer>
         )}
       </Box>
-      <Box py={6} width="70%">
+      <Box py={6} width={{ base: "100%", md: "70%" }}>
         <SimpleGrid columns={[2, null, 3]} spacing={2}>
           {loading
             ? [...Array(9)].map((_, idx) => (

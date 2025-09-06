@@ -59,8 +59,13 @@ function AccountIcon({ onClick }) {
   }
 
   return isMobile ? (
-    <Text fontSize="16px" color="brand.500" fontWeight={"500"}>
-      My Account
+    <Text
+      fontSize="16px"
+      color="brand.500"
+      fontWeight={"500"}
+      onClick={() => onClick?.("login")}
+    >
+      Account
     </Text>
   ) : (
     <IconButton

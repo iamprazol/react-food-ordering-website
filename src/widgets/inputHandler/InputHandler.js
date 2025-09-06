@@ -44,7 +44,11 @@ function InputHandler({ fieldSetting, onChange }) {
         <InputGroup>
           <Flex direction="column" width="100%">
             {icon && (
-              <InputLeftElement pointerEvents="none">
+              <InputLeftElement
+                pointerEvents="none"
+                fontSize={{ base: "12px", md: "14px" }}
+                height={{ base: "30px", md: "40px" }}
+              >
                 <IconContainer
                   icon={icon}
                   colorClass={error ? "text-red" : "text-green"}
@@ -60,16 +64,19 @@ function InputHandler({ fieldSetting, onChange }) {
               name={name}
               min={type === "number" ? 1 : undefined}
               step={type === "number" ? 1 : undefined}
-              pl={icon ? "2.5rem" : undefined}
+              px={icon ? "2.5rem" : undefined}
               bgColor={fieldSetting.bgColor || ""}
+              fontSize={{ base: "12px", md: "14px" }}
+              height={{ base: "30px", md: "40px" }}
             />
             {error && (
-              <FormErrorMessage display="flex" alignItems="center" gap={1}>
-                <IconContainer
-                  icon={<MdError />}
-                  fontSizeClass="icon--small"
-                  colorClass="text-red"
-                />
+              <FormErrorMessage
+                display="flex"
+                alignItems="center"
+                gap={1}
+                fontSize={{ base: "12px", md: "14px" }}
+              >
+                <IconContainer icon={<MdError />} colorClass="text-red" />
                 {error}
               </FormErrorMessage>
             )}
@@ -86,6 +93,7 @@ function InputHandler({ fieldSetting, onChange }) {
           onChange={handleChange}
           id={id}
           name={name}
+          fontSize={{ base: "12px", md: "14px" }}
         />
       )}
 
