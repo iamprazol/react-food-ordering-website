@@ -3,14 +3,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"; // ✅ Added
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "leaflet/dist/leaflet.css";
 
 // Import SCSS.
 import "./index.scss";
 
 // Import Components.
 import App from "./app/App";
-import * as serviceWorker from "./serviceWorker";
 import theme from "./shared/styles/theme";
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
@@ -50,6 +50,3 @@ root.render(
     </ChakraProvider>
   </React.StrictMode>
 );
-
-// If you want your app to work offline and load faster...
-serviceWorker.unregister();

@@ -37,6 +37,8 @@ function NavBar({ onClick, onChange }) {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  console.log(process.env.REACT_APP_URL);
+
   return (
     <Flex
       as="nav"
