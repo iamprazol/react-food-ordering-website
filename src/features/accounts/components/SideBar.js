@@ -66,7 +66,6 @@ const sideBar = ({ index }) => {
             gap={2}
             width="400px"
             border="none"
-            flexDirection={{ base: "column", md: "row" }}
           >
             {myAccountItems.map((items, idx) => (
               <Tab

@@ -25,6 +25,7 @@ import { MdAdd, MdOutlineRemoveCircle } from "react-icons/md";
 import { useCart } from "../../../../../carts/hooks/useCart";
 import FoodCard from "../../../../../food/FoodCard";
 import { Search } from "../../../../../../widgets/icon/Icon";
+import { useDebouncedValue } from "../../../../../../shared/hooks/useDebouncedValue";
 
 function MenuSection({ menuItems }) {
   const [openOrderBar, setOpenOrderBar] = useState(false);
@@ -34,6 +35,8 @@ function MenuSection({ menuItems }) {
   const [pendingOrder, setPendingOrder] = useState(null);
   const [currentRestaurantId, setCurrentRestaurantId] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [searchText, setSearchText] = useState(null);
+  const [noFoodFound, setNoFoodFound] = useState(null);
 
   const {
     isOpen: isCartOpen,
@@ -132,7 +135,30 @@ function MenuSection({ menuItems }) {
       </Box>
     ));
   };
+  const debouncedSearch = useDebouncedValue(searchText, 350);
 
+  const filteredMenuItems = menuItems?.map((menuItem) => ({
+    ...menuItem,
+    foods: menuItem.foods.filter((food) =>
+      food.food_name
+        .toLowerCase()
+        .includes(debouncedSearch?.toLowerCase() || "")
+    ),
+  }));
+
+  const searchFoods = (e) => {
+    const inputValue = e.target.value;
+    setSearchText(inputValue);
+  };
+
+  useEffect(() => {
+    if (filteredMenuItems) {
+      const hasFoods = filteredMenuItems.some(
+        (menu) => menu.foods && menu.foods.length > 0
+      );
+      setNoFoodFound(!hasFoods);
+    }
+  }, [filteredMenuItems]);
   return (
     <Box p={{ base: 0, md: 4 }} w="100%">
       <Flex direction="column" gap="60px">
@@ -160,48 +186,54 @@ function MenuSection({ menuItems }) {
             shadow="sm"
             _placeholder={{ color: "gray.400" }}
             fontSize={{ base: "14px", md: "16px" }}
+            onChange={searchFoods}
           />
         </Flex>
 
         <Flex direction="column" gap="20px">
           {loading ? (
             renderSkeletons()
-          ) : menuItems && menuItems.length > 0 ? (
-            menuItems.map((menuItem, index) => (
-              <Box key={index} mb={6}>
-                <Box bg="#FBF9F9" p={3}>
-                  <Text
-                    fontWeight="400"
-                    fontSize="sm"
-                    color="#2d2c2c "
-                    id={menuItem.category?.toLowerCase()}
-                  >
-                    {menuItem.category.toUpperCase()}
-                  </Text>
-                </Box>
-                <VStack align="stretch">
-                  {menuItem.foods && menuItem.foods.length > 0 ? (
-                    menuItem.foods.map((food, idx) => (
-                      <Flex
-                        key={idx}
-                        justify="space-between"
-                        p={3}
-                        borderBottomWidth="1px"
-                        cursor="pointer"
+          ) : filteredMenuItems &&
+            filteredMenuItems.length > 0 &&
+            !noFoodFound ? (
+            filteredMenuItems.map(
+              (menuItem, index) =>
+                menuItem.foods.length > 0 && (
+                  <Box key={index} mb={6}>
+                    <Box bg="#FBF9F9" p={3}>
+                      <Text
+                        fontWeight="400"
+                        fontSize="sm"
+                        color="#2d2c2c "
+                        id={menuItem.category?.toLowerCase()}
                       >
-                        <FoodCard
-                          currentFood={food}
-                          context="menu"
-                          onClick={() => handleAddToCartClick(food)}
-                        />
-                      </Flex>
-                    ))
-                  ) : (
-                    <Text>No foods found.</Text>
-                  )}
-                </VStack>
-              </Box>
-            ))
+                        {menuItem.category.toUpperCase()}
+                      </Text>
+                    </Box>
+                    <VStack align="stretch">
+                      {menuItem.foods && menuItem.foods.length > 0 ? (
+                        menuItem.foods.map((food, idx) => (
+                          <Flex
+                            key={idx}
+                            justify="space-between"
+                            p={3}
+                            borderBottomWidth="1px"
+                            cursor="pointer"
+                          >
+                            <FoodCard
+                              currentFood={food}
+                              context="menu"
+                              onClick={() => handleAddToCartClick(food)}
+                            />
+                          </Flex>
+                        ))
+                      ) : (
+                        <Text>No foods found.</Text>
+                      )}
+                    </VStack>
+                  </Box>
+                )
+            )
           ) : (
             <Text>No menu items found.</Text>
           )}
