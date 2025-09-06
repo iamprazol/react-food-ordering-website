@@ -79,20 +79,22 @@ function LocationSection({ latitude, longitude }) {
             <Skeleton height="100%" width="100%" />
           </Box>
         ) : (
-          <MapContainer
-            center={[latitude, longitude]}
-            zoom={13}
-            height="470px"
-            width="100%"
-            scrollWheelZoom={false}
-          >
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            <Marker position={[latitude, longitude]}>
-              <Popup>Your location</Popup>
-            </Marker>
-          </MapContainer>
+          <Box height="470px" borderRadius="md" overflow="hidden">
+            <MapContainer
+              center={[latitude, longitude]}
+              zoom={13}
+              scrollWheelZoom={false}
+              style={{ height: "100%", width: "100%" }}
+            >
+              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+              <Marker position={[latitude, longitude]}>
+                <Popup>Your location</Popup>
+              </Marker>
+            </MapContainer>
+          </Box>
         )}
       </Box>
+
       <Box py={6} width={{ base: "100%", md: "70%" }}>
         <SimpleGrid columns={[2, null, 3]} spacing={2}>
           {loading
