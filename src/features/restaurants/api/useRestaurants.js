@@ -4,10 +4,15 @@ import { get } from "../../../shared/api/client";
 export function useRestaurants(searchText) {
 	return useInfiniteQuery({
 		queryKey: ["restaurants", { q: searchText }],
-		queryFn: ({ pageParam = 1 }) =>
-			get("/restaurants", {
+		queryFn: ({ pageParam = 1 }) => {
+			const endpoint = searchText
+				? "/restaurants/search"
+				: "/restaurants";
+
+			return get(endpoint, {
 				params: { name: searchText || "", page: pageParam }
-			}),
+			});
+		},
 		getNextPageParam: (lastPage) => {
 			const { pagination } = lastPage || {};
 			if (!pagination) return false;

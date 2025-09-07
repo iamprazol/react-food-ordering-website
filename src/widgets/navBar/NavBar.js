@@ -37,6 +37,12 @@ function NavBar({ onClick, onChange }) {
 
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
+	const searchRestaurant = (e) => {
+		const inputValue = e.target.value;
+		setSearchText(inputValue);
+		onClick("find_restaurant", searchText);
+	};
+
 	return (
 		<Flex
 			as="nav"
@@ -93,7 +99,7 @@ function NavBar({ onClick, onChange }) {
 							placeholder="Bajeko Sekuwa"
 							border="none"
 							focusBorderColor="transparent"
-							onChange={(e) => setSearchText(e.target.value)}
+							onChange={searchRestaurant}
 							bg="white"
 							rounded="full"
 							shadow="sm"
@@ -101,7 +107,7 @@ function NavBar({ onClick, onChange }) {
 						/>
 					</Flex>
 
-					<ChakraButton
+					{/* <ChakraButton
 						colorScheme="blue"
 						ml={4}
 						px={8}
@@ -111,7 +117,7 @@ function NavBar({ onClick, onChange }) {
 						onClick={() => onClick("find_restaurant", searchText)}
 					>
 						Find Restaurant
-					</ChakraButton>
+					</ChakraButton> */}
 				</Flex>
 			)}
 
